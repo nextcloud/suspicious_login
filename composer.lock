@@ -1,0 +1,73 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "7c85aafa781df882991aab06a12bcc9d",
+    "packages": [
+        {
+            "name": "php-ai/php-ml",
+            "version": "0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-ai/php-ml.git",
+                "reference": "db95db3e57475df53d602b32c4451438c21e46c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-ai/php-ml/zipball/db95db3e57475df53d602b32c4451438c21e46c3",
+                "reference": "db95db3e57475df53d602b32c4451438c21e46c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phpbench/phpbench": "^0.14.0",
+                "phpstan/phpstan-phpunit": "^0.10",
+                "phpstan/phpstan-shim": "^0.10",
+                "phpstan/phpstan-strict-rules": "^0.10",
+                "phpunit/phpunit": "^7.0.0",
+                "symplify/coding-standard": "^5.1",
+                "symplify/easy-coding-standard": "^5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arkadiusz Kondas",
+                    "email": "arkadiusz.kondas@gmail.com"
+                }
+            ],
+            "description": "PHP-ML - Machine Learning library for PHP",
+            "homepage": "https://github.com/php-ai/php-ml",
+            "keywords": [
+                "Neural network",
+                "artificial intelligence",
+                "computational learning theory",
+                "data science",
+                "feature extraction",
+                "machine learning",
+                "pattern recognition"
+            ],
+            "time": "2018-11-07T18:40:31+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
