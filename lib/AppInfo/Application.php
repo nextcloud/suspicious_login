@@ -38,7 +38,6 @@ class Application extends App {
 
 		$container = $this->getContainer();
 
-
 		$lazyListener = new class($container) {
 			/** @var IAppContainer */
 			private $container;

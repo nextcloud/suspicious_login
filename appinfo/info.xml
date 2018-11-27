@@ -7,11 +7,13 @@
 	</summary>
 	<description>Detect and warn about suspicious IPs logging into Nextcloud
 	</description>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>SuspiciousLogin</namespace>
-	<category>security</category>
+	<types>
+		<authentication/>
+	</types>
 
 	<website>https://github.com/ChristophWurst/suspicious_login</website>
 	<bugs>https://github.com/ChristophWurst/suspicious_login/issues</bugs>
