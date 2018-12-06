@@ -33,4 +33,15 @@ class LoginAddressMapper extends QBMapper {
 		parent::__construct($db, 'login_address');
 	}
 
+	public function findAll(int $minEntries = 1) {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip')
+			->from($this->getTableName())
+			->groupBy('uid', 'ip');
+
+		return $this->findEntities($query);
+	}
+
 }
