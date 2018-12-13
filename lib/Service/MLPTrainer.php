@@ -26,6 +26,7 @@ namespace OCA\SuspiciousLogin\Service;
 
 use function array_slice;
 use OCA\SuspiciousLogin\Db\LoginAddressMapper;
+use OCA\SuspiciousLogin\Db\Model;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
@@ -46,12 +47,17 @@ class MLPTrainer {
 	/** @var ITimeFactory */
 	private $timeFactory;
 
+	/** @var ModelPersistenceService */
+	private $persistenceService;
+
 	public function __construct(LoginAddressMapper $loginAddressMapper,
 								NegativeSampleGenerator $negativeSampleGenerator,
-								ITimeFactory $timeFactory) {
+								ITimeFactory $timeFactory,
+								ModelPersistenceService $persistenceService) {
 		$this->loginAddressMapper = $loginAddressMapper;
 		$this->negativeSampleGenerator = $negativeSampleGenerator;
 		$this->timeFactory = $timeFactory;
+		$this->persistenceService = $persistenceService;
 	}
 
 	public function train(OutputInterface $output,
@@ -80,7 +86,6 @@ class MLPTrainer {
 		$validationSamples = $validationPositives->merge($validationNegatives);
 
 		$total = $numPositives + $numRandomNegatives + $numShuffledNegative;
-		$totalValidation = $numValidation * 2;
 		$output->writeln("Got $total samples for training: $numPositives positive, $numRandomNegatives random negative and $numShuffledNegative shuffled negative");
 		$output->writeln("Got $numValidation positive and $numValidation negative samples for validation (rate: $validationRate)");
 		$output->writeln("Number of epochs: " . $epochs);
@@ -101,6 +106,15 @@ class MLPTrainer {
 		$finished = $this->timeFactory->getDateTime();
 		$elapsed = $finished->getTimestamp() - $start->getTimestamp();
 		$output->writeln("Training finished after " . $elapsed . "s");
+
+		$output->writeln("");
+		$output->writeln("Persisting trained model");
+		$model = new Model();
+		$model->setCreatedAt($this->timeFactory->getTime());
+		$this->persistenceService->persist($classifier, $model);
+		$modelId = $model->getId();
+		$output->writeln("Model $modelId persisted");
+		$output->writeln("");
 
 		$predicted = $classifier->predict($validationSamples->asTrainingData());
 		$result = new ClassificationReport($validationSamples->getLabels(), $predicted);
