@@ -44,20 +44,20 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
-use OCA\SuspiciousLogin\Service\NaiveBayesTrainer;
+use OCA\SuspiciousLogin\Service\SVCTrainer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TrainNaiveBayes extends Train {
+class TrainSVC extends Train {
 
 	use ModelStatistics;
 
-	/** @var NaiveBayesTrainer */
+	/** @var SVCTrainer */
 	private $trainer;
 
-	public function __construct(NaiveBayesTrainer $trainer) {
-		parent::__construct("suspiciouslogin:train:naivebayes");
+	public function __construct(SVCTrainer $trainer) {
+		parent::__construct("suspiciouslogin:train:svc");
 		$this->trainer = $trainer;
 
 		$this->addOption(
