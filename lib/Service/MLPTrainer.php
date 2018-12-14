@@ -67,7 +67,7 @@ class MLPTrainer {
 						  int $epochs,
 						  int $layers,
 						  float $learningRate,
-						  float $validationRate) {
+						  float $validationRate): Model {
 		$raw = $this->loginAddressMapper->findAll();
 		shuffle($raw);
 		$all = DataSet::fromLoginAddresses($raw);
@@ -133,15 +133,8 @@ class MLPTrainer {
 		$this->persistenceService->persist($classifier, $model);
 		$modelId = $model->getId();
 		$output->writeln("Model $modelId persisted");
-		$output->writeln("");
 
-		$output->writeln("Prescision(y): " . $result->getPrecision()['y']);
-		$output->writeln("Prescision(n): " . $result->getPrecision()['n']);
-		$output->writeln("Recall(y): " . $result->getRecall()['y']);
-		$output->writeln("Recall(n): " . $result->getRecall()['n']);
-		$output->writeln("Average(precision): " . $result->getAverage()['precision']);
-		$output->writeln("Average(recall): " . $result->getAverage()['recall']);
-		$output->writeln("Average(f1score): " . $result->getAverage()['f1score']);
+		return $model;
 	}
 
 }
