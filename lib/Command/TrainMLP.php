@@ -25,13 +25,13 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Service\MLPTrainer;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TrainMLP extends Command {
+class TrainMLP extends Train {
+
+	use ModelStatistics;
 
 	/** @var MLPTrainer */
 	private $trainer;
@@ -85,15 +85,19 @@ class TrainMLP extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		$this->trainer->train(
+		$model = $this->trainer->train(
 			$output,
-			(float) $input->getOption('shuffled'),
-			(float) $input->getOption('random'),
-			(int) $input->getOption('epochs'),
-			(int) $input->getOption('layers'),
-			(float) $input->getOption('learn-rate'),
-			(float) $input->getOption('validation-rate')
+			(float)$input->getOption('shuffled'),
+			(float)$input->getOption('random'),
+			(int)$input->getOption('epochs'),
+			(int)$input->getOption('layers'),
+			(float)$input->getOption('learn-rate'),
+			(float)$input->getOption('validation-rate')
 		);
+
+		if ($input->hasOption(parent::OPTION_STATS) && $input->getOption(parent::OPTION_STATS)) {
+			$this->printModelStatistics($model, $output);
+		}
 	}
 
 }
