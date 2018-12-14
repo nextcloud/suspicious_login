@@ -25,6 +25,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use function array_slice;
+use function get_class;
 use OCA\SuspiciousLogin\Db\LoginAddressMapper;
 use OCA\SuspiciousLogin\Db\Model;
 use OCP\AppFramework\Utility\ITimeFactory;
@@ -108,16 +109,32 @@ class MLPTrainer {
 		$output->writeln("Training finished after " . $elapsed . "s");
 
 		$output->writeln("");
+		$output->writeln("Run predictions on test data set");
+		$predicted = $classifier->predict($validationSamples->asTrainingData());
+		$result = new ClassificationReport($validationSamples->getLabels(), $predicted);
+		$output->writeln("Predictions calculated");
+
+		$output->writeln("");
 		$output->writeln("Persisting trained model");
 		$model = new Model();
+		$model->setSamplesPositive($numPositives);
+		$model->setSamplesShuffled($numShuffledNegative);
+		$model->setSamplesRandom($numRandomNegatives);
+		$model->setEpochs($epochs);
+		$model->setLayers($layers);
+		$model->setVectorDim(UidIPVector::SIZE);
+		$model->setLearningRate($learningRate);
+		$model->setPrecisionY($result->getPrecision()['y']);
+		$model->setPrecisionN($result->getPrecision()['n']);
+		$model->setRecallY($result->getRecall()['y']);
+		$model->setRecallN($result->getRecall()['n']);
+		$model->setDuration($elapsed);
 		$model->setCreatedAt($this->timeFactory->getTime());
 		$this->persistenceService->persist($classifier, $model);
 		$modelId = $model->getId();
 		$output->writeln("Model $modelId persisted");
 		$output->writeln("");
 
-		$predicted = $classifier->predict($validationSamples->asTrainingData());
-		$result = new ClassificationReport($validationSamples->getLabels(), $predicted);
 		$output->writeln("Prescision(y): " . $result->getPrecision()['y']);
 		$output->writeln("Prescision(n): " . $result->getPrecision()['n']);
 		$output->writeln("Recall(y): " . $result->getRecall()['y']);

@@ -27,9 +27,11 @@ namespace OCA\SuspiciousLogin\Service;
 
 use function file_get_contents;
 use function file_put_contents;
+use OCA\SuspiciousLogin\AppInfo\Application;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Db\ModelMapper;
 use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
@@ -52,19 +54,25 @@ class ModelPersistenceService {
 	/** @var IAppData */
 	private $appData;
 
+	/** @var IAppManager */
+	private $appManager;
+
 	/** @var ITempManager */
 	private $tempManager;
 
 	/** @var ILogger */
 	private $logger;
 
+
 	public function __construct(ModelManager $modelManager,
 								ModelMapper $modelMapper,
 								IAppData $appData,
+								IAppManager $appManager,
 								ITempManager $tempManager,
 								ILogger $logger) {
 		$this->modelManager = $modelManager;
 		$this->appData = $appData;
+		$this->appManager = $appManager;
 		$this->modelMapper = $modelMapper;
 		$this->logger = $logger;
 		$this->tempManager = $tempManager;
@@ -111,6 +119,9 @@ class ModelPersistenceService {
 	 * @todo encapsulate in transaction to prevent inconsistencies
 	 */
 	public function persist(Estimator $estimator, Model $model) {
+		$model->setType(get_class($estimator));
+		$model->getAppVersion($this->appManager->getAppVersion(Application::APP_ID));
+
 		$this->modelMapper->insert($model);
 		try {
 			$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
