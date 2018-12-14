@@ -66,7 +66,7 @@ class TrainMLP extends Command {
 			'l',
 			InputOption::VALUE_OPTIONAL,
 			"number of hidden layers",
-			6
+			10
 		);
 		$this->addOption(
 			'learn-rate',
