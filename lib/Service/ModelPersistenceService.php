@@ -120,7 +120,7 @@ class ModelPersistenceService {
 	 */
 	public function persist(Estimator $estimator, Model $model) {
 		$model->setType(get_class($estimator));
-		$model->getAppVersion($this->appManager->getAppVersion(Application::APP_ID));
+		$model->setAppVersion($this->appManager->getAppVersion(Application::APP_ID));
 
 		$this->modelMapper->insert($model);
 		try {
