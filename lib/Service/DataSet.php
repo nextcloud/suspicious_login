@@ -30,7 +30,7 @@ use function array_map;
 use function array_merge;
 use ArrayAccess;
 use Countable;
-use OCA\SuspiciousLogin\Db\LoginAddress;
+use OCA\SuspiciousLogin\Db\LoginAddressAggregated;
 use function shuffle;
 
 class DataSet implements ArrayAccess, Countable {
@@ -45,10 +45,10 @@ class DataSet implements ArrayAccess, Countable {
 	}
 
 	/**
-	 * @param LoginAddress[] $loginAddresses
+	 * @param LoginAddressAggregated[] $loginAddresses
 	 */
 	public static function fromLoginAddresses(array $loginAddresses): DataSet {
-		return new DataSet(array_map(function (LoginAddress $addr) {
+		return new DataSet(array_map(function (LoginAddressAggregated $addr) {
 			return [
 				'uid' => $addr->getUid(),
 				'ip' => $addr->getIp(),

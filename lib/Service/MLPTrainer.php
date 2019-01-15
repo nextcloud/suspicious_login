@@ -25,8 +25,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use function array_slice;
-use function get_class;
-use OCA\SuspiciousLogin\Db\LoginAddressMapper;
+use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\Model;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
@@ -39,7 +38,7 @@ class MLPTrainer {
 	const LABEL_POSITIVE = 'y';
 	const LABEL_NEGATIVE = 'n';
 
-	/** @var LoginAddressMapper */
+	/** @var LoginAddressAggregatedMapper */
 	private $loginAddressMapper;
 
 	/** @var NegativeSampleGenerator */
@@ -51,7 +50,7 @@ class MLPTrainer {
 	/** @var ModelPersistenceService */
 	private $persistenceService;
 
-	public function __construct(LoginAddressMapper $loginAddressMapper,
+	public function __construct(LoginAddressAggregatedMapper $loginAddressMapper,
 								NegativeSampleGenerator $negativeSampleGenerator,
 								ITimeFactory $timeFactory,
 								ModelPersistenceService $persistenceService) {
@@ -76,8 +75,8 @@ class MLPTrainer {
 		$validationPositives = DataSet::fromLoginAddresses(array_slice($raw, $validationOffset));
 		$numValidation = count($validationPositives);
 		$numPositives = count($positives);
-		$numRandomNegatives = max((int)floor($numPositives * $randomNegativeRate), 1.0);
-		$numShuffledNegative = max((int)floor($numPositives * $shuffledNegativeRate), 1.0);
+		$numRandomNegatives = max((int)floor($numPositives * $randomNegativeRate), 1);
+		$numShuffledNegative = max((int)floor($numPositives * $shuffledNegativeRate), 1);
 		$randomNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
 		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
 
