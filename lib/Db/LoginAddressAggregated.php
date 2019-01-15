@@ -24,13 +24,14 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Db;
 
-use OCP\AppFramework\Db\QBMapper;
-use OCP\IDBConnection;
+use OCP\AppFramework\Db\Entity;
 
-class LoginAddressMapper extends QBMapper {
+class LoginAddressAggregated extends Entity {
 
-	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'login_address');
-	}
+	protected $uid;
+	protected $ip;
+	protected $seen;
+	protected $firstSeen;
+	protected $lastSeen;
 
 }

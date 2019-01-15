@@ -27,10 +27,20 @@ namespace OCA\SuspiciousLogin\Db;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
-class LoginAddressMapper extends QBMapper {
+class LoginAddressAggregatedMapper extends QBMapper {
 
 	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'login_address');
+		parent::__construct($db, 'login_address_aggregated');
+	}
+
+	public function findAll() {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
+			->from($this->getTableName());
+
+		return $this->findEntities($query);
 	}
 
 }

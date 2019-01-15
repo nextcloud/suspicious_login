@@ -45,12 +45,9 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use function array_slice;
-use function get_class;
-use OCA\SuspiciousLogin\Db\LoginAddressMapper;
+use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\Model;
 use OCP\AppFramework\Utility\ITimeFactory;
-use Phpml\Classification\MLPClassifier;
-use Phpml\Classification\NaiveBayes;
 use Phpml\Classification\SVC;
 use Phpml\Metric\ClassificationReport;
 use Phpml\SupportVectorMachine\Kernel;
@@ -62,7 +59,7 @@ class SVCTrainer {
 	const LABEL_POSITIVE = 'y';
 	const LABEL_NEGATIVE = 'n';
 
-	/** @var LoginAddressMapper */
+	/** @var LoginAddressAggregatedMapper */
 	private $loginAddressMapper;
 
 	/** @var NegativeSampleGenerator */
@@ -74,7 +71,7 @@ class SVCTrainer {
 	/** @var ModelPersistenceService */
 	private $persistenceService;
 
-	public function __construct(LoginAddressMapper $loginAddressMapper,
+	public function __construct(LoginAddressAggregatedMapper $loginAddressMapper,
 								NegativeSampleGenerator $negativeSampleGenerator,
 								ITimeFactory $timeFactory,
 								ModelPersistenceService $persistenceService) {
