@@ -31,6 +31,8 @@ use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\ILogger;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ETLService {
 
@@ -53,7 +55,10 @@ class ETLService {
 		$this->logger = $logger;
 	}
 
-	private function getRaw(): Generator {
+	private function getRaw(int $max, OutputInterface $output = null): Generator {
+		if (!is_null($output)) {
+			$progress = new ProgressBar($output);
+		}
 		$cnt = 0;
 		$selectQuery = $this->db->getQueryBuilder()
 			->select('id', 'ip', 'uid', 'created_at')
@@ -66,15 +71,22 @@ class ETLService {
 			foreach ($rows as $row) {
 				yield $row;
 				$cnt++;
+				if (!is_null($output)) {
+					$progress->advance();
+				}
 			}
 			$this->logger->debug($cnt . ' rows read for ETL');
-		} while ($cnt < self::MAX_BATCH_SIZE && !empty($rows));
+		} while ($cnt < $max && !empty($rows));
+
+		if (!is_null($output)) {
+			$progress->finish();
+		}
 	}
 
 	/**
 	 * Extract raw login data and feed it into the aggregated table
 	 */
-	public function extractAndTransform() {
+	public function extractAndTransform(int $max = self::MAX_BATCH_SIZE, OutputInterface $output = null) {
 		$this->logger->debug('starting login data ETL process');
 		$this->db->beginTransaction();
 
@@ -107,7 +119,7 @@ class ETLService {
 			->delete('login_address')
 			->where($select->expr()->eq('id', $select->createParameter('id')));
 
-		foreach ($this->getRaw() as $row) {
+		foreach ($this->getRaw($max, $output) as $row) {
 			$insert->setParameter('uid', $row['uid']);
 			$insert->setParameter('ip', $row['ip']);
 			$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
