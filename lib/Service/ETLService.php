@@ -34,7 +34,7 @@ use OCP\ILogger;
 
 class ETLService {
 
-	const MAX_BATCH_SIZE = 25000;
+	const MAX_BATCH_SIZE = 10000;
 
 	/** @var IDBConnection */
 	private $db;
