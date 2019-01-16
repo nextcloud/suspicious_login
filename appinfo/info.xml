@@ -33,6 +33,7 @@
 	</background-jobs>
 
 	<commands>
+		<command>OCA\SuspiciousLogin\Command\ETL</command>
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
 		<command>OCA\SuspiciousLogin\Command\TrainMLP</command>
 		<command>OCA\SuspiciousLogin\Command\TrainNaiveBayes</command>
