@@ -67,20 +67,6 @@ class NegativeSampleGenerator {
 		return $uniqueIps;
 	}
 
-	private function findRandomIp(string $uid, array $uniqueIps, int $maxRec = 10): string {
-		if ($maxRec === 0) {
-			throw new Exception("Could not generate negative sample off real data for $uid. Is there enough data for training?");
-		}
-
-		$rand = random_int(0, count($uniqueIps) - 1);
-		$randUid = array_keys($uniqueIps)[$rand];
-		if ($randUid === $uid) {
-			return $this->findRandomIp($uid, $uniqueIps, $maxRec - 1);
-		}
-		$randIdx = random_int(0, count($uniqueIps[$randUid]) - 1);
-		return $uniqueIps[$randUid][$randIdx];
-	}
-
 	private function generateFromRealData(string $uid, array $uniqueIps): array {
 		return [
 			'uid' => $uid,
@@ -110,8 +96,6 @@ class NegativeSampleGenerator {
 	/**
 	 * @param DataSet $positives
 	 * @param int $num
-	 *
-	 * @todo generate negative samples by mixing unrelated positive uids and positive ips
 	 *
 	 * @return DataSet
 	 */
