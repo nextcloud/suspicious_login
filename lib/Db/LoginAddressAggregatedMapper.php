@@ -50,7 +50,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
 			->from($this->getTableName())
 			->where($qb->expr()->gte('last_seen', $qb->createNamedParameter($maxAge)))
-			->andWhere($qb->expr()->lte('last_seen', $qb->createNamedParameter($threshold)));
+			->andWhere($qb->expr()->lte('first_seen', $qb->createNamedParameter($threshold)));
 
 		return $this->findEntities($query);
 	}
