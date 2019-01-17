@@ -43,4 +43,34 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		return $this->findEntities($query);
 	}
 
+	private function findHistoric(int $threshold, int $maxAge): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
+			->from($this->getTableName())
+			->where($qb->expr()->gte('last_seen', $qb->createNamedParameter($maxAge)))
+			->andWhere($qb->expr()->lte('last_seen', $qb->createNamedParameter($threshold)));
+
+		return $this->findEntities($query);
+	}
+
+	private function findRecent(int $threshold): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
+			->from($this->getTableName())
+			->andWhere($qb->expr()->gt('last_seen', $qb->createNamedParameter($threshold)));
+
+		return $this->findEntities($query);
+	}
+
+	public function findHistoricAndRecent(int $threshold, int $maxAge = 0): array {
+		return [
+			$this->findHistoric($threshold, $maxAge),
+			$this->findRecent($threshold),
+		];
+	}
+
 }
