@@ -30,7 +30,6 @@ use OCA\SuspiciousLogin\Db\Model;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
-use function shuffle;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MLPTrainer {
@@ -66,13 +65,16 @@ class MLPTrainer {
 						  int $epochs,
 						  int $layers,
 						  float $learningRate,
-						  float $validationRate): Model {
-		$raw = $this->loginAddressMapper->findAll();
-		shuffle($raw);
-		$all = DataSet::fromLoginAddresses($raw);
-		$validationOffset = (int)min(count($all), max(0, count($raw) * (1 - $validationRate)));
-		$positives = DataSet::fromLoginAddresses(array_slice($raw, 0, $validationOffset));
-		$validationPositives = DataSet::fromLoginAddresses(array_slice($raw, $validationOffset));
+						  int $validationThreshold = 7,
+						  int $maxAge = -1): Model {
+		$testingDays = $this->timeFactory->getTime() - $validationThreshold * 60 * 60 * 24;
+		$validationDays = $maxAge === -1 ? 0 : $this->timeFactory->getTime() - $maxAge * 60 * 60 * 24;
+		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecent(
+			$testingDays,
+			$validationDays
+		);
+		$positives = DataSet::fromLoginAddresses($historyRaw);
+		$validationPositives = DataSet::fromLoginAddresses($recentRaw);
 		$numValidation = count($validationPositives);
 		$numPositives = count($positives);
 		$numRandomNegatives = max((int)floor($numPositives * $randomNegativeRate), 1);
@@ -81,13 +83,14 @@ class MLPTrainer {
 		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
 
 		// Validation negatives are generated from all data (to have all UIDs), but shuffled
+		$all = $positives->merge($validationPositives);
 		$all->shuffle();
 		$validationNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($all, $numValidation);
 		$validationSamples = $validationPositives->merge($validationNegatives);
 
 		$total = $numPositives + $numRandomNegatives + $numShuffledNegative;
 		$output->writeln("Got $total samples for training: $numPositives positive, $numRandomNegatives random negative and $numShuffledNegative shuffled negative");
-		$output->writeln("Got $numValidation positive and $numValidation negative samples for validation (rate: $validationRate)");
+		$output->writeln("Got $numValidation positive and $numValidation negative samples for validation");
 		$output->writeln("Number of epochs: " . $epochs);
 		$output->writeln("Number of hidden layers: " . $layers);
 		$output->writeln("Learning rate: " . $learningRate);

@@ -76,11 +76,18 @@ class TrainMLP extends Train {
 			0.05
 		);
 		$this->addOption(
-			'validation-rate',
+			'validation-threshold',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"relative size of the validation data set",
-			0.15
+			"determines how much of the most recent data is used for validation. the default is one week",
+			7
+		);
+		$this->addOption(
+			'max-age',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"determines the maximum age of test data",
+			60
 		);
 	}
 
@@ -92,7 +99,8 @@ class TrainMLP extends Train {
 			(int)$input->getOption('epochs'),
 			(int)$input->getOption('layers'),
 			(float)$input->getOption('learn-rate'),
-			(float)$input->getOption('validation-rate')
+			(int)$input->getOption('validation-threshold'),
+			(int)$input->getOption('max-age')
 		);
 
 		if ($input->hasOption(parent::OPTION_STATS) && $input->getOption(parent::OPTION_STATS)) {
