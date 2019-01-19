@@ -37,9 +37,9 @@ class TrainMLP extends Train {
 	/** @var Trainer */
 	private $trainer;
 
-	public function __construct(Trainer $trainer) {
+	public function __construct(Trainer $optimizer) {
 		parent::__construct("suspiciouslogin:train:mlp");
-		$this->trainer = $trainer;
+		$this->trainer = $optimizer;
 
 		$this->addOption(
 			'epochs',

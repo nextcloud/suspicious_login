@@ -65,7 +65,7 @@ class Trainer {
 
 	public function train(Config $config,
 						  int $validationThreshold = 7,
-						  int $maxAge = -1): Model {
+						  int $maxAge = 60): Model {
 		$testingDays = $this->timeFactory->getTime() - $validationThreshold * 60 * 60 * 24;
 		$validationDays = $maxAge === -1 ? 0 : $this->timeFactory->getTime() - $maxAge * 60 * 60 * 24;
 		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecent(
