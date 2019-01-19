@@ -95,19 +95,19 @@ class TrainMLP extends Train {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$config = Config::default();
 		if ($input->hasOption('epochs')) {
-			$config->setEpochs((int)$input->getOption('epochs'));
+			$config = $config->setEpochs((int)$input->getOption('epochs'));
 		}
 		if ($input->hasOption('layers')) {
-			$config->setLayers((int)$input->getOption('layers'));
+			$config = $config->setLayers((int)$input->getOption('layers'));
 		}
 		if ($input->hasOption('shuffled')) {
-			$config->setShuffledNegativeRate((float)$input->getOption('shuffled'));
+			$config = $config->setShuffledNegativeRate((float)$input->getOption('shuffled'));
 		}
 		if ($input->hasOption('random')) {
-			$config->setRandomNegativeRate((float)$input->getOption('random'));
+			$config = $config->setRandomNegativeRate((float)$input->getOption('random'));
 		}
 		if ($input->hasOption('learn-rate')) {
-			$config->setLearningRate((float)$input->getOption('learn-rate'));
+			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
 		$model = $this->trainer->train(

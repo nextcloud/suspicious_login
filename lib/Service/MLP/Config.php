@@ -73,9 +73,13 @@ class Config {
 
 	/**
 	 * @param int $epochs
+	 *
+	 * @return Config
 	 */
-	public function setEpochs(int $epochs) {
-		$this->epochs = $epochs;
+	public function setEpochs(int $epochs): Config {
+		$clone = clone $this;
+		$clone->epochs = $epochs;
+		return $clone;
 	}
 
 	/**
@@ -87,9 +91,13 @@ class Config {
 
 	/**
 	 * @param int $layers
+	 *
+	 * @return Config
 	 */
-	public function setLayers(int $layers) {
-		$this->layers = $layers;
+	public function setLayers(int $layers): Config {
+		$clone = clone $this;
+		$clone->layers = $layers;
+		return $clone;
 	}
 
 	/**
@@ -101,9 +109,13 @@ class Config {
 
 	/**
 	 * @param float $shuffledNegativeRate
+	 *
+	 * @return Config
 	 */
-	public function setShuffledNegativeRate(float $shuffledNegativeRate) {
-		$this->shuffledNegativeRate = $shuffledNegativeRate;
+	public function setShuffledNegativeRate(float $shuffledNegativeRate): Config {
+		$clone = clone $this;
+		$clone->shuffledNegativeRate = $shuffledNegativeRate;
+		return $clone;
 	}
 
 	/**
@@ -115,12 +127,17 @@ class Config {
 
 	/**
 	 * @param float $randomNegativeRate
+	 *
+	 * @return Config
 	 */
-	public function setRandomNegativeRate(float $randomNegativeRate) {
-		$this->randomNegativeRate = $randomNegativeRate;
+	public function setRandomNegativeRate(float $randomNegativeRate): Config {
+		$clone = clone $this;
+		$clone->randomNegativeRate = $randomNegativeRate;
+		return $clone;
 	}
 
 	/**
+	 *
 	 * @return float
 	 */
 	public function getLearningRate(): float {
@@ -129,9 +146,13 @@ class Config {
 
 	/**
 	 * @param float $learningRate
+	 *
+	 * @return Config
 	 */
-	public function setLearningRate(float $learningRate) {
+	public function setLearningRate(float $learningRate): Config {
+		$clone = clone $this;
 		$this->learningRate = $learningRate;
+		return $clone;
 	}
 
 }
