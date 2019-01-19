@@ -31,6 +31,7 @@ use function array_merge;
 use ArrayAccess;
 use Countable;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregated;
+use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use function shuffle;
 
 class DataSet implements ArrayAccess, Countable {
@@ -52,7 +53,7 @@ class DataSet implements ArrayAccess, Countable {
 			return [
 				'uid' => $addr->getUid(),
 				'ip' => $addr->getIp(),
-				'label' => MLPTrainer::LABEL_POSITIVE,
+				'label' => Trainer::LABEL_POSITIVE,
 			];
 		}, $loginAddresses));
 	}

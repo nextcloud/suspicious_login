@@ -1,24 +1,4 @@
 <?php
-/**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
- *
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 declare(strict_types=1);
 
@@ -47,6 +27,10 @@ namespace OCA\SuspiciousLogin\Service\MLP;
 use function array_slice;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\Model;
+use OCA\SuspiciousLogin\Service\DataSet;
+use OCA\SuspiciousLogin\Service\ModelPersistenceService;
+use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
+use OCA\SuspiciousLogin\Service\UidIPVector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
@@ -79,11 +63,7 @@ class Trainer {
 		$this->persistenceService = $persistenceService;
 	}
 
-	public function train(float $shuffledNegativeRate,
-						  float $randomNegativeRate,
-						  int $epochs,
-						  int $layers,
-						  float $learningRate,
+	public function train(Config $config,
 						  int $validationThreshold = 7,
 						  int $maxAge = -1): Model {
 		$testingDays = $this->timeFactory->getTime() - $validationThreshold * 60 * 60 * 24;
@@ -96,8 +76,8 @@ class Trainer {
 		$validationPositives = DataSet::fromLoginAddresses($recentRaw);
 		$numValidation = count($validationPositives);
 		$numPositives = count($positives);
-		$numRandomNegatives = max((int)floor($numPositives * $randomNegativeRate), 1);
-		$numShuffledNegative = max((int)floor($numPositives * $shuffledNegativeRate), 1);
+		$numRandomNegatives = max((int)floor($numPositives * $config->getRandomNegativeRate()), 1);
+		$numShuffledNegative = max((int)floor($numPositives * $config->getShuffledNegativeRate()), 1);
 		$randomNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
 		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
 
@@ -111,7 +91,14 @@ class Trainer {
 		$allSamples->shuffle();
 
 		$start = $this->timeFactory->getDateTime();
-		$classifier = new MLPClassifier(UidIPVector::SIZE, [$layers], ['y', 'n'], $epochs, null, $learningRate);
+		$classifier = new MLPClassifier(
+			UidIPVector::SIZE,
+			[$config->getLayers()],
+			['y', 'n'],
+			$config->getEpochs(),
+			null,
+			$config->getLearningRate()
+		);
 		$classifier->train(
 			$allSamples->asTrainingData(),
 			$allSamples->getLabels()
@@ -126,10 +113,10 @@ class Trainer {
 		$model->setSamplesPositive($numPositives);
 		$model->setSamplesShuffled($numShuffledNegative);
 		$model->setSamplesRandom($numRandomNegatives);
-		$model->setEpochs($epochs);
-		$model->setLayers($layers);
+		$model->setEpochs($config->getEpochs());
+		$model->setLayers($config->getLayers());
 		$model->setVectorDim(UidIPVector::SIZE);
-		$model->setLearningRate($learningRate);
+		$model->setLearningRate($config->getLearningRate());
 		$model->setPrecisionY($result->getPrecision()['y']);
 		$model->setPrecisionN($result->getPrecision()['n']);
 		$model->setRecallY($result->getRecall()['y']);

@@ -24,6 +24,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
+use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,20 +42,6 @@ class TrainMLP extends Train {
 		$this->trainer = $trainer;
 
 		$this->addOption(
-			'shuffled',
-			null,
-			InputOption::VALUE_OPTIONAL,
-			"ratio of shuffled negative samples",
-			1.0
-		);
-		$this->addOption(
-			'random',
-			null,
-			InputOption::VALUE_OPTIONAL,
-			"ratio of random negative samples",
-			1.0
-		);
-		$this->addOption(
 			'epochs',
 			'e',
 			InputOption::VALUE_OPTIONAL,
@@ -67,6 +54,20 @@ class TrainMLP extends Train {
 			InputOption::VALUE_OPTIONAL,
 			"number of hidden layers",
 			10
+		);
+		$this->addOption(
+			'shuffled',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"ratio of shuffled negative samples",
+			1.0
+		);
+		$this->addOption(
+			'random',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"ratio of random negative samples",
+			1.0
 		);
 		$this->addOption(
 			'learn-rate',
@@ -92,12 +93,25 @@ class TrainMLP extends Train {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
+		$config = Config::default();
+		if ($input->hasOption('epochs')) {
+			$config->setEpochs((int)$input->getOption('epochs'));
+		}
+		if ($input->hasOption('layers')) {
+			$config->setLayers((int)$input->getOption('layers'));
+		}
+		if ($input->hasOption('shuffled')) {
+			$config->setShuffledNegativeRate((float)$input->getOption('shuffled'));
+		}
+		if ($input->hasOption('random')) {
+			$config->setRandomNegativeRate((float)$input->getOption('random'));
+		}
+		if ($input->hasOption('learn-rate')) {
+			$config->setLearningRate((float)$input->getOption('learn-rate'));
+		}
+
 		$model = $this->trainer->train(
-			(float)$input->getOption('shuffled'),
-			(float)$input->getOption('random'),
-			(int)$input->getOption('epochs'),
-			(int)$input->getOption('layers'),
-			(float)$input->getOption('learn-rate'),
+			$config,
 			(int)$input->getOption('validation-threshold'),
 			(int)$input->getOption('max-age')
 		);

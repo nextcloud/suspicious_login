@@ -30,6 +30,7 @@ use function array_filter;
 use function array_keys;
 use function array_search;
 use Exception;
+use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use function random_int;
 
 class NegativeSampleGenerator {
@@ -76,7 +77,7 @@ class NegativeSampleGenerator {
 				random_int(0, 255),
 				random_int(0, 255),
 			]),
-			'label' => MLPTrainer::LABEL_NEGATIVE,
+			'label' => Trainer::LABEL_NEGATIVE,
 		];
 	}
 
@@ -89,7 +90,7 @@ class NegativeSampleGenerator {
 				random_int(0, 255),
 				random_int(0, 255),
 			]),
-			'label' => MLPTrainer::LABEL_NEGATIVE,
+			'label' => Trainer::LABEL_NEGATIVE,
 		];
 	}
 
