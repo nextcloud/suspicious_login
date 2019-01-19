@@ -59,7 +59,7 @@ class TrainMLP extends Train {
 			'e',
 			InputOption::VALUE_OPTIONAL,
 			"number of epochs to train",
-			5000
+			250
 		);
 		$this->addOption(
 			'layers',
