@@ -24,7 +24,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
-use OCA\SuspiciousLogin\Service\MLPTrainer;
+use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,10 +33,10 @@ class TrainMLP extends Train {
 
 	use ModelStatistics;
 
-	/** @var MLPTrainer */
+	/** @var Trainer */
 	private $trainer;
 
-	public function __construct(MLPTrainer $trainer) {
+	public function __construct(Trainer $trainer) {
 		parent::__construct("suspiciouslogin:train:mlp");
 		$this->trainer = $trainer;
 
