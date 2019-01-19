@@ -59,8 +59,7 @@ class MLPTrainer {
 		$this->persistenceService = $persistenceService;
 	}
 
-	public function train(OutputInterface $output,
-						  float $shuffledNegativeRate,
+	public function train(float $shuffledNegativeRate,
 						  float $randomNegativeRate,
 						  int $epochs,
 						  int $layers,
@@ -88,18 +87,9 @@ class MLPTrainer {
 		$validationNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($all, $numValidation);
 		$validationSamples = $validationPositives->merge($validationNegatives);
 
-		$total = $numPositives + $numRandomNegatives + $numShuffledNegative;
-		$output->writeln("Got $total samples for training: $numPositives positive, $numRandomNegatives random negative and $numShuffledNegative shuffled negative");
-		$output->writeln("Got $numValidation positive and $numValidation negative samples for validation");
-		$output->writeln("Number of epochs: " . $epochs);
-		$output->writeln("Number of hidden layers: " . $layers);
-		$output->writeln("Learning rate: " . $learningRate);
-		$output->writeln("Vecor dimensions: " . UidIPVector::SIZE);
-
 		$allSamples = $positives->merge($randomNegatives)->merge($shuffledNegatives);
 		$allSamples->shuffle();
 
-		$output->writeln("Start training");
 		$start = $this->timeFactory->getDateTime();
 		$classifier = new MLPClassifier(UidIPVector::SIZE, [$layers], ['y', 'n'], $epochs, null, $learningRate);
 		$classifier->train(
@@ -108,16 +98,10 @@ class MLPTrainer {
 		);
 		$finished = $this->timeFactory->getDateTime();
 		$elapsed = $finished->getTimestamp() - $start->getTimestamp();
-		$output->writeln("Training finished after " . $elapsed . "s");
 
-		$output->writeln("");
-		$output->writeln("Run predictions on test data set");
 		$predicted = $classifier->predict($validationSamples->asTrainingData());
 		$result = new ClassificationReport($validationSamples->getLabels(), $predicted);
-		$output->writeln("Predictions calculated");
 
-		$output->writeln("");
-		$output->writeln("Persisting trained model");
 		$model = new Model();
 		$model->setSamplesPositive($numPositives);
 		$model->setSamplesShuffled($numShuffledNegative);
@@ -133,8 +117,6 @@ class MLPTrainer {
 		$model->setDuration($elapsed);
 		$model->setCreatedAt($this->timeFactory->getTime());
 		$this->persistenceService->persist($classifier, $model);
-		$modelId = $model->getId();
-		$output->writeln("Model $modelId persisted");
 
 		return $model;
 	}

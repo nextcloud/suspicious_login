@@ -93,7 +93,6 @@ class TrainMLP extends Train {
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$model = $this->trainer->train(
-			$output,
 			(float)$input->getOption('shuffled'),
 			(float)$input->getOption('random'),
 			(int)$input->getOption('epochs'),
