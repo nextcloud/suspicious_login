@@ -22,6 +22,7 @@
 
 namespace OCA\SuspiciousLogin\Listener;
 
+use OCA\SuspiciousLogin\Service\LoginClassifier;
 use OCA\SuspiciousLogin\Service\LoginDataCollector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\IRequest;
@@ -34,13 +35,20 @@ class LoginListener {
 	/** @var ITimeFactory */
 	private $timeFactory;
 
+	/** @var LoginClassifier */
+	private $loginClassifier;
+
 	/** @var LoginDataCollector */
 	private $loginDataCollector;
 
-	public function __construct(IRequest $request, ITimeFactory $timeFactory, LoginDataCollector $loginDataCollector) {
+	public function __construct(IRequest $request,
+								ITimeFactory $timeFactory,
+								LoginClassifier $loginClassifier,
+								LoginDataCollector $loginDataCollector) {
 		$this->request = $request;
 		$this->timeFactory = $timeFactory;
 		$this->loginDataCollector = $loginDataCollector;
+		$this->loginClassifier = $loginClassifier;
 	}
 
 	public function handle(array $data) {
@@ -53,6 +61,7 @@ class LoginListener {
 		$ip = $this->request->getRemoteAddress();
 		$now = $this->timeFactory->getTime();
 
+		$this->loginClassifier->process($uid, $ip);
 		$this->loginDataCollector->collectSuccessfulLogin($uid, $ip, $now);
 	}
 
