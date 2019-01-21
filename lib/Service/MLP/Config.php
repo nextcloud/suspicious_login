@@ -151,7 +151,7 @@ class Config {
 	 */
 	public function setLearningRate(float $learningRate): Config {
 		$clone = clone $this;
-		$this->learningRate = $learningRate;
+		$clone->learningRate = $learningRate;
 		return $clone;
 	}
 

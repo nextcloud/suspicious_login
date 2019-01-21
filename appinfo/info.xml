@@ -7,7 +7,7 @@
 	</summary>
 	<description>Detect and warn about suspicious IPs logging into Nextcloud
 	</description>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>SuspiciousLogin</namespace>
@@ -34,6 +34,7 @@
 
 	<commands>
 		<command>OCA\SuspiciousLogin\Command\ETL</command>
+		<command>OCA\SuspiciousLogin\Command\OptimizeMLP</command>
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
 		<command>OCA\SuspiciousLogin\Command\TrainMLP</command>
 		<command>OCA\SuspiciousLogin\Command\TrainNaiveBayes</command>
