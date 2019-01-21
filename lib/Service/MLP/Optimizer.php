@@ -151,7 +151,8 @@ class Optimizer {
 							 OutputInterface $output) {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
-		$config = $initialConfig ?? Config::default();
+		// Start with random config if none was passed (breadth-first search)
+		$config = $initialConfig ?? $this->getNeighborConfig(Config::default(), $stepWidth);
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps. Enjoy your coffee!</>");
 		$output->writeln("");
