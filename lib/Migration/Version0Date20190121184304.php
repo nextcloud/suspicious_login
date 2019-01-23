@@ -30,7 +30,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 
-class Version0Date20190115134303 extends SimpleMigrationStep {
+class Version0Date20190121184304 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
@@ -43,7 +43,7 @@ class Version0Date20190115134303 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->createTable('login_address_aggregated');
+		$table = $schema->createTable('suspicious_login');
 		$table->addColumn('id', 'integer', [
 			'autoincrement' => true,
 			'notnull' => true,
@@ -57,20 +57,11 @@ class Version0Date20190115134303 extends SimpleMigrationStep {
 			'notnull' => true,
 			'length' => 64,
 		]);
-		$table->addColumn('seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('first_seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('last_seen', 'integer', [
+		$table->addColumn('created_at', 'integer', [
 			'notnull' => true,
 			'length' => 4,
 		]);
 		$table->setPrimaryKey(['id']);
-		$table->addUniqueIndex(['uid', 'ip']);
 
 		return $schema;
 	}
