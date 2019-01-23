@@ -33,11 +33,17 @@ use OCP\AppFramework\Db\Entity;
  * @method string getIp()
  * @method void setCreatedAt(int $createdAt)
  * @method int getCreatedAt()
+ * @method void setRequestId(string $requestId)
+ * @method string getRequestId()
+ * @method void setUrl(string $userAgent)
+ * @method string getUrl()
  */
 class SuspiciousLogin extends Entity {
 
 	protected $uid;
 	protected $ip;
 	protected $createdAt;
+	protected $requestId;
+	protected $url;
 
 }

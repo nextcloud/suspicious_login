@@ -114,6 +114,8 @@ class LoginClassifier {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);
 			$entity->setIp($ip);
+			$entity->setRequestId($this->request->getId());
+			$entity->setUrl($this->request->getRequestUri());
 			$entity->setCreatedAt($this->timeFactory->getTime());
 
 			$this->mapper->insert($entity);
