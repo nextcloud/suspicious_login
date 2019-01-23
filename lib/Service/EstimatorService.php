@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCP\ILogger;
 
 class EstimatorService {
@@ -41,6 +42,14 @@ class EstimatorService {
 		$this->logger = $logger;
 	}
 
+	/**
+	 * @param string $uid
+	 * @param string $ip
+	 * @param int|null $modelId
+	 *
+	 * @return bool
+	 * @throws ServiceException
+	 */
 	public function predict(string $uid, string $ip, int $modelId = null): bool {
 		if (is_null($modelId)) {
 			$estimatorModel = $this->persistenceService->loadLatest();
