@@ -1,0 +1,43 @@
+diff --git lib/private/Server.php lib/private/Server.php
+index 8ae2cb7652..4f0bd0d717 100644
+--- lib/private/Server.php
++++ lib/private/Server.php
+@@ -413,9 +413,9 @@ class Server extends ServerContainer implements IServerContainer {
+ 			$userSession->listen('\OC\User', 'preLogin', function ($uid, $password) {
+ 				\OC_Hook::emit('OC_User', 'pre_login', array('run' => true, 'uid' => $uid, 'password' => $password));
+ 			});
+-			$userSession->listen('\OC\User', 'postLogin', function ($user, $password) {
++			$userSession->listen('\OC\User', 'postLogin', function ($user, $password, $isTokenLogin) {
+ 				/** @var $user \OC\User\User */
+-				\OC_Hook::emit('OC_User', 'post_login', array('run' => true, 'uid' => $user->getUID(), 'password' => $password));
++				\OC_Hook::emit('OC_User', 'post_login', array('run' => true, 'uid' => $user->getUID(), 'password' => $password, 'isTokenLogin' => $isTokenLogin));
+ 			});
+ 			$userSession->listen('\OC\User', 'postRememberedLogin', function ($user, $password) {
+ 				/** @var $user \OC\User\User */
+diff --git lib/private/User/Session.php lib/private/User/Session.php
+index 8d1cfd13a5..d9bbef27d1 100644
+--- lib/private/User/Session.php
++++ lib/private/User/Session.php
+@@ -360,7 +360,8 @@ class Session implements IUserSession, Emitter {
+ 		$this->setUser($user);
+ 		$this->setLoginName($loginDetails['loginName']);
+ 
+-		if(isset($loginDetails['token']) && $loginDetails['token'] instanceof IToken) {
++		$isToken = isset($loginDetails['token']) && $loginDetails['token'] instanceof IToken;
++		if ($isToken) {
+ 			$this->setToken($loginDetails['token']->getId());
+ 			$this->lockdownManager->setToken($loginDetails['token']);
+ 			$firstTimeLogin = false;
+@@ -368,7 +369,11 @@ class Session implements IUserSession, Emitter {
+ 			$this->setToken(null);
+ 			$firstTimeLogin = $user->updateLastLoginTimestamp();
+ 		}
+-		$this->manager->emit('\OC\User', 'postLogin', [$user, $loginDetails['password']]);
++		$this->manager->emit('\OC\User', 'postLogin', [
++			$user,
++			$loginDetails['password'],
++			$isToken,
++		]);
+ 		if($this->isLoggedIn()) {
+ 			$this->prepareUserLogin($firstTimeLogin, $regenerateSessionId);
+ 			return true;
