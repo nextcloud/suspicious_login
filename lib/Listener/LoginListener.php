@@ -61,7 +61,7 @@ class LoginListener {
 		$ip = $this->request->getRemoteAddress();
 		$now = $this->timeFactory->getTime();
 
-		if (!($data['isTokenLogin'] ?? false)) {
+		if (isset($data['isTokenLogin']) && $data['isTokenLogin'] === false) {
 			$this->loginClassifier->process($uid, $ip);
 		}
 		$this->loginDataCollector->collectSuccessfulLogin($uid, $ip, $now);
