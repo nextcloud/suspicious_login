@@ -52,19 +52,23 @@ class LoginClassifier {
 	/** @var SuspiciousLoginMapper */
 	private $mapper;
 
+	/** @var LoginNotifier */
+	private $loginNotifier;
+
 	/** @var ITimeFactory */
 	private $timeFactory;
-
 
 	public function __construct(EstimatorService $estimator,
 								IRequest $request,
 								ILogger $logger,
 								SuspiciousLoginMapper $mapper,
+								LoginNotifier $loginNotifier,
 								ITimeFactory $timeFactory) {
 		$this->estimator = $estimator;
 		$this->request = $request;
 		$this->logger = $logger;
 		$this->mapper = $mapper;
+		$this->loginNotifier = $loginNotifier;
 		$this->timeFactory = $timeFactory;
 	}
 
@@ -110,6 +114,12 @@ class LoginClassifier {
 		}
 
 		$this->logger->warning("detected a login from a suspicious login. user=$uid ip=$ip");
+		try {
+			$this->loginNotifier->notify($uid, $ip);
+		} catch (Throwable $ex) {
+			$this->logger->critical("could not send notification about a suspicious login");
+			$this->logger->logException($ex);
+		}
 		try {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);

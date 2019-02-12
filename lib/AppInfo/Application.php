@@ -25,8 +25,11 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\AppInfo;
 
 use OCA\SuspiciousLogin\Listener\LoginListener;
+use OCA\SuspiciousLogin\Notifications\Notifier;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
+use OCP\IL10N;
+use OCP\Notification\IManager;
 use OCP\Util;
 
 class Application extends App {
@@ -36,8 +39,9 @@ class Application extends App {
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
 
-		$container = $this->getContainer();
+		$this->registerNotification();
 
+		$container = $this->getContainer();
 		$lazyListener = new class($container) {
 			/** @var IAppContainer */
 			private $container;
@@ -58,6 +62,21 @@ class Application extends App {
 			'post_login',
 			$lazyListener,
 			'handle'
+		);
+	}
+
+	public function registerNotification() {
+		$container = $this->getContainer();
+		/** @var IManager $manager */
+		$manager = $container->query(IManager::class);
+		$manager->registerNotifier(
+			function () use ($container) {
+				return $container->query(Notifier::class);
+			},
+			function () use ($container) {
+				$l = $container->query(IL10N::class);
+				return ['id' => self::APP_ID, 'name' => $l->t('Suspicious Login')];
+			}
 		);
 	}
 
