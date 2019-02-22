@@ -37,7 +37,5 @@
 		<command>OCA\SuspiciousLogin\Command\OptimizeMLP</command>
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
 		<command>OCA\SuspiciousLogin\Command\TrainMLP</command>
-		<command>OCA\SuspiciousLogin\Command\TrainNaiveBayes</command>
-		<command>OCA\SuspiciousLogin\Command\TrainSVC</command>
 	</commands>
 </info>

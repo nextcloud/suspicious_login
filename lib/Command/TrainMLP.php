@@ -26,11 +26,12 @@ namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TrainMLP extends Train {
+class TrainMLP extends Command {
 
 	use ModelStatistics;
 
@@ -90,6 +91,7 @@ class TrainMLP extends Train {
 			"determines the maximum age of test data",
 			60
 		);
+		$this->registerStatsOption();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
@@ -116,9 +118,7 @@ class TrainMLP extends Train {
 			(int)$input->getOption('max-age')
 		);
 
-		if ($input->hasOption(parent::OPTION_STATS) && $input->getOption(parent::OPTION_STATS)) {
-			$this->printModelStatistics($model, $output);
-		}
+		$this->printModelStatistics($model, $input, $output);
 	}
 
 }

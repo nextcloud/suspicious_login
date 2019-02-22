@@ -25,11 +25,12 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Service\MLP\Optimizer;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class OptimizeMLP extends Train {
+class OptimizeMLP extends Command {
 
 	use ModelStatistics;
 
@@ -47,6 +48,7 @@ class OptimizeMLP extends Train {
 			"maximum number of epochs of optimization",
 			100
 		);
+		$this->registerStatsOption();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
