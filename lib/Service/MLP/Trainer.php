@@ -24,9 +24,10 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
-use function array_slice;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\Model;
+use OCA\SuspiciousLogin\Exception\InsufficientDataException;
+use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\DataSet;
 use OCA\SuspiciousLogin\Service\ModelPersistenceService;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
@@ -34,7 +35,6 @@ use OCA\SuspiciousLogin\Service\UidIPVector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class Trainer {
 
@@ -63,6 +63,15 @@ class Trainer {
 		$this->persistenceService = $persistenceService;
 	}
 
+	/**
+	 * @param Config $config
+	 * @param int $validationThreshold
+	 * @param int $maxAge
+	 *
+	 * @throws ServiceException
+	 *
+	 * @return Model
+	 */
 	public function train(Config $config,
 						  int $validationThreshold = 7,
 						  int $maxAge = 60): Model {
@@ -72,6 +81,12 @@ class Trainer {
 			$testingDays,
 			$validationDays
 		);
+		if (empty($historyRaw)) {
+			throw new InsufficientDataException("No historic data available");
+		}
+		if (empty($recentRaw)) {
+			throw new InsufficientDataException("No recent data available");
+		}
 		$positives = DataSet::fromLoginAddresses($historyRaw);
 		$validationPositives = DataSet::fromLoginAddresses($recentRaw);
 		$numValidation = count($validationPositives);
