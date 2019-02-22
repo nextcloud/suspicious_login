@@ -31,6 +31,7 @@ use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\DataSet;
 use OCA\SuspiciousLogin\Service\ModelPersistenceService;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
+use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCA\SuspiciousLogin\Service\UidIPVector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
@@ -74,13 +75,9 @@ class Trainer {
 	 * @return Model
 	 */
 	public function train(Config $config,
-						  int $validationThreshold = 7,
-						  int $maxAge = 60,
-						  int $time = null): Model {
-		$now = $time ?? $this->timeFactory->getTime();
-
-		$testingDays = $now - $validationThreshold * 60 * 60 * 24;
-		$validationDays = $maxAge === -1 ? 0 : $now - $maxAge * 60 * 60 * 24;
+						  TrainingDataConfig $dataConfig): Model {
+		$testingDays = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
+		$validationDays = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
 		if (!$this->loginAddressMapper->hasSufficientData($validationDays)) {
 			throw new InsufficientDataException("Not enough data for the specified maximum age");
 		}
