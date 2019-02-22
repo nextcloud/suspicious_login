@@ -26,6 +26,13 @@ namespace OCA\SuspiciousLogin\Db;
 
 use OCP\AppFramework\Db\Entity;
 
+/**
+ * @method string getUid()
+ * @method string getIp()
+ * @method int getSeen()
+ * @method int getFirstSeen()
+ * @method int getLastSeen()
+ */
 class LoginAddressAggregated extends Entity {
 
 	protected $uid;

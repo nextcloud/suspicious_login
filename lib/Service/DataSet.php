@@ -48,14 +48,19 @@ class DataSet implements ArrayAccess, Countable {
 	/**
 	 * @param LoginAddressAggregated[] $loginAddresses
 	 */
-	public static function fromLoginAddresses(array $loginAddresses): DataSet {
-		return new DataSet(array_map(function (LoginAddressAggregated $addr) {
-			return [
+	public static function fromLoginAddresses(array $loginAddresses, bool $weighted = true): DataSet {
+		$deep = array_map(function (LoginAddressAggregated $addr) use ($weighted) {
+			$multiplier = $weighted ? (int)log((int) $addr->getSeen(), 2) : 1;
+			return array_fill(0, $multiplier, [
 				'uid' => $addr->getUid(),
 				'ip' => $addr->getIp(),
 				'label' => Trainer::LABEL_POSITIVE,
-			];
-		}, $loginAddresses));
+			]);
+		}, $loginAddresses);
+
+		return new DataSet(
+			array_merge(...$deep)
+		);
 	}
 
 	public function asTrainingData(): array {
