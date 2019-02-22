@@ -20,8 +20,15 @@ database does not need much space for the collected login data.
 
 ### Neural net
 
-When enough data is collected – which is roughly three to four weeks (!) – a first
-training run can be started. The training is invoked via the OCC command line tool:
+When enough data is collected – which by default is 60 days (!) – a first
+training run can be started.
+
+The app registers a background job that invokes the training once a day.
+As long as there isn't sufficient data, no trained model is generated.
+
+#### Manual training
+
+The training can also be invoked via the OCC command line tool:
 
 ```bash
 php -f occ suspiciouslogin:train
