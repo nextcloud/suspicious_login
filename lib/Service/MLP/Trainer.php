@@ -69,6 +69,7 @@ class Trainer {
 	 * @param int $maxAge
 	 *
 	 * @throws ServiceException
+	 * @throws InsufficientDataException
 	 *
 	 * @return Model
 	 */
