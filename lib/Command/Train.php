@@ -28,6 +28,7 @@ use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -122,12 +123,21 @@ class Train extends Command {
 			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
+		$trainingDataConfig = TrainingDataConfig::default();
+		if ($input->hasOption('validation-threshold')) {
+			$trainingDataConfig = $trainingDataConfig->setThreshold((int)$input->getOption('validation-threshold'));
+		}
+		if ($input->hasOption('max-age')) {
+			$trainingDataConfig = $trainingDataConfig->setMaxAge((int)$input->getOption('max-age'));
+		}
+		if ($input->hasOption('now')) {
+			$trainingDataConfig = $trainingDataConfig->setNow((int)$input->getOption('now'));
+		}
+
 		try {
 			$model = $this->trainer->train(
 				$config,
-				(int)$input->getOption('validation-threshold'),
-				(int)$input->getOption('max-age'),
-				(int)$input->getOption('now')
+				$trainingDataConfig
 			);
 			$this->printModelStatistics($model, $input, $output);
 		} catch (InsufficientDataException $ex) {

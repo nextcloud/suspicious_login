@@ -28,6 +28,7 @@ namespace OCA\SuspiciousLogin\BackgroundJob;
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\TimedJob;
 use OCP\ILogger;
@@ -58,7 +59,10 @@ class TrainJob extends TimedJob {
 	 */
 	protected function run($argument) {
 		try {
-			$this->trainer->train(Config::default());
+			$this->trainer->train(
+				Config::default(),
+				TrainingDataConfig::default()
+			);
 		} catch (InsufficientDataException $ex) {
 			$this->logger->logException($ex, [
 				'level' => ILogger::WARN,
