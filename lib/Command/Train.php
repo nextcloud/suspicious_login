@@ -32,6 +32,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function time;
 
 class Train extends Command {
 
@@ -93,6 +94,13 @@ class Train extends Command {
 			"determines the maximum age of test data",
 			60
 		);
+		$this->addOption(
+			'now',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"overwrite the current time",
+			time()
+		);
 		$this->registerStatsOption();
 	}
 
@@ -118,7 +126,8 @@ class Train extends Command {
 			$model = $this->trainer->train(
 				$config,
 				(int)$input->getOption('validation-threshold'),
-				(int)$input->getOption('max-age')
+				(int)$input->getOption('max-age'),
+				(int)$input->getOption('now')
 			);
 			$this->printModelStatistics($model, $input, $output);
 		} catch (InsufficientDataException $ex) {
