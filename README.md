@@ -24,7 +24,7 @@ When enough data is collected – which is roughly three to four weeks (!) – a
 training run can be started. The training is invoked via the OCC command line tool:
 
 ```bash
-php -f occ suspiciouslogin:train:mlp
+php -f occ suspiciouslogin:train
 ```
 
 This command uses several sensible default that should work for instances of any size.
@@ -35,7 +35,7 @@ of the input training set, but is usually between two to 15 minutes.
 The full list of parameters, their description and default values can be seen with
 
 ```bash
-php -f occ suspiciouslogin:train:mlp --help
+php -f occ suspiciouslogin:train --help
 ```
 
 ### Hyper parameter optimization (optional)
@@ -44,7 +44,7 @@ To find the best possible parameters for the training it's possible to start a *
 parameter optimization* run via the CLI:
 
 ```bash
-php -f occ suspiciouslogin:optimize:mlp
+php -f occ suspiciouslogin:optimize
 ```
 
 This command uses the heuristic *simulated annealing* algorithm to find optimal

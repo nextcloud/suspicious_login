@@ -30,7 +30,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class OptimizeMLP extends Command {
+class Optimize extends Command {
 
 	use ModelStatistics;
 
@@ -38,7 +38,7 @@ class OptimizeMLP extends Command {
 	private $optimizer;
 
 	public function __construct(Optimizer $optimizer) {
-		parent::__construct("suspiciouslogin:optimize:mlp");
+		parent::__construct("suspiciouslogin:optimize");
 		$this->optimizer = $optimizer;
 
 		$this->addOption(

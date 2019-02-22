@@ -34,8 +34,8 @@
 
 	<commands>
 		<command>OCA\SuspiciousLogin\Command\ETL</command>
-		<command>OCA\SuspiciousLogin\Command\OptimizeMLP</command>
+		<command>OCA\SuspiciousLogin\Command\Optimize</command>
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
-		<command>OCA\SuspiciousLogin\Command\TrainMLP</command>
+		<command>OCA\SuspiciousLogin\Command\Train</command>
 	</commands>
 </info>

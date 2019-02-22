@@ -31,7 +31,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TrainMLP extends Command {
+class Train extends Command {
 
 	use ModelStatistics;
 
@@ -39,7 +39,7 @@ class TrainMLP extends Command {
 	private $trainer;
 
 	public function __construct(Trainer $optimizer) {
-		parent::__construct("suspiciouslogin:train:mlp");
+		parent::__construct("suspiciouslogin:train");
 		$this->trainer = $optimizer;
 
 		$this->addOption(
