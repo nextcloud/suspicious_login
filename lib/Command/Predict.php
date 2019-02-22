@@ -61,7 +61,7 @@ class Predict extends Command {
 		$uid = $input->getArgument('uid');
 		$ip = $input->getArgument('ip');
 		$modelId = $input->getArgument('model');
-		if ($this->estimatorService->predict($uid, $ip, (int) $modelId)) {
+		if ($this->estimatorService->predict($uid, $ip, $modelId ? (int) $modelId : null)) {
 			$output->writeln("OK:   IP $ip is not suspicious");
 		} else {
 			$output->writeln("WARN: IP $ip is suspicious");
