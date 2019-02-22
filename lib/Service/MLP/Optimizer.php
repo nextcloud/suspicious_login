@@ -153,17 +153,18 @@ class Optimizer {
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
 		$config = $initialConfig ?? $this->getNeighborConfig(Config::default(), $stepWidth);
+		$now = time();
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps. Enjoy your coffee!</>");
 		$output->writeln("");
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$best = $this->getAverageCost(
-			$this->trainer->train($config),
-			$this->trainer->train($config),
-			$this->trainer->train($config),
-			$this->trainer->train($config),
-			$this->trainer->train($config)
+			$this->trainer->train($config, 7, 60, $now),
+			$this->trainer->train($config, 7, 60, $now),
+			$this->trainer->train($config, 7, 60, $now),
+			$this->trainer->train($config, 7, 60, $now),
+			$this->trainer->train($config, 7, 60, $now)
 		);
 
 		while ($epochs < $maxEpochs) {
@@ -172,11 +173,11 @@ class Optimizer {
 			$newConfig = $this->getNeighborConfig($config, $stepWidth);
 			$this->printConfig($epochs, $stepWidth, $newConfig, $output);
 			$cost = $this->getAverageCost(
-				$this->trainer->train($newConfig),
-				$this->trainer->train($newConfig),
-				$this->trainer->train($newConfig),
-				$this->trainer->train($newConfig),
-				$this->trainer->train($newConfig)
+				$this->trainer->train($newConfig, 7, 60, $now),
+				$this->trainer->train($newConfig, 7, 60, $now),
+				$this->trainer->train($newConfig, 7, 60, $now),
+				$this->trainer->train($newConfig, 7, 60, $now),
+				$this->trainer->train($newConfig, 7, 60, $now)
 			);
 
 			if ($cost > $best) {
