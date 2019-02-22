@@ -24,22 +24,101 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
+use OCA\SuspiciousLogin\Service\MLP\Config;
+use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class Train extends Command {
+class Train extends Command {
 
-	protected const OPTION_STATS = 'stats';
+	use ModelStatistics;
 
-	public function __construct(string $name = null) {
-		parent::__construct($name);
+	/** @var Trainer */
+	private $trainer;
+
+	public function __construct(Trainer $optimizer) {
+		parent::__construct("suspiciouslogin:train");
+		$this->trainer = $optimizer;
 
 		$this->addOption(
-			'stats',
-			null,
-			InputOption::VALUE_NONE,
-			'show model statics'
+			'epochs',
+			'e',
+			InputOption::VALUE_OPTIONAL,
+			"number of epochs to train",
+			250
 		);
+		$this->addOption(
+			'layers',
+			'l',
+			InputOption::VALUE_OPTIONAL,
+			"number of hidden layers",
+			10
+		);
+		$this->addOption(
+			'shuffled',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"ratio of shuffled negative samples",
+			1.0
+		);
+		$this->addOption(
+			'random',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"ratio of random negative samples",
+			1.0
+		);
+		$this->addOption(
+			'learn-rate',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"learning rate",
+			0.05
+		);
+		$this->addOption(
+			'validation-threshold',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"determines how much of the most recent data is used for validation. the default is one week",
+			7
+		);
+		$this->addOption(
+			'max-age',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"determines the maximum age of test data",
+			60
+		);
+		$this->registerStatsOption();
+	}
+
+	protected function execute(InputInterface $input, OutputInterface $output) {
+		$config = Config::default();
+		if ($input->hasOption('epochs')) {
+			$config = $config->setEpochs((int)$input->getOption('epochs'));
+		}
+		if ($input->hasOption('layers')) {
+			$config = $config->setLayers((int)$input->getOption('layers'));
+		}
+		if ($input->hasOption('shuffled')) {
+			$config = $config->setShuffledNegativeRate((float)$input->getOption('shuffled'));
+		}
+		if ($input->hasOption('random')) {
+			$config = $config->setRandomNegativeRate((float)$input->getOption('random'));
+		}
+		if ($input->hasOption('learn-rate')) {
+			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
+		}
+
+		$model = $this->trainer->train(
+			$config,
+			(int)$input->getOption('validation-threshold'),
+			(int)$input->getOption('max-age')
+		);
+
+		$this->printModelStatistics($model, $input, $output);
 	}
 
 }
