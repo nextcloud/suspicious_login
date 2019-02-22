@@ -98,7 +98,7 @@ class ModelPersistenceService {
 	}
 
 	private function getCached(int $id): ?string {
-		if (!$this->cacheFactory->isAvailable()) {
+		if (!$this->cacheFactory->isLocalCacheAvailable()) {
 			return null;
 		}
 		$cache = $this->cacheFactory->createLocal();
@@ -109,7 +109,7 @@ class ModelPersistenceService {
 	}
 
 	private function cache(int $id, string $serialized): void {
-		if (!$this->cacheFactory->isAvailable()) {
+		if (!$this->cacheFactory->isLocalCacheAvailable()) {
 			return;
 		}
 		$cache = $this->cacheFactory->createLocal();
