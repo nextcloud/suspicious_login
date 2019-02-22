@@ -35,6 +35,7 @@ use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
+use OCP\ICacheFactory;
 use OCP\ILogger;
 use OCP\ITempManager;
 use Phpml\Estimator;
@@ -60,22 +61,26 @@ class ModelPersistenceService {
 	/** @var ITempManager */
 	private $tempManager;
 
+	/** @var ICacheFactory */
+	private $cacheFactory;
+
 	/** @var ILogger */
 	private $logger;
-
 
 	public function __construct(ModelManager $modelManager,
 								ModelMapper $modelMapper,
 								IAppData $appData,
 								IAppManager $appManager,
 								ITempManager $tempManager,
+								ICacheFactory $cachFactory,
 								ILogger $logger) {
 		$this->modelManager = $modelManager;
 		$this->appData = $appData;
 		$this->appManager = $appManager;
 		$this->modelMapper = $modelMapper;
-		$this->logger = $logger;
 		$this->tempManager = $tempManager;
+		$this->cacheFactory = $cachFactory;
+		$this->logger = $logger;
 	}
 
 	public function loadLatest(): Estimator {
@@ -88,22 +93,51 @@ class ModelPersistenceService {
 		return $this->load($latestModel->getId());
 	}
 
-	/**
-	 * @todo models are immutable -> cache them
-	 */
+	private function getCacheKey(int $id): string {
+		return "suspicious_login_model_$id";
+	}
+
+	private function getCached(int $id): ?string {
+		if (!$this->cacheFactory->isAvailable()) {
+			return null;
+		}
+		$cache = $this->cacheFactory->createLocal();
+
+		return $cache->get(
+			$this->getCacheKey($id)
+		);
+	}
+
+	private function cache(int $id, string $serialized): void {
+		if (!$this->cacheFactory->isAvailable()) {
+			return;
+		}
+		$cache = $this->cacheFactory->createLocal();
+		$cache->set($this->getCacheKey($id), $serialized);
+	}
+
 	public function load(int $id): Estimator {
-		try {
-			$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
-			$modelFile = $modelsFolder->getFile((string)$id);
-		} catch (NotFoundException $e) {
-			$this->logger->error("Could not load classifier model $id: " . $e->getMessage());
-			throw new ServiceException("Could not load model $id", 0, $e);
+		$cached = $this->getCached($id);
+		if (!is_null($cached)) {
+			$serialized = $cached;
+		} else {
+			try {
+				$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
+				$modelFile = $modelsFolder->getFile((string)$id);
+			} catch (NotFoundException $e) {
+				$this->logger->error("Could not load classifier model $id: " . $e->getMessage());
+				throw new ServiceException("Could not load model $id", 0, $e);
+			}
+
+			$serialized = $modelFile->getContent();
+
+			$this->cache($id, $serialized);
 		}
 
 		// Inefficient, but we can't get the real path from app data as it might
 		// not be a local file
 		$tmpFile = $this->tempManager->getTemporaryFile();
-		file_put_contents($tmpFile, $modelFile->getContent());
+		file_put_contents($tmpFile, $serialized);
 
 		try {
 			$estimator = $this->modelManager->restoreFromFile($tmpFile);
