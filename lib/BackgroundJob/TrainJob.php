@@ -60,9 +60,15 @@ class TrainJob extends TimedJob {
 		try {
 			$this->trainer->train(Config::default());
 		} catch (InsufficientDataException $ex) {
-			$this->logger->warning("No suspicious login model trained because of insufficient data");
+			$this->logger->logException($ex, [
+				'level' => ILogger::WARN,
+				'message' => 'No suspicious login model trained because of insufficient data',
+			]);
 		} catch (Throwable $ex) {
-			$this->logger->logException($ex);
+			$this->logger->logException($ex, [
+				'level' => ILogger::ERROR,
+				'message' => 'Caught unknown error during a background training',
+			]);
 		}
 	}
 
