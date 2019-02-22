@@ -78,6 +78,9 @@ class Trainer {
 						  int $maxAge = 60): Model {
 		$testingDays = $this->timeFactory->getTime() - $validationThreshold * 60 * 60 * 24;
 		$validationDays = $maxAge === -1 ? 0 : $this->timeFactory->getTime() - $maxAge * 60 * 60 * 24;
+		if (!$this->loginAddressMapper->hasSufficientData($validationDays)) {
+			throw new InsufficientDataException("Not enough data for the specified maximum age");
+		}
 		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecent(
 			$testingDays,
 			$validationDays

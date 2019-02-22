@@ -43,6 +43,32 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		return $this->findEntities($query);
 	}
 
+	/**
+	 * Check if data exists that has been seen before $start
+	 *
+	 * This allows checking if the specific max age of data rows will be filled
+	 * with actual data, e.g. shortly after the app was installed and little/no
+	 * data has been collected.
+	 *
+	 * @param int $start
+	 *
+	 * @return bool
+	 */
+	public function hasSufficientData(int $start): bool {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select($qb->createFunction('COUNT(*)'))
+			->from($this->getTableName())
+			->where($qb->expr()->lte('first_seen', $qb->createNamedParameter($start)));
+
+		$result = $query->execute();
+		$count = (int) $result->fetchColumn();
+		$result->closeCursor();
+
+		return $count > 0;
+	}
+
 	private function findHistoric(int $threshold, int $maxAge): array {
 		$qb = $this->db->getQueryBuilder();
 
