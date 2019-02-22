@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
+use OCA\SuspiciousLogin\Exception\InsufficientDataException;
+use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use Symfony\Component\Console\Command\Command;
@@ -112,13 +114,21 @@ class Train extends Command {
 			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
-		$model = $this->trainer->train(
-			$config,
-			(int)$input->getOption('validation-threshold'),
-			(int)$input->getOption('max-age')
-		);
-
-		$this->printModelStatistics($model, $input, $output);
+		try {
+			$model = $this->trainer->train(
+				$config,
+				(int)$input->getOption('validation-threshold'),
+				(int)$input->getOption('max-age')
+			);
+			$this->printModelStatistics($model, $input, $output);
+		} catch (InsufficientDataException $ex) {
+			$output->writeln("<info>Not enough data, try again later (<error>" . $ex->getMessage() . "</error>)</info>");
+			return 1;
+		} catch (ServiceException $ex) {
+			$output->writeln("<error>Could not train a model: " . $ex->getMessage() . "</error>");
+			return 1;
+		}
+		return 0;
 	}
 
 }
