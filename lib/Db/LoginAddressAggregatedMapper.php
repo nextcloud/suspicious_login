@@ -99,4 +99,28 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		];
 	}
 
+	public function getCount(): int {
+		$qb = $this->db->getQueryBuilder();
+
+		$qb->select($qb->createFunction('COUNT(*)'))
+			->from($this->getTableName());
+		$result = $qb->execute();
+		$cnt = $result->fetchColumn();
+		$result->closeCursor();
+
+		return (int)$cnt;
+	}
+
+	public function getTotalCount(): int {
+		$qb = $this->db->getQueryBuilder();
+
+		$qb->select($qb->createFunction('SUM(seen)'))
+			->from($this->getTableName());
+		$result = $qb->execute();
+		$cnt = $result->fetchColumn();
+		$result->closeCursor();
+
+		return (int)$cnt;
+	}
+
 }

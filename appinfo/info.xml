@@ -7,7 +7,7 @@
 	</summary>
 	<description>Detect and warn about suspicious IPs logging into Nextcloud
 	</description>
-	<version>0.5.4</version>
+	<version>0.5.5</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>SuspiciousLogin</namespace>
@@ -39,4 +39,8 @@
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
 		<command>OCA\SuspiciousLogin\Command\Train</command>
 	</commands>
+
+	<settings>
+		<admin>OCA\SuspiciousLogin\Settings\AdminSettings</admin>
+	</settings>
 </info>
