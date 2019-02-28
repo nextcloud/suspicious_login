@@ -33,18 +33,19 @@
  					distinct: stats.trainingDataStats.loginsAggregated,
 				}) }}
 			</p>
-			<h3>{{ t('suspicious_login', 'Classifier statistics') }}</h3>
+			<h3>{{ t('suspicious_login', 'Classifier model statistics') }}</h3>
 			<p v-if="!stats.active">
 				{{ t('suspicious_login', 'No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured.', {
  					days: stats.trainingDataConfig.maxAge
 				}) }}
 			</p>
 			<p v-else>
-				{{ t('suspicious_login', 'During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins, whereas {precision}% of the logins classified as suspicious are indeed suspicious.', {
+				{{ t('suspicious_login', 'During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance.', {
 					time: relativeModified(stats.recentModels[0].createdAt),
 					precision: stats.recentModels[0].precisionN * 100,
 					recall: stats.recentModels[0].recallN * 100
 				}) }}
+				<ModelPerformanceChart :models="stats.recentModels" :styles="chartStyles"/>
 			</p>
 		</template>
 	</div>
@@ -52,9 +53,13 @@
 
 <script>
 	import Axios from 'nextcloud-axios';
+	import ModelPerformanceChart from './ModelPerformanceChart';
 
 	export default {
 		name: 'AdminSettings',
+		components: {
+			ModelPerformanceChart
+		},
 		mounted () {
 			this.fetchStats();
 		},
@@ -62,6 +67,10 @@
 			return {
 				loading: true,
 				stats: {},
+				chartStyles: {
+					height: '350px',
+					position: 'relative',
+				}
 			};
 		},
 		methods: {
