@@ -60,4 +60,20 @@ class ModelMapper extends QBMapper {
 		return $this->findEntity($query);
 	}
 
+	/**
+	 * @param int $max maximum number of models
+	 *
+	 * @return Model[]
+	 */
+	public function findMostRecent(int $max): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb->select('*')
+			->from($this->getTableName())
+			->orderBy('created_at', 'desc')
+			->setMaxResults($max);
+
+		return $this->findEntities($query);
+	}
+
 }

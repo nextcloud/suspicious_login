@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Db;
 
+use JsonSerializable;
 use OCP\AppFramework\Db\Entity;
 
 /**
@@ -59,7 +60,7 @@ use OCP\AppFramework\Db\Entity;
  * @method int getCreatedAt()
  * @method void setCreatedAt(int $createdAt)
  */
-class Model extends Entity {
+class Model extends Entity implements JsonSerializable {
 
 	protected $type;
 	protected $appVersion;
@@ -76,5 +77,25 @@ class Model extends Entity {
 	protected $recallN;
 	protected $duration;
 	protected $createdAt;
+
+	public function jsonSerialize() {
+		return [
+			'type' => $this->type,
+			'appVersion' => $this->appVersion,
+			'samplesPositive' => $this->samplesPositive,
+			'samplesShuffled' => $this->samplesShuffled,
+			'samplesRandom' => $this->samplesRandom,
+			'epochs' => $this->epochs,
+			'layers' => $this->layers,
+			'vectorDim' => $this->vectorDim,
+			'learningRate' => $this->learningRate,
+			'precisionY' => $this->precisionY,
+			'precisionN' => $this->precisionN,
+			'recallY' => $this->recallY,
+			'recallN' => $this->recallN,
+			'duration' => $this->duration,
+			'createdAt' => $this->createdAt,
+		];
+	}
 
 }

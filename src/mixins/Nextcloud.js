@@ -1,9 +1,7 @@
-<?php
-
-declare(strict_types=1);
-
-/**
- * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+/*
+ * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ *
+ * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,30 +17,10 @@ declare(strict_types=1);
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
-namespace OCA\SuspiciousLogin\Db;
-
-use OCP\AppFramework\Db\QBMapper;
-use OCP\IDBConnection;
-
-class LoginAddressMapper extends QBMapper {
-
-	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'login_address');
+export default {
+	methods: {
+		t,
 	}
-
-	public function getCount(): int {
-		$qb = $this->db->getQueryBuilder();
-
-		$qb->select($qb->createFunction('COUNT(*)'))
-			->from($this->getTableName());
-		$result = $qb->execute();
-		$cnt = $result->fetchColumn();
-		$result->closeCursor();
-
-		return (int)$cnt;
-	}
-
 }

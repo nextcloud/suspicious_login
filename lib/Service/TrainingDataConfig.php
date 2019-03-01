@@ -25,7 +25,9 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-class TrainingDataConfig {
+use JsonSerializable;
+
+class TrainingDataConfig implements JsonSerializable {
 
 	/** @var int */
 	private $maxAge;
@@ -100,6 +102,14 @@ class TrainingDataConfig {
 		$clone = clone $this;
 		$clone->now = $now;
 		return $clone;
+	}
+
+	public function jsonSerialize() {
+		return [
+			'maxAge' => $this->getMaxAge(),
+			'threshold' => $this->getThreshold(),
+			'now' => $this->getNow(),
+		];
 	}
 
 }

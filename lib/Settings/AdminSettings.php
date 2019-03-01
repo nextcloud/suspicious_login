@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 /**
- * @author Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ *
+ * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -19,30 +21,25 @@ declare(strict_types=1);
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
-namespace OCA\SuspiciousLogin\Db;
+namespace OCA\SuspiciousLogin\Settings;
 
-use OCP\AppFramework\Db\QBMapper;
-use OCP\IDBConnection;
+use OCA\SuspiciousLogin\AppInfo\Application;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCP\Settings\ISettings;
 
-class LoginAddressMapper extends QBMapper {
+class AdminSettings implements ISettings {
 
-	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'login_address');
+	public function getForm() {
+		return new TemplateResponse(Application::APP_ID, 'settings-admin');
 	}
 
-	public function getCount(): int {
-		$qb = $this->db->getQueryBuilder();
-
-		$qb->select($qb->createFunction('COUNT(*)'))
-			->from($this->getTableName());
-		$result = $qb->execute();
-		$cnt = $result->fetchColumn();
-		$result->closeCursor();
-
-		return (int)$cnt;
+	public function getSection() {
+		return 'security';
 	}
 
+	public function getPriority() {
+		return 90;
+	}
 }
