@@ -114,12 +114,16 @@ class LoginClassifier {
 		}
 
 		$this->logger->warning("detected a login from a suspicious login. user=$uid ip=$ip");
-		try {
-			$this->loginNotifier->notify($uid, $ip);
-		} catch (Throwable $ex) {
-			$this->logger->critical("could not send notification about a suspicious login");
-			$this->logger->logException($ex);
-		}
+
+		$this->persistSuspiciousLogin($uid, $ip);
+		$this->notifyUser($uid, $ip);
+	}
+
+	/**
+	 * @param string $uid
+	 * @param string $ip
+	 */
+	protected function persistSuspiciousLogin(string $uid, string $ip) {
 		try {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);
@@ -131,6 +135,27 @@ class LoginClassifier {
 			$this->mapper->insert($entity);
 		} catch (Throwable $ex) {
 			$this->logger->critical("could not save the details of a suspicious login");
+			$this->logger->logException($ex);
+		}
+	}
+
+	/**
+	 * @param string $uid
+	 * @param string $ip
+	 */
+	protected function notifyUser(string $uid, string $ip): void {
+		$now = $this->timeFactory->getTime();
+		$twoHoursAgo = $now - 60*60*2;
+		// We just inserted one alert – are there more with these params?
+		if (count($this->mapper->findRecent($uid, $ip, $twoHoursAgo)) > 1) {
+			$this->logger->debug("Notification for $uid:$ip already sent");
+			return;
+		}
+
+		try {
+			$this->loginNotifier->notify($uid, $ip);
+		} catch (Throwable $ex) {
+			$this->logger->critical("could not send notification about a suspicious login");
 			$this->logger->logException($ex);
 		}
 	}

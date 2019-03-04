@@ -33,4 +33,17 @@ class SuspiciousLoginMapper extends QBMapper {
 		parent::__construct($db, 'suspicious_login');
 	}
 
+	public function findRecent(string $uid, string $ip, $start): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('*')
+			->from($this->getTableName())
+			->where($qb->expr()->eq('uid', $qb->createNamedParameter($uid)))
+			->andWhere($qb->expr()->eq('ip', $qb->createNamedParameter($ip)))
+			->andWhere($qb->expr()->gte('created_at', $qb->createNamedParameter($start)));
+
+		return $this->findEntities($query);
+	}
+
 }
