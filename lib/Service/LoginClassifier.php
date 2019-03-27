@@ -28,6 +28,7 @@ namespace OCA\SuspiciousLogin\Service;
 use function base64_decode;
 use function explode;
 use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Util\AddressClassifier;
 use function preg_match;
 use function strlen;
 use function substr;
@@ -100,10 +101,14 @@ class LoginClassifier {
 	public function process(string $uid, string $ip) {
 		if ($this->isAuthenticatedWithAppPassword($this->request)) {
 			// We don't care about those logins
+			$this->logger->debug("App password detected. No address classification is performed");
 			return;
 		}
 		try {
-			if ($this->estimator->predict($uid, $ip)) {
+			if (!AddressClassifier::isIpV4($ip)) {
+				$this->logger->warning("Login is not from IPv4, hence it's considered suspicious");
+				// TODO: add IPv6 classifier https://github.com/nextcloud-gmbh/suspicious_login/issues/44
+			} else if ($this->estimator->predict($uid, $ip)) {
 				// All good, carry on!
 				return;
 			}
