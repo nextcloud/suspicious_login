@@ -23,7 +23,7 @@
 	<div id="suspicious-login-admin-settings" class="section">
 		<h2>{{ t('suspicious_login', 'Suspicious login detection') }}</h2>
 		<p>
-			{{ t('suspicious_login', 'The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if new IPs come from suspicious IP addresses.' )}}
+			{{ t('suspicious_login', 'The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address.' )}}
 		</p>
 		<template v-if="!loading">
 			<h3>{{ t('suspicious_login', 'Training data statistics') }}</h3>
