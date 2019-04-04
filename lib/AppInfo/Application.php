@@ -33,7 +33,7 @@ class Application extends App {
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
 
-		BootstrapSingleton::getInstance()->boot($this->getContainer());
+		BootstrapSingleton::getInstance($this->getContainer())->boot();
 	}
 
 }

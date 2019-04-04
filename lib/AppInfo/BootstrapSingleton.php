@@ -40,26 +40,31 @@ class BootstrapSingleton {
 	/** @var BootstrapSingleton */
 	private static $instance = null;
 
+	/** @var bool */
 	private $booted = false;
 
-	private function __construct() {
+	/** @var IAppContainer */
+	private $container;
+
+	private function __construct(IAppContainer $container) {
+		$this->container = $container;
 	}
 
-	public static function getInstance(): BootstrapSingleton {
+	public static function getInstance(IAppContainer $container): BootstrapSingleton {
 		if (self::$instance === null) {
-			self::$instance = new static();
+			self::$instance = new static($container);
 		}
 
 		return self::$instance;
 	}
 
-	public function boot(IAppContainer $container): void {
+	public function boot(): void {
 		if ($this->booted) {
 			return;
 		}
 
-		$this->registerEvents($container);
-		$this->registerNotification($container);
+		$this->registerEvents($this->container);
+		$this->registerNotification($this->container);
 
 		$this->booted = true;
 	}
