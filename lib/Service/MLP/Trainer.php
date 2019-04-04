@@ -78,10 +78,10 @@ class Trainer {
 						  TrainingDataConfig $dataConfig): Model {
 		$testingDays = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
 		$validationDays = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
-		if (!$this->loginAddressMapper->hasSufficientData($validationDays)) {
+		if (!$this->loginAddressMapper->hasSufficientIpV4Data($validationDays)) {
 			throw new InsufficientDataException("Not enough data for the specified maximum age");
 		}
-		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecent(
+		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecentIpv4(
 			$testingDays,
 			$validationDays
 		);
