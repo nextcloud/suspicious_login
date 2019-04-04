@@ -24,47 +24,25 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use OCA\SuspiciousLogin\Service\Collection\IAddressCollectionStrategy;
-use OCA\SuspiciousLogin\Service\Collection\IpV4Collector;
-use OCA\SuspiciousLogin\Service\Collection\IpV6Collector;
-use OCA\SuspiciousLogin\Util\AddressClassifier;
-use OCP\ILogger;
+use OCA\SuspiciousLogin\Db\LoginAddress;
+use OCA\SuspiciousLogin\Db\LoginAddressMapper;
 
 class LoginDataCollector {
 
-	/** @var IpV4Collector */
-	private $ipV4Collector;
+	/** @var LoginAddressMapper */
+	private $addressMapper;
 
-	/** @var IpV6Collector */
-	private $ipV6Collector;
-
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(IpV4Collector $ipV4Collector, IpV6Collector $ipV6Collector, ILogger $logger) {
-		$this->ipV4Collector = $ipV4Collector;
-		$this->ipV6Collector = $ipV6Collector;
-		$this->logger = $logger;
-	}
-
-	private function getCollectionStrategy(string $ip): ?IAddressCollectionStrategy {
-		if (AddressClassifier::isIpV4($ip)) {
-			return $this->ipV4Collector;
-		} else if (AddressClassifier::isIpV6($ip)) {
-			return $this->ipV6Collector;
-		} else {
-			return null;
-		}
+	public function __construct(LoginAddressMapper $addressMapper) {
+		$this->addressMapper = $addressMapper;
 	}
 
 	public function collectSuccessfulLogin(string $uid, string $ip, int $timestamp): void {
-		$strategy = $this->getCollectionStrategy($ip);
-		if ($strategy === null) {
-			$this->logger->error("Got invalid address <$ip>");
-			return;
-		}
+		$addr = new LoginAddress();
+		$addr->setUid($uid);
+		$addr->setIp($ip);
+		$addr->setCreatedAt($timestamp);
 
-		$strategy->collect($uid, $ip, $timestamp);
+		$this->addressMapper->insert($addr);
 	}
 
 }
