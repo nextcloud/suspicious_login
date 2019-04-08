@@ -33,12 +33,13 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		parent::__construct($db, 'login_address_aggregated');
 	}
 
-	public function findAll() {
+	public function findAllIpV4() {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb
 			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
-			->from($this->getTableName());
+			->from($this->getTableName())
+			->where($qb->expr()->like('ip', $qb->createNamedParameter('_%._%._%._%')));
 
 		return $this->findEntities($query);
 	}
@@ -54,13 +55,16 @@ class LoginAddressAggregatedMapper extends QBMapper {
 	 *
 	 * @return bool
 	 */
-	public function hasSufficientData(int $start): bool {
+	public function hasSufficientIpV4Data(int $start): bool {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb
 			->select($qb->createFunction('COUNT(*)'))
 			->from($this->getTableName())
-			->where($qb->expr()->lte('first_seen', $qb->createNamedParameter($start)));
+			->where($qb->expr()->andX(
+				$qb->expr()->like('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->lte('first_seen', $qb->createNamedParameter($start))
+			));
 
 		$result = $query->execute();
 		$count = (int) $result->fetchColumn();
@@ -69,33 +73,39 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		return $count > 0;
 	}
 
-	private function findHistoric(int $threshold, int $maxAge): array {
+	private function findHistoricIpv4(int $threshold, int $maxAge): array {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb
 			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
 			->from($this->getTableName())
-			->where($qb->expr()->gte('last_seen', $qb->createNamedParameter($maxAge)))
-			->andWhere($qb->expr()->lte('first_seen', $qb->createNamedParameter($threshold)));
+			->where($qb->expr()->andX(
+				$qb->expr()->like('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->gte('last_seen', $qb->createNamedParameter($maxAge)),
+				$qb->expr()->lte('first_seen', $qb->createNamedParameter($threshold))
+			));
 
 		return $this->findEntities($query);
 	}
 
-	private function findRecent(int $threshold): array {
+	private function findRecentIpV4(int $threshold): array {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb
 			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
 			->from($this->getTableName())
-			->andWhere($qb->expr()->gt('last_seen', $qb->createNamedParameter($threshold)));
+			->where($qb->expr()->andX(
+				$qb->expr()->like('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->gt('last_seen', $qb->createNamedParameter($threshold))
+			));
 
 		return $this->findEntities($query);
 	}
 
-	public function findHistoricAndRecent(int $threshold, int $maxAge = 0): array {
+	public function findHistoricAndRecentIpv4(int $threshold, int $maxAge = 0): array {
 		return [
-			$this->findHistoric($threshold, $maxAge),
-			$this->findRecent($threshold),
+			$this->findHistoricIpv4($threshold, $maxAge),
+			$this->findRecentIpV4($threshold),
 		];
 	}
 
