@@ -21,6 +21,5 @@
  */
 include_once __DIR__ . '/../vendor/autoload.php';
 
-use OCA\SuspiciousLogin\AppInfo\Application;
-
-$app = new Application();
+// Query the app instance in the hope it's instantiated exactly once
+OC::$server->query(\OCA\SuspiciousLogin\AppInfo\Application::class);
