@@ -3,7 +3,8 @@
     "description": "Detect and warn about suspicious IPs logging into Nextcloud",
     "type": "library",
     "require": {
-        "php-ai/php-ml": "^0.7.0"
+        "php-ai/php-ml": "^0.7.0",
+        "christophwurst/nextcloud": "v16.0.0-beta3"
     },
     "license": "AGPLv3",
     "authors": [
