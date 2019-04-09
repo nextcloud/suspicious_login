@@ -12,5 +12,8 @@
             "name": "Christoph Wurst",
             "email": "christoph@winzerhof-wurst.at"
         }
-    ]
+    ],
+    "scripts": {
+        "lint": "find . -name \\*.php -not -path './vendor/*' -exec php -l \"{}\" \\;"
+    }
 }
