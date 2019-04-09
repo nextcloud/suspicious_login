@@ -15,6 +15,7 @@
 		<authentication/>
 	</types>
 
+	<category>security</category>
 	<website>https://github.com/ChristophWurst/suspicious_login</website>
 	<bugs>https://github.com/ChristophWurst/suspicious_login/issues</bugs>
 	<repository type="git">
