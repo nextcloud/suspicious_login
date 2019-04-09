@@ -79,6 +79,9 @@ script:
   - xmllint appinfo/info.xml --schema info.xsd --noout
   - rm info.xsd
 
+  # Check PHP syntax errors
+  - composer run lint
+
   # Run server's app code checker
   - php ../../occ app:check-code suspicious_login
 
