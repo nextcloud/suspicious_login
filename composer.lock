@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71524cbcfeb8bd6087625edc7afdc03d",
+    "content-hash": "4ec5d8fcfbf5696287ec4275279ff0ee",
     "packages": [
         {
             "name": "christophwurst/nextcloud",
@@ -44,16 +44,16 @@
         },
         {
             "name": "php-ai/php-ml",
-            "version": "0.7.0",
+            "version": "0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-ai/php-ml.git",
-                "reference": "db95db3e57475df53d602b32c4451438c21e46c3"
+                "reference": "5e02b893e904761cd7e2415b11778cd421494c07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-ai/php-ml/zipball/db95db3e57475df53d602b32c4451438c21e46c3",
-                "reference": "db95db3e57475df53d602b32c4451438c21e46c3",
+                "url": "https://api.github.com/repos/php-ai/php-ml/zipball/5e02b893e904761cd7e2415b11778cd421494c07",
+                "reference": "5e02b893e904761cd7e2415b11778cd421494c07",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
                 "machine learning",
                 "pattern recognition"
             ],
-            "time": "2018-11-07T18:40:31+00:00"
+            "time": "2019-03-20T22:22:45+00:00"
         }
     ],
     "packages-dev": [],
