@@ -10,6 +10,7 @@ OC.L10N.register(
     "Training data statistics" : "Trénovanie štatistických dát",
     "Classifier model statistics" : "Štatistiky klasifikačného modelu",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Zatiaľ nebol natrénovaný žiadny model klasifikátora. To s najväčšou pravdepodobnosťou znamená, že ste apku povolili len nedávno. Pretože správne natrénovanie modelu vyžaduje viac údajov, apka bude čakať, kým sa nezaznamenajú prihlásenia aspoň za {days} dní.",
-    "Precision" : "Presnosť"
+    "Precision" : "Presnosť",
+    "Recall" : "Vyvolať"
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
