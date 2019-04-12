@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ec5d8fcfbf5696287ec4275279ff0ee",
+    "content-hash": "8a0d6efd7612c7ca1ae9c1964498687a",
     "packages": [
         {
             "name": "christophwurst/nextcloud",
-            "version": "v16.0.0-beta3",
+            "version": "v16.0.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "69332fc5190a4c209669a3933e7ca1767a292e7a"
+                "reference": "dd3131cef901825cbbdedb25c0ff50d28fea2fec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/69332fc5190a4c209669a3933e7ca1767a292e7a",
-                "reference": "69332fc5190a4c209669a3933e7ca1767a292e7a",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/dd3131cef901825cbbdedb25c0ff50d28fea2fec",
+                "reference": "dd3131cef901825cbbdedb25c0ff50d28fea2fec",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2019-04-08T08:10:16+00:00"
+            "time": "2019-04-12T06:01:46+00:00"
         },
         {
             "name": "php-ai/php-ml",
@@ -102,7 +102,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "christophwurst/nextcloud": 10
+        "christophwurst/nextcloud": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
