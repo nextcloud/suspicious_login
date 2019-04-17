@@ -5,6 +5,8 @@ OC.L10N.register(
     "New login detected" : "Zjištěno nové přihlášení",
     "Suspicious login detection" : "Zjišťování podezřelých přihlášení",
     "Training data statistics" : "Statistiky trénovacích údajů",
+    "Classifier model statistics" : "Statistiky modelu hodnocení",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Doposud nebyl natrénován žádný model hodnocení. To nejspíš znamená, že jste aplikaci zapnuli teprve nedávno. Protože natrénování modelu vyžaduje dobrá data, aplikace čeká dokud nejsou zachycena přihlášení po dobu alespoň {days}.",
     "Precision" : "Přesnost",
     "Recall" : "Vyvolat"
 },
