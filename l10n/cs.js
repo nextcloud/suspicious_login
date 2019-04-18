@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Suspicious Login" : "Podezřelé přihlášení",
     "New login detected" : "Zjištěno nové přihlášení",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Zjišťovat a varovat o podezřelých IP adresách přihlašujících se k Nextcloud\n\t",
     "Suspicious login detection" : "Zjišťování podezřelých přihlášení",
     "Training data statistics" : "Statistiky trénovacích údajů",
     "Classifier model statistics" : "Statistiky modelu hodnocení",
