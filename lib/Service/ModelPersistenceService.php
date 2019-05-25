@@ -87,7 +87,7 @@ class ModelPersistenceService {
 		try {
 			$latestModel = $this->modelMapper->findLatest();
 		} catch (DoesNotExistException $e) {
-			$this->logger->error("No models found. Can't load latest");
+			$this->logger->debug("No models found. Can't load latest");
 			throw new ServiceException("No models found", 0, $e);
 		}
 		return $this->load($latestModel->getId());
