@@ -27,6 +27,7 @@ namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCP\ILogger;
+use Phpml\Exception\SerializeException;
 
 class EstimatorService {
 
@@ -51,10 +52,20 @@ class EstimatorService {
 	 * @throws ServiceException
 	 */
 	public function predict(string $uid, string $ip, int $modelId = null): bool {
-		if (is_null($modelId)) {
-			$estimatorModel = $this->persistenceService->loadLatest();
-		} else {
-			$estimatorModel = $this->persistenceService->load($modelId);
+		try {
+			if ($modelId === null) {
+				$this->logger->debug("loading latest model");
+
+				$estimatorModel = $this->persistenceService->loadLatest();
+			} else {
+				$this->logger->debug("loading model $modelId");
+
+				$estimatorModel = $this->persistenceService->load($modelId);
+			}
+		} catch (SerializeException $e) {
+			$this->logger->warning("could not load model $modelId to classify UID $uid and IP $ip");
+
+			throw new ServiceException($e->getMessage(), $e->getCode(), $e);
 		}
 
 		$data = new DataSet([
