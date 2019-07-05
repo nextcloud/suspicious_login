@@ -29,15 +29,13 @@ use function array_merge;
 use function str_pad;
 use function substr;
 
-class UidIPVector {
-
-	const SIZE = 16 + 32;
+abstract class AUidIpVector {
 
 	/** @var string */
 	private $uid;
 
 	/** @var string */
-	private $ip;
+	protected $ip;
 
 	/** @var string */
 	private $label;
@@ -55,7 +53,7 @@ class UidIPVector {
 		return str_split($padded);
 	}
 
-	private function numStringsToBitArray(array $strings, $base, $padding): array {
+	protected function numStringsToBitArray(array $strings, $base, $padding): array {
 		$converted = array_reduce(array_map(function (string $s) use ($base, $padding) {
 			return $this->numStringToBitArray($s, $base, $padding);
 		}, $strings), 'array_merge', []);
@@ -81,15 +79,13 @@ class UidIPVector {
 	 *
 	 * @return array
 	 */
-	private function ipAsFeatureVector(): array {
-		$splitIp = explode('.', $this->ip);
-		return $this->numStringsToBitArray($splitIp, 10, 8);
-	}
+	abstract protected function ipAsFeatureVector(): array;
 
 	public function asFeatureVector(): array {
+		$v = $this->ipAsFeatureVector();
 		return array_merge(
 			$this->uidAsFeatureVector(),
-			$this->ipAsFeatureVector()
+			$v
 		);
 	}
 

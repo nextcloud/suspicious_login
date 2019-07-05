@@ -25,13 +25,16 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use function array_diff;
 use function array_filter;
-use function array_keys;
+use function array_map;
 use function array_search;
-use Exception;
+use function base_convert;
+use Darsyn\IP\Version\IPv6;
+use function implode;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use function pow;
 use function random_int;
+use function range;
 
 class NegativeSampleGenerator {
 
@@ -60,7 +63,7 @@ class NegativeSampleGenerator {
 					}
 
 					// If the IP is not found for other users it's unique
-					return array_search($ip, $otherIps) === false;
+					return !in_array($ip, $otherIps);
 				}
 			});
 		}
@@ -68,28 +71,18 @@ class NegativeSampleGenerator {
 		return $uniqueIps;
 	}
 
-	private function generateFromRealData(string $uid, array $uniqueIps): array {
+	private function generateFromRealData(string $uid, array $uniqueIps, bool $v4 = true): array {
 		return [
 			'uid' => $uid,
-			'ip' => implode('.', [
-				random_int(0, 255),
-				random_int(0, 255),
-				random_int(0, 255),
-				random_int(0, 255),
-			]),
+			'ip' => $uniqueIps[random_int(0, count($uniqueIps) - 1)],
 			'label' => Trainer::LABEL_NEGATIVE,
 		];
 	}
 
-	private function generateRandom(string $uid): array {
+	private function generateRandom(string $uid, IClassificationStrategy $strategy): array {
 		return [
 			'uid' => $uid,
-			'ip' => implode('.', [
-				random_int(0, 255),
-				random_int(0, 255),
-				random_int(0, 255),
-				random_int(0, 255),
-			]),
+			'ip' => $strategy->generateRandomIp(),
 			'label' => Trainer::LABEL_NEGATIVE,
 		];
 	}
@@ -100,12 +93,15 @@ class NegativeSampleGenerator {
 	 *
 	 * @return DataSet
 	 */
-	public function generateRandomFromPositiveSamples(DataSet $positives, int $num): DataSet {
+	public function generateRandomFromPositiveSamples(DataSet $positives, int $num, IClassificationStrategy $strategy): DataSet {
 		$max = count($positives);
 
-		return new DataSet(array_map(function (int $id) use ($positives, $max) {
-			return $this->generateRandom($positives[$id % $max]->getUid());
-		}, range(0, $num - 1)));
+		return new DataSet(
+			array_map(function (int $id) use ($strategy, $positives, $max) {
+				return $this->generateRandom($positives[$id % $max]->getUid(), $strategy);
+			}, range(0, $num - 1)),
+			$strategy
+		);
 	}
 
 	/**
@@ -114,13 +110,16 @@ class NegativeSampleGenerator {
 	 *
 	 * @return DataSet
 	 */
-	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num): DataSet {
+	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num, bool $v4 = true): DataSet {
 		$max = count($positives);
 		$uniqueIps = $this->getUniqueIPsPerUser($positives);
 
-		return new DataSet(array_map(function (int $id) use ($uniqueIps, $positives, $max) {
-			return $this->generateFromRealData($positives[$id % $max]->getUid(), $uniqueIps);
-		}, range(0, $num - 1)));
+		return new DataSet(
+			array_map(function (int $id) use ($uniqueIps, $positives, $max) {
+				return $this->generateFromRealData($positives[$id % $max]->getUid(), $uniqueIps);
+			}, range(0, $num - 1)),
+			$v4
+		);
 	}
 
 }

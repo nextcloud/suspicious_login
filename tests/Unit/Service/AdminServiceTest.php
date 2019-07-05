@@ -69,7 +69,7 @@ class AdminServiceTest extends TestCase {
 		$this->modelMapper->expects($this->once())
 			->method('findLatest')
 			->willThrowException(new DoesNotExistException(''));
-		$this->modelMapper->expects($this->once())
+		$this->modelMapper->expects($this->exactly(2))
 			->method('findMostRecent')
 			->with(14)
 			->willReturn([]);
@@ -99,7 +99,7 @@ class AdminServiceTest extends TestCase {
 		$this->modelMapper->expects($this->once())
 			->method('findLatest')
 			->willReturn($model);
-		$this->modelMapper->expects($this->once())
+		$this->modelMapper->expects($this->exactly(2))
 			->method('findMostRecent')
 			->with(14)
 			->willReturn([$model]);
@@ -114,7 +114,7 @@ class AdminServiceTest extends TestCase {
 			->willReturn(20);
 		$expected = new AppStatistics(
 			true,
-			[$model],
+			[$model, $model],
 			TrainingDataConfig::default(),
 			new TrainingDataStatistics(200, 20)
 		);

@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use InvalidArgumentException;
 use function array_key_exists;
 use function array_map;
 use function array_merge;
@@ -36,21 +37,25 @@ use function shuffle;
 
 class DataSet implements ArrayAccess, Countable {
 
-	/** @var UidIPVector[] */
+	/** @var AUidIpVector[] */
 	private $data;
 
-	public function __construct(array $data) {
-		$this->data = array_map(function (array $item) {
-			return new UidIPVector($item['uid'], $item['ip'], $item['label']);
+	/** @var IClassificationStrategy */
+	private $strategy;
+
+	public function __construct(array $data, IClassificationStrategy $strategy) {
+		$this->data = array_map(function (array $item) use ($strategy) {
+			return $strategy->newVector($item['uid'], $item['ip'], $item['label']);
 		}, $data);
+		$this->strategy = $strategy;
 	}
 
 	/**
 	 * @param LoginAddressAggregated[] $loginAddresses
 	 */
-	public static function fromLoginAddresses(array $loginAddresses, bool $weighted = true): DataSet {
-		$deep = array_map(function (LoginAddressAggregated $addr) use ($weighted) {
-			$multiplier = $weighted ? (int)log((int) $addr->getSeen(), 2) : 1;
+	public static function fromLoginAddresses(array $loginAddresses, IClassificationStrategy $strategy): DataSet {
+		$deep = array_map(function (LoginAddressAggregated $addr) {
+			$multiplier = (int)log((int) $addr->getSeen(), 2);
 			return array_fill(0, $multiplier, [
 				'uid' => $addr->getUid(),
 				'ip' => $addr->getIp(),
@@ -59,12 +64,13 @@ class DataSet implements ArrayAccess, Countable {
 		}, $loginAddresses);
 
 		return new DataSet(
-			array_merge(...$deep)
+			array_merge(...$deep),
+			$strategy
 		);
 	}
 
 	public function asTrainingData(): array {
-		return array_map(function (UidIPVector $vec) {
+		return array_map(function (AUidIpVector $vec) {
 			return $vec->asFeatureVector();
 		}, $this->data);
 	}
@@ -105,14 +111,17 @@ class DataSet implements ArrayAccess, Countable {
 	 * @return string[]
 	 */
 	public function getLabels(): array {
-		return array_map(function (UidIPVector $vec) {
+		return array_map(function (AUidIpVector $vec) {
 			return $vec->getLabel();
 		}, $this->data);
 	}
 
 	public function merge(DataSet $other): DataSet {
+		if ($other->strategy::getTypeName() !== $this->strategy::getTypeName()) {
+			throw new InvalidArgumentException('Can\'t merge data set of different types');
+		}
 		$merged = array_merge($this->data, $other->data);
-		$new = new DataSet([]);
+		$new = new DataSet([], $this->strategy);
 		$new->data = $merged;
 		return $new;
 	}

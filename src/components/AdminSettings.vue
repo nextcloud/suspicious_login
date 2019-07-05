@@ -28,30 +28,17 @@
 		<h3>{{ t('suspicious_login', 'Training data statistics') }}</h3>
 		<p>
 			{{ t('suspicious_login', 'So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples.', {
-				total: stats.trainingDataStats.loginsCaptured,
-				distinct: stats.trainingDataStats.loginsAggregated,
+			total: stats.trainingDataStats.loginsCaptured,
+			distinct: stats.trainingDataStats.loginsAggregated,
 			}) }}
 		</p>
-		<h3>{{ t('suspicious_login', 'Classifier model statistics') }}</h3>
-		<p v-if="!stats.active">
-			{{ t('suspicious_login', 'No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured.', {
-				days: stats.trainingDataConfig.maxAge
-			}) }}
-		</p>
-		<p v-else>
-			{{ t('suspicious_login', 'During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance.', {
-				time: relativeModified(stats.recentModels[0].createdAt),
-				precision: stats.recentModels[0].precisionN * 100,
-				recall: stats.recentModels[0].recallN * 100
-			}) }}
-			<ModelPerformanceChart :models="stats.recentModels" :styles="chartStyles"/>
-		</p>
+		<ModelPerformance :title="t('suspicious_login', 'IPv4')" :stats="stats" address-type="ipv4"></ModelPerformance>
+		<ModelPerformance :title="t('suspicious_login', 'IPv6')" :stats="stats" address-type="ipv6"></ModelPerformance>
 	</div>
 </template>
 
 <script>
-	import Axios from 'nextcloud-axios';
-	import ModelPerformanceChart from './ModelPerformanceChart';
+	import ModelPerformance from './ModelPerformance';
 
 	export default {
 		name: 'AdminSettings',
@@ -62,20 +49,7 @@
 			},
 		},
 		components: {
-			ModelPerformanceChart
-		},
-		data() {
-			return {
-				chartStyles: {
-					height: '350px',
-					position: 'relative',
-				}
-			};
-		},
-		methods: {
-			relativeModified (ts) {
-				return OC.Util.relativeModifiedDate(ts * 1000);
-			}
+			ModelPerformance
 		}
 	}
 </script>

@@ -107,10 +107,9 @@ class LoginClassifier {
 			return;
 		}
 		try {
-			if (!AddressClassifier::isIpV4($ip)) {
-				$this->logger->warning("Login is not from IPv4, hence it's considered suspicious");
-				// TODO: add IPv6 classifier https://github.com/nextcloud-gmbh/suspicious_login/issues/44
-			} else if ($this->estimator->predict($uid, $ip)) {
+			$strategy = AddressClassifier::isIpV4($ip) ? new Ipv4Strategy() : new IpV6Strategy();
+			if ($this->estimator->predict($uid, $ip, $strategy)) {
+				$this->logger->debug("Ip $ip for user $uid is not suspicious");
 				// All good, carry on!
 				return;
 			}
@@ -120,7 +119,7 @@ class LoginClassifier {
 			return;
 		}
 
-		$this->logger->warning("detected a login from a suspicious login. user=$uid ip=$ip");
+		$this->logger->warning("Detected a login from a suspicious login. user=$uid ip=$ip strategy=" . $strategy::getTypeName());
 
 		$this->persistSuspiciousLogin($uid, $ip);
 		$this->notifyUser($uid, $ip);
@@ -130,7 +129,7 @@ class LoginClassifier {
 	 * @param string $uid
 	 * @param string $ip
 	 */
-	protected function persistSuspiciousLogin(string $uid, string $ip) {
+	private function persistSuspiciousLogin(string $uid, string $ip) {
 		try {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);
@@ -150,7 +149,7 @@ class LoginClassifier {
 	 * @param string $uid
 	 * @param string $ip
 	 */
-	protected function notifyUser(string $uid, string $ip): void {
+	private function notifyUser(string $uid, string $ip): void {
 		$now = $this->timeFactory->getTime();
 		$twoHoursAgo = $now - 60*60*2;
 		// We just inserted one alert – are there more with these params?

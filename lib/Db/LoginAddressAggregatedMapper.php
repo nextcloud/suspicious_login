@@ -67,7 +67,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 			));
 
 		$result = $query->execute();
-		$count = (int) $result->fetchColumn();
+		$count = (int)$result->fetchColumn();
 		$result->closeCursor();
 
 		return $count > 0;
@@ -109,6 +109,24 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		];
 	}
 
+	public function hasSufficientIpV6Data(int $start) {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select($qb->createFunction('COUNT(*)'))
+			->from($this->getTableName())
+			->where($qb->expr()->andX(
+				$qb->expr()->notLike('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->lte('first_seen', $qb->createNamedParameter($start))
+			));
+
+		$result = $query->execute();
+		$count = (int)$result->fetchColumn();
+		$result->closeCursor();
+
+		return $count > 0;
+	}
+
 	public function getCount(): int {
 		$qb = $this->db->getQueryBuilder();
 
@@ -131,6 +149,42 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		$result->closeCursor();
 
 		return (int)$cnt;
+	}
+
+	private function findHistoricIpv6(int $threshold, int $maxAge): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
+			->from($this->getTableName())
+			->where($qb->expr()->andX(
+				$qb->expr()->notLike('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->gte('last_seen', $qb->createNamedParameter($maxAge)),
+				$qb->expr()->lte('first_seen', $qb->createNamedParameter($threshold))
+			));
+
+		return $this->findEntities($query);
+	}
+
+	private function findRecentIpV6(int $threshold): array {
+		$qb = $this->db->getQueryBuilder();
+
+		$query = $qb
+			->select('uid', 'ip', 'seen', 'first_seen', 'last_seen')
+			->from($this->getTableName())
+			->where($qb->expr()->andX(
+				$qb->expr()->notLike('ip', $qb->createNamedParameter('_%._%._%._%')),
+				$qb->expr()->gt('last_seen', $qb->createNamedParameter($threshold))
+			));
+
+		return $this->findEntities($query);
+	}
+
+	public function findHistoricAndRecentIpv6(int $threshold, int $maxAge = 0) {
+		return [
+			$this->findHistoricIpv6($threshold, $maxAge),
+			$this->findRecentIpV6($threshold),
+		];
 	}
 
 }
