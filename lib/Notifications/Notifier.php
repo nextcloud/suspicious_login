@@ -45,7 +45,15 @@ class Notifier implements INotifier {
 		$this->url = $url;
 	}
 
-	public function prepare(INotification $notification, $languageCode) {
+	public function getID(): string {
+		return Application::APP_ID;
+	}
+
+	public function getName(): string {
+		return $this->factory->get(Application::APP_ID)->t('Suspicious Login');
+	}
+
+	public function prepare(INotification $notification, string $languageCode): INotification {
 		if ($notification->getApp() !== Application::APP_ID) {
 			// Not my app => throw
 			throw new InvalidArgumentException();
