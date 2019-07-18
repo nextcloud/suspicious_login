@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 - TBD
+### Added
+- Nextcloud 17 support
+
+### Removed
+- Nextcloud 16 support
+
 ## 1.0.0 - 2019-04-24
 ### Added
 - First production-ready implementation
