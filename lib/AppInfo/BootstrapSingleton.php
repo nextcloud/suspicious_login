@@ -96,15 +96,7 @@ class BootstrapSingleton {
 	private function registerNotification(IAppContainer $container) {
 		/** @var IManager $manager */
 		$manager = $container->query(IManager::class);
-		$manager->registerNotifier(
-			function () use ($container) {
-				return $container->query(Notifier::class);
-			},
-			function () use ($container) {
-				$l = $container->query(IL10N::class);
-				return ['id' => Application::APP_ID, 'name' => $l->t('Suspicious Login')];
-			}
-		);
+		$manager->registerNotifierService(Notifier::class);
 	}
 
 }
