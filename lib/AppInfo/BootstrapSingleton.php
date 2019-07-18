@@ -102,7 +102,7 @@ class BootstrapSingleton {
 			},
 			function () use ($container) {
 				$l = $container->query(IL10N::class);
-				return ['id' => self::APP_ID, 'name' => $l->t('Suspicious Login')];
+				return ['id' => Application::APP_ID, 'name' => $l->t('Suspicious Login')];
 			}
 		);
 	}
