@@ -25,9 +25,7 @@ env:
 matrix:
   include:
     - php: 7.3
-      env: "CORE_BRANCH=stable16"
-    - php: 7.3
-      env: "CORE_BRANCH=v16.0.0RC1"
+      env: "CORE_BRANCH=master"
     - php: 7.3
       env: "DB=pgsql"
     - php: 7.3
