@@ -2,7 +2,11 @@
 
 Detect and warn about suspicious IPs logging into Nextcloud
 
-The app is in incubation stage, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/suspicious_login#development-setup)
+![Downloads](https://img.shields.io/github/downloads/nextcloud/suspicious_login/total.svg)
+[![Build Status](https://travis-ci.com/nextcloud/suspicious_login.svg?branch=master)](https://travis-ci.com/nextcloud/suspicious_login)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=nextcloud/suspicious_login)](https://dependabot.com)
+
+The app is still under development, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/suspicious_login#development-setup)
 
 ## How it works
 
