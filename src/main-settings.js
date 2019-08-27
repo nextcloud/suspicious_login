@@ -22,6 +22,7 @@
 import Vue from 'vue';
 
 import AdminSettings from './components/AdminSettings';
+import {loadState} from 'nextcloud-initial-state'
 import Nextcloud from './mixins/Nextcloud';
 
 Vue.mixin(Nextcloud);
@@ -29,6 +30,6 @@ Vue.mixin(Nextcloud);
 const View = Vue.extend(AdminSettings);
 new View({
 	propsData: {
-		stats: OCP.InitialState.loadState('suspicious_login', 'stats')
+		stats: loadState('suspicious_login', 'stats')
 	}
 }).$mount('#suspicious-login-admin-settings');
