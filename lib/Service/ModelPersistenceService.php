@@ -41,6 +41,7 @@ use OCP\ITempManager;
 use Phpml\Estimator;
 use Phpml\Exception\SerializeException;
 use Phpml\ModelManager;
+use function strlen;
 
 class ModelPersistenceService {
 
@@ -83,6 +84,11 @@ class ModelPersistenceService {
 		$this->logger = $logger;
 	}
 
+	/**
+	 * @return Estimator
+	 * @throws SerializeException
+	 * @throws ServiceException
+	 */
 	public function loadLatest(): Estimator {
 		try {
 			$latestModel = $this->modelMapper->findLatest();
@@ -119,8 +125,12 @@ class ModelPersistenceService {
 	public function load(int $id): Estimator {
 		$cached = $this->getCached($id);
 		if (!is_null($cached)) {
+			$this->logger->debug("using cached model $id");
+
 			$serialized = $cached;
 		} else {
+			$this->logger->debug("loading model $id from app data");
+
 			try {
 				$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
 				$modelFile = $modelsFolder->getFile((string)$id);
@@ -134,6 +144,8 @@ class ModelPersistenceService {
 			$this->cache($id, $serialized);
 		}
 
+		$this->logger->debug("seralized model size: " . strlen($serialized));
+
 		// Inefficient, but we can't get the real path from app data as it might
 		// not be a local file
 		$tmpFile = $this->tempManager->getTemporaryFile();
@@ -143,6 +155,7 @@ class ModelPersistenceService {
 			$estimator = $this->modelManager->restoreFromFile($tmpFile);
 		} catch (SerializeException $e) {
 			$this->logger->error("Could not deserialize persisted model $id: " . $e->getMessage());
+
 			throw new SerializeException("Could not deserialize persisted model $id", 0, $e);
 		}
 
