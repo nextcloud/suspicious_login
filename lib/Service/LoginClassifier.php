@@ -27,8 +27,10 @@ namespace OCA\SuspiciousLogin\Service;
 
 use function base64_decode;
 use function explode;
+use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
+use OCP\EventDispatcher\IEventDispatcher;
 use function preg_match;
 use function strlen;
 use function substr;
@@ -53,24 +55,24 @@ class LoginClassifier {
 	/** @var SuspiciousLoginMapper */
 	private $mapper;
 
-	/** @var LoginNotifier */
-	private $loginNotifier;
-
 	/** @var ITimeFactory */
 	private $timeFactory;
+
+	/** @var IEventDispatcher */
+	private $dispatcher;
 
 	public function __construct(EstimatorService $estimator,
 								IRequest $request,
 								ILogger $logger,
 								SuspiciousLoginMapper $mapper,
-								LoginNotifier $loginNotifier,
-								ITimeFactory $timeFactory) {
+								ITimeFactory $timeFactory,
+								IEventDispatcher $dispatcher) {
 		$this->estimator = $estimator;
 		$this->request = $request;
 		$this->logger = $logger;
 		$this->mapper = $mapper;
-		$this->loginNotifier = $loginNotifier;
 		$this->timeFactory = $timeFactory;
+		$this->dispatcher = $dispatcher;
 	}
 
 	/**
@@ -157,12 +159,8 @@ class LoginClassifier {
 			return;
 		}
 
-		try {
-			$this->loginNotifier->notify($uid, $ip);
-		} catch (Throwable $ex) {
-			$this->logger->critical("could not send notification about a suspicious login");
-			$this->logger->logException($ex);
-		}
+		$event = new SuspiciousLoginEvent($uid, $ip);
+		$this->dispatcher->dispatch(SuspiciousLoginEvent::class, $event);
 	}
 
 }
