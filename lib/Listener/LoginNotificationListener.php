@@ -1,11 +1,9 @@
 <?php
-
 declare(strict_types=1);
-
 /**
- * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright Copyright (c) 2019, Roeland Jago Douma <roeland@famdouma.nl>
  *
- * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Roeland Jago Douma <roeland@famdouma.nl>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -21,38 +19,54 @@ declare(strict_types=1);
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-namespace OCA\SuspiciousLogin\Service;
+namespace OCA\SuspiciousLogin\Event;
 
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
+use OCP\ILogger;
 use OCP\Notification\IManager;
 
-class LoginNotifier {
+class LoginNotificationListener implements IEventListener {
 
 	/** @var IManager */
 	private $notificationManager;
-
 	/** @var ITimeFactory */
 	private $timeFactory;
+	/** @var ILogger */
+	private $logger;
 
 	public function __construct(IManager $notificationManager,
-								ITimeFactory $timeFactory) {
+								ITimeFactory $timeFactory,
+								ILogger $logger) {
 		$this->notificationManager = $notificationManager;
 		$this->timeFactory = $timeFactory;
+		$this->logger = $logger;
 	}
 
-	public function notify(string $uid, string $ip): void {
-		$notification = $this->notificationManager->createNotification();
-		$notification->setApp(Application::APP_ID)
-			->setUser($uid)
-			->setDateTime($this->timeFactory->getDateTime())
-			->setObject('ip', $ip)
-			->setSubject('suspicious_login_detected', [
-				'ip' => $ip,
-			]);
-		$this->notificationManager->notify($notification);
+	public function handle(Event $event): void {
+		if (!($event instanceof SuspiciousLoginEvent)) {
+			return;
+		}
+
+		try {
+			$notification = $this->notificationManager->createNotification();
+			$notification->setApp(Application::APP_ID)
+				->setUser($event->getUid())
+				->setDateTime($this->timeFactory->getDateTime())
+				->setObject('ip', $event->getIp())
+				->setSubject('suspicious_login_detected', [
+					'ip' => $event->getIp(),
+				]);
+			$this->notificationManager->notify($notification);
+		} catch (\Throwable $ex) {
+			$this->logger->critical("could not send notification about a suspicious login");
+			$this->logger->logException($ex);
+		}
 	}
 
 }
