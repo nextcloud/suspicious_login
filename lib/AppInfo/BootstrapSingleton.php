@@ -28,13 +28,12 @@ namespace OCA\SuspiciousLogin\AppInfo;
 
 use function call_user_func_array;
 use function func_get_args;
-use OCA\SuspiciousLogin\Event\LoginNotificationListener;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Listener\LoginListener;
+use OCA\SuspiciousLogin\Listener\LoginNotificationListener;
 use OCA\SuspiciousLogin\Notifications\Notifier;
 use OCP\AppFramework\IAppContainer;
 use OCP\EventDispatcher\IEventDispatcher;
-use OCP\IL10N;
 use OCP\Notification\IManager;
 use OCP\Util;
 
