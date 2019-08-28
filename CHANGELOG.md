@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 - 2019-08-28
+### Changed
+- New and updated translations
+### Fixed
+- Better handling of deserialization errors
+- Vulnerable npm dependencies
+
 ## 2.0.0 - 2019-08-26
 ### Added
 - Nextcloud 17 support
