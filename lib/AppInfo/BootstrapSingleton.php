@@ -30,6 +30,7 @@ use function call_user_func_array;
 use function func_get_args;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Listener\LoginListener;
+use OCA\SuspiciousLogin\Listener\LoginMailListener;
 use OCA\SuspiciousLogin\Listener\LoginNotificationListener;
 use OCA\SuspiciousLogin\Notifications\Notifier;
 use OCP\AppFramework\IAppContainer;
@@ -97,6 +98,7 @@ class BootstrapSingleton {
 		/** @var IEventDispatcher $dispatcher */
 		$dispatcher = $container->query(IEventDispatcher::class);
 		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginNotificationListener::class);
+		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginMailListener::class);
 	}
 
 	private function registerNotification(IAppContainer $container) {
