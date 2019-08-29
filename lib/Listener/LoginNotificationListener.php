@@ -22,9 +22,10 @@ declare(strict_types=1);
  *
  */
 
-namespace OCA\SuspiciousLogin\Event;
+namespace OCA\SuspiciousLogin\Listener;
 
 use OCA\SuspiciousLogin\AppInfo\Application;
+use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
