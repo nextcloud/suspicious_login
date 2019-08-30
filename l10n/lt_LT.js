@@ -1,9 +1,9 @@
 OC.L10N.register(
     "suspicious_login",
     {
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Buvo aptiktas naujas prisijungimas prie jūsų paskyros. IP adresas %s buvo klasifikuotas kaip įtartinas. Jeigu tai buvote jūs, galite nepaisyti šio pranešimo. Priešingu atveju, turėtumėte pasikeisti slaptažodį.",
     "Suspicious Login" : "Įtartinas prisijungimas",
     "New login detected" : "Aptiktas naujas prisijungimas",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Buvo aptiktas naujas prisijungimas prie jūsų paskyros. IP adresas %s buvo klasifikuotas kaip įtartinas. Jeigu tai buvote jūs, galite nepaisyti šio pranešimo. Priešingu atveju, turėtumėte pasikeisti slaptažodį.",
     "Suspicious login detection" : "Įtartinų prisijungimų aptikimas",
     "Precision" : "Tikslumas"
 },

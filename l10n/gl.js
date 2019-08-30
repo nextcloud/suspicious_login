@@ -1,9 +1,9 @@
 OC.L10N.register(
     "suspicious_login",
     {
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Detectouse un novo acceso na súa conta. O enderezo IP %s cualificouse como sospeitoso. Se foi vostede, pode ignorar esta mensaxe. Se non, debería cambiar o seu contrasinal.",
     "Suspicious Login" : "Acceso sospeitoso",
     "New login detected" : "Detectouse un novo acceso",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Detectouse un novo acceso na súa conta. O enderezo IP %s cualificouse como sospeitoso. Se foi vostede, pode ignorar esta mensaxe. Se non, debería cambiar o seu contrasinal.",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detectar e alertar sobre enderezos IP sospeitosos accedendo ao Nextcloud\n\t",
     "Suspicious login detection" : "Detección de accesos sospeitosos",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A aplicación de detección de accesos sospeitosos está activa nesta instalación. Rexistraranse os enderezos IP dos usuarios que accedan e construirase un clasificador que alertará ao detectar un acceso dende un IP sospeitoso.",

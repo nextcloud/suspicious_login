@@ -1,9 +1,9 @@
 OC.L10N.register(
     "suspicious_login",
     {
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "התגלתה כניסה חדשה לחשבון שלך. כתובת ה־IP %s סווגה כחשודה. אם זה היה ניסיון כניסה שלך, ניתן להתעלם מההודעה הזאת. בכל מקרה אחר מוטב לך לשנות את הססמה שלך.",
     "Suspicious Login" : "כניסה חשודה",
     "New login detected" : "התגלתה כניסה חדשה",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "התגלתה כניסה חדשה לחשבון שלך. כתובת ה־IP %s סווגה כחשודה. אם זה היה ניסיון כניסה שלך, ניתן להתעלם מההודעה הזאת. בכל מקרה אחר מוטב לך לשנות את הססמה שלך.",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "זיהוי ואזהרה מפני כתובות IP חשודות שנכנסות ל־Nextcloud\n\t",
     "Suspicious login detection" : "התגלתה כניסה חשודה",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "יישומון הכניסה החשודה פעיל בעותק זה. היישומון יעקוב אחר כתובות ה־IP דרכן משתמשים נכנסו בהצלחה ויבנה מסווג שמזהיר במקרה שיש כניסה חדשה מכתובת IP חשודה.",

@@ -1,7 +1,7 @@
 { "translations": {
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Foi detetado um novo acesso à sua conta. O endereço IP %s foi classificado como suspeito. Se foi você a aceder, pode ignorar esta mensagem. Caso contrário, deve proceder à alteração da sua palavra-passe.",
     "Suspicious Login" : "Acesso suspeito",
     "New login detected" : "Detetado novo acesso",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Foi detetado um novo acesso à sua conta. O endereço IP %s foi classificado como suspeito. Se foi você a aceder, pode ignorar esta mensagem. Caso contrário, deve proceder à alteração da sua palavra-passe.",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detetar e avisar sobre acessos ao Nextcloud a partir de endereços IP suspeitos ",
     "Suspicious login detection" : "Deteção de acessos suspeitos",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A aplicação de acessos suspeitos está ativa nesta instância. Regista os endereços IP dos utilizadores que acederam e classifica-os de forma a avisar se o acesso provém de um endereço IP suspeito.",
