@@ -26,7 +26,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\AppInfo;
 
 
-use function call_user_func_array;
+use OCA\SuspiciousLogin\Event\PostLoginEvent;
 use function func_get_args;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Listener\LoginListener;
@@ -73,32 +73,39 @@ class BootstrapSingleton {
 	}
 
 	private function registerEvents(IAppContainer $container): void {
-		$lazyListener = new class($container) {
-			/** @var IAppContainer */
-			private $container;
+		/** @var IEventDispatcher $dispatcher */
+		$dispatcher = $container->query(IEventDispatcher::class);
+		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginNotificationListener::class);
+		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginMailListener::class);
+		$dispatcher->addServiceListener(PostLoginEvent::class, LoginListener::class);
 
-			public function __construct(IAppContainer $container) {
-				$this->container = $container;
+		$loginHookAdapter = new class($dispatcher) {
+			/** @var IEventDispatcher */
+			private $dispatcher;
+
+			public function __construct(IEventDispatcher $dispatcher) {
+				$this->dispatcher = $dispatcher;
 			}
 
-			public function handle() {
-				/** @var LoginListener $loginListener */
-				$loginListener = $this->container->query(LoginListener::class);
-				call_user_func_array([$loginListener, 'handle'], func_get_args());
+			public function handle(array $data) {
+				if (!isset($data['uid'], $data['isTokenLogin'])) {
+					// Ignore invalid data
+					return;
+				}
+
+				$this->dispatcher->dispatch(
+					PostLoginEvent::class,
+					new PostLoginEvent($data['uid'], $data['isTokenLogin'])
+				);
 			}
 		};
 
 		Util::connectHook(
 			'OC_User',
 			'post_login',
-			$lazyListener,
+			$loginHookAdapter,
 			'handle'
 		);
-
-		/** @var IEventDispatcher $dispatcher */
-		$dispatcher = $container->query(IEventDispatcher::class);
-		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginNotificationListener::class);
-		$dispatcher->addServiceListener(SuspiciousLoginEvent::class, LoginMailListener::class);
 	}
 
 	private function registerNotification(IAppContainer $container) {
