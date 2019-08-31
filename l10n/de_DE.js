@@ -1,6 +1,7 @@
 OC.L10N.register(
     "suspicious_login",
     {
+    "New login location detected" : "Neuer Anmeldeort erkannt",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Eine neue Anmeldung mit Ihrem Konto wurde erkannt. Die IP-Adresse %s wurde als verdächtig eingestuft. Falls Sie es selbst waren, ignorieren Sie diese Meldung. Andernfalls sollten Sie ihr Kennwort ändern.",
     "Suspicious Login" : "Verdächtige Anmeldung",
     "New login detected" : "Neue Anmeldung erkannt",
