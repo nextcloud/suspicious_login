@@ -6,7 +6,7 @@
   "dependencies": {
     "chart.js": "^2.8.0",
     "nextcloud-axios": "^0.2.1",
-    "nextcloud-initial-state": "0.0.1",
+    "nextcloud-initial-state": "0.0.3",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2"
   },
