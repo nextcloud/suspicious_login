@@ -1,4 +1,5 @@
 { "translations": {
+    "New login location detected" : "Nieuwe inloglocatie opgemerkt",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "We hebben een nieuwe inlog-poging bij je account opgemerkt. Het IP-adres %s is als verdacht aangemerkt. Als jij het was, kun je dit bericht negeren. Zo niet dan kun je het beste je wachtwoord aanpassen.",
     "Suspicious Login" : "Verdachte login",
     "New login detected" : "Nieuwe inlogpoging opgemerkt",
