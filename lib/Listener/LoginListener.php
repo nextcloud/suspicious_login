@@ -22,12 +22,15 @@
 
 namespace OCA\SuspiciousLogin\Listener;
 
+use OCA\SuspiciousLogin\Event\PostLoginEvent;
 use OCA\SuspiciousLogin\Service\LoginClassifier;
 use OCA\SuspiciousLogin\Service\LoginDataCollector;
 use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 use OCP\IRequest;
 
-class LoginListener {
+class LoginListener implements IEventListener {
 
 	/** @var IRequest */
 	private $request;
@@ -51,20 +54,21 @@ class LoginListener {
 		$this->loginClassifier = $loginClassifier;
 	}
 
-	public function handle(array $data) {
-		if (!isset($data['uid'])) {
-			// Nothing to do
+	public function handle(Event $event): void {
+		if (!($event instanceof PostLoginEvent)) {
+			// Unrelated
+			return;
+		}
+		if ($event->isTokenLogin()) {
+			// We don't care about those
 			return;
 		}
 
-		$uid = $data['uid'];
 		$ip = $this->request->getRemoteAddress();
 		$now = $this->timeFactory->getTime();
 
-		if (isset($data['isTokenLogin']) && $data['isTokenLogin'] === false) {
-			$this->loginClassifier->process($uid, $ip);
-		}
-		$this->loginDataCollector->collectSuccessfulLogin($uid, $ip, $now);
+		$this->loginClassifier->process($event->getUid(), $ip);
+		$this->loginDataCollector->collectSuccessfulLogin($event->getUid(), $ip, $now);
 	}
 
 }
