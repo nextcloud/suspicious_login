@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3b17ddfc346f1237be6b40f29cc46e1",
+    "content-hash": "a6f92967087134140a71a27f7d5e8c18",
     "packages": [
         {
             "name": "php-ai/php-ml",
@@ -65,16 +65,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud",
-            "version": "v16.0.2",
+            "version": "v17.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "bb47310e37a69e0160ddf75dad6b9601201e556e"
+                "reference": "25b5d5c7789c5a494eb9af483481f1bef74aebf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/bb47310e37a69e0160ddf75dad6b9601201e556e",
-                "reference": "bb47310e37a69e0160ddf75dad6b9601201e556e",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/25b5d5c7789c5a494eb9af483481f1bef74aebf5",
+                "reference": "25b5d5c7789c5a494eb9af483481f1bef74aebf5",
                 "shasum": ""
             },
             "require": {
@@ -83,7 +83,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "16.0.0-dev"
+                    "dev-master": "17.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -97,7 +97,7 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2019-08-06T10:15:42+00:00"
+            "time": "2019-09-03T07:51:02+00:00"
         },
         {
             "name": "christophwurst/nextcloud_testing",
@@ -388,18 +388,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -670,8 +670,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -721,8 +721,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -763,8 +763,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -1514,8 +1514,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -1723,7 +1723,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "christophwurst/nextcloud": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
