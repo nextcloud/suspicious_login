@@ -25,9 +25,12 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Service\EstimatorService;
+use OCA\SuspiciousLogin\Service\Ipv4Strategy;
+use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Predict extends Command {
@@ -55,13 +58,23 @@ class Predict extends Command {
 			InputArgument::OPTIONAL,
 			"persisted model id (latest if omited)"
 		);
+		$this->addOption(
+			'v6',
+			null,
+			InputOption::VALUE_NONE,
+			"train with IPv6 data"
+		);
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$uid = $input->getArgument('uid');
 		$ip = $input->getArgument('ip');
 		$modelId = $input->getArgument('model');
-		if ($this->estimatorService->predict($uid, $ip, $modelId ? (int) $modelId : null)) {
+		if ($this->estimatorService->predict(
+			$uid,
+			$ip,
+			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
+			$modelId ? (int)$modelId : null)) {
 			$output->writeln("OK:   IP $ip is not suspicious");
 		} else {
 			$output->writeln("WARN: IP $ip is suspicious");

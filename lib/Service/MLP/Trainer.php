@@ -29,10 +29,13 @@ use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\DataSet;
+use OCA\SuspiciousLogin\Service\IClassificationStrategy;
 use OCA\SuspiciousLogin\Service\ModelPersistenceService;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
-use OCA\SuspiciousLogin\Service\UidIPVector;
+use OCA\SuspiciousLogin\Service\AUidIpVector;
+use OCA\SuspiciousLogin\Service\UidIpV4Vector;
+use OCA\SuspiciousLogin\Service\UidIpV6Vector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
@@ -75,13 +78,16 @@ class Trainer {
 	 * @return Model
 	 */
 	public function train(Config $config,
-						  TrainingDataConfig $dataConfig): Model {
+						  TrainingDataConfig $dataConfig,
+						  IClassificationStrategy $strategy): Model {
 		$testingDays = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
 		$validationDays = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
-		if (!$this->loginAddressMapper->hasSufficientIpV4Data($validationDays)) {
+
+		if (!$strategy->hasSufficientData($this->loginAddressMapper, $validationDays)) {
 			throw new InsufficientDataException("Not enough data for the specified maximum age");
 		}
-		list($historyRaw, $recentRaw) = $this->loginAddressMapper->findHistoricAndRecentIpv4(
+		list($historyRaw, $recentRaw) = $strategy->findHistoricAndRecent(
+			$this->loginAddressMapper,
 			$testingDays,
 			$validationDays
 		);
@@ -91,19 +97,19 @@ class Trainer {
 		if (empty($recentRaw)) {
 			throw new InsufficientDataException("No recent data available");
 		}
-		$positives = DataSet::fromLoginAddresses($historyRaw);
-		$validationPositives = DataSet::fromLoginAddresses($recentRaw);
+		$positives = DataSet::fromLoginAddresses($historyRaw, $strategy);
+		$validationPositives = DataSet::fromLoginAddresses($recentRaw, $strategy);
 		$numValidation = count($validationPositives);
 		$numPositives = count($positives);
 		$numRandomNegatives = max((int)floor($numPositives * $config->getRandomNegativeRate()), 1);
 		$numShuffledNegative = max((int)floor($numPositives * $config->getShuffledNegativeRate()), 1);
-		$randomNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
-		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives);
+		$randomNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives, $strategy);
+		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives, $strategy);
 
 		// Validation negatives are generated from all data (to have all UIDs), but shuffled
 		$all = $positives->merge($validationPositives);
 		$all->shuffle();
-		$validationNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($all, $numValidation);
+		$validationNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($all, $numValidation, $strategy);
 		$validationSamples = $validationPositives->merge($validationNegatives);
 
 		$allSamples = $positives->merge($randomNegatives)->merge($shuffledNegatives);
@@ -111,7 +117,7 @@ class Trainer {
 
 		$start = $this->timeFactory->getDateTime();
 		$classifier = new MLPClassifier(
-			UidIPVector::SIZE,
+			$strategy->getSize(),
 			[$config->getLayers()],
 			['y', 'n'],
 			$config->getEpochs(),
@@ -134,13 +140,14 @@ class Trainer {
 		$model->setSamplesRandom($numRandomNegatives);
 		$model->setEpochs($config->getEpochs());
 		$model->setLayers($config->getLayers());
-		$model->setVectorDim(UidIPVector::SIZE);
+		$model->setVectorDim($strategy->getSize());
 		$model->setLearningRate($config->getLearningRate());
 		$model->setPrecisionY($result->getPrecision()['y']);
 		$model->setPrecisionN($result->getPrecision()['n']);
 		$model->setRecallY($result->getRecall()['y']);
 		$model->setRecallN($result->getRecall()['n']);
 		$model->setDuration($elapsed);
+		$model->setAddressType($strategy::getTypeName());
 		$model->setCreatedAt($this->timeFactory->getTime());
 		$this->persistenceService->persist($classifier, $model);
 

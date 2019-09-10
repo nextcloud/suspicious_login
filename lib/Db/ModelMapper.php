@@ -46,14 +46,17 @@ class ModelMapper extends QBMapper {
 	}
 
 	/**
+	 * @param string $addressType
+	 *
 	 * @return Model
 	 * @throws DoesNotExistException
 	 */
-	public function findLatest(): Model {
+	public function findLatest(string $addressType): Model {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb->select('*')
 			->from($this->getTableName())
+			->where($qb->expr()->eq('address_type', $qb->createNamedParameter($addressType)))
 			->orderBy('created_at', 'desc')
 			->setMaxResults(1);
 
@@ -62,14 +65,16 @@ class ModelMapper extends QBMapper {
 
 	/**
 	 * @param int $max maximum number of models
+	 * @param string $addressType
 	 *
 	 * @return Model[]
 	 */
-	public function findMostRecent(int $max): array {
+	public function findMostRecent(int $max, string $addressType): array {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb->select('*')
 			->from($this->getTableName())
+			->where($qb->expr()->eq('address_type', $qb->createNamedParameter($addressType)))
 			->orderBy('created_at', 'desc')
 			->setMaxResults($max);
 

@@ -59,6 +59,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setDuration(int $layers)
  * @method int getCreatedAt()
  * @method void setCreatedAt(int $createdAt)
+ * @method string getAddressType()
+ * @method void setAddressType(string $type)
  */
 class Model extends Entity implements JsonSerializable {
 
@@ -77,6 +79,7 @@ class Model extends Entity implements JsonSerializable {
 	protected $recallN;
 	protected $duration;
 	protected $createdAt;
+	protected $addressType;
 
 	public function jsonSerialize() {
 		return [
@@ -95,6 +98,7 @@ class Model extends Entity implements JsonSerializable {
 			'recallN' => $this->recallN,
 			'duration' => $this->duration,
 			'createdAt' => $this->createdAt,
+			'addressType' => $this->addressType,
 		];
 	}
 

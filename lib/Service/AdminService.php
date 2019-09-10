@@ -54,7 +54,10 @@ class AdminService {
 	public function getStatistics(): AppStatistics {
 		return new AppStatistics(
 			$this->isActive(),
-			$this->modelMapper->findMostRecent(14),
+			array_merge(
+				$this->modelMapper->findMostRecent(14, Ipv4Strategy::getTypeName()),
+				$this->modelMapper->findMostRecent(14, IpV6Strategy::getTypeName())
+			),
 			TrainingDataConfig::default(),
 			$this->getTrainingDataStats()
 		);
@@ -62,7 +65,7 @@ class AdminService {
 
 	protected function isActive(): bool {
 		try {
-			$this->modelMapper->findLatest();
+			$this->modelMapper->findLatest(Ipv4Strategy::getTypeName());
 			return true;
 		} catch (DoesNotExistException $ex) {
 			return false;

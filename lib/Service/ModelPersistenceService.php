@@ -89,9 +89,9 @@ class ModelPersistenceService {
 	 * @throws SerializeException
 	 * @throws ServiceException
 	 */
-	public function loadLatest(): Estimator {
+	public function loadLatest(IClassificationStrategy $strategy): Estimator {
 		try {
-			$latestModel = $this->modelMapper->findLatest();
+			$latestModel = $this->modelMapper->findLatest($strategy::getTypeName());
 		} catch (DoesNotExistException $e) {
 			$this->logger->debug("No models found. Can't load latest");
 			throw new ServiceException("No models found", 0, $e);
@@ -124,7 +124,7 @@ class ModelPersistenceService {
 
 	public function load(int $id): Estimator {
 		$cached = $this->getCached($id);
-		if (!is_null($cached)) {
+		if ($cached !== null) {
 			$this->logger->debug("using cached model $id");
 
 			$serialized = $cached;

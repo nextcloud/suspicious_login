@@ -51,12 +51,12 @@ class EstimatorService {
 	 * @return bool
 	 * @throws ServiceException
 	 */
-	public function predict(string $uid, string $ip, int $modelId = null): bool {
+	public function predict(string $uid, string $ip, IClassificationStrategy $strategy, int $modelId = null): bool {
 		try {
 			if ($modelId === null) {
 				$this->logger->debug("loading latest model");
 
-				$estimatorModel = $this->persistenceService->loadLatest();
+				$estimatorModel = $this->persistenceService->loadLatest($strategy);
 			} else {
 				$this->logger->debug("loading model $modelId");
 
@@ -73,8 +73,8 @@ class EstimatorService {
 				'uid' => $uid,
 				'ip' => $ip,
 				'label' => '',
-			]
-		]);
+			],
+		], $strategy);
 
 		$predictions = $estimatorModel->predict($data->asTrainingData());
 

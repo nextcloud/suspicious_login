@@ -26,6 +26,9 @@ namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Service\IClassificationStrategy;
+use OCA\SuspiciousLogin\Service\Ipv4Strategy;
+use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
@@ -50,50 +53,43 @@ class Train extends Command {
 			'epochs',
 			'e',
 			InputOption::VALUE_OPTIONAL,
-			"number of epochs to train",
-			250
+			"number of epochs to train"
 		);
 		$this->addOption(
 			'layers',
 			'l',
 			InputOption::VALUE_OPTIONAL,
-			"number of hidden layers",
-			10
+			"number of hidden layers"
 		);
 		$this->addOption(
 			'shuffled',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"ratio of shuffled negative samples",
-			1.0
+			"ratio of shuffled negative samples"
 		);
 		$this->addOption(
 			'random',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"ratio of random negative samples",
-			1.0
+			"ratio of random negative samples"
 		);
 		$this->addOption(
 			'learn-rate',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"learning rate",
-			0.05
+			"learning rate"
 		);
 		$this->addOption(
 			'validation-threshold',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"determines how much of the most recent data is used for validation. the default is one week",
-			7
+			"determines how much of the most recent data is used for validation. the default is one week"
 		);
 		$this->addOption(
 			'max-age',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"determines the maximum age of test data",
-			60
+			"determines the maximum age of test data"
 		);
 		$this->addOption(
 			'now',
@@ -102,42 +98,52 @@ class Train extends Command {
 			"overwrite the current time",
 			time()
 		);
+		$this->addOption(
+			'v6',
+			null,
+			InputOption::VALUE_NONE,
+			"train with IPv6 data"
+		);
 		$this->registerStatsOption();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		$config = Config::default();
-		if ($input->hasOption('epochs')) {
+		$strategy = $input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy();
+		$config = $strategy->getDefaultMlpConfig();
+		if ($input->getOption('epochs') !== null) {
 			$config = $config->setEpochs((int)$input->getOption('epochs'));
 		}
-		if ($input->hasOption('layers')) {
+		if ($input->getOption('layers') !== null) {
 			$config = $config->setLayers((int)$input->getOption('layers'));
 		}
-		if ($input->hasOption('shuffled')) {
+		if ($input->getOption('shuffled') !== null) {
 			$config = $config->setShuffledNegativeRate((float)$input->getOption('shuffled'));
 		}
-		if ($input->hasOption('random')) {
+		if ($input->getOption('random') !== null) {
 			$config = $config->setRandomNegativeRate((float)$input->getOption('random'));
 		}
-		if ($input->hasOption('learn-rate')) {
+		if ($input->getOption('learn-rate') !== null) {
 			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
 		$trainingDataConfig = TrainingDataConfig::default();
-		if ($input->hasOption('validation-threshold')) {
+		if ($input->getOption('validation-threshold') !== null) {
 			$trainingDataConfig = $trainingDataConfig->setThreshold((int)$input->getOption('validation-threshold'));
 		}
-		if ($input->hasOption('max-age')) {
+		if ($input->getOption('max-age') !== null) {
 			$trainingDataConfig = $trainingDataConfig->setMaxAge((int)$input->getOption('max-age'));
 		}
-		if ($input->hasOption('now')) {
+		if ($input->getOption('now') !== null) {
 			$trainingDataConfig = $trainingDataConfig->setNow((int)$input->getOption('now'));
 		}
 
 		try {
+			$output->writeln('Using ' . $strategy::getTypeName() . ' strategy');
+
 			$model = $this->trainer->train(
 				$config,
-				$trainingDataConfig
+				$trainingDataConfig,
+				$strategy
 			);
 			$this->printModelStatistics($model, $input, $output);
 		} catch (InsufficientDataException $ex) {

@@ -26,7 +26,8 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\BackgroundJob;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
-use OCA\SuspiciousLogin\Service\MLP\Config;
+use OCA\SuspiciousLogin\Service\Ipv4Strategy;
+use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
@@ -34,7 +35,7 @@ use OCP\BackgroundJob\TimedJob;
 use OCP\ILogger;
 use Throwable;
 
-class TrainJob extends TimedJob {
+class TrainJobIpV6 extends TimedJob {
 
 	/** @var Trainer */
 	private $trainer;
@@ -59,19 +60,21 @@ class TrainJob extends TimedJob {
 	 */
 	protected function run($argument) {
 		try {
+			$strategy = new IpV6Strategy();
 			$this->trainer->train(
-				Config::default(),
-				TrainingDataConfig::default()
+				$strategy->getDefaultMlpConfig(),
+				TrainingDataConfig::default(),
+				$strategy
 			);
 		} catch (InsufficientDataException $ex) {
 			$this->logger->logException($ex, [
-				'level' => ILogger::WARN,
-				'message' => 'No suspicious login model trained because of insufficient data',
+				'level' => ILogger::INFO,
+				'message' => 'No suspicious login model for IPv6 trained because of insufficient data',
 			]);
 		} catch (Throwable $ex) {
 			$this->logger->logException($ex, [
 				'level' => ILogger::ERROR,
-				'message' => 'Caught unknown error during a background training',
+				'message' => 'Caught unknown error during IPv6 background training',
 			]);
 		}
 	}

@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
+use OCA\SuspiciousLogin\Service\IClassificationStrategy;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
@@ -148,12 +149,13 @@ class Optimizer {
 	}
 
 	public function optimize(int $maxEpochs,
+							 IClassificationStrategy $strategy,
 							 Config $initialConfig = null,
 							 OutputInterface $output) {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
-		$config = $initialConfig ?? $this->getNeighborConfig(Config::default(), $stepWidth);
+		$config = $initialConfig ?? $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
 		$dataConfig = TrainingDataConfig::default();
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps. Enjoy your coffee!</>");
@@ -161,11 +163,11 @@ class Optimizer {
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$best = $this->getAverageCost(
-			$this->trainer->train($config, $dataConfig),
-			$this->trainer->train($config, $dataConfig),
-			$this->trainer->train($config, $dataConfig),
-			$this->trainer->train($config, $dataConfig),
-			$this->trainer->train($config, $dataConfig)
+			$this->trainer->train($config, $dataConfig, $strategy),
+			$this->trainer->train($config, $dataConfig, $strategy),
+			$this->trainer->train($config, $dataConfig, $strategy),
+			$this->trainer->train($config, $dataConfig, $strategy),
+			$this->trainer->train($config, $dataConfig, $strategy)
 		);
 
 		while ($epochs < $maxEpochs) {
@@ -174,11 +176,11 @@ class Optimizer {
 			$newConfig = $this->getNeighborConfig($config, $stepWidth);
 			$this->printConfig($epochs, $stepWidth, $newConfig, $output);
 			$cost = $this->getAverageCost(
-				$this->trainer->train($newConfig, $dataConfig),
-				$this->trainer->train($newConfig, $dataConfig),
-				$this->trainer->train($newConfig, $dataConfig),
-				$this->trainer->train($newConfig, $dataConfig),
-				$this->trainer->train($newConfig, $dataConfig)
+				$this->trainer->train($newConfig, $dataConfig, $strategy),
+				$this->trainer->train($newConfig, $dataConfig, $strategy),
+				$this->trainer->train($newConfig, $dataConfig, $strategy),
+				$this->trainer->train($newConfig, $dataConfig, $strategy),
+				$this->trainer->train($newConfig, $dataConfig, $strategy)
 			);
 
 			if ($cost > $best) {
