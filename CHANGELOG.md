@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.1.0 - 2019-09-10
+### Added
+- Nextcloud 18 support
+- IPv6 classification
+- Send email when a suspicious login is detected
+### Changed
+- New and updated translations
+
 ## 2.0.2 - 2019-09-03
 ### Fixed
 - Event propagation of suspicious logins
