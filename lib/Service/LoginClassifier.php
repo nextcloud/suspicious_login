@@ -172,7 +172,7 @@ class LoginClassifier {
 
 		$lastHour = count($this->mapper->findRecentByUid($uid, $now - 60 * 60));
 		if ($lastHour > 3) {
-			$this->logger->warning("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last hour");
+			$this->logger->warning("Suspicious login peak detected: $uid received $lastHour alerts in the last hour");
 			return;
 		}
 
