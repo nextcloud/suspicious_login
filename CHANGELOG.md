@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.2.0 - 2019-09-11
+### Added
+- Alert peak detection
+
 ## 2.1.0 - 2019-09-10
 ### Added
 - Nextcloud 18 support
