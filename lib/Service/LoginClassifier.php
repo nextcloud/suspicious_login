@@ -121,15 +121,15 @@ class LoginClassifier {
 
 		$this->logger->warning("Detected a login from a suspicious login. user=$uid ip=$ip strategy=" . $strategy::getTypeName());
 
-		$this->persistSuspiciousLogin($uid, $ip);
-		$this->notifyUser($uid, $ip);
+		$login = $this->persistSuspiciousLogin($uid, $ip);
+		$this->notifyUser($uid, $ip, $login);
 	}
 
 	/**
 	 * @param string $uid
 	 * @param string $ip
 	 */
-	private function persistSuspiciousLogin(string $uid, string $ip) {
+	private function persistSuspiciousLogin(string $uid, string $ip): SuspiciousLogin {
 		try {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);
@@ -139,6 +139,8 @@ class LoginClassifier {
 			$entity->setCreatedAt($this->timeFactory->getTime());
 
 			$this->mapper->insert($entity);
+
+			return $entity;
 		} catch (Throwable $ex) {
 			$this->logger->critical("could not save the details of a suspicious login");
 			$this->logger->logException($ex);
@@ -148,13 +150,29 @@ class LoginClassifier {
 	/**
 	 * @param string $uid
 	 * @param string $ip
+	 * @param SuspiciousLogin $login
 	 */
-	private function notifyUser(string $uid, string $ip): void {
+	private function notifyUser(string $uid, string $ip, SuspiciousLogin $login): void {
 		$now = $this->timeFactory->getTime();
-		$twoHoursAgo = $now - 60*60*2;
-		// We just inserted one alert – are there more with these params?
-		if (count($this->mapper->findRecent($uid, $ip, $twoHoursAgo)) > 1) {
-			$this->logger->debug("Notification for $uid:$ip already sent");
+
+		// Assuming that a suspicious IP is most likely one that hasn't been seen before
+		// (for this user), we'll not send another notification until the data is used
+		// for the model training
+		$secondsSinceLastTraining = TrainingDataConfig::default()->getThreshold() * 60 * 60 * 24;
+		if (count($this->mapper->findRelated($uid, $ip, $login, $now - $secondsSinceLastTraining)) > 0) {
+			$this->logger->debug("Notification for $uid:$ip already sent, waiting until the next training period");
+			return;
+		}
+
+		$lastTwoDays = count($this->mapper->findRecentByUid($uid, $now - 60 * 60 * 24 * 2));
+		if ($lastTwoDays > 10) {
+			$this->logger->warning("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last two days");
+			return;
+		}
+
+		$lastHour = count($this->mapper->findRecentByUid($uid, $now - 60 * 60));
+		if ($lastHour > 3) {
+			$this->logger->warning("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last hour");
 			return;
 		}
 
