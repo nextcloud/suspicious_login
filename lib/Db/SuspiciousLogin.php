@@ -37,6 +37,8 @@ use OCP\AppFramework\Db\Entity;
  * @method string getRequestId()
  * @method void setUrl(string $userAgent)
  * @method string getUrl()
+ * @method void setNotificationState(int|null $state)
+ * @method int|null getNotificationState()
  */
 class SuspiciousLogin extends Entity {
 
@@ -45,5 +47,6 @@ class SuspiciousLogin extends Entity {
 	protected $createdAt;
 	protected $requestId;
 	protected $url;
+	protected $notificationState;
 
 }

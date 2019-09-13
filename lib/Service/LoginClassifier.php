@@ -161,23 +161,32 @@ class LoginClassifier {
 		$secondsSinceLastTraining = TrainingDataConfig::default()->getThreshold() * 60 * 60 * 24;
 		if (count($this->mapper->findRelated($uid, $ip, $login, $now - $secondsSinceLastTraining)) > 0) {
 			$this->logger->debug("Notification for $uid:$ip already sent, waiting until the next training period");
+			$login->setNotificationState(NotificationState::NOT_SENT_DUPLICATE);
+			$this->mapper->update($login);
 			return;
 		}
 
 		$lastTwoDays = count($this->mapper->findRecentByUid($uid, $now - 60 * 60 * 24 * 2));
 		if ($lastTwoDays > 10) {
 			$this->logger->warning("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last two days");
+			$login->setNotificationState(NotificationState::NOT_SENT_PEAK_TWO_DAYS);
+			$this->mapper->update($login);
 			return;
 		}
 
 		$lastHour = count($this->mapper->findRecentByUid($uid, $now - 60 * 60));
 		if ($lastHour > 3) {
 			$this->logger->warning("Suspicious login peak detected: $uid received $lastHour alerts in the last hour");
+			$login->setNotificationState(NotificationState::NOT_SENT_PEAK_ONE_HOUR);
+			$this->mapper->update($login);
 			return;
 		}
 
 		$event = new SuspiciousLoginEvent($uid, $ip);
 		$this->dispatcher->dispatch(SuspiciousLoginEvent::class, $event);
+		$login->setNotificationState(NotificationState::SENT);
+
+		$this->mapper->update($login);
 	}
 
 }
