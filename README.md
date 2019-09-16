@@ -75,7 +75,7 @@ uid) is classified as suspicious by the trained model, it will add an entry to t
 
 ## Development setup
 
-1. ☁ Clone the app into the `apps` folder of your Nextcloud: `git clone https://github.com/ChristophWurst/recommendations.git`
+1. ☁ Clone the app into the `apps` folder of your Nextcloud: `git clone https://github.com/nextcloud/suspicious_login.git`
 2. 💻 Run `npm i` or `krankerl up` to install the dependencies
 3. 🏗 To build the Javascript whenever you make changes, run `npm run dev`
 4. ☁ Enable the app through the app management of your Nextcloud or run `krankerl enable`
