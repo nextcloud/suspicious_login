@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.2.0 - 2019-09-17
+### Added
+- Persist notification status of alerts in the DB
+### Changed
+- New and updated translations
+### Fixed
+- Peak detection log message
+
 ## 2.2.0 - 2019-09-11
 ### Added
 - Alert peak detection
