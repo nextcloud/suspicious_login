@@ -22,7 +22,7 @@
 import Vue from 'vue';
 
 import AdminSettings from './components/AdminSettings';
-import {loadState} from 'nextcloud-initial-state'
+import {loadState} from '@nextcloud/initial-state'
 import Nextcloud from './mixins/Nextcloud';
 
 Vue.mixin(Nextcloud);
