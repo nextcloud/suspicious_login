@@ -125,7 +125,7 @@ class ETLService {
 				->setParameter('ip', $row['ip']);
 			$result = $select->execute();
 			$existing = $result->fetchAll()[0];
-			if (sizeof($existing) == 0){
+			if (empty($existing)){
 				$insert->setParameter('uid', $row['uid']);
 				$insert->setParameter('ip', $row['ip']);
 				$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
