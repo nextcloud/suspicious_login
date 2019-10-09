@@ -124,7 +124,8 @@ class ETLService {
 				->setParameter('uid', $row['uid'])
 				->setParameter('ip', $row['ip']);
 			$result = $select->execute();
-			$existing = $result->fetchAll()[0];
+			$existing = $result->fetch();
+			$result->closeCursor();
 			if (empty($existing)){
 				$insert->setParameter('uid', $row['uid']);
 				$insert->setParameter('ip', $row['ip']);
