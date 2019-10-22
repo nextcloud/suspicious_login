@@ -132,7 +132,7 @@ class ETLService {
 				$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
 				$insert->setParameter('ts', $row['created_at'], IQueryBuilder::PARAM_INT);
 				$insert->execute();
-			}else{
+			} else {
 				$update
 					->setParameter('uid', $row['uid'])
 					->setParameter('ip', $row['ip'])
