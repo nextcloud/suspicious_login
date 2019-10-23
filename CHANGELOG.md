@@ -1,7 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 2.2.0 - 2019-09-17
+## 2.4.0 - 2019-10-23
+### Changed
+- New and updated translations
+- Use new @nextcloud npm packages
+### Fixed
+- Login aggregation background job on PostgreSQL
+- Readme clone link
+
+## 2.3.0 - 2019-09-17
 ### Added
 - Persist notification status of alerts in the DB
 ### Changed
