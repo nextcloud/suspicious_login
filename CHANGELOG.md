@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.4.1 - 2019-10-23
+### Fixed
+- Missing data collection of requests that use an app password
+
 ## 2.4.0 - 2019-10-23
 ### Changed
 - New and updated translations

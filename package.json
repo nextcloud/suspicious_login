@@ -1,6 +1,6 @@
 {
   "name": "suspicious_login",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Detect and warn about suspicious IPs logging into Nextcloud",
   "private": true,
   "dependencies": {
