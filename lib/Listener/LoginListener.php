@@ -59,16 +59,29 @@ class LoginListener implements IEventListener {
 			// Unrelated
 			return;
 		}
+
+		$this->handleClassification($event);
+		$this->handleDataCollection($event);
+	}
+
+	private function handleClassification(PostLoginEvent $event): void {
 		if ($event->isTokenLogin()) {
 			// We don't care about those
 			return;
 		}
 
-		$ip = $this->request->getRemoteAddress();
-		$now = $this->timeFactory->getTime();
+		$this->loginClassifier->process(
+			$event->getUid(),
+			$this->request->getRemoteAddress()
+		);
+	}
 
-		$this->loginClassifier->process($event->getUid(), $ip);
-		$this->loginDataCollector->collectSuccessfulLogin($event->getUid(), $ip, $now);
+	private function handleDataCollection(PostLoginEvent $event): void {
+		$this->loginDataCollector->collectSuccessfulLogin(
+			$event->getUid(),
+			$this->request->getRemoteAddress(),
+			$this->timeFactory->getTime()
+		);
 	}
 
 }
