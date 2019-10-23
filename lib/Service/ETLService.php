@@ -120,23 +120,19 @@ class ETLService {
 			->where($select->expr()->eq('id', $select->createParameter('id')));
 
 		foreach ($this->getRaw($max, $output) as $row) {
-			$insert->setParameter('uid', $row['uid']);
-			$insert->setParameter('ip', $row['ip']);
-			$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
-			$insert->setParameter('ts', $row['created_at'], IQueryBuilder::PARAM_INT);
-
-			try {
+			$select
+				->setParameter('uid', $row['uid'])
+				->setParameter('ip', $row['ip']);
+			$result = $select->execute();
+			$existing = $result->fetch();
+			$result->closeCursor();
+			if (empty($existing)){
+				$insert->setParameter('uid', $row['uid']);
+				$insert->setParameter('ip', $row['ip']);
+				$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
+				$insert->setParameter('ts', $row['created_at'], IQueryBuilder::PARAM_INT);
 				$insert->execute();
-			} catch (UniqueConstraintViolationException $ex) {
-				$select
-					->setParameter('uid', $row['uid'])
-					->setParameter('ip', $row['ip']);
-				$result = $select->execute();
-				$existing = $result->fetch();
-				if (is_null($existing)) {
-					continue;
-				}
-
+			} else {
 				$update
 					->setParameter('uid', $row['uid'])
 					->setParameter('ip', $row['ip'])
@@ -150,7 +146,6 @@ class ETLService {
 				$cleanUp->execute();
 			}
 		}
-
 		$this->logger->debug('finished login data ETL process, sending transaction commit');
 		$this->db->commit();
 		$this->logger->debug('ETL finished');
