@@ -24,6 +24,8 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
+use OCA\SuspiciousLogin\Service\Ipv4Strategy;
+use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Optimizer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,13 +50,19 @@ class Optimize extends Command {
 			"maximum number of epochs of optimization",
 			100
 		);
+		$this->addOption(
+			'v6',
+			null,
+			InputOption::VALUE_NONE,
+			"train with IPv6 data"
+		);
 		$this->registerStatsOption();
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$this->optimizer->optimize(
 			(int)$input->getOption('max-epochs'),
-			null,
+			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
 			$output
 		);
 	}

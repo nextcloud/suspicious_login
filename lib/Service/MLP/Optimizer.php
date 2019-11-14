@@ -150,8 +150,8 @@ class Optimizer {
 
 	public function optimize(int $maxEpochs,
 							 IClassificationStrategy $strategy,
-							 Config $initialConfig = null,
-							 OutputInterface $output) {
+							 OutputInterface $output,
+							 Config $initialConfig = null) {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
