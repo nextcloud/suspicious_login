@@ -61,8 +61,8 @@ class Optimizer {
 								 float $stepWidth,
 								 Config $config,
 								 OutputInterface $output) {
-		$epochs = sprintf("%4d", $config->getEpochs());
-		$layers = sprintf("%2d", $config->getLayers());
+		$epochs = sprintf("%d", $config->getEpochs());
+		$layers = sprintf("%d", $config->getLayers());
 		$shuffledRate = sprintf("%1.3f", $config->getShuffledNegativeRate());
 		$randomRate = sprintf("%1.3f", $config->getRandomNegativeRate());
 		$learningRate = sprintf("%1.3f", $config->getLearningRate());
