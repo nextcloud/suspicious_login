@@ -1,9 +1,11 @@
 { "translations": {
     "New login location detected" : "Bylo zjištěno nové místo přihlášení",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Bylo zaznamenáno nové přihlášení k vašemu účtu. IP adresa %s byla vyhodnocena jako podezřelá. Pokud jste to byli vy, tuto zprávu ignorujte. Pokud ne, měli byste si změnit heslo.",
     "Suspicious Login" : "Podezřelé přihlášení",
     "New login detected" : "Zjištěno nové přihlášení",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Zjišťovat a varovat o podezřelých IP adresách přihlašujících se k Nextcloud\n\t",
     "Suspicious login detection" : "Zjišťování podezřelých přihlášení",
+    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Na této instanci je zapnutá služba sledování podezřelých přihlášení. Uchovává záznam o IP adresách ze kterých se uživatelé úspěšně přihlásili a vytváří hodnocení, které varuje, pokud nové přihlášení přichází z podezřelé iP adresy.",
     "Training data statistics" : "Statistiky trénovacích údajů",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Doposud aplikace zachytila {total} přihlášení (včetně připojení z klientských aplikací), z kterých {distinct} jsou neopakující se dvojice (IP adresa, UID identifikátor).",
     "IPv4" : "IPv4",
