@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.0.0 - 2019-12-02
+### Added
+- php7.4 support
+### Changed
+- New and updated translations
+- Updated dependencies
+### Fixed
+- IPv6 optimizer
+### Removed
+- php7.1 support
+
 ## 2.4.1 - 2019-10-23
 ### Fixed
 - Missing data collection of requests that use an app password
