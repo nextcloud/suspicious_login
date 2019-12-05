@@ -9,6 +9,8 @@
     "Training data statistics" : "Prestakuntza datuen estatistikak",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Orain arte, aplikazioak {total} saio hasiera atzeman ditu (bezeroekiko konexioak barne), eta horietatik {distinct} tupla (IP, UID) desberdinak dira.",
     "IPv4" : "IPv4",
-    "IPv6" : "IPv6"
+    "IPv6" : "IPv6",
+    "Classifier model statistics" : "Sailkapen ereduen estatistikak",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Oraindik ez da sailkatzaile eredurik trebatu. Ziurrenik horrek aplikazioa duela gutxi gaitu duzula esan nahi du. Eredu baten trebakuntzak datu onak eskatzen dituenez, aplikazioak gutxienez {days} egunetako saio hasierak atzematen diren arte itxaroten du."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
