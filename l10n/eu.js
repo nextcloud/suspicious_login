@@ -13,6 +13,7 @@ OC.L10N.register(
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "Sailkapen ereduen estatistikak",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Oraindik ez da sailkatzaile eredurik trebatu. Ziurrenik horrek aplikazioa duela gutxi gaitu duzula esan nahi du. Eredu baten trebakuntzak datu onak eskatzen dituenez, aplikazioak gutxienez {days} egunetako saio hasierak atzematen diren arte itxaroten du."
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Oraindik ez da sailkatzaile eredurik trebatu. Ziurrenik horrek aplikazioa duela gutxi gaitu duzula esan nahi du. Eredu baten trebakuntzak datu onak eskatzen dituenez, aplikazioak gutxienez {days} egunetako saio hasierak atzematen diren arte itxaroten du.",
+    "Precision" : "Zehaztasuna"
 },
 "nplurals=2; plural=(n != 1);");
