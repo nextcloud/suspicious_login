@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.0.1 - 2019-12-12
+### Changed
+- New and updated translations
+- Updated dependencies
+### Fixed
+- JavaScript vulnerability in `serialize-javascript` dependency
+
 ## 3.0.0 - 2019-12-02
 ### Added
 - php7.4 support
