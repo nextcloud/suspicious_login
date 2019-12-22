@@ -9,6 +9,8 @@ OC.L10N.register(
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "יישומון הכניסה החשודה פעיל בעותק זה. היישומון יעקוב אחר כתובות ה־IP דרכן משתמשים נכנסו בהצלחה ויבנה מסווג שמזהיר במקרה שיש כניסה חדשה מכתובת IP חשודה.",
     "Training data statistics" : "סטטיסטיקת נתוני אימון",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "עד כה לכד היישומון {total} פעילויות כניסה (לרבות חיבורי לקוחות) מתוכם {distinct} הן צמדים ייחודיים של (IP, UID) - כתובת IP ומזהה ייחודי.",
+    "IPv4" : "IPv4",
+    "IPv6" : "IPv6",
     "Classifier model statistics" : "סטטיסטיקת מודל הסיווג",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "לא התבצע אימון סביב אף מודל סיווג. הסיבה לכך היא כפי הנראה העובדה שהפעלת את היישומון לאחרונה. כיוון שאימון מודל דורש נתונים איכותיים, היישומון ממתין עד שתתבצענה לכידת כניסות במשך {days} ימים.",
     "Precision" : "דיוק"

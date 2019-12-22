@@ -6,6 +6,8 @@ OC.L10N.register(
     "New login detected" : "Έντοπίστηκε νέα σύνδεση",
     "Suspicious login detection" : "Εντοπισμός ύποπτης σύνδεσης",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Η εφαρμογή εντοπισμού σνδέσεων από ύποπτες IP έχει ενεργοποιηθεί . Θα παρακολουθεί τις IP διευθύνσεις που συνδέονται επιτυχώς και θα δημιουργήσει ένα μοντέλο ταξινόμησης που θα προειδοποιεί όταν μία νέα σύνδεση προέρχεται από ύποπτη διεύθυνση IP.",
+    "IPv4" : "IPv4",
+    "IPv6" : "IPv6",
     "Precision" : "Ακρίβεια",
     "Recall" : "Ανάκληση"
 },

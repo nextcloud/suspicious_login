@@ -7,6 +7,8 @@
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A gyanús belépés alkalmazás engedélyezett ezen a példányon. Nyomon fogja követni a felhasználók sikeres bejelentkezéseinek az IP címeit és felállít egy osztalyozási sorrendet, hogy figyelmeztetni tudjon, ha egy belépés gyanús IP címről érkezik.",
     "Training data statistics" : "Tanulási adat statisztika",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Idáig az alkalmazás {total} belépést (ügyfél csatlakozással együtt) fogott el, amelyből {distinct} volt gyanús (IP, UID).",
+    "IPv4" : "IPv4",
+    "IPv6" : "IPv6",
     "Classifier model statistics" : "Osztályozó model statisztika",
     "Precision" : "Precízség",
     "Recall" : "Visszahív"

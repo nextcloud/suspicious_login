@@ -6,6 +6,8 @@
     "Suspicious login detection" : "Zisťovanie podozrivého prihlasovania",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "V tejto inštancii systému Nextcloud je povolená apka Podozrivé prihlasovanie. Bude sledovať adresy IP používateľov, ktorí sa úspešne prihlásia a zostavovať klasifikátor, ktorý bude varovať v prípade, ak dané prihlásenie bude prichádzať z podozrivej adresy IP.",
     "Training data statistics" : "Trénovanie štatistických dát",
+    "IPv4" : "IPv4",
+    "IPv6" : "IPv6",
     "Classifier model statistics" : "Štatistiky klasifikačného modelu",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Zatiaľ nebol natrénovaný žiadny model klasifikátora. To s najväčšou pravdepodobnosťou znamená, že ste apku povolili len nedávno. Pretože správne natrénovanie modelu vyžaduje viac údajov, apka bude čakať, kým sa nezaznamenajú prihlásenia aspoň za {days} dní.",
     "Precision" : "Presnosť",
