@@ -5,7 +5,7 @@ OC.L10N.register(
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "检测到您账号的一个新的登录行为。IP地址 %s 被归类为可疑。如果这是您自己，您可忽略此消息。否则您应该修改您的密码。",
     "Suspicious Login" : "可疑登录行为",
     "New login detected" : "检测到新的登录行为",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "检测并警告登录到Nextcloud的可疑IP地址\n\t",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "检测并警告登录到 Nextcloud 的可疑 IP 地址\n\t",
     "Suspicious login detection" : "可疑登录行为检测",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "可疑登录行为应用在此实例上被启用。它将跟踪成功登录用户的源IP地址并创建一个分类器，用于对来自可疑IP地址的新登录行为发出警告。",
     "Training data statistics" : "训练数据统计",
