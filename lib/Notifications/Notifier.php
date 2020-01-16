@@ -65,9 +65,9 @@ class Notifier implements INotifier {
 		switch ($notification->getSubject()) {
 			case 'suspicious_login_detected':
 				$notification->setParsedSubject(
-					$l->t('New login detected')
+					$l->t('Suspicious sign in detected')
 				)->setParsedMessage(
-					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $notification->getSubjectParameters())
+					$l->t('Someone with IP address %s (%s) recently accessed your account. If you are not familiar with it please revoke your credentials and change password immediately.', $notification->getSubjectParameters(), gethostbyaddr($notification->getSubjectParameters()))
 				);
 
 				return $notification;
