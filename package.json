@@ -10,7 +10,7 @@
     "vue-chartjs": "^3.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.0",
+    "@babel/core": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@vue/babel-preset-app": "^4.1.2",
     "babel-loader": "^8.0.6",
