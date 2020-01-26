@@ -51,7 +51,7 @@ class AdminServiceTest extends TestCase {
 	/** @var AdminService */
 	private $service;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->loginAddressMapper = $this->createMock(LoginAddressMapper::class);

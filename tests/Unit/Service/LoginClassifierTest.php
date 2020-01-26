@@ -58,7 +58,7 @@ class LoginClassifierTest extends TestCase {
 	/** @var LoginClassifier */
 	private $classifier;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->estimatorService = $this->createMock(EstimatorService::class);
