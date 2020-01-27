@@ -44,7 +44,7 @@ class AdminSettingsTest extends TestCase {
 	/** @var AdminSettings */
 	private $settings;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->initialState = $this->createMock(IInitialStateService::class);
