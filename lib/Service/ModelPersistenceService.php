@@ -177,7 +177,7 @@ class ModelPersistenceService {
 			$modelsFolder = $this->appData->newFolder(self::APPDATA_MODELS_FOLDER);
 		}
 
-		$modelFile = $modelsFolder->newFile($model->getId());
+		$modelFile = $modelsFolder->newFile((string)$model->getId());
 
 		// Inefficient, but we can't get the real path from app data as it might
 		// not be a local file
