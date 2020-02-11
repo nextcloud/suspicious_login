@@ -11,6 +11,8 @@
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "Στατιστικά μοντέλου ταξινόμησης",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Κανένα μοντέλο ταξινομητή δεν έχει εφαρμοστεί ακόμα. Αυτό πιθανότατα σημαίνει ότι μόλις ενεργοποιήσατε την εφαρμογή. Επειδή ο ορισμός ενός μοντέλου απαιτεί αρκετά δεδομένα, η εφαρμογή περιμένει έως ότου ληφθούν στοιχεία σύνδεσης τουλάχιστον {ημέρες} ημερών.",
+    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Κατά τη διάρκεια της αξιολόγησης, το τελευταίο μοντέλο (εκπαιδευμένο {time}) έχει αποδείξει ότι καταγράφει {recall}% από όλες τις ύποπτες συνδέσεις (ανάκληση), ενώ η ακρίβεια {precision}% των συνδέσεων που ταξινομούνται ως ύποπτες είναι πράγματι ύποπτες (ακρίβεια). Παρακάτω βλέπετε μια απεικόνιση της απόδοσης του ιστορικού μοντέλου.",
     "Precision" : "Ακρίβεια",
     "Recall" : "Ανάκληση"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
