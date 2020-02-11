@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.1.0 - 2020-02-11
+### Added
+- Nextcloud 19 support
+### Changed
+- New and updated translations
+- Updated dependencies
+### Fixed
+- Model persistence type error on php7.4
+
 ## 3.0.1 - 2019-12-12
 ### Changed
 - New and updated translations
