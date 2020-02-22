@@ -1,6 +1,7 @@
 OC.L10N.register(
     "suspicious_login",
     {
+    "New login location detected" : "Зарегистрировано новое местоположение при входе в учётную запись",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Зарегистрирован новый вход в ваш аккаунт. IP-адрес %s считается подозрительным. Если это были вы, то можете проигнорировать это сообщение. Иначе, вам лучше сменить пароль.",
     "Suspicious Login" : "Подозрительный вход",
     "New login detected" : "Зарегистрирован новый вход",
