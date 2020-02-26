@@ -1,4 +1,5 @@
 { "translations": {
+    "New login location detected" : "התגלתה כניסה ממיקום חדש",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "התגלתה כניסה חדשה לחשבון שלך. כתובת ה־IP %s סווגה כחשודה. אם זה היה ניסיון כניסה שלך, ניתן להתעלם מההודעה הזאת. בכל מקרה אחר מוטב לך לשנות את הססמה שלך.",
     "Suspicious Login" : "כניסה חשודה",
     "New login detected" : "התגלתה כניסה חדשה",
@@ -11,6 +12,7 @@
     "IPv6" : "IPv6",
     "Classifier model statistics" : "סטטיסטיקת מודל הסיווג",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "לא התבצע אימון סביב אף מודל סיווג. הסיבה לכך היא כפי הנראה העובדה שהפעלת את היישומון לאחרונה. כיוון שאימון מודל דורש נתונים איכותיים, היישומון ממתין עד שתתבצענה לכידת כניסות במשך {days} ימים.",
-    "Precision" : "דיוק"
+    "Precision" : "דיוק",
+    "Recall" : "לקרוא מחדש"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
 }
