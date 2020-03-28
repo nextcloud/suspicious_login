@@ -14,6 +14,7 @@ OC.L10N.register(
     "IPv6" : "IPv6",
     "Classifier model statistics" : "Štatistiky klasifikačného modelu",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Zatiaľ nebol natrénovaný žiadny model klasifikátora. To s najväčšou pravdepodobnosťou znamená, že ste apku povolili len nedávno. Pretože správne natrénovanie modelu vyžaduje viac údajov, apka bude čakať, kým sa nezaznamenajú prihlásenia aspoň za {days} dní.",
+    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Počas vyhodnocovania najnovší model (v činnosti {time}) zachytil {recall}% všetkých podozrivých prihlásení (zrušenie), zatiaľ čo {precision}% prihlásení klasifikovaných ako podozrivé sú skutočne podozrivé (presnosť). Nižšie vidíte vizualizáciu výkonu historického modelu.",
     "Precision" : "Presnosť",
     "Recall" : "Vyvolať"
 },
