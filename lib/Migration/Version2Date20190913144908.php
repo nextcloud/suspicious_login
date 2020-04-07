@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Migration;
 
 use Closure;
-use OCA\SuspiciousLogin\Service\Ipv4Strategy;
-use OCA\SuspiciousLogin\Service\NotificationState;
 use OCP\DB\ISchemaWrapper;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;

@@ -26,10 +26,8 @@ namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
-use OCA\SuspiciousLogin\Service\IClassificationStrategy;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
-use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Command\Command;

@@ -26,7 +26,6 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\BackgroundJob;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
-use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;

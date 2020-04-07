@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Exception;
 
-use Throwable;
 
 class InsufficientDataException extends ServiceException {
 

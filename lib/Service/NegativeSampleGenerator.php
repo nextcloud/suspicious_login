@@ -27,12 +27,7 @@ namespace OCA\SuspiciousLogin\Service;
 
 use function array_filter;
 use function array_map;
-use function array_search;
-use function base_convert;
-use Darsyn\IP\Version\IPv6;
-use function implode;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
-use function pow;
 use function random_int;
 use function range;
 

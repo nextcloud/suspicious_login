@@ -26,7 +26,6 @@ namespace OCA\SuspiciousLogin\Listener;
 
 use Exception;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
-use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\IL10N;

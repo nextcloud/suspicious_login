@@ -25,9 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\AppInfo;
 
-
 use OCA\SuspiciousLogin\Event\PostLoginEvent;
-use function func_get_args;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Listener\LoginListener;
 use OCA\SuspiciousLogin\Listener\LoginMailListener;

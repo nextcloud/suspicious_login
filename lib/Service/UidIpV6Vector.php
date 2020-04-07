@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-
 use function array_map;
 use function base_convert;
 use function bin2hex;

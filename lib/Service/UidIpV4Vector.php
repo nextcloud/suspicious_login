@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-
 class UidIpV4Vector extends AUidIpVector {
 
 	/**

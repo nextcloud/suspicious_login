@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Generator;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
