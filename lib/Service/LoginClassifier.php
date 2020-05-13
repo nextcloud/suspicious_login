@@ -188,5 +188,4 @@ class LoginClassifier {
 
 		$this->mapper->update($login);
 	}
-
 }

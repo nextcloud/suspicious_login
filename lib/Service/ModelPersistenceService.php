@@ -44,8 +44,7 @@ use Phpml\ModelManager;
 use function strlen;
 
 class ModelPersistenceService {
-
-	const APPDATA_MODELS_FOLDER = 'models';
+	public const APPDATA_MODELS_FOLDER = 'models';
 
 	/** @var ModelManager */
 	private $modelManager;
@@ -186,5 +185,4 @@ class ModelPersistenceService {
 
 		$modelFile->putContent(file_get_contents($tmpFile));
 	}
-
 }

@@ -38,9 +38,8 @@ use Phpml\Classification\MLPClassifier;
 use Phpml\Metric\ClassificationReport;
 
 class Trainer {
-
-	const LABEL_POSITIVE = 'y';
-	const LABEL_NEGATIVE = 'n';
+	public const LABEL_POSITIVE = 'y';
+	public const LABEL_NEGATIVE = 'n';
 
 	/** @var LoginAddressAggregatedMapper */
 	private $loginAddressMapper;
@@ -150,5 +149,4 @@ class Trainer {
 
 		return $model;
 	}
-
 }

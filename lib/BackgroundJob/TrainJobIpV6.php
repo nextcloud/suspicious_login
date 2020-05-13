@@ -77,5 +77,4 @@ class TrainJobIpV6 extends TimedJob {
 			]);
 		}
 	}
-
 }

@@ -29,7 +29,6 @@ use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
 
 class AddressClassifierTest extends TestCase {
-
 	public function ipV4Data(): array {
 		return [
 			['1.2.3.4', true],
@@ -71,5 +70,4 @@ class AddressClassifierTest extends TestCase {
 
 		$this->assertEquals($expected, $isIpV4);
 	}
-
 }

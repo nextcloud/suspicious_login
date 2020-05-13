@@ -100,5 +100,4 @@ abstract class AUidIpVector {
 	public function getLabel(): string {
 		return $this->label;
 	}
-
 }

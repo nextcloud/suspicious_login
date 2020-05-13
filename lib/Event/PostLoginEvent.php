@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -46,5 +48,4 @@ class PostLoginEvent extends Event {
 	public function isTokenLogin(): bool {
 		return $this->isTokenLogin;
 	}
-
 }

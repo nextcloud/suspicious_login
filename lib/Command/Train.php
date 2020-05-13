@@ -37,7 +37,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function time;
 
 class Train extends Command {
-
 	use ModelStatistics;
 
 	/** @var Trainer */
@@ -153,5 +152,4 @@ class Train extends Command {
 		}
 		return 0;
 	}
-
 }

@@ -28,7 +28,6 @@ use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
 class LoginAddressMapper extends QBMapper {
-
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'login_address');
 	}
@@ -44,5 +43,4 @@ class LoginAddressMapper extends QBMapper {
 
 		return (int)$cnt;
 	}
-
 }

@@ -109,5 +109,4 @@ class AppStatistics implements JsonSerializable {
 			'trainingDataStats' => $this->getTrainingDataStatistics(),
 		];
 	}
-
 }

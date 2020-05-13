@@ -154,5 +154,4 @@ class Config {
 		$clone->learningRate = $learningRate;
 		return $clone;
 	}
-
 }

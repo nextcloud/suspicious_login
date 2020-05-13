@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /**
  * @copyright Copyright (c) 2019, Roeland Jago Douma <roeland@famdouma.nl>
@@ -101,7 +102,5 @@ class LoginMailListener implements IEventListener {
 		$message->useTemplate($emailTemplate);
 
 		return $message;
-
 	}
-
 }

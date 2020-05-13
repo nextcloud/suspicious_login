@@ -28,7 +28,6 @@ use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
 class LoginAddressAggregatedMapper extends QBMapper {
-
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'login_address_aggregated');
 	}
@@ -186,5 +185,4 @@ class LoginAddressAggregatedMapper extends QBMapper {
 			$this->findRecentIpV6($threshold),
 		];
 	}
-
 }

@@ -129,5 +129,4 @@ class DataSet implements ArrayAccess, Countable {
 	public function shuffle() {
 		shuffle($this->data);
 	}
-
 }

@@ -32,7 +32,6 @@ use function random_int;
 use function range;
 
 class NegativeSampleGenerator {
-
 	private function getUniqueIPsPerUser(DataSet $positives): array {
 		$ips = [];
 
@@ -116,5 +115,4 @@ class NegativeSampleGenerator {
 			$v4
 		);
 	}
-
 }

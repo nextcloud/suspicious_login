@@ -111,5 +111,4 @@ class BootstrapSingleton {
 		$manager = $container->query(IManager::class);
 		$manager->registerNotifierService(Notifier::class);
 	}
-
 }

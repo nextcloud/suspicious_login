@@ -63,7 +63,6 @@ use OCP\AppFramework\Db\Entity;
  * @method void setAddressType(string $type)
  */
 class Model extends Entity implements JsonSerializable {
-
 	protected $type;
 	protected $appVersion;
 	protected $samplesPositive;
@@ -101,5 +100,4 @@ class Model extends Entity implements JsonSerializable {
 			'addressType' => $this->addressType,
 		];
 	}
-
 }

@@ -34,11 +34,9 @@ use OCP\AppFramework\Db\Entity;
  * @method int getLastSeen()
  */
 class LoginAddressAggregated extends Entity {
-
 	protected $uid;
 	protected $ip;
 	protected $seen;
 	protected $firstSeen;
 	protected $lastSeen;
-
 }

@@ -31,7 +31,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 trait ModelStatistics {
-
 	private function registerStatsOption() {
 		$this->addOption(
 			'stats',
@@ -50,5 +49,4 @@ trait ModelStatistics {
 		$output->writeln("Recall(y): " . $model->getRecallY());
 		$output->writeln("Recall(n): " . $model->getRecallN());
 	}
-
 }

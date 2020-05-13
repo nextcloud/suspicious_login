@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -27,7 +29,6 @@ use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 
 interface IClassificationStrategy {
-
 	public static function getTypeName(): string;
 
 	public function hasSufficientData(LoginAddressAggregatedMapper $loginAddressMapper, int $validationDays): bool;
@@ -41,5 +42,4 @@ interface IClassificationStrategy {
 	public function getSize(): int;
 
 	public function getDefaultMlpConfig(): Config;
-
 }

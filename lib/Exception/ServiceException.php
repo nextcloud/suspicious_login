@@ -28,5 +28,4 @@ namespace OCA\SuspiciousLogin\Exception;
 use Exception;
 
 class ServiceException extends Exception {
-
 }

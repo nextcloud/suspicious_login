@@ -34,8 +34,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ETLService {
-
-	const MAX_BATCH_SIZE = 10000;
+	public const MAX_BATCH_SIZE = 10000;
 
 	/** @var IDBConnection */
 	private $db;
@@ -125,7 +124,7 @@ class ETLService {
 			$result = $select->execute();
 			$existing = $result->fetch();
 			$result->closeCursor();
-			if (empty($existing)){
+			if (empty($existing)) {
 				$insert->setParameter('uid', $row['uid']);
 				$insert->setParameter('ip', $row['ip']);
 				$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
@@ -149,5 +148,4 @@ class ETLService {
 		$this->db->commit();
 		$this->logger->debug('ETL finished');
 	}
-
 }
