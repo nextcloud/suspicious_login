@@ -26,8 +26,8 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Vendor\Phpml\Exception\SerializeException;
 use OCP\ILogger;
-use Phpml\Exception\SerializeException;
 
 class EstimatorService {
 

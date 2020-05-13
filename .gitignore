@@ -5,6 +5,7 @@
 
 /nbproject/private/
 tests/.phpunit.result.cache
+/lib/Vendor
 /vendor
 composer.phar
 

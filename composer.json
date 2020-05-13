@@ -3,8 +3,9 @@
     "description": "Detect and warn about suspicious IPs logging into Nextcloud",
     "type": "library",
     "require": {
-        "php-ai/php-ml": "^0.7.0 || ^0.8.0",
+        "php-ai/php-ml": "0.9.0",
         "darsyn/ip": "^4.0",
+        "coenjacobs/mozart": "^0.5.1",
         "nextcloud/coding-standard": "^0.3.0"
     },
     "license": "AGPLv3",
@@ -18,6 +19,14 @@
         "cs:check": "php-cs-fixer fix --dry-run --diff",
         "cs:fix": "php-cs-fixer fix",
         "lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
+        "post-install-cmd": [
+            "\"vendor/bin/mozart\" compose",
+            "composer dump-autoload"
+        ],
+        "post-update-cmd": [
+            "\"vendor/bin/mozart\" compose",
+            "composer dump-autoload"
+        ],
         "test": "phpunit -c tests/phpunit.xml",
         "test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
         "test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage"
@@ -25,5 +34,16 @@
     "require-dev": {
         "christophwurst/nextcloud_testing": "^0.10.0",
         "christophwurst/nextcloud": "v18.0.4"
+    },
+    "extra": {
+        "mozart": {
+            "dep_namespace": "OCA\\SuspiciousLogin\\Vendor\\",
+            "dep_directory": "/lib/Vendor/",
+            "classmap_directory": "/lib/autoload/",
+            "classmap_prefix": "NEXTCLOUDSUSPICIOUSLOGIN_",
+            "packages": [
+                "php-ai/php-ml"
+            ]
+        }
     }
 }

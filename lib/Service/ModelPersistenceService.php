@@ -25,6 +25,9 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use OCA\SuspiciousLogin\Vendor\Phpml\Estimator;
+use OCA\SuspiciousLogin\Vendor\Phpml\Exception\SerializeException;
+use OCA\SuspiciousLogin\Vendor\Phpml\ModelManager;
 use function file_get_contents;
 use function file_put_contents;
 use OCA\SuspiciousLogin\AppInfo\Application;
@@ -38,9 +41,6 @@ use OCP\Files\NotFoundException;
 use OCP\ICacheFactory;
 use OCP\ILogger;
 use OCP\ITempManager;
-use Phpml\Estimator;
-use Phpml\Exception\SerializeException;
-use Phpml\ModelManager;
 use function strlen;
 
 class ModelPersistenceService {
@@ -156,6 +156,9 @@ class ModelPersistenceService {
 			$this->logger->error("Could not deserialize persisted model $id: " . $e->getMessage());
 
 			throw new SerializeException("Could not deserialize persisted model $id", 0, $e);
+		}
+		if (!($estimator instanceof Estimator)) {
+			throw new SerializeException("Could not deserialize model class for $id");
 		}
 
 		return $estimator;

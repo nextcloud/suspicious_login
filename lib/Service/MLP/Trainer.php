@@ -33,9 +33,9 @@ use OCA\SuspiciousLogin\Service\IClassificationStrategy;
 use OCA\SuspiciousLogin\Service\ModelPersistenceService;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
+use OCA\SuspiciousLogin\Vendor\Phpml\Classification\MLPClassifier;
+use OCA\SuspiciousLogin\Vendor\Phpml\Metric\ClassificationReport;
 use OCP\AppFramework\Utility\ITimeFactory;
-use Phpml\Classification\MLPClassifier;
-use Phpml\Metric\ClassificationReport;
 
 class Trainer {
 	public const LABEL_POSITIVE = 'y';
