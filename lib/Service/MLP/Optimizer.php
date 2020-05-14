@@ -38,9 +38,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Optimize the MLP trainer with simulated annealing
  */
 class Optimizer {
-
-	const INITIAL_STEP_WIDTH = 0.8;
-	const STEP_WIDTH_FACTOR = 0.985;
+	public const INITIAL_STEP_WIDTH = 0.8;
+	public const STEP_WIDTH_FACTOR = 0.985;
 
 	/** @var Trainer */
 	private $trainer;
@@ -194,5 +193,4 @@ class Optimizer {
 			$stepWidth = $stepWidth * self::STEP_WIDTH_FACTOR;
 		}
 	}
-
 }

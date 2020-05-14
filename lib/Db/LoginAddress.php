@@ -27,9 +27,7 @@ namespace OCA\SuspiciousLogin\Db;
 use OCP\AppFramework\Db\Entity;
 
 class LoginAddress extends Entity {
-
 	protected $uid;
 	protected $ip;
 	protected $createdAt;
-
 }

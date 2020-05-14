@@ -28,7 +28,6 @@ use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
 class SuspiciousLoginMapper extends QBMapper {
-
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'suspicious_login');
 	}
@@ -58,5 +57,4 @@ class SuspiciousLoginMapper extends QBMapper {
 
 		return $this->findEntities($query);
 	}
-
 }

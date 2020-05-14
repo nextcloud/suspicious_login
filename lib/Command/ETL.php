@@ -56,5 +56,4 @@ class ETL extends Command {
 			$output
 		);
 	}
-
 }

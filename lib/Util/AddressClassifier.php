@@ -28,7 +28,6 @@ namespace OCA\SuspiciousLogin\Util;
 use function filter_var;
 
 class AddressClassifier {
-
 	public static function isIpV4(string $address): bool {
 		return filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
 	}
@@ -36,5 +35,4 @@ class AddressClassifier {
 	public static function isIpV6(string $address): bool {
 		return filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
 	}
-
 }

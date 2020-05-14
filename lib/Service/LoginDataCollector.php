@@ -44,5 +44,4 @@ class LoginDataCollector {
 
 		$this->addressMapper->insert($addr);
 	}
-
 }

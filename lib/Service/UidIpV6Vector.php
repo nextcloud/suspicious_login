@@ -25,7 +25,7 @@ class UidIpV6Vector extends AUidIpVector {
 
 		$hex = bin2hex($addr->getBinary());
 		$padded = str_pad($hex, 32, '0', STR_PAD_LEFT);
-		$binString = implode('', array_map(function(string $h) {
+		$binString = implode('', array_map(function (string $h) {
 			return str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT);
 		}, str_split($padded)));
 		$mostSign = substr($binString, 0, 64);

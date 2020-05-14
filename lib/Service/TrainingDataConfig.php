@@ -111,5 +111,4 @@ class TrainingDataConfig implements JsonSerializable {
 			'now' => $this->getNow(),
 		];
 	}
-
 }

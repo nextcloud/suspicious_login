@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 /**
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
@@ -27,7 +29,6 @@ use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 
 class IpV6Strategy implements IClassificationStrategy {
-
 	public static function getTypeName(): string {
 		return 'ipv6';
 	}
@@ -57,5 +58,4 @@ class IpV6Strategy implements IClassificationStrategy {
 	public function getDefaultMlpConfig(): Config {
 		return Config::default()->setEpochs(20);
 	}
-
 }

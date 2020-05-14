@@ -80,5 +80,4 @@ class EstimatorService {
 
 		return $predictions[0] === 'y';
 	}
-
 }

@@ -78,5 +78,4 @@ class AdminService {
 			$this->loginAddressAggregatedMapper->getCount()
 		);
 	}
-
 }

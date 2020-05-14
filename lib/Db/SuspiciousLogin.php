@@ -41,12 +41,10 @@ use OCP\AppFramework\Db\Entity;
  * @method int|null getNotificationState()
  */
 class SuspiciousLogin extends Entity {
-
 	protected $uid;
 	protected $ip;
 	protected $createdAt;
 	protected $requestId;
 	protected $url;
 	protected $notificationState;
-
 }

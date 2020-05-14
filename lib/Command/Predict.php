@@ -80,5 +80,4 @@ class Predict extends Command {
 			$output->writeln("WARN: IP $ip is suspicious");
 		}
 	}
-
 }

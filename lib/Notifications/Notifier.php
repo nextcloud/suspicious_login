@@ -76,5 +76,4 @@ class Notifier implements INotifier {
 				throw new InvalidArgumentException();
 		}
 	}
-
 }

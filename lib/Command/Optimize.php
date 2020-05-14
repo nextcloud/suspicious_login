@@ -33,7 +33,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class Optimize extends Command {
-
 	use ModelStatistics;
 
 	/** @var Optimizer */
@@ -66,5 +65,4 @@ class Optimize extends Command {
 			$output
 		);
 	}
-
 }
