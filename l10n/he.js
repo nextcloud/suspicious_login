@@ -14,6 +14,7 @@ OC.L10N.register(
     "IPv6" : "IPv6",
     "Classifier model statistics" : "סטטיסטיקת מודל הסיווג",
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "לא התבצע אימון סביב אף מודל סיווג. הסיבה לכך היא כפי הנראה העובדה שהפעלת את היישומון לאחרונה. כיוון שאימון מודל דורש נתונים איכותיים, היישומון ממתין עד שתתבצענה לכידת כניסות במשך {days} ימים.",
+    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "במהלך ההערכה, הוכח שהדגם העדכני ביותר (אומן ב־{time}) לוכד {recall}% מכל ניסיונות הכניסה החשודים (החזרה - recall), בעוד {precision}% מניסיונות הכניסה שמסווגים כחשודים הם אכן חשודים (דיוק - precision). להלן ניתן לצפות בעיבוד חזותי של ביצועי הדגם במבט היסטורי.",
     "Precision" : "דיוק",
     "Recall" : "לקרוא מחדש"
 },
