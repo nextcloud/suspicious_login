@@ -12,7 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
-    "@vue/babel-preset-app": "^4.3.1",
+    "@vue/babel-preset-app": "^4.4.6",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
