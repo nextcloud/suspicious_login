@@ -24,6 +24,6 @@
     },
     "require-dev": {
         "christophwurst/nextcloud_testing": "^0.10.0",
-        "christophwurst/nextcloud": "v18.0.4"
+        "christophwurst/nextcloud": "v19.0.0"
     }
 }
