@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.2.0 - 2020-08-31
+### Added
+- Nextcloud 20 support
+### Changed
+- New and updated translations
+- Updated dependencies
+
 ## 3.1.0 - 2020-02-11
 ### Added
 - Nextcloud 19 support
