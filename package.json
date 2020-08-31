@@ -7,7 +7,7 @@
     "@nextcloud/initial-state": "^1.1.2",
     "chart.js": "^2.9.3",
     "vue": "^2.6.12",
-    "vue-chartjs": "^3.5.0"
+    "vue-chartjs": "^3.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
