@@ -6,7 +6,7 @@
   "dependencies": {
     "@nextcloud/initial-state": "^1.1.2",
     "chart.js": "^2.9.3",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-chartjs": "^3.5.0"
   },
   "devDependencies": {
@@ -18,7 +18,7 @@
     "file-loader": "^6.0.0",
     "url-loader": "^4.1.0",
     "vue-loader": "^15.9.3",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^4.2.2"
