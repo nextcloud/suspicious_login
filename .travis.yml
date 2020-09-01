@@ -33,8 +33,10 @@ matrix:
       env: "PHP_COVERAGE=TRUE"
     - php: 7.3
       env: "TEST_JS=TRUE"
-    - php: 7.3
+    - php: 7.2
       env: "CORE_BRANCH=stable17"
+    - php: 7.3
+      env: "CORE_BRANCH=stable18"
     - php: 7.3
       env: "CORE_BRANCH=v17.0.0"
     - php: nightly
@@ -86,6 +88,9 @@ before_script:
   - cd core/apps/suspicious_login
 
 script:
+  # Run occ to see if Nextcloud falls apart (https://github.com/nextcloud/suspicious_login/issues/317)
+  - php -f ../../occ
+
   # Check info.xml schema validity
   - wget https://apps.nextcloud.com/schema/apps/info.xsd
   - xmllint appinfo/info.xml --schema info.xsd --noout
