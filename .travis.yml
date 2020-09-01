@@ -89,7 +89,7 @@ before_script:
 
 script:
   # Run occ to see if Nextcloud falls apart (https://github.com/nextcloud/suspicious_login/issues/317)
-  - php -f ../../occ
+  - php -f ../../occ config:list
 
   # Check info.xml schema validity
   - wget https://apps.nextcloud.com/schema/apps/info.xsd
