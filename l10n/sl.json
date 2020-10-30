@@ -3,6 +3,7 @@
     "Suspicious Login" : "Sumljiva prijava",
     "New login detected" : "Zaznana je nova prijava",
     "Suspicious login detection" : "Zaznavanje sumljivih prijav",
+    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Program za nadzor nad sumljivim povezovanjem jv oblak e omogočen. Sledi naslovom IP uporabnikov, ki se uspešno povežejo in opozori, ko se prijava izvede iz sumljivega naslova.",
     "IPv4" : "Naslov IPv4",
     "IPv6" : "Naslov IPv6",
     "Precision" : "Natančnost"
