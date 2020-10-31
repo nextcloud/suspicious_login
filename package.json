@@ -21,7 +21,7 @@
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-merge": "^5.1.4"
+    "webpack-merge": "^5.3.0"
   },
   "scripts": {
     "build": "webpack --progress --config src/webpack.prod.js",
