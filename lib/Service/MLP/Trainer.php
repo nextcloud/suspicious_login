@@ -82,7 +82,7 @@ class Trainer {
 		if (!$strategy->hasSufficientData($this->loginAddressMapper, $validationDays)) {
 			throw new InsufficientDataException("Not enough data for the specified maximum age");
 		}
-		list($historyRaw, $recentRaw) = $strategy->findHistoricAndRecent(
+		[$historyRaw, $recentRaw] = $strategy->findHistoricAndRecent(
 			$this->loginAddressMapper,
 			$testingDays,
 			$validationDays

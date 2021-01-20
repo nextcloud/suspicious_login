@@ -92,7 +92,7 @@ class LoginClassifierTest extends TestCase {
 				'user',
 				'1.2.3.4',
 				$this->anything(),
-				1000000-60*60*24*TrainingDataConfig::default()->getThreshold()
+				1000000 - 60 * 60 * 24 * TrainingDataConfig::default()->getThreshold()
 			)
 			->willReturn([
 				new SuspiciousLogin(),
@@ -115,14 +115,14 @@ class LoginClassifierTest extends TestCase {
 				'user',
 				'1.2.3.4',
 				$this->anything(),
-				1000000-60*60*24*TrainingDataConfig::default()->getThreshold()
+				1000000 - 60 * 60 * 24 * TrainingDataConfig::default()->getThreshold()
 			)
 			->willReturn([]);
 		$this->mapper->expects($this->at(2))
 			->method('findRecentByUid')
 			->with(
 				'user',
-				1000000-60*60*24*2
+				1000000 - 60 * 60 * 24 * 2
 			)
 			->willReturn(array_fill(0, 25, new SuspiciousLogin()));
 		$this->dispatcher->expects($this->never())
@@ -141,14 +141,14 @@ class LoginClassifierTest extends TestCase {
 			->method('findRecentByUid')
 			->with(
 				'user',
-				1000000-60*60*24*2
+				1000000 - 60 * 60 * 24 * 2
 			)
 			->willReturn(array_fill(0, 7, new SuspiciousLogin()));
 		$this->mapper->expects($this->at(3))
 			->method('findRecentByUid')
 			->with(
 				'user',
-				1000000-60*60
+				1000000 - 60 * 60
 			)
 			->willReturn(array_fill(0, 5, new SuspiciousLogin()));
 		$this->dispatcher->expects($this->never())
@@ -167,14 +167,14 @@ class LoginClassifierTest extends TestCase {
 			->method('findRecentByUid')
 			->with(
 				'user',
-				1000000-60*60*24*2
+				1000000 - 60 * 60 * 24 * 2
 			)
 			->willReturn(array_fill(0, 7, new SuspiciousLogin()));
 		$this->mapper->expects($this->at(3))
 			->method('findRecentByUid')
 			->with(
 				'user',
-				1000000-60*60
+				1000000 - 60 * 60
 			)
 			->willReturn(array_fill(0, 1, new SuspiciousLogin()));
 		$this->dispatcher->expects($this->once())
