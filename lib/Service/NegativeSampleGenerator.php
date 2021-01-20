@@ -25,14 +25,19 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use Rubix\ML\Datasets\Dataset;
+use Rubix\ML\Datasets\Labeled;
+use function array_fill;
 use function array_filter;
 use function array_map;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use function array_merge;
+use function array_slice;
 use function random_int;
 use function range;
 
 class NegativeSampleGenerator {
-	private function getUniqueIPsPerUser(DataSet $positives): array {
+	private function getUniqueIPsPerUser(Dataset $positives): array {
 		$ips = [];
 
 		// First, let's map (uid,ip) to uid -> [ip]
@@ -73,12 +78,11 @@ class NegativeSampleGenerator {
 		];
 	}
 
-	private function generateRandom(string $uid, IClassificationStrategy $strategy): array {
-		return [
-			'uid' => $uid,
-			'ip' => $strategy->generateRandomIp(),
-			'label' => Trainer::LABEL_NEGATIVE,
-		];
+	private function generateRandom(array $uidVec, AClassificationStrategy $strategy): array {
+		return array_merge(
+			$uidVec,
+			$strategy->generateRandomIpVector()
+		);
 	}
 
 	/**
@@ -87,14 +91,13 @@ class NegativeSampleGenerator {
 	 *
 	 * @return DataSet
 	 */
-	public function generateRandomFromPositiveSamples(DataSet $positives, int $num, IClassificationStrategy $strategy): DataSet {
+	public function generateRandomFromPositiveSamples(Dataset $positives, int $num, AClassificationStrategy $strategy): DataSet {
 		$max = count($positives);
-
-		return new DataSet(
+		return new Labeled(
 			array_map(function (int $id) use ($strategy, $positives, $max) {
-				return $this->generateRandom($positives[$id % $max]->getUid(), $strategy);
+				return $this->generateRandom(array_slice($positives[$id % $max], 0, 16), $strategy);
 			}, range(0, $num - 1)),
-			$strategy
+			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
 	}
 
@@ -108,11 +111,11 @@ class NegativeSampleGenerator {
 		$max = count($positives);
 		$uniqueIps = $this->getUniqueIPsPerUser($positives);
 
-		return new DataSet(
-			array_map(function (int $id) use ($uniqueIps, $positives, $max) {
-				return $this->generateFromRealData($positives[$id % $max]->getUid(), $uniqueIps);
+		return new Labeled(
+			array_map(function (int $id) use ($v4, $uniqueIps, $positives, $max) {
+				return $this->generateFromRealData($positives[$id % $max]->getUid(), $uniqueIps, $v4);
 			}, range(0, $num - 1)),
-			$v4
+			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
 	}
 }

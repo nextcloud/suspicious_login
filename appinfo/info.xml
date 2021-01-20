@@ -23,10 +23,10 @@
 	</repository>
 
 	<dependencies>
-		<php min-version="7.2" max-version="7.4"/>
+		<php min-version="7.3" max-version="8.0"/>
 		<database>mysql</database>
 		<database>pgsql</database>
-		<nextcloud min-version="17" max-version="20"/>
+		<nextcloud min-version="21" max-version="22"/>
 	</dependencies>
 
 	<background-jobs>
@@ -39,6 +39,7 @@
 		<command>OCA\SuspiciousLogin\Command\ETL</command>
 		<command>OCA\SuspiciousLogin\Command\Optimize</command>
 		<command>OCA\SuspiciousLogin\Command\Predict</command>
+		<command>OCA\SuspiciousLogin\Command\Seed</command>
 		<command>OCA\SuspiciousLogin\Command\Train</command>
 	</commands>
 

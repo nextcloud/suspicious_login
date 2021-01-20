@@ -1,0 +1,53 @@
+name: Profile
+on: pull_request
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ 7.3, 7.4, 8.0 ]
+        nextcloud-version: [ 'master' ]
+    name: php${{ matrix.php-version }} profiling
+    services:
+      mysql-service:
+        image: mariadb:10
+        env:
+          MYSQL_ROOT_PASSWORD: my-secret-pw
+          MYSQL_DATABASE: nextcloud
+          MYSQL_USER: nextcloud
+          MYSQL_PASSWORD: nextcloud
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+      - name: Set up php${{ matrix.php-version }}
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
+          coverage: none
+      - name: Checkout Nextcloud
+        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
+      - name: Install Nextcloud
+        run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database mysql
+      - name: Checkout app
+        uses: actions/checkout@master
+        with:
+          path: nextcloud/apps/suspicious_login
+      - name: Install dependencies
+        working-directory: nextcloud/apps/suspicious_login
+        run: composer install
+      - name: Enable app
+        run: php -f nextcloud/occ app:enable suspicious_login
+      - name: Seed the database
+        run: |
+          php -f nextcloud/occ config:system:set debug --type bool --value true
+          php -f nextcloud/occ suspiciouslogin:seed
+          php -f nextcloud/occ config:system:set debug --type bool --value false
+      - name: Profile a training
+        run: time php -f nextcloud/occ suspiciouslogin:train -v

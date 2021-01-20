@@ -24,61 +24,50 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
-use OCA\SuspiciousLogin\Service\EstimatorService;
+use OCA\SuspiciousLogin\Db\LoginAddressAggregatedSeeder;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
+use OCP\IConfig;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Predict extends Command {
+class Seed extends Command {
+	use ModelStatistics;
 
-	/** @var EstimatorService */
-	private $estimatorService;
+	/** @var IConfig */
+	private $config;
 
-	public function __construct(EstimatorService $estimatorService) {
-		parent::__construct("suspiciouslogin:predict");
+	/** @var LoginAddressAggregatedSeeder */
+	private $seeder;
 
-		$this->estimatorService = $estimatorService;
+	public function __construct(IConfig $config,
+								LoginAddressAggregatedSeeder $seeder) {
+		parent::__construct("suspiciouslogin:seed");
+		$this->seeder = $seeder;
 
-		$this->addArgument(
-			'uid',
-			InputArgument::REQUIRED,
-			"the UID of the user to run a prediction for"
-		);
-		$this->addArgument(
-			'ip',
-			InputArgument::REQUIRED,
-			"the IP to predict suspiciousness"
-		);
-		$this->addArgument(
-			'model',
-			InputArgument::OPTIONAL,
-			"persisted model id (latest if omited)"
-		);
 		$this->addOption(
 			'v6',
 			null,
 			InputOption::VALUE_NONE,
 			"train with IPv6 data"
 		);
+		$this->setDescription("Fills the database with random IPs for development and testing purposes");
+		$this->config = $config;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
-		$uid = $input->getArgument('uid');
-		$ip = $input->getArgument('ip');
-		$modelId = $input->getArgument('model');
-		if (!$this->estimatorService->predict(
-			$uid,
-			$ip,
-			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
-			$modelId ? (int)$modelId : null)) {
-			$output->writeln("WARN: IP $ip is suspicious");
+		if ($this->config->getSystemValueBool('debug', false) === false) {
+			$output->writeln("<error>This command is meant for development purposes.</error> Enable debug mode and try again if you know what you are doing.");
 			return 1;
 		}
-		$output->writeln("OK:   IP $ip is not suspicious");
+
+		$num = $this->seeder->seed(
+			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy()
+		);
+		$output->writeln("$num rows created");
+
 		return 0;
 	}
 }

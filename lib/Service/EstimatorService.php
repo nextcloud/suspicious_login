@@ -27,7 +27,8 @@ namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCP\ILogger;
-use Phpml\Exception\SerializeException;
+use Rubix\ML\Datasets\Unlabeled;
+use RuntimeException;
 
 class EstimatorService {
 
@@ -51,32 +52,26 @@ class EstimatorService {
 	 * @return bool
 	 * @throws ServiceException
 	 */
-	public function predict(string $uid, string $ip, IClassificationStrategy $strategy, int $modelId = null): bool {
+	public function predict(string $uid, string $ip, AClassificationStrategy $strategy, int $modelId = null): bool {
 		try {
 			if ($modelId === null) {
 				$this->logger->debug("loading latest model");
 
-				$estimatorModel = $this->persistenceService->loadLatest($strategy);
+				$estimator = $this->persistenceService->loadLatest($strategy);
 			} else {
 				$this->logger->debug("loading model $modelId");
 
-				$estimatorModel = $this->persistenceService->load($modelId);
+				$estimator = $this->persistenceService->load($modelId);
 			}
-		} catch (SerializeException $e) {
-			$this->logger->warning("could not load model $modelId to classify UID $uid and IP $ip");
-
-			throw new ServiceException($e->getMessage(), $e->getCode(), $e);
+		} catch (RuntimeException $e) {
+			throw new ServiceException("Could not load model $modelId to classify UID $uid and IP $ip: " . $e->getMessage(), $e->getCode(), $e);
 		}
 
-		$data = new DataSet([
-			[
-				'uid' => $uid,
-				'ip' => $ip,
-				'label' => '',
-			],
-		], $strategy);
+		$data = new Unlabeled([
+			$strategy->newVector($uid, $ip),
+		]);
 
-		$predictions = $estimatorModel->predict($data->asTrainingData());
+		$predictions = $estimator->predict($data);
 
 		return $predictions[0] === 'y';
 	}
