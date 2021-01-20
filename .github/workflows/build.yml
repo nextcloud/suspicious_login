@@ -1,0 +1,22 @@
+name: Build
+on: pull_request
+
+jobs:
+  build-js:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 13, 14, 15 ]
+    name: Build front-end with Node ${{ matrix.node-version }}
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: npm install
+      - name: run tests
+        run: npm run build
+    env:
+      CI: true
