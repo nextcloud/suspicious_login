@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff4b8e2f687b99f9f568e6c159324b2b",
+    "content-hash": "6cea2d183da9464427f31ad7e9e1fb35",
     "packages": [
         {
             "name": "darsyn/ip",
@@ -114,16 +114,16 @@
     "packages-dev": [
         {
             "name": "christophwurst/nextcloud",
-            "version": "v19.0.0",
+            "version": "v20.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ChristophWurst/nextcloud_composer.git",
-                "reference": "1329e82c5aaf79ce546d9c86ebb057ebe6f857e4"
+                "reference": "26bfecf56f81adb9271d3d55c180bfb0e3e37e3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/1329e82c5aaf79ce546d9c86ebb057ebe6f857e4",
-                "reference": "1329e82c5aaf79ce546d9c86ebb057ebe6f857e4",
+                "url": "https://api.github.com/repos/ChristophWurst/nextcloud_composer/zipball/26bfecf56f81adb9271d3d55c180bfb0e3e37e3d",
+                "reference": "26bfecf56f81adb9271d3d55c180bfb0e3e37e3d",
                 "shasum": ""
             },
             "require": {
@@ -132,7 +132,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "19.0.0-dev"
+                    "dev-master": "20.0.0-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -146,7 +146,11 @@
                 }
             ],
             "description": "Composer package containing Nextcloud's public API (classes, interfaces)",
-            "time": "2020-08-24T12:38:49+00:00"
+            "support": {
+                "issues": "https://github.com/ChristophWurst/nextcloud_composer/issues",
+                "source": "https://github.com/ChristophWurst/nextcloud_composer/tree/v20.0.5"
+            },
+            "time": "2021-01-20T09:13:27+00:00"
         },
         {
             "name": "christophwurst/nextcloud_testing",
