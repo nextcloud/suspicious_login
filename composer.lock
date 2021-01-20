@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bce494ddd69ef7f8ee9ad4488dfee99",
+    "content-hash": "ff4b8e2f687b99f9f568e6c159324b2b",
     "packages": [
         {
             "name": "darsyn/ip",
@@ -682,6 +682,10 @@
                 }
             ],
             "description": "Nextcloud coding standards for the php cs fixer",
+            "support": {
+                "issues": "https://github.com/nextcloud/coding-standard/issues",
+                "source": "https://github.com/nextcloud/coding-standard/tree/v0.3.0"
+            },
             "time": "2020-04-10T14:57:18+00:00"
         },
         {
@@ -3804,5 +3808,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

@@ -38,7 +38,7 @@ class ETLJob extends TimedJob {
 								ITimeFactory $time) {
 		parent::__construct($time);
 
-		$this->setInterval(60*60);
+		$this->setInterval(60 * 60);
 		$this->etlService = $etlService;
 	}
 
