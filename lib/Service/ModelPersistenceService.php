@@ -25,6 +25,11 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use Rubix\ML\Estimator;
+use Rubix\ML\Persistable;
+use Rubix\ML\Persisters\Filesystem;
+use RuntimeException;
+use Throwable;
 use function file_get_contents;
 use function file_put_contents;
 use OCA\SuspiciousLogin\AppInfo\Application;
@@ -38,16 +43,10 @@ use OCP\Files\NotFoundException;
 use OCP\ICacheFactory;
 use OCP\ILogger;
 use OCP\ITempManager;
-use Phpml\Estimator;
-use Phpml\Exception\SerializeException;
-use Phpml\ModelManager;
 use function strlen;
 
 class ModelPersistenceService {
 	public const APPDATA_MODELS_FOLDER = 'models';
-
-	/** @var ModelManager */
-	private $modelManager;
 
 	/** @var ModelMapper */
 	private $modelMapper;
@@ -67,14 +66,12 @@ class ModelPersistenceService {
 	/** @var ILogger */
 	private $logger;
 
-	public function __construct(ModelManager $modelManager,
-								ModelMapper $modelMapper,
+	public function __construct(ModelMapper $modelMapper,
 								IAppData $appData,
 								IAppManager $appManager,
 								ITempManager $tempManager,
 								ICacheFactory $cachFactory,
 								ILogger $logger) {
-		$this->modelManager = $modelManager;
 		$this->appData = $appData;
 		$this->appManager = $appManager;
 		$this->modelMapper = $modelMapper;
@@ -85,10 +82,10 @@ class ModelPersistenceService {
 
 	/**
 	 * @return Estimator
-	 * @throws SerializeException
+	 * @throws RuntimeException
 	 * @throws ServiceException
 	 */
-	public function loadLatest(IClassificationStrategy $strategy): Estimator {
+	public function loadLatest(AClassificationStrategy $strategy): Estimator {
 		try {
 			$latestModel = $this->modelMapper->findLatest($strategy::getTypeName());
 		} catch (DoesNotExistException $e) {
@@ -151,20 +148,30 @@ class ModelPersistenceService {
 		file_put_contents($tmpFile, $serialized);
 
 		try {
-			$estimator = $this->modelManager->restoreFromFile($tmpFile);
-		} catch (SerializeException $e) {
+			$persister = new Filesystem($tmpFile);
+			$estimator = $persister->load();
+		} catch (RuntimeException $e) {
 			$this->logger->error("Could not deserialize persisted model $id: " . $e->getMessage());
 
-			throw new SerializeException("Could not deserialize persisted model $id", 0, $e);
+			throw $e;
+		}
+
+		if (!($estimator instanceof Estimator)) {
+			throw new RuntimeException("Deserialized object is not an estimator");
 		}
 
 		return $estimator;
 	}
 
 	/**
+	 * @param Estimator|Persistable $estimator
 	 * @todo encapsulate in transaction to prevent inconsistencies
 	 */
 	public function persist(Estimator $estimator, Model $model) {
+		if (!($estimator instanceof Persistable)) {
+			throw new RuntimeException("Estimator is not persistable");
+		}
+
 		$model->setType(get_class($estimator));
 		$model->setAppVersion($this->appManager->getAppVersion(Application::APP_ID));
 
@@ -176,13 +183,21 @@ class ModelPersistenceService {
 			$modelsFolder = $this->appData->newFolder(self::APPDATA_MODELS_FOLDER);
 		}
 
-		$modelFile = $modelsFolder->newFile((string)$model->getId());
+		try {
+			$modelFile = $modelsFolder->newFile((string)$model->getId());
 
-		// Inefficient, but we can't get the real path from app data as it might
-		// not be a local file
-		$tmpFile = $this->tempManager->getTemporaryFile();
-		$this->modelManager->saveToFile($estimator, $tmpFile);
+			// Inefficient, but we can't get the real path from app data as it might
+			// not be a local file
+			$tmpFile = $this->tempManager->getTemporaryFile();
+			$persister = new Filesystem($tmpFile);
+			$persister->save($estimator);
 
-		$modelFile->putContent(file_get_contents($tmpFile));
+			$modelFile->putContent(file_get_contents($tmpFile));
+		} catch (Throwable $e) {
+			$this->logger->error("Could not save persisted estimator to storage, reverting", [
+				'exception' => $e,
+			]);
+			$this->modelMapper->delete($model);
+		}
 	}
 }

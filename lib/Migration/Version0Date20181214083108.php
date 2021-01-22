@@ -54,10 +54,10 @@ class Version0Date20181214083108 extends SimpleMigrationStep {
 		$table->getColumn('precision_n')
 			->setPrecision(10)
 			->setScale(5);
-		$table->getColumn('recall_y', 'decimal')
+		$table->getColumn('recall_y')
 			->setPrecision(10)
 			->setScale(5);
-		$table->getColumn('recall_n', 'decimal')
+		$table->getColumn('recall_n')
 			->setPrecision(10)
 			->setScale(5);
 

@@ -24,18 +24,29 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
+use OCA\SuspiciousLogin\Db\LoginAddressAggregated;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
-use OCA\SuspiciousLogin\Service\DataSet;
-use OCA\SuspiciousLogin\Service\IClassificationStrategy;
+use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\ModelPersistenceService;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
-use Phpml\Classification\MLPClassifier;
-use Phpml\Metric\ClassificationReport;
+use Rubix\ML\Classifiers\MultilayerPerceptron;
+use Rubix\ML\CrossValidation\Reports\MulticlassBreakdown;
+use Rubix\ML\Datasets\Dataset;
+use Rubix\ML\Datasets\Labeled;
+use Rubix\ML\NeuralNet\ActivationFunctions\Sigmoid;
+use Rubix\ML\NeuralNet\Layers\Activation;
+use Rubix\ML\NeuralNet\Layers\Dense;
+use Rubix\ML\NeuralNet\Optimizers\Adam;
+use function array_fill;
+use function array_map;
+use function array_merge;
+use function log;
+use function range;
 
 class Trainer {
 	public const LABEL_POSITIVE = 'y';
@@ -75,7 +86,7 @@ class Trainer {
 	 */
 	public function train(Config $config,
 						  TrainingDataConfig $dataConfig,
-						  IClassificationStrategy $strategy): Model {
+						  AClassificationStrategy $strategy): Model {
 		$testingDays = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
 		$validationDays = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
 
@@ -84,6 +95,7 @@ class Trainer {
 		}
 		[$historyRaw, $recentRaw] = $strategy->findHistoricAndRecent(
 			$this->loginAddressMapper,
+
 			$testingDays,
 			$validationDays
 		);
@@ -93,8 +105,9 @@ class Trainer {
 		if (empty($recentRaw)) {
 			throw new InsufficientDataException("No recent data available");
 		}
-		$positives = DataSet::fromLoginAddresses($historyRaw, $strategy);
-		$validationPositives = DataSet::fromLoginAddresses($recentRaw, $strategy);
+
+		$positives = $this->addressesToDataSet($historyRaw, $strategy);
+		$validationPositives = $this->addressesToDataSet($recentRaw, $strategy);
 		$numValidation = count($validationPositives);
 		$numPositives = count($positives);
 		$numRandomNegatives = max((int)floor($numPositives * $config->getRandomNegativeRate()), 1);
@@ -104,31 +117,32 @@ class Trainer {
 
 		// Validation negatives are generated from all data (to have all UIDs), but shuffled
 		$all = $positives->merge($validationPositives);
-		$all->shuffle();
+		$all->randomize();
 		$validationNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($all, $numValidation, $strategy);
 		$validationSamples = $validationPositives->merge($validationNegatives);
 
 		$allSamples = $positives->merge($randomNegatives)->merge($shuffledNegatives);
-		$allSamples->shuffle();
+		$allSamples->randomize();
 
 		$start = $this->timeFactory->getDateTime();
-		$classifier = new MLPClassifier(
-			$strategy->getSize(),
-			[$config->getLayers()],
-			['y', 'n'],
-			$config->getEpochs(),
-			null,
-			$config->getLearningRate()
+		$layers = array_map(function () use ($strategy) {
+			return new Dense($strategy->getSize());
+		}, range(0, $config->getLayers()));
+		$layers[] = new Activation(new Sigmoid());
+		$classifier = new MultilayerPerceptron(
+			$layers,
+			128,
+			new Adam($config->getLearningRate()),
+			1e-3,
+			$config->getEpochs()
 		);
-		$classifier->train(
-			$allSamples->asTrainingData(),
-			$allSamples->getLabels()
-		);
+		$classifier->train($allSamples);
 		$finished = $this->timeFactory->getDateTime();
 		$elapsed = $finished->getTimestamp() - $start->getTimestamp();
 
-		$predicted = $classifier->predict($validationSamples->asTrainingData());
-		$result = new ClassificationReport($validationSamples->getLabels(), $predicted);
+		$predicted = $classifier->predict($validationSamples);
+		$reportGenerator = new MulticlassBreakdown();
+		$report = $reportGenerator->generate($predicted, $validationSamples->labels());
 
 		$model = new Model();
 		$model->setSamplesPositive($numPositives);
@@ -138,15 +152,31 @@ class Trainer {
 		$model->setLayers($config->getLayers());
 		$model->setVectorDim($strategy->getSize());
 		$model->setLearningRate($config->getLearningRate());
-		$model->setPrecisionY($result->getPrecision()['y']);
-		$model->setPrecisionN($result->getPrecision()['n']);
-		$model->setRecallY($result->getRecall()['y']);
-		$model->setRecallN($result->getRecall()['n']);
+		$model->setPrecisionY($report['classes']['y']['precision']);
+		$model->setPrecisionN($report['classes']['n']['recall']);
+		$model->setRecallY($report['classes']['y']['precision']);
+		$model->setRecallN($report['classes']['n']['recall']);
 		$model->setDuration($elapsed);
 		$model->setAddressType($strategy::getTypeName());
 		$model->setCreatedAt($this->timeFactory->getTime());
 		$this->persistenceService->persist($classifier, $model);
 
 		return $model;
+	}
+
+	/**
+	 * @param LoginAddressAggregated[] $loginAddresses
+	 */
+	private function addressesToDataSet(array $loginAddresses, AClassificationStrategy $strategy): Dataset {
+		$deep = array_map(function (LoginAddressAggregated $addr) use ($strategy) {
+			$multiplier = (int)log((int) $addr->getSeen(), 2);
+			return array_fill(0, $multiplier, $strategy->newVector($addr->getUid(), $addr->getIp()));
+		}, $loginAddresses);
+		$samples = array_merge(...$deep);
+
+		return new Labeled(
+			$samples,
+			array_fill(0, count($samples), Trainer::LABEL_POSITIVE)
+		);
 	}
 }

@@ -56,7 +56,7 @@ class Config {
 
 	public static function default() {
 		return new static(
-			150,
+			200,
 			14,
 			1.5,
 			1.0,

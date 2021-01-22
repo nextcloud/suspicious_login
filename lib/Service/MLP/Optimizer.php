@@ -25,7 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
-use OCA\SuspiciousLogin\Service\IClassificationStrategy;
+use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
@@ -44,12 +44,12 @@ class Optimizer {
 	/** @var Trainer */
 	private $trainer;
 
-	private $parameterMaximum = [
+	private $parameterRanges = [
 		'epochs' => [50, 1000],
 		'layers' => [6, 14],
 		'shuffledNegativeRate' => [0.1, 1.5],
 		'randomNegativeRate' => [0.1, 1.5],
-		'learningRate' => [0.001, 0.1],
+		'learningRate' => [0.0001, 0.01],
 	];
 
 	public function __construct(Trainer $trainer) {
@@ -71,9 +71,9 @@ class Optimizer {
 	}
 
 	/**
-	 * @param Model[] ...$models
+	 * @param Model ...$models
 	 */
-	private function getAverageCost(...$models): float {
+	private function getAverageCost(Model ...$models): float {
 		$costs = array_map(function (Model $model) {
 			return ($model->getPrecisionN() + $model->getRecallN()) / 2;
 		}, $models);
@@ -108,47 +108,47 @@ class Optimizer {
 			->setEpochs(
 				$this->getRandomIntParam(
 					$config->getEpochs(),
-					$this->parameterMaximum['epochs'][0],
-					$this->parameterMaximum['epochs'][1],
+					$this->parameterRanges['epochs'][0],
+					$this->parameterRanges['epochs'][1],
 					$stepWidth
 				)
 			)
 			->setLayers(
 				$this->getRandomIntParam(
 					$config->getLayers(),
-					$this->parameterMaximum['layers'][0],
-					$this->parameterMaximum['layers'][1],
+					$this->parameterRanges['layers'][0],
+					$this->parameterRanges['layers'][1],
 					$stepWidth
 				)
 			)
 			->setShuffledNegativeRate(
 				$this->getRandomFloatParam(
 					$config->getShuffledNegativeRate(),
-					$this->parameterMaximum['shuffledNegativeRate'][0],
-					$this->parameterMaximum['shuffledNegativeRate'][1],
+					$this->parameterRanges['shuffledNegativeRate'][0],
+					$this->parameterRanges['shuffledNegativeRate'][1],
 					$stepWidth
 				)
 			)
 			->setRandomNegativeRate(
 				$this->getRandomFloatParam(
 					$config->getRandomNegativeRate(),
-					$this->parameterMaximum['randomNegativeRate'][0],
-					$this->parameterMaximum['randomNegativeRate'][1],
+					$this->parameterRanges['randomNegativeRate'][0],
+					$this->parameterRanges['randomNegativeRate'][1],
 					$stepWidth
 				)
 			)
 			->setLearningRate(
 				$this->getRandomFloatParam(
 					$config->getLearningRate(),
-					$this->parameterMaximum['learningRate'][0],
-					$this->parameterMaximum['learningRate'][1],
+					$this->parameterRanges['learningRate'][0],
+					$this->parameterRanges['learningRate'][1],
 					$stepWidth
 				)
 			);
 	}
 
 	public function optimize(int $maxEpochs,
-							 IClassificationStrategy $strategy,
+							 AClassificationStrategy $strategy,
 							 OutputInterface $output,
 							 Config $initialConfig = null) {
 		$epochs = 0;

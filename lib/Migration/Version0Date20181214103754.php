@@ -45,7 +45,7 @@ class Version0Date20181214103754 extends SimpleMigrationStep {
 
 		$table = $schema->getTable('suspicious_login_model');
 		$table->getColumn('app_version')
-			->setType(Type::getType(Type::STRING));
+			->setType(Type::getType('string'));
 
 		return $schema;
 	}
