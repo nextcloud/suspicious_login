@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@nextcloud/initial-state": "^1.1.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1"
   },
