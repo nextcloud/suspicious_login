@@ -45,7 +45,7 @@ use OCP\ILogger;
 use OCP\ITempManager;
 use function strlen;
 
-class ModelPersistenceService {
+class ModelStore {
 	public const APPDATA_MODELS_FOLDER = 'models';
 
 	/** @var ModelMapper */

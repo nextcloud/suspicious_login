@@ -26,6 +26,7 @@ namespace OCA\SuspiciousLogin\Command;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Service\DataLoader;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
@@ -39,10 +40,14 @@ use function time;
 class Train extends Command {
 	use ModelStatistics;
 
+	/** @var DataLoader */
+	private $loader;
+
 	/** @var Trainer */
 	private $trainer;
 
-	public function __construct(Trainer $optimizer) {
+	public function __construct(DataLoader $loader,
+								Trainer $optimizer) {
 		parent::__construct("suspiciouslogin:train");
 		$this->trainer = $optimizer;
 
@@ -102,6 +107,7 @@ class Train extends Command {
 			"train with IPv6 data"
 		);
 		$this->registerStatsOption();
+		$this->loader = $loader;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
@@ -137,12 +143,17 @@ class Train extends Command {
 		try {
 			$output->writeln('Using ' . $strategy::getTypeName() . ' strategy');
 
-			$model = $this->trainer->train(
+			$data = $this->loader->loadTrainingAndValidationData(
 				$config,
 				$trainingDataConfig,
 				$strategy
 			);
-			$this->printModelStatistics($model, $input, $output);
+			$result = $this->trainer->train(
+				$config,
+				$data,
+				$strategy
+			);
+			$this->printModelStatistics($result->getModel(), $input, $output);
 		} catch (InsufficientDataException $ex) {
 			$output->writeln("<info>Not enough data, try again later (<error>" . $ex->getMessage() . "</error>)</info>");
 			return 1;

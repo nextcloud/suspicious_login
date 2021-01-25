@@ -25,6 +25,9 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
+/**
+ * @psalm-immutable
+ */
 class Config {
 
 	/** @var int */
@@ -57,7 +60,7 @@ class Config {
 	public static function default() {
 		return new static(
 			200,
-			14,
+			20,
 			1.5,
 			1.0,
 			0.07

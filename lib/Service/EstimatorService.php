@@ -32,15 +32,15 @@ use RuntimeException;
 
 class EstimatorService {
 
-	/** @var ModelPersistenceService */
-	private $persistenceService;
+	/** @var ModelStore */
+	private $modelStore;
 
 	/** @var ILogger */
 	private $logger;
 
-	public function __construct(ModelPersistenceService $persistenceService,
+	public function __construct(ModelStore $modelStore,
 								ILogger $logger) {
-		$this->persistenceService = $persistenceService;
+		$this->modelStore = $modelStore;
 		$this->logger = $logger;
 	}
 
@@ -57,11 +57,11 @@ class EstimatorService {
 			if ($modelId === null) {
 				$this->logger->debug("loading latest model");
 
-				$estimator = $this->persistenceService->loadLatest($strategy);
+				$estimator = $this->modelStore->loadLatest($strategy);
 			} else {
 				$this->logger->debug("loading model $modelId");
 
-				$estimator = $this->persistenceService->load($modelId);
+				$estimator = $this->modelStore->load($modelId);
 			}
 		} catch (RuntimeException $e) {
 			throw new ServiceException("Could not load model $modelId to classify UID $uid and IP $ip: " . $e->getMessage(), $e->getCode(), $e);
