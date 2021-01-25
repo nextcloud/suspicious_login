@@ -27,8 +27,8 @@ namespace OCA\SuspiciousLogin\BackgroundJob;
 
 use OCA\SuspiciousLogin\Exception\InsufficientDataException;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
-use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
+use OCA\SuspiciousLogin\Service\TrainService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\TimedJob;
 use OCP\ILogger;
@@ -36,19 +36,19 @@ use Throwable;
 
 class TrainJobIpV4 extends TimedJob {
 
-	/** @var Trainer */
-	private $trainer;
+	/** @var TrainService */
+	private $trainService;
 
 	/** @var ILogger */
 	private $logger;
 
-	public function __construct(Trainer $trainer,
+	public function __construct(TrainService $trainService,
 								ILogger $logger,
 								ITimeFactory $time) {
 		parent::__construct($time);
 
 		$this->setInterval(24 * 60 * 60);
-		$this->trainer = $trainer;
+		$this->trainService = $trainService;
 		$this->logger = $logger;
 	}
 
@@ -60,7 +60,7 @@ class TrainJobIpV4 extends TimedJob {
 	protected function run($argument) {
 		try {
 			$strategy = new Ipv4Strategy();
-			$this->trainer->train(
+			$this->trainService->train(
 				$strategy->getDefaultMlpConfig(),
 				TrainingDataConfig::default(),
 				$strategy

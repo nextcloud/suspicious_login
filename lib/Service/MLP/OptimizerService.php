@@ -26,10 +26,10 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service\MLP;
 
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
+use OCA\SuspiciousLogin\Service\DataLoader;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
-use function mt_rand;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,9 +37,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Optimize the MLP trainer with simulated annealing
  */
-class Optimizer {
+class OptimizerService {
 	public const INITIAL_STEP_WIDTH = 0.8;
 	public const STEP_WIDTH_FACTOR = 0.985;
+
+	/** @var DataLoader */
+	private $loader;
 
 	/** @var Trainer */
 	private $trainer;
@@ -52,7 +55,9 @@ class Optimizer {
 		'learningRate' => [0.0001, 0.01],
 	];
 
-	public function __construct(Trainer $trainer) {
+	public function __construct(DataLoader $loader,
+								Trainer $trainer) {
+		$this->loader = $loader;
 		$this->trainer = $trainer;
 	}
 
@@ -87,7 +92,7 @@ class Optimizer {
 									   float $stepWidth): int {
 		$range = $max - $min;
 		$newVal = $current
-			+ $stepWidth * $range * mt_rand(0, mt_getrandmax()) / mt_getrandmax()
+			+ $stepWidth * $range * random_int(0, mt_getrandmax()) / mt_getrandmax()
 			- $stepWidth * $range / 2;
 		return (int)max($min, min($max, $newVal));
 	}
@@ -98,7 +103,7 @@ class Optimizer {
 										 float $stepWidth): float {
 		$range = $max - $min;
 		$newVal = $current
-			+ $stepWidth * $range * mt_rand(0, mt_getrandmax()) / mt_getrandmax()
+			+ $stepWidth * $range * random_int(0, mt_getrandmax()) / mt_getrandmax()
 			- $stepWidth * $range / 2;
 		return max($min, min($max, $newVal));
 	}
@@ -156,17 +161,22 @@ class Optimizer {
 		// Start with random config if none was passed (breadth-first search)
 		$config = $initialConfig ?? $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
 		$dataConfig = TrainingDataConfig::default();
+		$data = $this->loader->loadTrainingAndValidationData(
+			$config,
+			$dataConfig,
+			$strategy
+		);
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps. Enjoy your coffee!</>");
 		$output->writeln("");
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$best = $this->getAverageCost(
-			$this->trainer->train($config, $dataConfig, $strategy),
-			$this->trainer->train($config, $dataConfig, $strategy),
-			$this->trainer->train($config, $dataConfig, $strategy),
-			$this->trainer->train($config, $dataConfig, $strategy),
-			$this->trainer->train($config, $dataConfig, $strategy)
+			$this->trainer->train($config, $data, $strategy)->getModel(),
+			$this->trainer->train($config, $data, $strategy)->getModel(),
+			$this->trainer->train($config, $data, $strategy)->getModel(),
+			$this->trainer->train($config, $data, $strategy)->getModel(),
+			$this->trainer->train($config, $data, $strategy)->getModel()
 		);
 
 		while ($epochs < $maxEpochs) {
@@ -175,11 +185,11 @@ class Optimizer {
 			$newConfig = $this->getNeighborConfig($config, $stepWidth);
 			$this->printConfig($epochs, $stepWidth, $newConfig, $output);
 			$cost = $this->getAverageCost(
-				$this->trainer->train($newConfig, $dataConfig, $strategy),
-				$this->trainer->train($newConfig, $dataConfig, $strategy),
-				$this->trainer->train($newConfig, $dataConfig, $strategy),
-				$this->trainer->train($newConfig, $dataConfig, $strategy),
-				$this->trainer->train($newConfig, $dataConfig, $strategy)
+				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
+				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
+				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
+				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
+				$this->trainer->train($newConfig, $data, $strategy)->getModel()
 			);
 
 			if ($cost > $best) {
