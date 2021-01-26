@@ -3,6 +3,8 @@
     "description": "Detect and warn about suspicious IPs logging into Nextcloud",
     "type": "library",
     "require": {
+        "amphp/amp": "^2.5",
+        "amphp/parallel": "^1.4",
         "darsyn/ip": "^4.0",
         "rubix/ml": "^0.3.1"
     },
@@ -26,6 +28,14 @@
         "nextcloud/coding-standard": "^0.5.0"
     },
 	"config": {
-		"sort-packages": true
+		"sort-packages": true,
+		"optimize-autoloader": true,
+		"classmap-authoritative": true,
+		"autoloader-suffix": "SuspiciousLogin"
+	},
+	"autoload" : {
+		"psr-4": {
+			"OCA\\SuspiciousLogin\\": "./lib/"
+		}
 	}
 }

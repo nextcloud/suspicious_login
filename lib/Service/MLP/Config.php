@@ -59,11 +59,11 @@ class Config {
 
 	public static function default() {
 		return new static(
-			200,
-			20,
+			50,
+			10,
 			1.5,
-			1.0,
-			0.07
+			0.9,
+			0.01
 		);
 	}
 

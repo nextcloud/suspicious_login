@@ -64,5 +64,7 @@ class Optimize extends Command {
 			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
 			$output
 		);
+
+		return 0;
 	}
 }
