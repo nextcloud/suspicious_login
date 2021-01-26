@@ -25,14 +25,18 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service\MLP;
 
+use Amp\Promise;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\DataLoader;
+use OCA\SuspiciousLogin\Task\TrainTask;
+use function Amp\Parallel\Worker\enqueue;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Output\OutputInterface;
+use function range;
 
 /**
  * Optimize the MLP trainer with simulated annealing
@@ -48,8 +52,8 @@ class OptimizerService {
 	private $trainer;
 
 	private $parameterRanges = [
-		'epochs' => [50, 1000],
-		'layers' => [6, 14],
+		'epochs' => [10, 300],
+		'layers' => [5, 25],
 		'shuffledNegativeRate' => [0.1, 1.5],
 		'randomNegativeRate' => [0.1, 1.5],
 		'learningRate' => [0.0001, 0.01],
@@ -155,11 +159,11 @@ class OptimizerService {
 	public function optimize(int $maxEpochs,
 							 AClassificationStrategy $strategy,
 							 OutputInterface $output,
-							 Config $initialConfig = null) {
+							 int $parallelism = 8): void {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
-		$config = $initialConfig ?? $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
+		$config = $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
 		$dataConfig = TrainingDataConfig::default();
 		$data = $this->loader->loadTrainingAndValidationData(
 			$config,
@@ -167,17 +171,18 @@ class OptimizerService {
 			$strategy
 		);
 
-		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps. Enjoy your coffee!</>");
+		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps</>");
 		$output->writeln("");
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$best = $this->getAverageCost(
-			$this->trainer->train($config, $data, $strategy)->getModel(),
-			$this->trainer->train($config, $data, $strategy)->getModel(),
-			$this->trainer->train($config, $data, $strategy)->getModel(),
-			$this->trainer->train($config, $data, $strategy)->getModel(),
-			$this->trainer->train($config, $data, $strategy)->getModel()
+			...Promise\wait(
+				Promise\all(array_map(function () use ($config, $data, $strategy) {
+					return enqueue(new TrainTask($config, $data, $strategy));
+				}, range(1, $parallelism)))
+			)
 		);
+		$output->writeln("  Base cost is $best. Trying to optimize this now …");
 
 		while ($epochs < $maxEpochs) {
 			$epochs++;
@@ -185,11 +190,11 @@ class OptimizerService {
 			$newConfig = $this->getNeighborConfig($config, $stepWidth);
 			$this->printConfig($epochs, $stepWidth, $newConfig, $output);
 			$cost = $this->getAverageCost(
-				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
-				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
-				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
-				$this->trainer->train($newConfig, $data, $strategy)->getModel(),
-				$this->trainer->train($newConfig, $data, $strategy)->getModel()
+				...Promise\wait(
+					Promise\all(array_map(function () use ($config, $data, $strategy) {
+						return enqueue(new TrainTask($config, $data, $strategy));
+					}, range(1, $parallelism)))
+				)
 			);
 
 			if ($cost > $best) {
