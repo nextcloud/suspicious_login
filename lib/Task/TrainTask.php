@@ -65,6 +65,6 @@ class TrainTask implements Task {
 			$this->strategy
 		);
 
-		return $result->getModel();
+		return $result;
 	}
 }
