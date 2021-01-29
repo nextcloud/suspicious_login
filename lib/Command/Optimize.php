@@ -31,6 +31,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function extension_loaded;
 
 class Optimize extends Command {
 	use ModelStatistics;
@@ -59,6 +60,10 @@ class Optimize extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
+		if (extension_loaded('xdebug')) {
+			$output->writeln('<comment>XDebug is active. This will slow down the training processes.</comment>');
+		}
+
 		$this->optimizerService->optimize(
 			(int)$input->getOption('max-epochs'),
 			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),

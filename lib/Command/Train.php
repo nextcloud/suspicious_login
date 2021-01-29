@@ -35,6 +35,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use function extension_loaded;
 use function time;
 
 class Train extends Command {
@@ -141,6 +142,9 @@ class Train extends Command {
 		}
 
 		try {
+			if (extension_loaded('xdebug')) {
+				$output->writeln('<comment>XDebug is active. This will slow down the training process.</comment>');
+			}
 			$output->writeln('Using ' . $strategy::getTypeName() . ' strategy');
 
 			$data = $this->loader->loadTrainingAndValidationData(
