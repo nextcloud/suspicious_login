@@ -28,15 +28,16 @@ namespace OCA\SuspiciousLogin\Service\MLP;
 use Amp\Promise;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\DataLoader;
+use OCA\SuspiciousLogin\Service\TrainingResult;
 use OCA\SuspiciousLogin\Task\TrainTask;
 use function Amp\Parallel\Worker\enqueue;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
-use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Output\OutputInterface;
 use function range;
+use function sprintf;
 
 /**
  * Optimize the MLP trainer with simulated annealing
@@ -52,7 +53,7 @@ class OptimizerService {
 	private $trainer;
 
 	private $parameterRanges = [
-		'epochs' => [10, 300],
+		'epochs' => [10, 400],
 		'layers' => [5, 25],
 		'shuffledNegativeRate' => [0.1, 1.5],
 		'randomNegativeRate' => [0.1, 1.5],
@@ -80,12 +81,29 @@ class OptimizerService {
 	}
 
 	/**
-	 * @param Model ...$models
+	 * @param OutputInterface $output
+	 * @param TrainingResult ...$results
 	 */
-	private function getAverageCost(Model ...$models): float {
-		$costs = array_map(function (Model $model) {
-			return ($model->getPrecisionN() + $model->getRecallN()) / 2;
-		}, $models);
+	private function getAverageCost(OutputInterface $output,
+									TrainingResult ...$results): float {
+		$costs = array_map(function (TrainingResult $result) use ($output) {
+			$output->writeln(sprintf("  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d",
+				$result->getReport()['overall']['f1_score'],
+				$result->getReport()['classes']['n']['precision'],
+				$result->getReport()['classes']['n']['recall'],
+				$result->getReport()['classes']['n']['f1_score'],
+				$result->getReport()['classes']['y']['precision'],
+				$result->getReport()['classes']['y']['recall'],
+				$result->getReport()['classes']['y']['f1_score'],
+				$result->getModel()->getSamplesPositive(),
+				$result->getModel()->getSamplesShuffled(),
+				$result->getModel()->getSamplesRandom()
+			));
+			return (
+					$result->getReport()['classes']['n']['f1_score'] +
+					$result->getReport()['overall']['f1_score']
+				) / 2;
+		}, $results);
 
 		return array_sum($costs) / count($costs);
 	}
@@ -176,6 +194,7 @@ class OptimizerService {
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$best = $this->getAverageCost(
+			$output,
 			...Promise\wait(
 				Promise\all(array_map(function () use ($config, $data, $strategy) {
 					return enqueue(new TrainTask($config, $data, $strategy));
@@ -190,6 +209,7 @@ class OptimizerService {
 			$newConfig = $this->getNeighborConfig($config, $stepWidth);
 			$this->printConfig($epochs, $stepWidth, $newConfig, $output);
 			$cost = $this->getAverageCost(
+				$output,
 				...Promise\wait(
 					Promise\all(array_map(function () use ($config, $data, $strategy) {
 						return enqueue(new TrainTask($config, $data, $strategy));

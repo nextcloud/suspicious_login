@@ -93,14 +93,14 @@ class Trainer {
 		$model->setLayers($config->getLayers());
 		$model->setVectorDim($strategy->getSize());
 		$model->setLearningRate($config->getLearningRate());
-		$model->setPrecisionY($report['classes']['y']['precision']);
-		$model->setPrecisionN($report['classes']['n']['recall']);
-		$model->setRecallY($report['classes']['y']['precision']);
-		$model->setRecallN($report['classes']['n']['recall']);
+		$model->setPrecisionY($report['classes'][self::LABEL_POSITIVE]['precision']);
+		$model->setPrecisionN($report['classes'][self::LABEL_NEGATIVE]['recall']);
+		$model->setRecallY($report['classes'][self::LABEL_POSITIVE]['precision']);
+		$model->setRecallN($report['classes'][self::LABEL_NEGATIVE]['recall']);
 		$model->setDuration($elapsed);
 		$model->setAddressType($strategy::getTypeName());
 		$model->setCreatedAt($this->timeFactory->getTime());
 
-		return new TrainingResult($classifier, $model);
+		return new TrainingResult($classifier, $model, $report);
 	}
 }

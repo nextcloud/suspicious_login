@@ -27,6 +27,7 @@ namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Db\Model;
 use Rubix\ML\Estimator;
+use Rubix\ML\Report;
 
 class TrainingResult {
 
@@ -36,23 +37,26 @@ class TrainingResult {
 	/** @var Model */
 	private $model;
 
+	/** @var Report */
+	private $report;
+
 	public function __construct(Estimator $classifier,
-								Model $model) {
+								Model $model,
+								Report $report) {
 		$this->classifier = $classifier;
 		$this->model = $model;
+		$this->report = $report;
 	}
 
-	/**
-	 * @return Estimator
-	 */
 	public function getClassifier(): Estimator {
 		return $this->classifier;
 	}
 
-	/**
-	 * @return Model
-	 */
 	public function getModel(): Model {
 		return $this->model;
+	}
+
+	public function getReport(): Report {
+		return $this->report;
 	}
 }
