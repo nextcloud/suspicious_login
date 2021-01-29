@@ -89,7 +89,7 @@ class DataLoader {
 		$numRandomNegatives = max((int)floor($numPositives * $config->getRandomNegativeRate()), 1);
 		$numShuffledNegative = max((int)floor($numPositives * $config->getShuffledNegativeRate()), 1);
 		$randomNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numRandomNegatives, $strategy);
-		$shuffledNegatives = $this->negativeSampleGenerator->generateRandomFromPositiveSamples($positives, $numShuffledNegative, $strategy);
+		$shuffledNegatives = $this->negativeSampleGenerator->generateShuffledFromPositiveSamples($positives, $numShuffledNegative, $strategy);
 
 		// Validation negatives are generated from all data (to have all UIDs), but shuffled
 		$all = $positives->merge($validationPositives);

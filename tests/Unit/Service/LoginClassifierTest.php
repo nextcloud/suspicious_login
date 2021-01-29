@@ -37,6 +37,7 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\ILogger;
 use OCP\IRequest;
 use PHPUnit\Framework\MockObject\MockObject;
+use function array_fill;
 
 class LoginClassifierTest extends TestCase {
 
@@ -82,22 +83,22 @@ class LoginClassifierTest extends TestCase {
 
 	public function testProcessAlertAlreadySent(): void {
 		$this->timeFactory->method('getTime')->willReturn(1000000);
-		$this->estimatorService->expects($this->once())
+		$this->estimatorService->expects(self::once())
 			->method('predict')
-			->with('user', '1.2.3.4', $this->equalTo(new Ipv4Strategy()))
+			->with('user', '1.2.3.4', self::equalTo(new Ipv4Strategy()))
 			->willReturn(false);
-		$this->mapper->expects($this->at(1))
+		$this->mapper->expects(self::once())
 			->method('findRelated')
 			->with(
 				'user',
 				'1.2.3.4',
-				$this->anything(),
+				self::anything(),
 				1000000 - 60 * 60 * 24 * TrainingDataConfig::default()->getThreshold()
 			)
 			->willReturn([
 				new SuspiciousLogin(),
 			]);
-		$this->dispatcher->expects($this->never())
+		$this->dispatcher->expects(self::never())
 			->method('dispatch');
 
 		$this->classifier->process('user', '1.2.3.4');
@@ -105,27 +106,27 @@ class LoginClassifierTest extends TestCase {
 
 	public function testProcessTwoDayPeakReached(): void {
 		$this->timeFactory->method('getTime')->willReturn(1000000);
-		$this->estimatorService->expects($this->once())
+		$this->estimatorService->expects(self::once())
 			->method('predict')
-			->with('user', '1.2.3.4', $this->equalTo(new Ipv4Strategy()))
+			->with('user', '1.2.3.4', self::equalTo(new Ipv4Strategy()))
 			->willReturn(false);
-		$this->mapper->expects($this->at(1))
+		$this->mapper->expects(self::once())
 			->method('findRelated')
 			->with(
 				'user',
 				'1.2.3.4',
-				$this->anything(),
+				self::anything(),
 				1000000 - 60 * 60 * 24 * TrainingDataConfig::default()->getThreshold()
 			)
 			->willReturn([]);
-		$this->mapper->expects($this->at(2))
+		$this->mapper->expects(self::once())
 			->method('findRecentByUid')
 			->with(
 				'user',
 				1000000 - 60 * 60 * 24 * 2
 			)
 			->willReturn(array_fill(0, 25, new SuspiciousLogin()));
-		$this->dispatcher->expects($this->never())
+		$this->dispatcher->expects(self::never())
 			->method('dispatch');
 
 		$this->classifier->process('user', '1.2.3.4');
@@ -133,25 +134,25 @@ class LoginClassifierTest extends TestCase {
 
 	public function testProcessHourlyPeakReached(): void {
 		$this->timeFactory->method('getTime')->willReturn(1000000);
-		$this->estimatorService->expects($this->once())
+		$this->estimatorService->expects(self::once())
 			->method('predict')
-			->with('user', '1.2.3.4', $this->equalTo(new Ipv4Strategy()))
+			->with('user', '1.2.3.4', self::equalTo(new Ipv4Strategy()))
 			->willReturn(false);
-		$this->mapper->expects($this->at(2))
+		$this->mapper->expects(self::exactly(2))
 			->method('findRecentByUid')
-			->with(
-				'user',
-				1000000 - 60 * 60 * 24 * 2
-			)
-			->willReturn(array_fill(0, 7, new SuspiciousLogin()));
-		$this->mapper->expects($this->at(3))
-			->method('findRecentByUid')
-			->with(
-				'user',
-				1000000 - 60 * 60
-			)
-			->willReturn(array_fill(0, 5, new SuspiciousLogin()));
-		$this->dispatcher->expects($this->never())
+			->willReturnMap([
+				[
+					'user',
+					1000000 - 60 * 60 * 24 * 2,
+					array_fill(0, 7, new SuspiciousLogin())
+				],
+				[
+					'user',
+					1000000 - 60 * 60,
+					array_fill(0, 5, new SuspiciousLogin())
+				]
+			]);
+		$this->dispatcher->expects(self::never())
 			->method('dispatch');
 
 		$this->classifier->process('user', '1.2.3.4');
@@ -159,25 +160,25 @@ class LoginClassifierTest extends TestCase {
 
 	public function testProcessNoPeakReached(): void {
 		$this->timeFactory->method('getTime')->willReturn(1000000);
-		$this->estimatorService->expects($this->once())
+		$this->estimatorService->expects(self::once())
 			->method('predict')
-			->with('user', '1.2.3.4', $this->equalTo(new Ipv4Strategy()))
+			->with('user', '1.2.3.4', self::equalTo(new Ipv4Strategy()))
 			->willReturn(false);
-		$this->mapper->expects($this->at(2))
+		$this->mapper->expects(self::exactly(2))
 			->method('findRecentByUid')
-			->with(
-				'user',
-				1000000 - 60 * 60 * 24 * 2
-			)
-			->willReturn(array_fill(0, 7, new SuspiciousLogin()));
-		$this->mapper->expects($this->at(3))
-			->method('findRecentByUid')
-			->with(
-				'user',
-				1000000 - 60 * 60
-			)
-			->willReturn(array_fill(0, 1, new SuspiciousLogin()));
-		$this->dispatcher->expects($this->once())
+			->willReturnMap([
+				[
+					'user',
+					1000000 - 60 * 60 * 24 * 2,
+					array_fill(0, 7, new SuspiciousLogin())
+				],
+				[
+					'user',
+					1000000 - 60 * 60,
+					array_fill(0, 1, new SuspiciousLogin())
+				]
+			]);
+		$this->dispatcher->expects(self::once())
 			->method('dispatch');
 
 		$this->classifier->process('user', '1.2.3.4');

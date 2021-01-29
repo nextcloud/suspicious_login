@@ -35,47 +35,44 @@ use function array_merge;
 use function array_slice;
 use function random_int;
 use function range;
+use function str_split;
 
 class NegativeSampleGenerator {
 	private function getUniqueIPsPerUser(Dataset $positives): array {
-		$ips = [];
+		$map = [];
 
-		// First, let's map (uid,ip) to uid -> [ip]
+		// First, let's map (uid,ip) to id -> uid[]
 		$max = count($positives);
 		for ($i = 0; $i < $max; $i++) {
-			$positive = $positives[$i];
-			if (!isset($ips[$positive->getUid()])) {
-				$ips[$positive->getUid()] = [
-					$positive->getIp(),
+			$positive = $positives->sample($i);
+			$uidVecStr = implode('', array_slice($positive, 0, 16));
+			$ipVecStr = implode('', array_slice($positive, 16));
+			if (!isset($map[$ipVecStr])) {
+				$map[$ipVecStr] = [
+					$uidVecStr,
 				];
 			} else {
-				$ips[$positive->getUid()][] = $positive->getIp();
+				$map[$ipVecStr][] = $uidVecStr;
 			}
 		}
 
-		$uniqueIps = [];
-		foreach ($ips as $uid => $userIps) {
-			$uniqueIps[$uid] = array_filter($userIps, function (string $ip) use ($ips, $uid) {
-				foreach ($ips as $other => $otherIps) {
-					if ($other === $uid) {
-						return false;
-					}
+		$uniqueMap = array_filter($map, function (array $uidVecs) {
+			return count($uidVecs) === 1;
+		});
 
-					// If the IP is not found for other users it's unique
-					return !in_array($ip, $otherIps);
-				}
-			});
-		}
-
-		return $uniqueIps;
+		return array_map(function (string $ipVecStr): array {
+			// Split the IP vec again, but also past the digits
+			return array_map(function (string $c): int {
+				return (int)$c;
+			}, str_split($ipVecStr));
+		}, array_keys($uniqueMap));
 	}
 
-	private function generateFromRealData(string $uid, array $uniqueIps, bool $v4 = true): array {
-		return [
-			'uid' => $uid,
-			'ip' => $uniqueIps[random_int(0, count($uniqueIps) - 1)],
-			'label' => Trainer::LABEL_NEGATIVE,
-		];
+	private function generateFromRealData(array $uidVec, array $uniqueIps): array {
+		return array_merge(
+			$uidVec,
+			$uniqueIps[random_int(0, count($uniqueIps) - 1)]
+		);
 	}
 
 	private function generateRandom(array $uidVec, AClassificationStrategy $strategy): array {
@@ -107,13 +104,14 @@ class NegativeSampleGenerator {
 	 *
 	 * @return DataSet
 	 */
-	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num, bool $v4 = true): DataSet {
+	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num): DataSet {
 		$max = count($positives);
 		$uniqueIps = $this->getUniqueIPsPerUser($positives);
 
 		return new Labeled(
-			array_map(function (int $id) use ($v4, $uniqueIps, $positives, $max) {
-				return $this->generateFromRealData($positives[$id % $max]->getUid(), $uniqueIps, $v4);
+			array_map(function (int $id) use ($uniqueIps, $positives, $max) {
+				$sample = $positives->sample($id % $max);
+				return $this->generateFromRealData(array_slice($sample, 0, 16), $uniqueIps);
 			}, range(0, $num - 1)),
 			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
