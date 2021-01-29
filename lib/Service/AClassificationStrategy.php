@@ -43,7 +43,7 @@ abstract class AClassificationStrategy {
 	/**
 	 * @return LoginAddressAggregated[][]
 	 */
-	abstract public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $testingDays, int $validationDays): array;
+	abstract public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array;
 
 	/**
 	 * @return int[]

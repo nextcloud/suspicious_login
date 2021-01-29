@@ -63,17 +63,16 @@ class DataLoader {
 	public function loadTrainingAndValidationData(Config $config,
 												  TrainingDataConfig $dataConfig,
 												  AClassificationStrategy $strategy): TrainingDataSet {
-		$testingDays = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
-		$validationDays = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
+		$validationThreshold = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
+		$maxAge = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
 
-		if (!$strategy->hasSufficientData($this->loginAddressMapper, $validationDays)) {
+		if (!$strategy->hasSufficientData($this->loginAddressMapper, $maxAge)) {
 			throw new InsufficientDataException("Not enough data for the specified maximum age");
 		}
 		[$historyRaw, $recentRaw] = $strategy->findHistoricAndRecent(
 			$this->loginAddressMapper,
-
-			$testingDays,
-			$validationDays
+			$validationThreshold,
+			$maxAge
 		);
 		if (empty($historyRaw)) {
 			throw new InsufficientDataException("No historic data available");

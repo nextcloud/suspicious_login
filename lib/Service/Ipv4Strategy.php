@@ -39,8 +39,8 @@ class Ipv4Strategy extends AClassificationStrategy {
 		return $loginAddressMapper->hasSufficientIpV4Data($validationDays);
 	}
 
-	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $testingDays, int $validationDays): array {
-		return $loginAddressMapper->findHistoricAndRecentIpv4($testingDays, $validationDays);
+	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array {
+		return $loginAddressMapper->findHistoricAndRecentIpv4($validationThreshold, $maxAge);
 	}
 
 	public function generateRandomIpVector(): array {

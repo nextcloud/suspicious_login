@@ -45,8 +45,8 @@ class IpV6Strategy extends AClassificationStrategy {
 		return $loginAddressMapper->hasSufficientIpV6Data($validationDays);
 	}
 
-	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $testingDays, int $validationDays): array {
-		return $loginAddressMapper->findHistoricAndRecentIpv6($testingDays, $validationDays);
+	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array {
+		return $loginAddressMapper->findHistoricAndRecentIpv6($validationThreshold, $maxAge);
 	}
 
 	protected function ipToVec(string $ip): array {
