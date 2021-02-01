@@ -72,6 +72,11 @@ class Optimize extends Command {
 			$output->writeln('<comment>XDebug is active. This will slow down the training processes.</comment>');
 		}
 
+		// Prevent getting killed by a timeout
+		if (strpos(ini_get('disable_functions'), 'set_time_limit') === false) {
+			set_time_limit(0);
+		}
+
 		$this->optimizerService->optimize(
 			(int)$input->getOption('max-epochs'),
 			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
