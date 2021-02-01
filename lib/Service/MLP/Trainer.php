@@ -74,7 +74,7 @@ class Trainer {
 			$layers,
 			128,
 			new Adam($config->getLearningRate()),
-			1e-3,
+			1e-4,
 			$config->getEpochs()
 		);
 		$classifier->train($dataSet->getTrainingData());
