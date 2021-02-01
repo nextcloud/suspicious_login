@@ -176,13 +176,14 @@ class OptimizerService {
 
 	public function optimize(int $maxEpochs,
 							 AClassificationStrategy $strategy,
+							 int $now = null,
 							 OutputInterface $output,
 							 int $parallelism = 8): void {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
 		$config = $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
-		$dataConfig = TrainingDataConfig::default();
+		$dataConfig = TrainingDataConfig::default($now);
 		$data = $this->loader->loadTrainingAndValidationData(
 			$config,
 			$dataConfig,

@@ -107,6 +107,13 @@ class Train extends Command {
 			InputOption::VALUE_NONE,
 			"train with IPv6 data"
 		);
+		$this->addOption(
+			'now',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"the current time as timestamp",
+			time()
+		);
 		$this->registerStatsOption();
 		$this->loader = $loader;
 	}
@@ -130,7 +137,7 @@ class Train extends Command {
 			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
-		$trainingDataConfig = TrainingDataConfig::default();
+		$trainingDataConfig = TrainingDataConfig::default((int) $input->getOption('now'));
 		if ($input->getOption('validation-threshold') !== null) {
 			$trainingDataConfig = $trainingDataConfig->setThreshold((int)$input->getOption('validation-threshold'));
 		}
