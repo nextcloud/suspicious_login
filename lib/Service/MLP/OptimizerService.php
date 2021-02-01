@@ -53,10 +53,10 @@ class OptimizerService {
 	private $trainer;
 
 	private $parameterRanges = [
-		'epochs' => [10, 400],
-		'layers' => [5, 25],
-		'shuffledNegativeRate' => [0.1, 1.5],
-		'randomNegativeRate' => [0.1, 1.5],
+		'epochs' => [50, 600],
+		'layers' => [2, 20],
+		'shuffledNegativeRate' => [0.005, 1.5],
+		'randomNegativeRate' => [0.005, 2.0],
 		'learningRate' => [0.0001, 0.01],
 	];
 
@@ -74,7 +74,7 @@ class OptimizerService {
 		$layers = sprintf("%2d", $config->getLayers());
 		$shuffledRate = sprintf("%1.3f", $config->getShuffledNegativeRate());
 		$randomRate = sprintf("%1.3f", $config->getRandomNegativeRate());
-		$learningRate = sprintf("%1.3f", $config->getLearningRate());
+		$learningRate = sprintf("%1.4f", $config->getLearningRate());
 
 		$output->writeln("Epoch $epoch: epochs=$epochs layers=$layers shuffledRate=$shuffledRate randomRate=$randomRate, learningRate=$learningRate");
 		$output->writeln("  Step width for next config neighbor: $stepWidth");
