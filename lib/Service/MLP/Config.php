@@ -59,9 +59,9 @@ class Config {
 
 	public static function default() {
 		return new static(
-			50,
-			10,
-			1.5,
+			500,
+			2,
+			0.005,
 			0.9,
 			0.01
 		);
