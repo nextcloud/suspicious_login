@@ -26,6 +26,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use JsonSerializable;
+use function time;
 
 class TrainingDataConfig implements JsonSerializable {
 
@@ -46,8 +47,8 @@ class TrainingDataConfig implements JsonSerializable {
 		$this->now = $now;
 	}
 
-	public static function default() {
-		return new self(60, 7, time());
+	public static function default(int $time = null) {
+		return new self(60, 7, $time ?? time());
 	}
 
 	/**

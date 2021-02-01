@@ -32,6 +32,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use function extension_loaded;
+use function time;
 
 class Optimize extends Command {
 	use ModelStatistics;
@@ -56,6 +57,13 @@ class Optimize extends Command {
 			InputOption::VALUE_NONE,
 			"train with IPv6 data"
 		);
+		$this->addOption(
+			'now',
+			null,
+			InputOption::VALUE_OPTIONAL,
+			"the current time as timestamp",
+			time()
+		);
 		$this->registerStatsOption();
 	}
 
@@ -67,6 +75,7 @@ class Optimize extends Command {
 		$this->optimizerService->optimize(
 			(int)$input->getOption('max-epochs'),
 			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
+			(int) $input->getOption('now'),
 			$output
 		);
 
