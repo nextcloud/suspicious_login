@@ -29,23 +29,27 @@ use Amp\Parallel\Worker\Environment;
 use Amp\Parallel\Worker\Task;
 use OC;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
+use OCA\SuspiciousLogin\Service\CollectedData;
+use OCA\SuspiciousLogin\Service\DataLoader;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
-use OCA\SuspiciousLogin\Service\TrainingDataSet;
+use function ini_get;
+use function set_time_limit;
+use function strpos;
 
 class TrainTask implements Task {
 
 	/** @var Config */
 	private $config;
 
-	/** @var TrainingDataSet */
+	/** @var CollectedData */
 	private $dataSet;
 
 	/** @var AClassificationStrategy */
 	private $strategy;
 
 	public function __construct(Config $config,
-								TrainingDataSet $dataSet,
+								CollectedData $dataSet,
 								AClassificationStrategy $strategy) {
 		$this->config = $config;
 		$this->dataSet = $dataSet;
@@ -56,15 +60,21 @@ class TrainTask implements Task {
 		// TODO: only works if the app is placed into a sub-sub directory of Nextcloud
 		require_once __DIR__ . '/../../../../lib/base.php';
 
+		// Prevent getting killed by a timeout
+		if (strpos(ini_get('disable_functions'), 'set_time_limit') === false) {
+			set_time_limit(0);
+		}
+
+		/** @var DataLoader $loader */
+		$loader = OC::$server->get(DataLoader::class);
+		$data = $loader->generateRandomShuffledData($this->dataSet, $this->config, $this->strategy);
 		/** @var Trainer $trainer */
 		$trainer = OC::$server->get(Trainer::class);
 
-		$result = $trainer->train(
+		return $trainer->train(
 			$this->config,
-			$this->dataSet,
+			$data,
 			$this->strategy
 		);
-
-		return $result;
 	}
 }

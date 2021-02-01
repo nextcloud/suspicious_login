@@ -64,9 +64,13 @@ class TrainService {
 						  TrainingDataConfig $dataConfig,
 						  AClassificationStrategy $strategy): Model {
 		// Load
-		$data = $this->dataLoader->loadTrainingAndValidationData(
-			$config,
+		$collectedData = $this->dataLoader->loadTrainingAndValidationData(
 			$dataConfig,
+			$strategy
+		);
+		$data = $this->dataLoader->generateRandomShuffledData(
+			$collectedData,
+			$config,
 			$strategy
 		);
 

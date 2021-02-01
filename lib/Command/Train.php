@@ -154,9 +154,13 @@ class Train extends Command {
 			}
 			$output->writeln('Using ' . $strategy::getTypeName() . ' strategy');
 
-			$data = $this->loader->loadTrainingAndValidationData(
-				$config,
+			$collectedData = $this->loader->loadTrainingAndValidationData(
 				$trainingDataConfig,
+				$strategy
+			);
+			$data = $this->loader->generateRandomShuffledData(
+				$collectedData,
+				$config,
 				$strategy
 			);
 			$result = $this->trainer->train(

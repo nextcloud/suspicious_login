@@ -182,10 +182,9 @@ class OptimizerService {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)
-		$config = $this->getNeighborConfig($strategy->getDefaultMlpConfig(), $stepWidth);
+		$config = $strategy->getDefaultMlpConfig();
 		$dataConfig = TrainingDataConfig::default($now);
-		$data = $this->loader->loadTrainingAndValidationData(
-			$config,
+		$collectedData = $this->loader->loadTrainingAndValidationData(
 			$dataConfig,
 			$strategy
 		);
@@ -194,12 +193,15 @@ class OptimizerService {
 		$output->writeln("");
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
+		$tasks = array_map(function () use ($config, $collectedData, $strategy) {
+			return new TrainTask($config, $collectedData, $strategy);
+		}, range(1, $parallelism));
 		$best = $this->getAverageCost(
 			$output,
 			...Promise\wait(
-				Promise\all(array_map(function () use ($config, $data, $strategy) {
-					return enqueue(new TrainTask($config, $data, $strategy));
-				}, range(1, $parallelism)))
+				Promise\all(array_map(function (TrainTask $task) {
+					return enqueue($task);
+				}, $tasks))
 			)
 		);
 		$output->writeln("  Base cost is $best. Trying to optimize this now …");
@@ -212,8 +214,8 @@ class OptimizerService {
 			$cost = $this->getAverageCost(
 				$output,
 				...Promise\wait(
-					Promise\all(array_map(function () use ($config, $data, $strategy) {
-						return enqueue(new TrainTask($config, $data, $strategy));
+					Promise\all(array_map(function () use ($newConfig, $collectedData, $strategy) {
+						return enqueue(new TrainTask($newConfig, $collectedData, $strategy));
 					}, range(1, $parallelism)))
 				)
 			);
