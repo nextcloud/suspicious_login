@@ -30,6 +30,7 @@ use OCA\SuspiciousLogin\Service\DataLoader;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
+use OCA\SuspiciousLogin\Service\ModelStore;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,10 +48,16 @@ class Train extends Command {
 	/** @var Trainer */
 	private $trainer;
 
+	/** @var ModelStore */
+	private $store;
+
 	public function __construct(DataLoader $loader,
-								Trainer $optimizer) {
+								Trainer $optimizer,
+								ModelStore $store) {
 		parent::__construct("suspiciouslogin:train");
 		$this->trainer = $optimizer;
+		$this->loader = $loader;
+		$this->store = $store;
 
 		$this->addOption(
 			'epochs',
@@ -108,6 +115,12 @@ class Train extends Command {
 			"train with IPv6 data"
 		);
 		$this->addOption(
+			'dry-run',
+			null,
+			InputOption::VALUE_NONE,
+			"train but don't persist the model"
+		);
+		$this->addOption(
 			'now',
 			null,
 			InputOption::VALUE_OPTIONAL,
@@ -115,7 +128,6 @@ class Train extends Command {
 			time()
 		);
 		$this->registerStatsOption();
-		$this->loader = $loader;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
@@ -169,6 +181,13 @@ class Train extends Command {
 				$strategy
 			);
 			$this->printModelStatistics($result->getModel(), $input, $output);
+			if (!$input->getOption('dry-run')) {
+				$this->store->persist(
+					$result->getClassifier(),
+					$result->getModel()
+				);
+				$output->writeln("<info>Model and estimator persisted.</info>");
+			}
 		} catch (InsufficientDataException $ex) {
 			$output->writeln("<info>Not enough data, try again later (<error>" . $ex->getMessage() . "</error>)</info>");
 			return 1;
