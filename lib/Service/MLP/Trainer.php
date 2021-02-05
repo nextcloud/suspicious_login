@@ -94,8 +94,8 @@ class Trainer {
 		$model->setVectorDim($strategy->getSize());
 		$model->setLearningRate($config->getLearningRate());
 		$model->setPrecisionY($report['classes'][self::LABEL_POSITIVE]['precision']);
-		$model->setPrecisionN($report['classes'][self::LABEL_NEGATIVE]['recall']);
-		$model->setRecallY($report['classes'][self::LABEL_POSITIVE]['precision']);
+		$model->setPrecisionN($report['classes'][self::LABEL_NEGATIVE]['precision']);
+		$model->setRecallY($report['classes'][self::LABEL_POSITIVE]['recall']);
 		$model->setRecallN($report['classes'][self::LABEL_NEGATIVE]['recall']);
 		$model->setDuration($elapsed);
 		$model->setAddressType($strategy::getTypeName());
