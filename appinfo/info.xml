@@ -7,7 +7,7 @@
 	</summary>
 	<description>Detect and warn about suspicious IPs logging into Nextcloud
 	</description>
-	<version>4.0.0-beta.2</version>
+	<version>4.0.0-beta.3</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>SuspiciousLogin</namespace>
