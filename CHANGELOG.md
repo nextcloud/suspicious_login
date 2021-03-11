@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.0.0 – 2021-03-11
+### Added
+- Nextcloud 21 support
+- PHP8 support
+### Changed
+- ML algorithm replaced and improved
+- New and updated translations
+### Removed
+- Nextcloud 17-20 support
+- PHP7.2 support
+
 ## 3.2.1 - 2020-09-02
 ### Fixed
 - Packaging of development dependencies
