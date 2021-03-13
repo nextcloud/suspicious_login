@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f0b60e7ae816acdae38821ccc36103e",
+    "content-hash": "0bf8745eeae64a1dbdd703c90fd1bdf2",
     "packages": [
         {
             "name": "amphp/amp",
@@ -524,16 +524,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "2.0.2",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "1d68c2325a56b6b847f3a40b9564cabfa7bb2594"
+                "reference": "7cbbb7222e8d8a34e71273d243dfcf383ed6779f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/1d68c2325a56b6b847f3a40b9564cabfa7bb2594",
-                "reference": "1d68c2325a56b6b847f3a40b9564cabfa7bb2594",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7cbbb7222e8d8a34e71273d243dfcf383ed6779f",
+                "reference": "7cbbb7222e8d8a34e71273d243dfcf383ed6779f",
                 "shasum": ""
             },
             "require": {
@@ -588,7 +588,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/2.0.2"
+                "source": "https://github.com/thephpleague/flysystem/tree/2.0.4"
             },
             "funding": [
                 {
@@ -604,7 +604,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-28T17:02:23+00:00"
+            "time": "2021-02-12T19:37:50+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -714,16 +714,16 @@
         },
         {
             "name": "rubix/ml",
-            "version": "0.3.1",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RubixML/ML.git",
-                "reference": "67c62229ac564351bb7c3ce53ca42a664a2dc797"
+                "reference": "5c52364432a7fb1a1139d707b6809163b2733305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RubixML/ML/zipball/67c62229ac564351bb7c3ce53ca42a664a2dc797",
-                "reference": "67c62229ac564351bb7c3ce53ca42a664a2dc797",
+                "url": "https://api.github.com/repos/RubixML/ML/zipball/5c52364432a7fb1a1139d707b6809163b2733305",
+                "reference": "5c52364432a7fb1a1139d707b6809163b2733305",
                 "shasum": ""
             },
             "require": {
@@ -732,15 +732,15 @@
                 "league/flysystem": "~2.0.2",
                 "php": ">=7.2",
                 "psr/log": "^1.1",
-                "rubix/tensor": "^2.0",
+                "rubix/tensor": "^2.2",
                 "symfony/polyfill-mbstring": "^1.0",
                 "symfony/polyfill-php73": "^1.20",
                 "symfony/polyfill-php80": "^1.17"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "2.17.*",
+                "friendsofphp/php-cs-fixer": "2.18.*",
                 "league/flysystem-memory": "^2.0",
-                "phpbench/phpbench": "1.0.0-alpha4",
+                "phpbench/phpbench": "1.0.0-alpha6",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "0.12.*",
                 "phpstan/phpstan-phpunit": "0.12.*",
@@ -864,7 +864,7 @@
             ],
             "support": {
                 "chat": "https://t.me/RubixML",
-                "docs": "https://docs.rubixml.com/en/latest",
+                "docs": "https://docs.rubixml.com",
                 "email": "support@rubixml.com",
                 "issues": "https://github.com/RubixML/ML/issues",
                 "source": "https://github.com/RubixML/ML"
@@ -875,27 +875,28 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-11T02:06:22+00:00"
+            "time": "2021-03-07T05:16:44+00:00"
         },
         {
             "name": "rubix/tensor",
-            "version": "2.1.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RubixML/Tensor.git",
-                "reference": "816bc1abf7a65eb0b5660fe445e5a909f5fd1ec5"
+                "reference": "73f6d2af63a02662e0f4329726a453f1132b6362"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RubixML/Tensor/zipball/816bc1abf7a65eb0b5660fe445e5a909f5fd1ec5",
-                "reference": "816bc1abf7a65eb0b5660fe445e5a909f5fd1ec5",
+                "url": "https://api.github.com/repos/RubixML/Tensor/zipball/73f6d2af63a02662e0f4329726a453f1132b6362",
+                "reference": "73f6d2af63a02662e0f4329726a453f1132b6362",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "2.17.*",
+                "friendsofphp/php-cs-fixer": "2.18.*",
+                "phalcon/zephir": "^0.12.20",
                 "phpbench/phpbench": "0.16.*",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "0.12.*",
@@ -906,7 +907,8 @@
             "autoload": {
                 "psr-4": {
                     "Tensor\\": "src/",
-                    "JAMA\\": "lib/JAMA"
+                    "JAMA\\": "lib/JAMA",
+                    "Zephir\\Optimizers\\FunctionCall\\": "optimizers/"
                 },
                 "files": [
                     "src/constants.php"
@@ -933,23 +935,32 @@
                 "arithmetic",
                 "computation",
                 "computing",
+                "convolution",
                 "decomposition",
+                "eigendecomposition",
+                "eigenvalue",
+                "eigenvector",
                 "engineering",
                 "extension",
                 "linear algebra",
                 "math",
+                "matmul",
                 "matrix",
+                "matrix multiplication",
                 "norms",
                 "php",
-                "random number generation",
-                "reduction",
+                "php extension",
                 "scientific computing",
+                "signal processing",
+                "singular value decomposition",
                 "statistics",
+                "svd",
                 "tensor",
                 "trigonometry",
                 "vector"
             ],
             "support": {
+                "email": "support@rubixml.com",
                 "issues": "https://github.com/RubixML/Tensor/issues",
                 "source": "https://github.com/RubixML/Tensor"
             },
@@ -963,7 +974,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-15T02:06:21+00:00"
+            "time": "2021-03-08T06:05:54+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1047,7 +1058,7 @@
         },
         {
             "name": "symfony/polyfill-php73",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php73.git",
@@ -1106,7 +1117,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php73/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.22.1"
             },
             "funding": [
                 {
