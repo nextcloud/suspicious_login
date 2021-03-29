@@ -1,7 +1,7 @@
 OC.L10N.register(
     "suspicious_login",
     {
-    "New login location detected" : "Bylo zjištěno nové místo přihlášení",
+    "New login location detected" : "Zjištěno nové místo přihlášení",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Bylo zaznamenáno nové přihlášení k vašemu účtu. IP adresa %s byla vyhodnocena jako podezřelá. Pokud jste to byli vy, tuto zprávu ignorujte. Pokud ne, měli byste si změnit heslo.",
     "Suspicious Login" : "Podezřelé přihlášení",
     "New login detected" : "Zjištěno nové přihlášení",
