@@ -69,7 +69,7 @@ class LoginMailListener implements IEventListener {
 			return;
 		}
 		if ($user->getEMailAddress() === null) {
-			$this->logger->info("not sending a suspicous login email because user <$uid> has no email set");
+			$this->logger->info("not sending a suspicious login email because user <$uid> has no email set");
 			return;
 		}
 
@@ -89,13 +89,14 @@ class LoginMailListener implements IEventListener {
 		$message = $this->mailer->createMessage();
 		$emailTemplate = $this->mailer->createEMailTemplate('suspiciousLogin.suspiciousLoginDetected');
 
-		$emailTemplate->setSubject($this->l->t('New login location detected'));
+		$emailTemplate->setSubject($this->l->t('Suspicious sign in detected'));
 		$emailTemplate->addHeader();
 		$emailTemplate->addHeading(
-			$this->l->t('New login location detected')
+			$this->l->t('Suspicious sign in detected')
 		);
+
 		$emailTemplate->addBodyText(
-			$this->l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', [$event->getIp()])
+			$this->l->t('Someone with IP address %s (%s) recently accessed your account. If you are not familiar with it please revoke your credentials and change password immediately.', $event->getIp(), gethostbyaddr($event->getIp()))
 		);
 		$emailTemplate->addFooter();
 		$message->setTo([$user->getEMailAddress()]);
