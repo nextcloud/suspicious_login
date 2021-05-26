@@ -27,7 +27,7 @@ namespace OCA\SuspiciousLogin\Notifications;
 
 use InvalidArgumentException;
 use OCA\SuspiciousLogin\AppInfo\Application;
-use OCP\IURLGenerator;
+use OCP\IRequest;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
@@ -37,12 +37,12 @@ class Notifier implements INotifier {
 	/** @var IFactory */
 	private $factory;
 
-	/** @var IURLGenerator */
-	private $url;
+	/** @var IRequest */
+	private $request;
 
-	public function __construct(IFactory $factory, IURLGenerator $url) {
+	public function __construct(IFactory $factory, IRequest $request) {
 		$this->factory = $factory;
-		$this->url = $url;
+		$this->request = $request;
 	}
 
 	public function getID(): string {
@@ -62,12 +62,20 @@ class Notifier implements INotifier {
 		// Read the language from the notification
 		$l = $this->factory->get(Application::APP_ID, $languageCode);
 
+		/** @var string $suspiciousIp */
+		$suspiciousIp = $notification->getSubjectParameters();
+
 		switch ($notification->getSubject()) {
 			case 'suspicious_login_detected':
+				if ($suspiciousIp === $this->request->getRemoteAddress()) {
+					// It is the potential attacking user so don't render the notification for them
+					throw new InvalidArgumentException();
+				}
+
 				$notification->setParsedSubject(
 					$l->t('New login detected')
 				)->setParsedMessage(
-					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $notification->getSubjectParameters())
+					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp)
 				);
 
 				return $notification;
