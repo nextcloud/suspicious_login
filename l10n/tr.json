@@ -1,7 +1,7 @@
 { "translations": {
     "New login location detected" : "Yeni bir konumdan oturum açıldı",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Hesabınızda yeni bir oturum açıldı. %s IP adresi şüpheli olarak sınıflandırılmış. Oturumu siz açtıysanız bu iletiyi yok sayabilirsiniz. Siz değilseniz parolanızı değiştirmelisiniz.",
-    "Suspicious Login" : "Şüpheli Oturum Açma",
+    "Suspicious Login" : "Şüpheli oturum açma",
     "New login detected" : "Oturum açıldı",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Şüpheli IP adreslerinden açılan Nextcloud oturumlarını izler ve uyarır\n\t",
     "Suspicious login detection" : "Şüpheli oturum açma izleme",
