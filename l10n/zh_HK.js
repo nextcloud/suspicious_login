@@ -2,7 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "偵測到新的賬號登入位置",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "偵測到您賬號有新的賬戶登入活動。此IP位址%s歸類為可疑。 如果是您本人的登入活動，可以忽略此訊息。否則您應更改密碼。",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "偵測到您賬號有新的賬戶登入活動。此IP位址%s歸類為可疑。如果是您本人的登入活動，可以忽略此訊息。否則您應更改密碼。",
     "Suspicious Login" : "可疑的賬號登入活動",
     "New login detected" : "偵測到新的賬號登入活動",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "對關於IP來源登入Nextcloud活動進行偵測與警告",
@@ -13,8 +13,8 @@ OC.L10N.register(
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "分類器模型統計分析",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "尚未訓練分類器模型。 這很可能因為您剛剛啟用此應用程序。由於訓練模型需要品質良好的數據資料，因此該應用程序將等待，直到獲取到至少{days}天的登入信息為止。",
-    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "在評估模型過程中，已顯示最新模型（經過{time}的訓練）已獲取新的（或提取過往的）所有可疑登入信息中的{recall}％，而被分類為可疑登入紀錄的{precision}％是確實可疑的（精確度）。 您可以瀏覽下方顯示的視覺化歷史模型表現。",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "尚未訓練分類器模型。這很可能因為您剛剛啟用此應用程序。由於訓練模型需要品質良好的數據資料，因此該應用程序將等待，直到獲取到至少{days}天的登入信息為止。",
+    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "在評估模型過程中，已顯示最新模型（經過{time}的訓練）已獲取新的（或提取過往的）所有可疑登入信息中的{recall}％，而被分類為可疑登入紀錄的{precision}％是確實可疑的（精確度）。您可以瀏覽下方顯示的視覺化歷史模型表現。",
     "Precision" : "準確度",
     "Recall" : "提取紀錄"
 },
