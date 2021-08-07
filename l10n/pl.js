@@ -2,7 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Wykryto nową lokalizację logowania",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Wykryto nowe logowanie do Twojego konta. Adres IP %s został sklasyfikowany jako podejrzany. Jeśli to byłeś Ty, to możesz zignorować tę wiadomość. W przeciwnym razie należy zmienić hasło.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Wykryto nowe logowanie do Twojego konta. Adres IP %s został sklasyfikowany jako podejrzany. Jeśli byłeś to Ty, to możesz zignorować tę wiadomość. W przeciwnym razie należy zmienić hasło.",
     "Suspicious Login" : "Suspicious Login",
     "New login detected" : "Wykryto nowe logowanie",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Wykryj i ostrzeż o logowaniu do Nextcloud z podejrzanego adresu IP\n\t",
