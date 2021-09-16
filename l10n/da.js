@@ -8,6 +8,7 @@ OC.L10N.register(
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Opdag og advar om mistænkelige IP-adresser, som kan logge på Nextcloud",
     "Suspicious login detection" : "Mistænkeligt login opdaget",
     "IPv4" : "IPv4",
-    "IPv6" : "IPv6"
+    "IPv6" : "IPv6",
+    "Recall" : "Tilbagetræk"
 },
 "nplurals=2; plural=(n != 1);");
