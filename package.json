@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
+    "@nextcloud/browserslist-config": "^2.1.0",
     "@vue/babel-preset-app": "^4.5.13",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
@@ -38,6 +39,9 @@
     "type": "git",
     "url": "git+https://github.com/nextcloud/suspicious_login.git"
   },
+  "browserslist": [
+    "extends @nextcloud/browserslist-config"
+  ],
   "author": "Christoph Wurst",
   "license": "AGPL-3.0"
 }
