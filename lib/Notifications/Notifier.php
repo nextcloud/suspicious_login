@@ -25,6 +25,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Notifications;
 
+use OCP\IConfig;
 use InvalidArgumentException;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCP\IRequest;
@@ -34,13 +35,17 @@ use OCP\Notification\INotifier;
 
 class Notifier implements INotifier {
 
+	/** @var IConfig */
+	protected $config;
+
 	/** @var IFactory */
 	private $factory;
 
 	/** @var IRequest */
 	private $request;
 
-	public function __construct(IFactory $factory, IRequest $request) {
+	public function __construct(IFactory $factory, IRequest $request, IConfig $config) {
+		$this->config = $config;
 		$this->factory = $factory;
 		$this->request = $request;
 	}
@@ -72,10 +77,24 @@ class Notifier implements INotifier {
 					throw new InvalidArgumentException();
 				}
 
+				$additionalText = '';
+				// Add button for more information about the IP-address
+				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === "1") {
+					$action = $notification->createAction();
+					$label = $l->t('More information ↗');
+					$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
+					$action->setLabel($label)
+						->setParsedLabel($label)
+						->setLink($link, IAction::TYPE_WEB)
+						->setPrimary(true);
+					$notification->addParsedAction($action);
+					$additionalText = ' ' . $l->t('You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.', 'https://iplookup.flagfox.net');
+				}
+
 				$notification->setParsedSubject(
 					$l->t('New login detected')
 				)->setParsedMessage(
-					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp)
+					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp) . $additionalText
 				);
 
 				$notification->setIcon($this->url->getAbsoluteURL($this->url->imagePath('suspicious_login', 'app.svg')));
