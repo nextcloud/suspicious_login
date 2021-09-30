@@ -4,6 +4,8 @@ OC.L10N.register(
     "New login location detected" : "偵測到新的帳號登入位置",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "偵測到您帳號有新的帳戶登入活動。此IP位址%s歸類為可疑。 如果是您本人的登入活動，可以忽略此訊息。否則您應更改密碼。",
     "Suspicious Login" : "可疑的帳號登入活動",
+    "More information ↗" : "更多資訊 ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "您可以透過按下按鈕開啟 %s 並顯示關於可疑 IP 地址的資訊來取得更多資訊。",
     "New login detected" : "偵測到新的帳號登入活動",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "對關於IP來源登入Nextcloud活動進行偵測與警告",
     "Suspicious login detection" : "偵測到可疑的帳號登入活動",
