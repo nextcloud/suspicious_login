@@ -25,13 +25,20 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\AppInfo;
 
 use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IBootContext;
 
-class Application extends App {
+class Application extends App implements IBootstrap {
 	public const APP_ID = 'suspicious_login';
 
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
 
 		BootstrapSingleton::getInstance($this->getContainer())->boot();
+	}
+
+	public function boot(IBootContext $context): void {
+		// Query the app instance in the hope it's instantiated exactly once
+		\OC::$server->query(\OCA\SuspiciousLogin\AppInfo\Application::class);
 	}
 }
