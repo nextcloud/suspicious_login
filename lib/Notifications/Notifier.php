@@ -27,6 +27,7 @@ namespace OCA\SuspiciousLogin\Notifications;
 
 use OCP\IConfig;
 use InvalidArgumentException;
+use OCP\IURLGenerator;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCP\IRequest;
 use OCP\L10N\IFactory;
@@ -44,10 +45,14 @@ class Notifier implements INotifier {
 	/** @var IRequest */
 	private $request;
 
-	public function __construct(IFactory $factory, IRequest $request, IConfig $config) {
+	/** @var IURLGenerator */
+	protected $url;
+
+	public function __construct(IFactory $factory, IRequest $request, IConfig $config, IURLGenerator $urlGenerator) {
 		$this->config = $config;
 		$this->factory = $factory;
 		$this->request = $request;
+		$this->url = $urlGenerator;
 	}
 
 	public function getID(): string {
