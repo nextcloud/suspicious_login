@@ -4,7 +4,7 @@
   "description": "Detect and warn about suspicious IPs logging into Nextcloud",
   "private": true,
   "dependencies": {
-    "@nextcloud/initial-state": "^1.2.0",
+    "@nextcloud/initial-state": "^1.2.1",
     "chart.js": "^2.9.4",
     "vue": "^2.6.14",
     "vue-chartjs": "^3.5.1"
@@ -20,7 +20,7 @@
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.8",
     "vue-template-compiler": "^2.6.14",
-    "webpack": "^5.39.1",
+    "webpack": "^5.62.1",
     "webpack-cli": "^4.8.0",
     "webpack-merge": "^5.8.0"
   },
