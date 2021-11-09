@@ -8,12 +8,12 @@ jobs:
     strategy:
       matrix:
         php-versions: [ 7.4 ]
-        nextcloud-versions: [ 'stable19', 'stable20' ]
+        nextcloud-versions: [ 'v19.0.13', 'stable20' ]
         db: [ 'mysql', 'pgsql' ]
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
       mysql-service:
-        image: mariadb:10.5
+        image: mariadb:10.5.12
         env:
           MYSQL_ROOT_PASSWORD: my-secret-pw
           MYSQL_DATABASE: nextcloud
