@@ -55,6 +55,66 @@ jobs:
       env:
           CI: true
 
+  smoke-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: [ 7.4 ]
+        nextcloud-versions: [ 'stable21', 'stable22', 'master' ]
+        db: [ 'mysql', 'pgsql' ]
+    name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
+    services:
+      mysql-service:
+        image: mariadb:10.3
+        env:
+          MYSQL_ROOT_PASSWORD: my-secret-pw
+          MYSQL_DATABASE: nextcloud
+          MYSQL_USER: nextcloud
+          MYSQL_PASSWORD: nextcloud
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+      postgres-service:
+        image: postgres
+        env:
+          POSTGRES_USER: nextcloud
+          POSTGRES_DB: nextcloud
+          POSTGRES_PASSWORD: nextcloud
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Set up php${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: composer:v1
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp
+          coverage: xdebug
+      - name: Checkout Nextcloud
+        run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
+      - name: Install Nextcloud
+        run: php -f nextcloud/occ maintenance:install --database-host 127.0.0.1 --database-name nextcloud --database-user nextcloud --database-pass nextcloud --admin-user admin --admin-pass admin --database ${{ matrix.db }}
+      - name: Checkout the app
+        uses: actions/checkout@master
+        with:
+          path: nextcloud/apps/suspicious_login
+      - name: Install dependencies
+        working-directory: nextcloud/apps/suspicious_login
+        run: composer install
+      - name: Install the app
+        run: php -f nextcloud/occ app:enable suspicious_login
+      - name: Configure Nextcloud for testing
+        run: php -f nextcloud/occ config:system:set debug --type bool --value true
+
   app-code-check:
     runs-on: ubuntu-latest
     strategy:
