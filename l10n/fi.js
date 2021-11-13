@@ -9,6 +9,7 @@ OC.L10N.register(
     "New login detected" : "Uusi kirjautuminen havaittu",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Havaitsee ja varoittaa epäilyttävistä IP -osoitteista kirjautumassa Nextcloudiin.",
     "Suspicious login detection" : "Epäilyttävän kirjautumisen havaitseminen",
+    "Training data statistics" : "Koulutusdatan tilastot",
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Precision" : "Tarkkuus"
