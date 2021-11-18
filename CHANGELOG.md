@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.1.0 – tbd
+### Added
+- Optional support for geo IP lookup
+### Changed
+- New and updated translations
+
 ## 4.0.0 – 2021-03-11
 ### Added
 - Nextcloud 21 support
