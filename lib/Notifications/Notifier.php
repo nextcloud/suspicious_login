@@ -31,6 +31,7 @@ use OCP\IURLGenerator;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCP\IRequest;
 use OCP\L10N\IFactory;
+use OCP\Notification\IAction;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
 
