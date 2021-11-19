@@ -74,7 +74,8 @@ class Notifier implements INotifier {
 		$l = $this->factory->get(Application::APP_ID, $languageCode);
 
 		/** @var string $suspiciousIp */
-		$suspiciousIp = $notification->getSubjectParameters();
+		$params = $notification->getSubjectParameters();
+		$suspiciousIp = $params['ip'] ?? '';
 
 		switch ($notification->getSubject()) {
 			case 'suspicious_login_detected':
