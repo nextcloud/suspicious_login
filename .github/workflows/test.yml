@@ -21,6 +21,8 @@ jobs:
           MYSQL_PASSWORD: nextcloud
         ports:
           - 3306:3306
+        volumes:
+          - ./.github/mysql/conf.d:/etc/mysql/conf.d
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
