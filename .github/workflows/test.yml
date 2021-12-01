@@ -59,7 +59,7 @@ jobs:
         working-directory: nextcloud/apps/suspicious_login
         run: composer install
       - name: Enable query logging
-        run: >-
+        run: |
           php -f nextcloud/occ config:system:set loglevel --type=int --value=0
           php -f nextcloud/occ config:system:set log_query --value=true
       - name: Install the app
