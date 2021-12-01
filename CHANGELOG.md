@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 4.1.0 – tbd
+## 4.1.0 – 2021-12-01
 ### Added
 - Optional support for geo IP lookup
 ### Changed
