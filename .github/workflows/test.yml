@@ -21,8 +21,6 @@ jobs:
           MYSQL_PASSWORD: nextcloud
         ports:
           - 3306:3306
-        volumes:
-          - ./.github/mysql/conf.d:/etc/mysql/conf.d
         options: >-
           --health-cmd="mysqladmin ping"
           --health-interval=10s
@@ -60,7 +58,11 @@ jobs:
       - name: Install dependencies
         working-directory: nextcloud/apps/suspicious_login
         run: composer install
+      - name: Enable query logging
+        run: php -f nextcloud/occ config:system:set log_query --value=true
       - name: Install the app
         run: php -f nextcloud/occ app:enable suspicious_login
       - name: Configure Nextcloud for testing
         run: php -f nextcloud/occ config:system:set debug --type bool --value true
+      - name: Read logs
+        run: cat nextcloud/data/nextcloud.log
