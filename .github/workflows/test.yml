@@ -44,6 +44,7 @@ jobs:
         run: |
           echo "SET GLOBAL general_log = 'ON';" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
           echo "SET GLOBAL log_output = 'table';" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
+          echo "SHOW GLOBAL variables like 'sql_mode';" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
       - name: Set up php${{ matrix.php-versions }}
         uses: shivammathur/setup-php@master
         with:
