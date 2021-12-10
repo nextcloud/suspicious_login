@@ -42,8 +42,8 @@ jobs:
     steps:
       - name: Enable mysql query logs
         run: |
-          echo "SET GLOBAL general_log = 'ON';" | mysql -h 127.0.0.1 -u nextcloud -pnextcloud
-          echo "SET GLOBAL log_output = 'table';" | mysql -h 127.0.0.1 -u nextcloud -pnextcloud
+          echo "SET GLOBAL general_log = 'ON';" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
+          echo "SET GLOBAL log_output = 'table';" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
       - name: Set up php${{ matrix.php-versions }}
         uses: shivammathur/setup-php@master
         with:
@@ -74,4 +74,4 @@ jobs:
       - name: Read logs
         run: cat nextcloud/data/nextcloud.log
       - name: Read queries
-        run: echo "SELECT * FROM mysql.general_log" | mysql -h 127.0.0.1 -u nextcloud -pnextcloud
+        run: echo "SELECT * FROM mysql.general_log" | mysql -h 127.0.0.1 -u root -pmy-secret-pw
