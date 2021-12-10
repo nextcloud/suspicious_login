@@ -9,7 +9,7 @@ jobs:
       matrix:
         php-versions: [ 7.4 ]
         nextcloud-versions: [ 'v19.0.13', 'stable20' ]
-        db: [ 'mysql', 'pgsql' ]
+        db: [ 'mysql' ]
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
       mysql-service:
@@ -40,6 +40,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Enable mysql query logs
+        run: |
+          echo "SET GLOBAL general_log = 'ON';" | mysql -u nextcloud -pnextcloud
+          echo "SET GLOBAL log_output = 'table';" | mysql -u nextcloud -pnextcloud
       - name: Set up php${{ matrix.php-versions }}
         uses: shivammathur/setup-php@master
         with:
@@ -69,3 +73,5 @@ jobs:
         run: php -f nextcloud/occ config:system:set debug --type bool --value true
       - name: Read logs
         run: cat nextcloud/data/nextcloud.log
+      - name: Read queries
+        run: echo "SELECT * FROM mysql.general_log" | mysql -u nextcloud -pnextcloud
