@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ 7.4 ]
+        php-versions: [ 7.2 ]
         nextcloud-versions: [ 'v19.0.13', 'stable20' ]
         db: [ 'mysql' ]
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
