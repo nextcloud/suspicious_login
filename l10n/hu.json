@@ -2,6 +2,8 @@
     "New login location detected" : "Új bejelentkezési hely észlelve",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "A fiókjába új bejelentkezés lett észlelve. Az IP cím %s gyanús besorolású. Ha ez ön volt, figyelmen kívűl hagyhatja a figyelmeztetést. Egyéb esetben kérem változtasson jelszót.",
     "Suspicious Login" : "Gyanús Bejelentkezés",
+    "More information ↗" : "További információ ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "További információhoz juthatsz a gomb megnyomásával, ami megnyitja a/az %s és információkat mutat a gyanús IP-címekről.",
     "New login detected" : "Új belépes észlelve",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Észlelés és figyelmeztetés gyanús IP címekről történő Nextcloud bejelentkezés esetén",
     "Suspicious login detection" : "Gyanús bejelentkezés észlelés",
