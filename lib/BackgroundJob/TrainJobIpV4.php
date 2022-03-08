@@ -48,6 +48,12 @@ class TrainJobIpV4 extends TimedJob {
 		parent::__construct($time);
 
 		$this->setInterval(24 * 60 * 60);
+		/**
+		 * @todo remove checks with 24+
+		 */
+		if (defined('\OCP\BackgroundJob\IJob::TIME_INSENSITIVE') && method_exists($this, 'setTimeSensitivity')) {
+			$this->setTimeSensitivity(self::TIME_INSENSITIVE);
+		}
 		$this->trainService = $trainService;
 		$this->logger = $logger;
 	}
