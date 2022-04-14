@@ -18,9 +18,7 @@
 	<category>security</category>
 	<website>https://github.com/ChristophWurst/suspicious_login</website>
 	<bugs>https://github.com/ChristophWurst/suspicious_login/issues</bugs>
-	<repository type="git">
-		https://github.com/ChristophWurst/suspicious_login.git
-	</repository>
+	<repository>https://github.com/ChristophWurst/suspicious_login.git</repository>
 
 	<dependencies>
 		<php min-version="7.3" max-version="8.0"/>
