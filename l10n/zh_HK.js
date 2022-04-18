@@ -15,7 +15,7 @@ OC.L10N.register(
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "分類器模型統計分析",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "尚未訓練分類器模型。這很可能因為您剛剛啟用此應用程序。由於訓練模型需要品質良好的數據資料，因此該應用程序將等待，直到獲取到至少{days}天的登入信息為止。",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "尚未訓練分類器模型。這很可能因為您剛剛啟用此應用程序。由於訓練模型需要品質良好的數據資料，因此該應用程式將等到獲取到至少{days}天的登入信息為止。",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "在評估模型過程中，已顯示最新模型（經過{time}的訓練）已獲取新的（或提取過往的）所有可疑登入信息中的{recall}％，而被分類為可疑登入紀錄的{precision}％是確實可疑的（精確度）。您可以瀏覽下方顯示的視覺化歷史模型表現。",
     "Precision" : "準確度",
     "Recall" : "提取紀錄"
