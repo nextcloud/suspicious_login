@@ -13,7 +13,7 @@
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "Sınıflayıcı modeli istatistikleri",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Henüz bir sınıflandırma modeli geliştirilmemiş. Bu durum genellikle, uygulamayı yakın zamanda etkinleştirdiğiniz anlamına gelir. Bir modelin geliştirilmesi için sağlıklı veriler gerektiğinden, uygulama en az {gün} gün oturum açma bilgilerini derler.",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Henüz bir sınıflandırma modeli geliştirilmemiş. Bu durum genellikle, uygulamayı yakın zamanda etkinleştirdiğiniz anlamına gelir. Bir modelin geliştirilmesi için sağlıklı veriler gerektiğinden, uygulama en az {days} gün oturum açma bilgilerini derler.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Değerlendirme sırasında, en son modelin (geliştirme {time}) şüpheli oturum açmaları %{recall} oranında yakaladığı (anımsama) ve şüpheli olarak sınıflandırılan oturum açmaların %{precision} oranında gerçekten şüpheli olduğu (doğruluk) bulunmuştur. Model başarımının zamana göre gelişimini aşağıda görebilirsiniz.",
     "Precision" : "Doğruluk",
     "Recall" : "Anımsama"
