@@ -482,21 +482,26 @@
         },
         {
             "name": "darsyn/ip",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darsyn/ip.git",
-                "reference": "36db5b2160190de65ea66db4eedf38b3cfaa4d94"
+                "reference": "93b139036afc9c45f6a36b83480a7302161665fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darsyn/ip/zipball/36db5b2160190de65ea66db4eedf38b3cfaa4d94",
-                "reference": "36db5b2160190de65ea66db4eedf38b3cfaa4d94",
+                "url": "https://api.github.com/repos/darsyn/ip/zipball/93b139036afc9c45f6a36b83480a7302161665fc",
+                "reference": "93b139036afc9c45f6a36b83480a7302161665fc",
                 "shasum": ""
             },
             "require": {
                 "php-64bit": ">=5.6",
                 "php-ipv6": ">=5.6"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.3",
+                "ext-pdo": "*",
+                "phpunit/phpunit": "*"
             },
             "suggest": {
                 "doctrine/dbal": "to use IP as a column type"
@@ -530,9 +535,9 @@
             ],
             "support": {
                 "issues": "https://github.com/darsyn/ip/issues",
-                "source": "https://github.com/darsyn/ip/tree/4.0.0"
+                "source": "https://github.com/darsyn/ip/tree/4.1.0"
             },
-            "time": "2018-06-15T13:45:56+00:00"
+            "time": "2022-05-19T09:01:05+00:00"
         },
         {
             "name": "league/flysystem",
@@ -5165,5 +5170,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
