@@ -15,5 +15,5 @@
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Durante a avaliação, o último modelo  (processou {time}) mostrou que capturou  {recall}% do total de acessos suspeitos (reprocessar), e uma percentagem de {precision}% sobre os acessos suspeitos que efectivamente o eram (precisão). Abaixo é mostrado um histórico da performance do modelo.",
     "Precision" : "Precisão",
     "Recall" : "Reprocessar"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
+},"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }
