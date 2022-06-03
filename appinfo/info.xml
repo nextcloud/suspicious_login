@@ -24,7 +24,7 @@
 		<php min-version="7.3" max-version="8.0"/>
 		<database>mysql</database>
 		<database>pgsql</database>
-		<nextcloud min-version="21" max-version="24"/>
+		<nextcloud min-version="21" max-version="25"/>
 	</dependencies>
 
 	<background-jobs>
