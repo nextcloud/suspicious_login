@@ -21,7 +21,7 @@
 	<repository>https://github.com/ChristophWurst/suspicious_login.git</repository>
 
 	<dependencies>
-		<php min-version="7.4" max-version="8.0"/>
+		<php min-version="7.4" max-version="8.1"/>
 		<database>mysql</database>
 		<database>pgsql</database>
 		<nextcloud min-version="21" max-version="25"/>

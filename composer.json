@@ -31,7 +31,10 @@
 		"sort-packages": true,
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
-		"autoloader-suffix": "SuspiciousLogin"
+		"autoloader-suffix": "SuspiciousLogin",
+		"platform": {
+			"php": "7.4"
+		}
 	},
 	"autoload" : {
 		"psr-4": {
