@@ -47,18 +47,23 @@ class Version0Date20181214083108 extends SimpleMigrationStep {
 			->setLength(128);
 		$table->getColumn('learning_rate')
 			->setPrecision(10)
+			->setDefault(null)
 			->setScale(5);
 		$table->getColumn('precision_y')
 			->setPrecision(10)
+			->setDefault(null)
 			->setScale(5);
 		$table->getColumn('precision_n')
 			->setPrecision(10)
+			->setDefault(null)
 			->setScale(5);
 		$table->getColumn('recall_y', 'decimal')
 			->setPrecision(10)
+			->setDefault(null)
 			->setScale(5);
 		$table->getColumn('recall_n', 'decimal')
 			->setPrecision(10)
+			->setDefault(null)
 			->setScale(5);
 
 		return $schema;
