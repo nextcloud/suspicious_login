@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 13, 14, 15 ]
+        node-version: [ 14, 16 ]
     name: Build front-end with Node ${{ matrix.node-version }}
     steps:
       - uses: actions/checkout@master
@@ -14,8 +14,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install
-        run: npm install
+      - name: npm ci
+        run: npm ci
       - name: run tests
         run: npm run build
     env:
