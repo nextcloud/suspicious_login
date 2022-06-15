@@ -7,11 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: ["7.4", "8.0", "8.1"]
+        php-version: ['8.1']
         nextcloud-version: ['master']
         include:
-          - php-version: 7.4
-            nextcloud-version: stable21
+          - php-version: '8.1'
+            nextcloud-version: stable24
+          - php-version: '8.0'
+            nextcloud-version: stable23
+          - php-version: '8.0'
+            nextcloud-version: stable22
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up php${{ matrix.php-version }}
@@ -64,9 +68,6 @@ jobs:
             db: 'pgsql'
           - php-versions: '8.0'
             nextcloud-versions: stable22
-            db: 'pgsql'
-          - php-versions: '7.4'
-            nextcloud-versions: stable21
             db: 'pgsql'
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
