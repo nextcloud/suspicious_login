@@ -55,7 +55,7 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function boot(IBootContext $context): void {
-		$context->injectFn(function(IEventDispatcher $dispatcher) {
+		$context->injectFn(function (IEventDispatcher $dispatcher) {
 			$loginHookAdapter = new class($dispatcher) {
 				/** @var IEventDispatcher */
 				private $dispatcher;
