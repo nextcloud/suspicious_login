@@ -68,7 +68,7 @@ class IpV6Strategy extends AClassificationStrategy {
 
 	public function generateRandomIp(): string {
 		return implode(':', array_map(function () {
-			return base_convert(random_int(0, 2 ** 16 - 1), 10, 16);
+			return base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16);
 		}, range(0, 7)));
 	}
 
