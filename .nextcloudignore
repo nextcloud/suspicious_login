@@ -20,6 +20,7 @@
 /node_modules
 /package.json
 /package-lock.json
+/.php-cs-fixer.dist.php
 /screenshots
 .scrutinizer.yml
 /src
