@@ -9,3 +9,4 @@ tests/.phpunit.result.cache
 composer.phar
 
 /.php_cs.cache
+/.php-cs-fixer.cache
