@@ -18,7 +18,7 @@ jobs:
       uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-version }}
-        extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip
+        extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,xml,zip
         coverage: none
     - name: Checkout Nextcloud
       run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-version }} nextcloud
@@ -55,9 +55,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ 7.4 ]
-        nextcloud-versions: [ 'stable21', 'stable22', 'master' ]
-        db: [ 'mysql', 'pgsql' ]
+        php-versions: [ '8.1' ]
+        nextcloud-versions: [ 'stable24', 'master' ]
+        db: [ 'mysql' ]
+        include:
+          - php-versions: '8.0'
+            nextcloud-versions: stable23
+            db: 'pgsql'
+          - php-versions: '8.0'
+            nextcloud-versions: stable22
+            db: 'pgsql'
+          - php-versions: '7.4'
+            nextcloud-versions: stable21
+            db: 'pgsql'
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
       mysql-service:
@@ -93,7 +103,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v1
-          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,sqlite,xml,zip,gmp
+          extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,xml,zip,gmp
           coverage: xdebug
       - name: Checkout Nextcloud
         run: git clone https://github.com/nextcloud/server.git --recursive --depth 1 -b ${{ matrix.nextcloud-versions }} nextcloud
