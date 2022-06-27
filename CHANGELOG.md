@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.2.0 - 2022-06-28
+### Added
+- Nextcloud 24 support
+- PHP8.1 support
+### Changed
+- Background jobs run at off-peak times
+- New and updated translations
+### Removed
+- Nextcloud 21 support (EOL)
+- PHP7.4 support (EOL)
+
 ## 4.0.0 – 2021-03-11
 ### Added
 - Nextcloud 21 support
