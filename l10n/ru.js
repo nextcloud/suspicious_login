@@ -4,6 +4,8 @@ OC.L10N.register(
     "New login location detected" : "Зарегистрировано новое местоположение при входе в учётную запись",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Зарегистрирован новый вход в ваш аккаунт. IP-адрес %s считается подозрительным. Если это были вы, то можете проигнорировать это сообщение. Иначе, вам лучше сменить пароль.",
     "Suspicious Login" : "Подозрительный вход",
+    "More information ↗" : "Дополнительная информация ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Вы можете получить больше информации, нажав на кнопку, которая откроет %s и покажет информацию о подозрительном IP-адресе.",
     "New login detected" : "Зарегистрирован новый вход",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Регистрировать и предупреждать о входах в Nextcloud с подозрительных IP-адресов\n\t",
     "Suspicious login detection" : "Обнаружение подозрительных входов",
