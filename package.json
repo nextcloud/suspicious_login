@@ -10,7 +10,7 @@
     "vue-chartjs": "^3.5.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.5",
+    "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.18.2",
     "@nextcloud/browserslist-config": "^2.2.0",
     "@vue/babel-preset-app": "^4.5.13",
