@@ -29,7 +29,7 @@ use OCP\IDBConnection;
 
 class LoginAddressAggregatedMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'login_address_aggregated');
+		parent::__construct($db, 'login_ips_aggregated');
 	}
 
 	public function findAllIpV4() {
