@@ -30,7 +30,7 @@ use OCP\DB\ISchemaWrapper;
 use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
 
-class Version0Date20190115134303 extends SimpleMigrationStep {
+class Version4002Date20220922094804 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
@@ -43,39 +43,11 @@ class Version0Date20190115134303 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		/**
-		 * Replaced by Version4002Date20220922094803 for Oracle support
-		$table = $schema->createTable('login_address_aggregated');
-		$table->addColumn('id', 'integer', [
-			'autoincrement' => true,
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('uid', 'string', [
-			'notnull' => true,
-			'length' => 64,
-		]);
-		$table->addColumn('ip', 'string', [
-			'notnull' => true,
-			'length' => 64,
-		]);
-		$table->addColumn('seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('first_seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('last_seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->setPrimaryKey(['id']);
-		$table->addUniqueIndex(['uid', 'ip']);
+		if ($schema->hasTable('login_address_aggregated')) {
+			$schema->dropTable('login_address_aggregated');
+			return $schema;
+		}
 
-		return $schema;
-		 */
 		return null;
 	}
 }
