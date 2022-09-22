@@ -90,7 +90,7 @@ class ETLService {
 
 		$insert = $this->db->getQueryBuilder();
 		$insert
-			->insert('login_address_aggregated')
+			->insert('login_ips_aggregated')
 			->values([
 				'uid' => $insert->createParameter('uid'),
 				'ip' => $insert->createParameter('ip'),
@@ -101,12 +101,12 @@ class ETLService {
 		$select = $this->db->getQueryBuilder();
 		$select
 			->select('seen', 'first_seen', 'last_seen')
-			->from('login_address_aggregated')
+			->from('login_ips_aggregated')
 			->where($select->expr()->eq('uid', $select->createParameter('uid')))
 			->andWhere($select->expr()->eq('ip', $select->createParameter('ip')));
 		$update = $this->db->getQueryBuilder();
 		$update
-			->update('login_address_aggregated')
+			->update('login_ips_aggregated')
 			->set('seen', $update->createParameter('seen'))
 			->set('first_seen', $update->createParameter('first_seen'))
 			->set('last_seen', $update->createParameter('last_seen'))
