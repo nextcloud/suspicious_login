@@ -45,36 +45,36 @@ class Version0Date20190115134303 extends SimpleMigrationStep {
 
 		/**
 		 * Replaced by Version4002Date20220922094803 for Oracle support
-		$table = $schema->createTable('login_address_aggregated');
-		$table->addColumn('id', 'integer', [
-			'autoincrement' => true,
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('uid', 'string', [
-			'notnull' => true,
-			'length' => 64,
-		]);
-		$table->addColumn('ip', 'string', [
-			'notnull' => true,
-			'length' => 64,
-		]);
-		$table->addColumn('seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('first_seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->addColumn('last_seen', 'integer', [
-			'notnull' => true,
-			'length' => 4,
-		]);
-		$table->setPrimaryKey(['id']);
-		$table->addUniqueIndex(['uid', 'ip']);
-
-		return $schema;
+		 * $table = $schema->createTable('login_address_aggregated');
+		 * $table->addColumn('id', 'integer', [
+		 * 'autoincrement' => true,
+		 * 'notnull' => true,
+		 * 'length' => 4,
+		 * ]);
+		 * $table->addColumn('uid', 'string', [
+		 * 'notnull' => true,
+		 * 'length' => 64,
+		 * ]);
+		 * $table->addColumn('ip', 'string', [
+		 * 'notnull' => true,
+		 * 'length' => 64,
+		 * ]);
+		 * $table->addColumn('seen', 'integer', [
+		 * 'notnull' => true,
+		 * 'length' => 4,
+		 * ]);
+		 * $table->addColumn('first_seen', 'integer', [
+		 * 'notnull' => true,
+		 * 'length' => 4,
+		 * ]);
+		 * $table->addColumn('last_seen', 'integer', [
+		 * 'notnull' => true,
+		 * 'length' => 4,
+		 * ]);
+		 * $table->setPrimaryKey(['id']);
+		 * $table->addUniqueIndex(['uid', 'ip']);
+		 *
+		 * return $schema;
 		 */
 		return null;
 	}
