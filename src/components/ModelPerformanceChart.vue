@@ -19,12 +19,20 @@
   - along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
+<template>
+	<LineChart :chart-data="chartData" :styles="{ height: '200px', position: 'relative' }" />
+</template>
 <script>
-	import {Line} from 'vue-chartjs'
+	import { Line as LineChart } from 'vue-chartjs/legacy'
+	import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement } from 'chart.js'
+
+	ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
 	export default {
 		name: 'ModelPerformanceChart',
-		extends: Line,
+		components: {
+			LineChart,
+		},
 		props: {
 			models: {
 				type: Array,
@@ -73,8 +81,5 @@
 				}
 			}
 		},
-		mounted () {
-			this.renderChart(this.chartData, this.options);
-		}
 	}
 </script>
