@@ -33,13 +33,13 @@ ORDER  BY year,
 
 ```sql
 SELECT (SELECT SUM(seen)
-        FROM   oc_login_address_aggregated
+        FROM   oc_login_ips_aggregated
         WHERE  ip LIKE '%.%.%.%') / (SELECT SUM(seen)
-                                     FROM   oc_login_address_aggregated)     AS
+                                     FROM   oc_login_ips_aggregated)     AS
        pct_v4,
        (SELECT SUM(seen)
-        FROM   oc_login_address_aggregated
+        FROM   oc_login_ips_aggregated
         WHERE  ip NOT LIKE '%.%.%.%') / (SELECT SUM(seen)
-                                         FROM   oc_login_address_aggregated) AS
+                                         FROM   oc_login_ips_aggregated) AS
        pct_v6
 ```
