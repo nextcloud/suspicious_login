@@ -26,7 +26,6 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Migration;
 
 use Closure;
-use OCP\DB\Exception;
 use OCP\DB\ISchemaWrapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
