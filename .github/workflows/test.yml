@@ -12,10 +12,6 @@ jobs:
         include:
           - php-version: '8.1'
             nextcloud-version: stable24
-          - php-version: '8.0'
-            nextcloud-version: stable23
-          - php-version: '8.0'
-            nextcloud-version: stable22
     name: Nextcloud ${{ matrix.nextcloud-version }} php${{ matrix.php-version }} unit tests
     steps:
     - name: Set up php${{ matrix.php-version }}
@@ -64,10 +60,7 @@ jobs:
         db: [ 'mysql' ]
         include:
           - php-versions: '8.0'
-            nextcloud-versions: stable23
-            db: 'pgsql'
-          - php-versions: '8.0'
-            nextcloud-versions: stable22
+            nextcloud-versions: master
             db: 'pgsql'
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
