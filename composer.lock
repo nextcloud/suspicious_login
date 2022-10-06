@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3c4b300a05678a3d516f23af5ec3457",
+    "content-hash": "cc0aa305e0ed9b47cd3608e00ec52fe6",
     "packages": [
         {
             "name": "amphp/amp",
@@ -303,16 +303,16 @@
         },
         {
             "name": "amphp/process",
-            "version": "v1.1.3",
+            "version": "v1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amphp/process.git",
-                "reference": "f09e3ed3b0a953ccbfff1140f12be4a884f0aa83"
+                "reference": "76e9495fd6818b43a20167cb11d8a67f7744ee0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amphp/process/zipball/f09e3ed3b0a953ccbfff1140f12be4a884f0aa83",
-                "reference": "f09e3ed3b0a953ccbfff1140f12be4a884f0aa83",
+                "url": "https://api.github.com/repos/amphp/process/zipball/76e9495fd6818b43a20167cb11d8a67f7744ee0f",
+                "reference": "76e9495fd6818b43a20167cb11d8a67f7744ee0f",
                 "shasum": ""
             },
             "require": {
@@ -356,7 +356,7 @@
             "homepage": "https://github.com/amphp/process",
             "support": {
                 "issues": "https://github.com/amphp/process/issues",
-                "source": "https://github.com/amphp/process/tree/v1.1.3"
+                "source": "https://github.com/amphp/process/tree/v1.1.4"
             },
             "funding": [
                 {
@@ -364,7 +364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-12-17T19:09:33+00:00"
+            "time": "2022-07-06T23:50:12+00:00"
         },
         {
             "name": "amphp/serialization",
@@ -553,16 +553,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "2.0.8",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "82ad1e9a11745dba58775de2e8f47600b0a3331d"
+                "reference": "8aaffb653c5777781b0f7f69a5d937baf7ab6cdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/82ad1e9a11745dba58775de2e8f47600b0a3331d",
-                "reference": "82ad1e9a11745dba58775de2e8f47600b0a3331d",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8aaffb653c5777781b0f7f69a5d937baf7ab6cdb",
+                "reference": "8aaffb653c5777781b0f7f69a5d937baf7ab6cdb",
                 "shasum": ""
             },
             "require": {
@@ -579,11 +579,13 @@
                 "aws/aws-sdk-php": "^3.132.4",
                 "composer/semver": "^3.0",
                 "ext-fileinfo": "*",
-                "friendsofphp/php-cs-fixer": "^2.16",
+                "ext-ftp": "*",
+                "friendsofphp/php-cs-fixer": "^3.2",
                 "google/cloud-storage": "^1.23",
                 "phpseclib/phpseclib": "^2.0",
                 "phpstan/phpstan": "^0.12.26",
-                "phpunit/phpunit": "^8.5 || ^9.4"
+                "phpunit/phpunit": "^8.5 || ^9.4",
+                "sabre/dav": "^4.1"
             },
             "type": "library",
             "autoload": {
@@ -617,11 +619,11 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/2.0.8"
+                "source": "https://github.com/thephpleague/flysystem/tree/2.5.0"
             },
             "funding": [
                 {
-                    "url": "https://offset.earth/frankdejonge",
+                    "url": "https://ecologi.com/frankdejonge",
                     "type": "custom"
                 },
                 {
@@ -633,7 +635,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-15T19:53:59+00:00"
+            "time": "2022-09-17T21:02:32+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -743,22 +745,22 @@
         },
         {
             "name": "rubix/ml",
-            "version": "0.4.2",
+            "version": "dev-chore/bump-flysystem-v2.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/RubixML/ML.git",
-                "reference": "51f6f02f3d719b8f1c8641ff10accd9339fe691e"
+                "url": "https://github.com/nextcloud-deps/RubixML.git",
+                "reference": "35ebe863bb0ecfefb0524d7b77495107e4c5aefb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RubixML/ML/zipball/51f6f02f3d719b8f1c8641ff10accd9339fe691e",
-                "reference": "51f6f02f3d719b8f1c8641ff10accd9339fe691e",
+                "url": "https://api.github.com/repos/nextcloud-deps/RubixML/zipball/35ebe863bb0ecfefb0524d7b77495107e4c5aefb",
+                "reference": "35ebe863bb0ecfefb0524d7b77495107e4c5aefb",
                 "shasum": ""
             },
             "require": {
                 "amphp/parallel": "^1.3",
                 "ext-json": "*",
-                "league/flysystem": "~2.0.2",
+                "league/flysystem": "^2.1.1",
                 "php": ">=7.2",
                 "psr/log": "^1.1",
                 "rubix/tensor": "^2.2",
@@ -786,24 +788,53 @@
             },
             "type": "library",
             "autoload": {
+                "psr-4": {
+                    "Rubix\\ML\\": "src/"
+                },
                 "files": [
                     "src/constants.php",
                     "src/functions.php"
-                ],
+                ]
+            },
+            "autoload-dev": {
                 "psr-4": {
-                    "Rubix\\ML\\": "src/"
+                    "Rubix\\ML\\Tests\\": "tests/",
+                    "Rubix\\ML\\Benchmarks\\": "benchmarks/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "build": [
+                    "@composer install",
+                    "@analyze",
+                    "@test",
+                    "@check"
+                ],
+                "analyze": [
+                    "phpstan analyse -c phpstan.neon"
+                ],
+                "benchmark": [
+                    "phpbench run --report=env --report=aggregate"
+                ],
+                "check": [
+                    "@putenv PHP_CS_FIXER_IGNORE_ENV=1",
+                    "php-cs-fixer fix --config=.php_cs.dist -v --dry-run --using-cache=no"
+                ],
+                "fix": [
+                    "php-cs-fixer fix --config=.php_cs.dist"
+                ],
+                "test": [
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Andrew DalPino",
-                    "email": "support@andrewdalpino.com",
+                    "role": "Project Lead",
                     "homepage": "https://github.com/andrewdalpino",
-                    "role": "Project Lead"
+                    "email": "support@andrewdalpino.com"
                 },
                 {
                     "name": "Contributors",
@@ -813,14 +844,9 @@
             "description": "A high-level machine learning and deep learning library for the PHP language.",
             "homepage": "https://rubixml.com",
             "keywords": [
-                "Algorithm",
-                "Deep learning",
-                "Linear regression",
-                "Neural network",
-                "Rubix",
-                "TF-IDF",
                 "adaboost",
                 "ai",
+                "algorithm",
                 "analytics",
                 "anomaly detection",
                 "artificial intelligence",
@@ -833,6 +859,7 @@
                 "data science",
                 "dataset",
                 "dbscan",
+                "deep learning",
                 "dimensionality reduction",
                 "ensemble",
                 "estimator",
@@ -853,6 +880,7 @@
                 "k-nearest neighbors",
                 "kmeans",
                 "knn",
+                "linear regression",
                 "local outlier factor",
                 "loda",
                 "lof",
@@ -866,6 +894,7 @@
                 "naive bayes",
                 "natural language processing",
                 "nearest neighbors",
+                "neural network",
                 "nlp",
                 "outlier detection",
                 "php",
@@ -880,6 +909,7 @@
                 "regression",
                 "regressor",
                 "ridge",
+                "rubix",
                 "rubix ml",
                 "rubixml",
                 "softmax",
@@ -889,23 +919,24 @@
                 "t-sne",
                 "text mining",
                 "tf idf",
+                "tf-idf",
                 "tsne",
                 "unsupervised learning"
             ],
             "support": {
-                "chat": "https://t.me/RubixML",
                 "docs": "https://docs.rubixml.com",
-                "email": "support@andrewdalpino.com",
                 "issues": "https://github.com/RubixML/ML/issues",
-                "source": "https://github.com/RubixML/ML"
+                "source": "https://github.com/RubixML/ML",
+                "chat": "https://t.me/RubixML",
+                "email": "support@andrewdalpino.com"
             },
             "funding": [
                 {
-                    "url": "https://github.com/sponsors/RubixML",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/sponsors/RubixML"
                 }
             ],
-            "time": "2022-02-12T00:57:06+00:00"
+            "time": "2022-10-06T11:26:57+00:00"
         },
         {
             "name": "rubix/tensor",
@@ -5231,7 +5262,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "rubix/ml": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
