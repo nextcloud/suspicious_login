@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.2.1 - 2022-10-06
+### Fixed
+- Symfony command incompatibility
+### Changed
+- Updated dependencies
+
 ## 4.2.0 - 2022-06-28
 ### Added
 - Nextcloud 24 support
