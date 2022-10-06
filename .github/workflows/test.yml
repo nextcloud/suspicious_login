@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         php-versions: [ '8.1' ]
-        nextcloud-versions: [ 'stable24', 'master' ]
+        nextcloud-versions: [ 'master' ]
         db: [ 'mysql' ]
         include:
           - php-versions: '8.0'
@@ -64,7 +64,6 @@ jobs:
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: composer:v1
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,xml,zip,gmp
           coverage: xdebug
       - name: Checkout Nextcloud
