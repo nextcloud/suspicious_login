@@ -49,11 +49,12 @@ class ETL extends Command {
 		);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$max = $input->getOption('max');
 		$this->etlService->extractAndTransform(
 			(int)$max,
 			$output
 		);
+		return 0;
 	}
 }
