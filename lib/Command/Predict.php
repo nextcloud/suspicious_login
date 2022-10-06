@@ -66,7 +66,7 @@ class Predict extends Command {
 		);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$uid = $input->getArgument('uid');
 		$ip = $input->getArgument('ip');
 		$modelId = $input->getArgument('model');
