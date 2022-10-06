@@ -28,7 +28,7 @@ jobs:
         db: [ 'mysql' ]
         include:
           - php-versions: '8.0'
-            nextcloud-versions: master
+            nextcloud-versions: stable25
             db: 'pgsql'
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
@@ -64,7 +64,6 @@ jobs:
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: composer:v1
           extensions: ctype,curl,dom,gd,iconv,intl,json,mbstring,openssl,posix,xml,zip,gmp
           coverage: xdebug
       - name: Checkout Nextcloud
