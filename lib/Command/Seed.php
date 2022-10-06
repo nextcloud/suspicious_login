@@ -57,7 +57,7 @@ class Seed extends Command {
 		$this->config = $config;
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		if ($this->config->getSystemValueBool('debug', false) === false) {
 			$output->writeln("<error>This command is meant for development purposes.</error> Enable debug mode and try again if you know what you are doing.");
 			return 1;

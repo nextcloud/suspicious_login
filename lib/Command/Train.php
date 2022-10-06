@@ -130,7 +130,7 @@ class Train extends Command {
 		$this->registerStatsOption();
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$strategy = $input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy();
 		$config = $strategy->getDefaultMlpConfig();
 		if ($input->getOption('epochs') !== null) {
