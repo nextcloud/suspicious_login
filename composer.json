@@ -2,11 +2,17 @@
     "name": "christophwurst/suspicious_login",
     "description": "Detect and warn about suspicious IPs logging into Nextcloud",
     "type": "library",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/nextcloud-deps/RubixML"
+        }
+    ],
     "require": {
         "amphp/amp": "^2.5",
         "amphp/parallel": "^1.4",
         "darsyn/ip": "^4.0",
-        "rubix/ml": "^0.3.1 || ^0.4.0"
+        "rubix/ml": "dev-chore/bump-flysystem-v2.1.1"
     },
     "license": "AGPLv3",
     "authors": [
