@@ -67,7 +67,7 @@ class Optimize extends Command {
 		$this->registerStatsOption();
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		if (extension_loaded('xdebug')) {
 			$output->writeln('<comment>XDebug is active. This will slow down the training processes.</comment>');
 		}
