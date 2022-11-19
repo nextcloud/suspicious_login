@@ -15,7 +15,7 @@
     "@nextcloud/browserslist-config": "^2.3.0",
     "@vue/babel-preset-app": "^5.0.8",
     "babel-loader": "^8.2.5",
-    "css-loader": "^6.7.1",
+    "css-loader": "^6.7.2",
     "file-loader": "^6.2.0",
     "url-loader": "^4.1.1",
     "vue-loader": "^15.9.8",
