@@ -39,7 +39,7 @@
 		"classmap-authoritative": true,
 		"autoloader-suffix": "SuspiciousLogin",
 		"platform": {
-			"php": "7.4"
+			"php": "8.0"
 		}
 	},
 	"autoload" : {
