@@ -21,6 +21,7 @@
 /package.json
 /package-lock.json
 /.php-cs-fixer.dist.php
+/renovate.json
 /screenshots
 .scrutinizer.yml
 /src
