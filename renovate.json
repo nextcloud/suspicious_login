@@ -30,16 +30,6 @@
 		"node",
 		"npm"
 	],
-	"allowedPostUpgradeCommands": [
-		"npm ci",
-		"npm run build"
-	],
-	"postUpgradeTasks": {
-		"commands": [
-			"npm ci",
-			"npm run build"
-		]
-	},
 	"packageRules": [
 		{
 			"matchUpdateTypes": ["minor", "patch"],
