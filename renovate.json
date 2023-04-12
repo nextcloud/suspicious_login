@@ -20,7 +20,9 @@
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
 	"baseBranches": [
-		"master"
+		"master",
+		"stable26",
+		"stable25"
 	],
 	"enabledManagers": [
 		"composer",
@@ -39,6 +41,7 @@
 			"platformAutomerge": true
 		},
 		{
+			"description": "Disable regular bumps for stable branches",
 			"enabled": false,
 			"matchBaseBranches": "/^stable(.)+/"
 		},
@@ -49,6 +52,9 @@
 		}
 	],
 	"vulnerabilityAlerts": {
-		"enabled": true
-	}
+		"enabled": true,
+		"semanticCommitType": "fix",
+		"commitMessageSuffix": ""
+	},
+	"osvVulnerabilityAlerts": true
 }
