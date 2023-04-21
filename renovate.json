@@ -49,6 +49,15 @@
 			"matchBaseBranches": ["master"],
 			"matchDepTypes": ["devDependencies"],
 			"extends": ["schedule:monthly"]
+		},
+		{
+			"groupName": "AMPHP",
+			"matchPackagePrefixes": [
+				"amphp"
+			],
+			"matchManagers": [
+				"composer"
+			]
 		}
 	],
 	"vulnerabilityAlerts": {
