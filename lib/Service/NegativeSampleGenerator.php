@@ -71,7 +71,7 @@ class NegativeSampleGenerator {
 	private function generateFromRealData(array $uidVec, array $uniqueIps): array {
 		return array_merge(
 			$uidVec,
-			empty($uniqueIps) ? array() : $uniqueIps[random_int(0, count($uniqueIps) - 1)]
+			empty($uniqueIps) ? [] : $uniqueIps[random_int(0, count($uniqueIps) - 1)]
 		);
 	}
 
