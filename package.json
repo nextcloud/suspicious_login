@@ -12,7 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
-    "@nextcloud/browserslist-config": "^2.3.0",
+    "@nextcloud/browserslist-config": "^3.0.0",
     "@vue/babel-preset-app": "^5.0.8",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
