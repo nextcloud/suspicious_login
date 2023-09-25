@@ -2,6 +2,7 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"config:base",
+		"helpers:pinGitHubActionDigests",
 		":semanticCommits",
 		":dependencyDashboard"
 	],
@@ -21,11 +22,13 @@
 	"ignoreUnstable": false,
 	"baseBranches": [
 		"master",
+		"stable27",
 		"stable26",
 		"stable25"
 	],
 	"enabledManagers": [
 		"composer",
+		"github-actions",
 		"npm"
 	],
 	"ignoreDeps": [
@@ -44,6 +47,22 @@
 			"description": "Disable regular bumps for stable branches",
 			"enabled": false,
 			"matchBaseBranches": "/^stable(.)+/"
+		},
+		{
+			"description": "Bump Github actions monthly",
+			"matchManagers": ["github-actions"],
+			"extends": ["schedule:monthly"]
+		},
+		{
+			"description": "Allow Github action minor/patch updates for stable branches",
+			"matchManagers": ["github-actions"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"matchBaseBranches": [
+				"stable27",
+				"stable26",
+				"stable25"
+			],
+			"extends": ["schedule:monthly"]
 		},
 		{
 			"matchBaseBranches": ["master"],
