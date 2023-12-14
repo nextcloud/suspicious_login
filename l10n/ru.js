@@ -11,7 +11,7 @@ OC.L10N.register(
     "Suspicious login detection" : "Обнаружение подозрительных входов",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Приложение обнаружения подозрительных входов активировано для этого сервера. Оно будет отслеживать IP-адреса пользователей, которые успешно авторизовались в системе, и создавать классификатор, предупреждающий об авторизации с подозрительных IP-адресов.",
     "Training data statistics" : "Статистика обучающих данных",
-    "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "До настоящего времени приложение отследило {total} входов в систему (включая клиентские соединения), из которых {distinct) являются различными кортежами (IP, UID).",
+    "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "До настоящего времени приложение отследило {total} входов в систему (включая клиентские соединения), из которых {distinct} являются различными кортежами (IP, UID).",
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "Статистика классификационной модели",
