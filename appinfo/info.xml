@@ -5,8 +5,9 @@
 	<name>Suspicious Login</name>
 	<summary>Detect and warn about suspicious IPs logging into Nextcloud
 	</summary>
-	<description>Detect and warn about suspicious IPs logging into Nextcloud
-	</description>
+	<description><![CDATA[Detect and warn about suspicious IPs logging into Nextcloud
+		**This app currently requires a 64-bit environment.**
+	]]></description>
 	<version>7.0.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
