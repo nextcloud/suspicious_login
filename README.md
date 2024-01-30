@@ -10,6 +10,9 @@ The app is still under development, so itâ€™s time for you to [get involved! ðŸ‘
 
 ## Installation
 
+> [!NOTE] 
+> This app requires a 64-bit environment. It will not function properly in a 32-bit environment currently.
+
 ### Nextcloud 25 and newer
 
 The app is [shipped](https://docs.nextcloud.com/server/latest/developer_manual/app_publishing_maintenance/release_process.html#shipped-apps) and comes with the installation of Nextcloud Server. No additional steps are necessary.
