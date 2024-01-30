@@ -21,6 +21,7 @@
 	<repository>https://github.com/ChristophWurst/suspicious_login.git</repository>
 
 	<dependencies>
+		<php min-int-size="64"/>
 		<nextcloud min-version="29" max-version="29"/>
 	</dependencies>
 
