@@ -6,6 +6,7 @@ declare(strict_types=1);
  * @copyright 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
  *
  * @author 2019 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author Richard Steinmetz <richard@steinmetz.cloud>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -25,7 +26,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use Darsyn\IP\Version\IPv6;
+use InvalidArgumentException;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Service\MLP\Config;
 use function array_map;
@@ -50,8 +51,12 @@ class IpV6Strategy extends AClassificationStrategy {
 	}
 
 	protected function ipToVec(string $ip): array {
-		$addr = IPv6::factory($ip);
-		$hex = bin2hex($addr->getBinary());
+		$addr = inet_pton($ip);
+		if ($addr === false) {
+			throw new InvalidArgumentException('Invalid IPv6 address');
+		}
+
+		$hex = bin2hex($addr);
 		$padded = str_pad($hex, 32, '0', STR_PAD_LEFT);
 		$binString = implode('', array_map(function (string $h) {
 			return str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT);
