@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         php-version: [ '8.0', '8.1' ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable27' ]
     name: php${{ matrix.php-version }} profiling
     services:
       mysql-service:
