@@ -16,7 +16,18 @@ The app is [shipped](https://docs.nextcloud.com/server/latest/developer_manual/a
 
 ### Nextcloud 24 and older
 
-The app is available through the [app store](https://apps.nextcloud.com/apps/suspicious_login). It can be [installed through Nextcloud's app management UI](https://docs.nextcloud.com/server/latest/admin_manual/apps_management.html#managing-apps).
+Old versions of this app remain available through the [app store](https://apps.nextcloud.com/apps/suspicious_login). They can be [installed through Nextcloud's app management UI](https://docs.nextcloud.com/server/latest/admin_manual/apps_management.html#managing-apps). 
+
+> [!NOTE]
+> Newer versions of the app are not included in the app store since it is now a shipped app.
+
+## Releases and CHANGELOGs
+
+As a shipped app:
+
+- changes are posted within the [Nextcloud Server changelog](https://nextcloud.com/changelog/).
+- releases are **not** posted in this GitHub repository, but they are [tagged](https://github.com/nextcloud/suspicious_login/tags) for code perusal.
+- it is automatically kept up-to-date with each Nextcloud Server release.
 
 ## How it works
 
