@@ -131,6 +131,17 @@ class NegativeSampleGeneratorTest extends TestCase {
 				'sample has a unique IP'
 			);
 		}
+
+		$positives = new Unlabeled([
+			array_merge(self::decToBitArray(1, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(2, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(3, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(4, 16), self::decToBitArray(1, 32)),
+		]);
+
+		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 5);
+
+		self::assertCount(5, $result);
 	}
 
 	/**
