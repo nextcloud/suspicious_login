@@ -11,7 +11,6 @@
     "require": {
         "amphp/amp": "^2.6.2",
         "amphp/parallel": "^1.4.2",
-        "darsyn/ip": "^4.1.0",
         "rubix/ml": "dev-chore/bump-flysystem-v2.1.1"
     },
     "license": "AGPLv3",
