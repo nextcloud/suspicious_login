@@ -2,13 +2,14 @@ name: Profile
 on: pull_request
 
 jobs:
-  unit-tests:
+  profile:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        flag: ['', '--v6']
         php-version: [ '8.0', '8.1' ]
         nextcloud-version: [ 'master' ]
-    name: php${{ matrix.php-version }} profiling
+    name: php${{ matrix.php-version }} ${{ matrix.flag }} profiling
     services:
       mysql-service:
         image: mariadb:10.5
@@ -47,7 +48,17 @@ jobs:
       - name: Seed the database
         run: |
           php -f nextcloud/occ config:system:set debug --type bool --value true
-          php -f nextcloud/occ suspiciouslogin:seed
+          php -f nextcloud/occ suspiciouslogin:seed ${{ matrix.flag }}
           php -f nextcloud/occ config:system:set debug --type bool --value false
       - name: Profile a training
-        run: time php -f nextcloud/occ suspiciouslogin:train -v
+        run: time php -f nextcloud/occ suspiciouslogin:train -v ${{ matrix.flag }}
+  summary:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    needs: [ profile ]
+    if: always()
+    name: profile-summary
+    steps:
+      - name: Summary status
+        run: if ${{ needs.profile.result != 'false' && needs.profile.result != 'success' }}; then exit 1; fi
