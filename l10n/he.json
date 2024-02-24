@@ -15,5 +15,5 @@
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "במהלך ההערכה, הוכח שהדגם העדכני ביותר (אומן ב־{time}) לוכד {recall}% מכל ניסיונות הכניסה החשודים (החזרה - recall), בעוד {precision}% מניסיונות הכניסה שמסווגים כחשודים הם אכן חשודים (דיוק - precision). להלן ניתן לצפות בעיבוד חזותי של ביצועי הדגם במבט היסטורי.",
     "Precision" : "דיוק",
     "Recall" : "לקרוא מחדש"
-},"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
+},"pluralForm" :"nplurals=3; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
 }
