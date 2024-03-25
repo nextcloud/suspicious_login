@@ -80,7 +80,7 @@ class Model extends Entity implements JsonSerializable {
 	protected $createdAt;
 	protected $addressType;
 
-	public function jsonSerialize() {
+	public function jsonSerialize(): array {
 		return [
 			'type' => $this->type,
 			'appVersion' => $this->appVersion,
