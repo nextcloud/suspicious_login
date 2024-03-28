@@ -22,6 +22,7 @@
 	"ignoreUnstable": false,
 	"baseBranches": [
 		"master",
+		"stable29",
 		"stable28",
 		"stable27",
 		"stable26",
@@ -59,6 +60,7 @@
 			"matchManagers": ["github-actions"],
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchBaseBranches": [
+				"stable29",
 				"stable28",
 				"stable27",
 				"stable26",

@@ -7,7 +7,7 @@
 	</summary>
 	<description>Detect and warn about suspicious IPs logging into Nextcloud
 	</description>
-	<version>7.0.0</version>
+	<version>8.0.0</version>
 	<licence>agpl</licence>
 	<author>Christoph Wurst</author>
 	<namespace>SuspiciousLogin</namespace>
@@ -21,7 +21,7 @@
 	<repository>https://github.com/ChristophWurst/suspicious_login.git</repository>
 
 	<dependencies>
-		<nextcloud min-version="29" max-version="29"/>
+		<nextcloud min-version="30" max-version="30"/>
 	</dependencies>
 
 	<background-jobs>
