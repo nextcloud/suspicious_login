@@ -28,6 +28,7 @@ namespace OCA\SuspiciousLogin\Service;
 use function base64_decode;
 use function explode;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
 use OCP\EventDispatcher\IEventDispatcher;
@@ -113,9 +114,13 @@ class LoginClassifier {
 				// All good, carry on!
 				return;
 			}
+		} catch (ModelNotFoundException $ex) {
+			$this->logger->debug('Could not predict suspiciousness: ' . $ex->getMessage());
+			// This most likely means there is no trained model yet, so we return early here
+			return;
 		} catch (ServiceException $ex) {
 			$this->logger->warning("Could not predict suspiciousness: " . $ex->getMessage());
-			// This most likely means there is no trained model yet, so we return early here
+			// There was an error loading the model, so we return early here
 			return;
 		}
 
