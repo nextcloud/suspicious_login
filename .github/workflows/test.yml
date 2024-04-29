@@ -25,11 +25,7 @@ jobs:
       matrix:
         php-versions: [ '8.1' ]
         nextcloud-versions: [ 'master' ]
-        db: [ 'mysql' ]
-        include:
-          - php-versions: '8.0'
-            nextcloud-versions: master
-            db: 'pgsql'
+        db: [ 'mysql', 'pgsql' ]
     name: Nextcloud${{ matrix.nextcloud-versions }}-${{ matrix.db }} smoke test
     services:
       mysql-service:
