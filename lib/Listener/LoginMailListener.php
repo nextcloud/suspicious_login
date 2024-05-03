@@ -107,7 +107,7 @@ class LoginMailListener implements IEventListener {
 		$additionalText = '';
 		// Add explanation for more information about the IP-address (if enabled)
 		if ($addButton) {
-			$additionalText = ' ' . $l->t('You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.', 'https://iplookup.flagfox.net');
+			$additionalText = ' ' . $this->l->t('You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.', 'https://iplookup.flagfox.net');
 		}
 		$emailTemplate->addBodyText(
 			$this->l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp) . $additionalText
@@ -116,7 +116,7 @@ class LoginMailListener implements IEventListener {
 		if ($addButton) {
 			$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
 			$emailTemplate->addBodyButton(
-				htmlspecialchars($this->l10n->t('More information ↗')),
+				htmlspecialchars($this->l->t('More information ↗')),
 				$link,
 				false
 			);
