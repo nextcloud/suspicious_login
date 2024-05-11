@@ -93,6 +93,11 @@ via an app password as suspicious. Should it detect a password login where the (
 uid) is classified as suspicious by the trained model, it will add an entry to the
 ``suspicious_login`` table, including the timestamp, request id and URL.
 
+## Configuration
+
+Enable a button in notifications to lookup more info about a suspicious IP (geography, ISP):
+
+`occ config:app:set --value 1 suspicious_login show_more_info_button`
 
 ## Development setup
 
