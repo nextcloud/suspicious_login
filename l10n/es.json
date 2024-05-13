@@ -1,9 +1,9 @@
 { "translations": {
     "New login location detected" : "Se ha detectado una nueva ubicación de inicio de sesión",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Se ha detectado un nuevo inicio de sesión en tu cuenta. La IP %s parece sospechosa. Si fuiste tu, puedes ignorar este mensaje. Si no, debes cambiar tu contraseña.",
-    "Suspicious Login" : "Suspicious Login",
-    "More information ↗" : "Más información ↗",
     "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Puedes obtener más información al presionar el botón, que abrirá %s y te mostrará información sobre la dirección IP sospechosa.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Se ha detectado un nuevo inicio de sesión en tu cuenta. La IP %s parece sospechosa. Si fuiste tu, puedes ignorar este mensaje. Si no, debes cambiar tu contraseña.",
+    "More information ↗" : "Más información ↗",
+    "Suspicious Login" : "Suspicious Login",
     "New login detected" : "Nuevo inicio de sesión detectado",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detectar y advierta sobre las IP sospechosas que inician sesión en la nube\n\t",
     "Suspicious login detection" : "Detector de inicios de sesión sospechosos",
