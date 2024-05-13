@@ -2,10 +2,10 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Zistené nová lokalita prihlásenia",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Zistilo sa podozrivé prihlásenie do vášho účtu. Adresa IP %s bola klasifikovaná ako podozrivá. Ak ste to boli vy, môžete toto hlásenie ignorovať. V opačnom prípade odporúčame, aby ste si zmenili svoje heslo.",
-    "Suspicious Login" : "Podozrivé prihlasovanie",
-    "More information ↗" : "Viac informácií ↗",
     "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Viac informácií získate stlačením tlačidla, ktoré otvorí %s a zobrazí informácie o podozrivej adrese IP.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Zistilo sa podozrivé prihlásenie do vášho účtu. Adresa IP %s bola klasifikovaná ako podozrivá. Ak ste to boli vy, môžete toto hlásenie ignorovať. V opačnom prípade odporúčame, aby ste si zmenili svoje heslo.",
+    "More information ↗" : "Viac informácií ↗",
+    "Suspicious Login" : "Podozrivé prihlasovanie",
     "New login detected" : "Zistené nové prihlásenie",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upozornovať na podozrivé adresy IP prihlasujúce sa do systému Nextcloud\n\t",
     "Suspicious login detection" : "Zisťovanie podozrivého prihlasovania",
