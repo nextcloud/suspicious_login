@@ -95,9 +95,9 @@ uid) is classified as suspicious by the trained model, it will add an entry to t
 
 ## Configuration
 
-Enable a button in notifications to lookup more info about a suspicious IP (geography, ISP):
+By default notifications about suspicious logins contain a link (button) to lookup more info about the noted IP address (geography, ISP). This link can be disabled if it isn't desired:
 
-`occ config:app:set --value 1 suspicious_login show_more_info_button`
+`occ config:app:set --value 0 suspicious_login show_more_info_button`
 
 ## Development setup
 
