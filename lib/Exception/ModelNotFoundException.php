@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /**
- * @copyright 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @copyright 2024 Victor Lap <victorlap@outlook.com>
  *
- * @author 2018 Christoph Wurst <christoph@winzerhof-wurst.at>
+ * @author 2024 Victor Lap <victorlap@outlook.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
