@@ -1,0 +1,28 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: suspicious_login
+Upstream-Contact: Nextcloud <info@nextcloud.com>
+Source: https://github.com/nextcloud/suspicious_login
+
+Files: .tx/config l10n/*.js l10n/*.json screenshots/admin_settings.png screenshots/notification_android.png screenshots/notification_web.png
+Copyright: 2019 Nextcloud GmbH and Nextcloud contributors
+License: AGPL-3.0-or-later
+
+Files: .github/CODEOWNERS renovate.json
+Copyright: 2023 Nextcloud GmbH and Nextcloud contributors
+License: AGPL-3.0-or-later
+
+Files: composer.json composer.lock
+Copyright: 2018 Nextcloud GmbH and Nextcloud contributors
+License: AGPL-3.0-or-later
+
+Files: package.json package-lock.json tests/phpunit.xml
+Copyright: 2019 Nextcloud GmbH and Nextcloud contributors
+License: AGPL-3.0-or-later
+
+Files: img/app.svg img/app-dark.svg
+Copyright: 2018-2024 Google LLC
+License: Apache-2.0
+
+Files: js/settings.js js/settings.js.LICENSE.txt js/settings.js.map
+Copyright: 2019 Nextcloud GmbH and Nextcloud contributors, 2020 Chart.js Contributors, 2014-2022 Evan You, 2011-2023 Tim Wood, Iskren Chernev, Moment.js contributors
+License: AGPL-3.0-or-later AND MIT
