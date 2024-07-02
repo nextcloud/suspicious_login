@@ -1,10 +1,15 @@
+<!--
+  - SPDX-FileCopyrightText: 2018 Nextcloud GmbH and Nextcloud contributors
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
 # 🔮 Nextcloud Suspicious Login Detection
 
-Detect and warn about suspicious IPs logging into Nextcloud
-
+[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/suspicious_login)](https://api.reuse.software/info/github.com/nextcloud/suspicious_login)
 ![Downloads](https://img.shields.io/github/downloads/nextcloud/suspicious_login/total.svg)
 [![Build Status](https://travis-ci.com/nextcloud/suspicious_login.svg?branch=master)](https://travis-ci.com/nextcloud/suspicious_login)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=nextcloud/suspicious_login)](https://dependabot.com)
+
+Detect and warn about suspicious IPs logging into Nextcloud
 
 The app is still under development, so it’s time for you to [get involved! 👩‍💻](https://github.com/nextcloud/suspicious_login#development-setup)
 
