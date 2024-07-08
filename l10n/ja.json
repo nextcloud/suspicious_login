@@ -6,7 +6,7 @@
     "Suspicious Login" : "不審なログイン",
     "New login detected" : "新しいログインが検出されました",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloudにログインする不審なIPを検出して警告します\n\t",
-    "Suspicious login detection" : "不審なログインが検出されました",
+    "Suspicious login detection" : "不審なログインの検出",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "このインスタンスで不審ログインの検知アプリケーションが有効になっています。ユーザーが正常にログインしたIPアドレスを追跡し、疑わしいIPアドレスから新しいログインがあった場合に警告する分類モデルを構築します。",
     "Training data statistics" : "統計データをトレーニング",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "現在、アプリは {total} 回のログイン(クライアント接続を含む)を記録しており、そのうち {distinct} 回は別々の(IPとUID)の組み合わせになっている。",
