@@ -77,7 +77,7 @@ class Notifier implements INotifier {
 	
 	protected function parseSuspiciousLoginDetected(INotification $notification, array $subjectParameters, IL10N $l): INotification {
 		string $additionalText = '';
-		string $suspiciousIp = $subjecetParameters['ip'] ?? '';
+		string $suspiciousIp = $subjectParameters['ip'] ?? '';
 
 		if ($suspiciousIp === $this->request->getRemoteAddress()) {
 			// It is the potential attacking user so don't render the notification for them
