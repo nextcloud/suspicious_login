@@ -72,14 +72,15 @@ class Notifier implements INotifier {
 				// Add button for more information about the IP-address
 				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === "1") {
 					$action = $notification->createAction();
-					$label = $l->t('More information ↗');
+					$label = $l->t('Open %s ↗', ['iplookup.flagfox.net']);
 					$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
 					$action->setLabel($label)
 						->setParsedLabel($label)
 						->setLink($link, IAction::TYPE_WEB)
 						->setPrimary(true);
 					$notification->addParsedAction($action);
-					$additionalText = ' ' . $l->t('You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.', 'https://iplookup.flagfox.net');
+					// TODO: deduplicate with \OCA\SuspiciousLogin\Listener\LoginMailListener::getMail
+					$additionalText = ' ' . $l->t('More info about the suspicious IP address available on %s', 'https://iplookup.flagfox.net');
 				}
 
 				$notification->setParsedSubject(
