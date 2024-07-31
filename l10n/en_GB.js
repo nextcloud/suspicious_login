@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "New login location detected",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.",
-    "More information ↗" : "More information ↗",
     "Suspicious Login" : "Suspicious Login",
     "New login detected" : "New login detected",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detect and warn about suspicious IPs logging into Nextcloud\n\t",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance.",
     "Precision" : "Precision",
-    "Recall" : "Recall"
+    "Recall" : "Recall",
+    "More information ↗" : "More information ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address."
 },
 "nplurals=2; plural=(n != 1);");

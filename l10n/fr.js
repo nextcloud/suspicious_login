@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Nouvel emplacement de connexion détecté",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Vous pouvez obtenir plus d'informations en pressant le bouton qui ouvrira %s et montrera des détails à propos de l'adresse IP suspecte.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Une nouvelle connexion à votre compte a été détectée. L'adresse IP %s a été considérée comme suspecte. S'il s'agissait de vous, vous pouvez ignorer ce message. Sinon, vous devriez changer votre mot de passe.",
-    "More information ↗" : "Plus d'informations ↗",
     "Suspicious Login" : "Connexion suspecte",
     "New login detected" : "Nouvelle connexion détectée",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Détecte et avertit des IPs suspectes se connectant à Nextcloud",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Aucun modèle de classificateur n'a encore été formé. Cela signifie très probablement que vous venez d'activer l'application récemment. Parce que la formation d'un modèle nécessite de bonnes données, l'application attend que des connexions d'au moins {days} jours aient été capturées.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Lors de l'évaluation, le dernier modèle (formé {time}) a montré qu'il capturait {recall}% de toutes les connexions suspectes (rappel), alors que {precision}% des connexions classifiées comme suspectes étaient effectivement suspectes (précision). Ci-dessous, vous voyez une visualisation de la performance d'un modèle historique.",
     "Precision" : "Précision",
-    "Recall" : "Rappeler"
+    "Recall" : "Rappeler",
+    "More information ↗" : "Plus d'informations ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Vous pouvez obtenir plus d'informations en pressant le bouton qui ouvrira %s et montrera des détails à propos de l'adresse IP suspecte."
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

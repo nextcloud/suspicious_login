@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "S'ha detectat una nova ubicació d'inici de sessió",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Podeu obtenir més informació prement el botó que obrirà %s i mostrarà informació sobre l'adreça IP sospitosa.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "S'ha detectat un nou inici de sessió al vostre compte. L’adreça IP %s està classificada com a sospitosa. Si era la vostra sessió podeu ignorar aquest missatge. En cas contrari, haureu de canviar la contrasenya.",
-    "More information ↗" : "Més informació ↗",
     "Suspicious Login" : "Inici de sessió sospitós",
     "New login detected" : "S'ha detectat un nou inici de sessió",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detecta i avisa sobre les IP sospitoses que es connectin a Nextcloud\n\t",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Encara no s’ha format cap model de classificació. Això probablement significa que heu habilitat l’aplicació recentment. Com que la formació d’un model requereix bones dades, l’aplicació s'espera fins que s’hagi capturat l’inici de sessió d'almenys {dies} dies.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Durant l’avaluació, el darrer model (temps de formació {time}) ha demostrat capturar {recall}% de totes les connexions sospitoses (recorda), mentre que {precision}% de les connexions classificades com a sospitoses són de fet sospitoses (precisió). A continuació, es mostra una visualització del rendiment del model històric.",
     "Precision" : "Precisió",
-    "Recall" : "Recorda"
+    "Recall" : "Recorda",
+    "More information ↗" : "Més informació ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Podeu obtenir més informació prement el botó que obrirà %s i mostrarà informació sobre l'adreça IP sospitosa."
 },
 "nplurals=2; plural=(n != 1);");
