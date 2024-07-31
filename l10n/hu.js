@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Új bejelentkezési hely észlelve",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "További információkhoz juthat a gomb megnyomásával, ami megnyitja a %s oldalt, és információkat jelenít meg a gyanús IP-címekről.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "A fiókjába új bejelentkezés lett észlelve. A(z) %s IP-cím gyanús besorolású. Ha ez Ön volt, figyelmen kívül hagyhatja a figyelmeztetést. Egyéb esetben változtasson jelszót.",
-    "More information ↗" : "További információk ↗",
     "Suspicious Login" : "Gyanús bejelentkezés",
     "New login detected" : "Új belépes észlelve",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "A gyanús IP-címekről történő Nextcloud bejelentkezések észlelések és figyelmeztetés küldése ezekről",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Az osztályozó modell még nincs betanítva. Ez valószínűleg azt jelenti, hogy nemrég engedélyezte az alkalmazást. Mivel egy modell betanításához jó adatokra van szükség, az alkalmazás megvárja, amíg legalább {days} napnyi bejelentkezést rögzít.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "A kiértékelés során a legújabb (betanítva: {time}) modell azt mutatta ki, hogy az összes gyanús bejelentkezés {recall} százalékát fogja felvenni (visszahívás), míg a gyanúsnak minősített bejelentkezések {precision} százaléka valóban gyanús (precizitás). Az alábbiakban láthatja a modell teljesítményének történetét.",
     "Precision" : "Precizitás",
-    "Recall" : "Visszahívás"
+    "Recall" : "Visszahívás",
+    "More information ↗" : "További információk ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "További információkhoz juthat a gomb megnyomásával, ami megnyitja a %s oldalt, és információkat jelenít meg a gyanús IP-címekről."
 },
 "nplurals=2; plural=(n != 1);");
