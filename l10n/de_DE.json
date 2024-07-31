@@ -1,8 +1,6 @@
 { "translations": {
     "New login location detected" : "Neuer Anmeldeort erkannt",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Sie können weitere Informationen erhalten, indem Sie die Schaltfläche drücken, die %s öffnet und Informationen über die verdächtige IP-Adresse anzeigt.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Eine neue Anmeldung mit Ihrem Konto wurde erkannt. Die IP-Adresse %s wurde als verdächtig eingestuft. Falls Sie es selbst waren, ignorieren Sie diese Meldung. Andernfalls sollten Sie ihr Passwort ändern.",
-    "More information ↗" : "Weitere Informationen ↗",
     "Suspicious Login" : "Verdächtige Anmeldung",
     "New login detected" : "Neue Anmeldung erkannt",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Erkennen und warnen vor verdächtigen IP-Adressen, die sich bei Nextcloud anmelden\n\t",
@@ -16,6 +14,8 @@
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Ein Kriterienmodell wurde bis jetzt noch nicht erstellt. Dies bedeutet, dass die Anwendung höchstwahrscheinlich erst kürzlich aktiviert wurde. Um ein Kriterienmodell erstellen zu können, wird eine verlässliche Datenbasis benötigt. Aus diesem Grund wartet die Anwendung, bis Anmeldungen von mindestens {days} Tagen erfasst wurden.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Während der Auswertung hat das letzte Kriterienmodell (Zeitraum {time}) {recall}% aller verdächtigen Ameldungen (Trefferquote) erfasst, wohingegen {precision}% der Anmeldungen, die als verdächtig eingestuft wurden, tatsächlich verdächtige Anmeldungen waren (Genauigkeit). Unten sehen Sie eine Visualisierung der historischen Modellleistung.",
     "Precision" : "Genauigkeit",
-    "Recall" : "Widerruf"
+    "Recall" : "Widerruf",
+    "More information ↗" : "Weitere Informationen ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Sie können weitere Informationen erhalten, indem Sie die Schaltfläche drücken, die %s öffnet und Informationen über die verdächtige IP-Adresse anzeigt."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

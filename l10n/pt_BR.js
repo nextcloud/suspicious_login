@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Novo local de login detectado",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Você pode obter mais informações pressionando o botão que irá abrir 1%s e mostrar informações sobre o endereço IP suspeito.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Um novo login na sua conta foi detectado. O endereço IP %s foi classificado como suspeito. Se era você, pode ignorar esta mensagem. Caso contrário, você deve alterar sua senha.",
-    "More information ↗" : "Mais Informações ↗",
     "Suspicious Login" : "Logins Suspeitos",
     "New login detected" : "Novo login detectado",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detectar e avisar sobre IPs suspeitos conectados ao Nextcloud\n\t",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Nenhum modelo de classificador foi treinado ainda. Isso provavelmente significa que você ativou o aplicativo recentemente. Como o treinamento de um modelo requer bons dados, o aplicativo aguarda até que logins de pelo menos {days} dias sejam capturados.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Durante a avaliação, o modelo mais recente (treinado {time}) mostrou capturar {recall}% de todos os logins suspeitos (recall), enquanto {precision}% dos logins classificados como suspeitos são realmente suspeitos (precisão). Abaixo você vê uma visualização do desempenho do modelo histórico.",
     "Precision" : "Precisão",
-    "Recall" : "Recall"
+    "Recall" : "Recall",
+    "More information ↗" : "Mais Informações ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Você pode obter mais informações pressionando o botão que irá abrir 1%s e mostrar informações sobre o endereço IP suspeito."
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

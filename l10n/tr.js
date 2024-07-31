@@ -2,9 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Yeni bir konumdan oturum açıldı",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Düğmeye basarak açılacak %s ile şüpheli IP adresi hakkında ayrıntılı bilgi alabilirsiniz.",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Hesabınızda yeni bir oturum açıldı. %s IP adresi şüpheli olarak sınıflandırılmış. Oturumu siz açtıysanız bu iletiyi yok sayabilirsiniz. Siz değilseniz parolanızı değiştirmelisiniz.",
-    "More information ↗" : "Diğer bilgiler ↗",
     "Suspicious Login" : "Şüpheli oturum açma",
     "New login detected" : "Oturum açıldı",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Şüpheli IP adreslerinden açılan Nextcloud oturumlarını izler ve uyarır\n\t",
@@ -18,6 +16,8 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Henüz bir sınıflandırma modeli geliştirilmemiş. Bu durum genellikle, uygulamayı yakın zamanda etkinleştirdiğiniz anlamına gelir. Bir modelin geliştirilmesi için sağlıklı veriler gerektiğinden, uygulama en az {days} gün oturum açma bilgilerini derler.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Değerlendirme sırasında, en son modelin (geliştirme {time}) şüpheli oturum açmaları %{recall} oranında yakaladığı (anımsama) ve şüpheli olarak sınıflandırılan oturum açmaların %{precision} oranında gerçekten şüpheli olduğu (doğruluk) bulunmuştur. Model başarımının zamana göre gelişimini aşağıda görebilirsiniz.",
     "Precision" : "Doğruluk",
-    "Recall" : "Anımsama"
+    "Recall" : "Anımsama",
+    "More information ↗" : "Diğer bilgiler ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Düğmeye basarak açılacak %s ile şüpheli IP adresi hakkında ayrıntılı bilgi alabilirsiniz."
 },
 "nplurals=2; plural=(n > 1);");
