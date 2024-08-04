@@ -32,9 +32,9 @@ class AppStatistics implements JsonSerializable {
 	private $trainingDataStatistics;
 
 	public function __construct(bool $active,
-								array $recentModels,
-								TrainingDataConfig $trainingDataConfig,
-								TrainingDataStatistics $trainingDataStatistics) {
+		array $recentModels,
+		TrainingDataConfig $trainingDataConfig,
+		TrainingDataStatistics $trainingDataStatistics) {
 		$this->active = $active;
 		$this->recentModels = $recentModels;
 		$this->trainingDataConfig = $trainingDataConfig;

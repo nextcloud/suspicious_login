@@ -21,7 +21,7 @@ class LoginAddressAggregatedSeeder {
 	private $mapper;
 
 	public function __construct(IDBConnection $db,
-								LoginAddressAggregatedMapper $mapper) {
+		LoginAddressAggregatedMapper $mapper) {
 		$this->db = $db;
 		$this->mapper = $mapper;
 	}

@@ -19,7 +19,7 @@ class CollectedData {
 	private $validationPositives;
 
 	public function __construct(Labeled $trainingPositives,
-								Labeled $validationPositives) {
+		Labeled $validationPositives) {
 		$this->trainingPositives = $trainingPositives;
 		$this->validationPositives = $validationPositives;
 	}

@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Notifications;
 
-use OCP\IConfig;
 use InvalidArgumentException;
-use OCP\IURLGenerator;
 use OCA\SuspiciousLogin\AppInfo\Application;
+use OCP\IConfig;
 use OCP\IRequest;
+use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\IAction;
 use OCP\Notification\INotification;

@@ -32,7 +32,7 @@ class DataLoader {
 	private $negativeSampleGenerator;
 
 	public function __construct(LoginAddressAggregatedMapper $loginAddressMapper,
-								NegativeSampleGenerator $negativeSampleGenerator) {
+		NegativeSampleGenerator $negativeSampleGenerator) {
 		$this->loginAddressMapper = $loginAddressMapper;
 		$this->negativeSampleGenerator = $negativeSampleGenerator;
 	}
@@ -44,7 +44,7 @@ class DataLoader {
 	 * @throws InsufficientDataException
 	 */
 	public function loadTrainingAndValidationData(TrainingDataConfig $dataConfig,
-												  AClassificationStrategy $strategy): CollectedData {
+		AClassificationStrategy $strategy): CollectedData {
 		$validationThreshold = $dataConfig->getNow() - $dataConfig->getThreshold() * 60 * 60 * 24;
 		$maxAge = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
 
@@ -97,8 +97,8 @@ class DataLoader {
 	 * @return TrainingDataSet
 	 */
 	public function generateRandomShuffledData(CollectedData $collectedData,
-												Config $config,
-												AClassificationStrategy $strategy): TrainingDataSet {
+		Config $config,
+		AClassificationStrategy $strategy): TrainingDataSet {
 		$numPositives = count($collectedData->getTrainingPositives());
 		$numValidation = count($collectedData->getValidationPositives());
 		$numRandomNegatives = max((int)floor($numPositives * $config->getRandomNegativeRate()), 1);

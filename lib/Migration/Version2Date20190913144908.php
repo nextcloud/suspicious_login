@@ -9,8 +9,8 @@ namespace OCA\SuspiciousLogin\Migration;
 
 use Closure;
 use OCP\DB\ISchemaWrapper;
-use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\SimpleMigrationStep;
 
 class Version2Date20190913144908 extends SimpleMigrationStep {
 

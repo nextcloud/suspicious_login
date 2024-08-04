@@ -20,7 +20,7 @@ class TrainingDataStatistics implements JsonSerializable {
 	private $loginsAggregated;
 
 	public function __construct(int $loginsCaptured,
-								int $loginsAggregated) {
+		int $loginsAggregated) {
 		$this->loginsCaptured = $loginsCaptured;
 		$this->loginsAggregated = $loginsAggregated;
 	}

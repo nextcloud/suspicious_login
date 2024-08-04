@@ -33,8 +33,8 @@ class TrainTask implements Task {
 	private $strategy;
 
 	public function __construct(Config $config,
-								CollectedData $dataSet,
-								AClassificationStrategy $strategy) {
+		CollectedData $dataSet,
+		AClassificationStrategy $strategy) {
 		$this->config = $config;
 		$this->dataSet = $dataSet;
 		$this->strategy = $strategy;

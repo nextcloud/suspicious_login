@@ -10,8 +10,8 @@ namespace OCA\SuspiciousLogin\Migration;
 use Closure;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCP\DB\ISchemaWrapper;
-use OCP\Migration\SimpleMigrationStep;
 use OCP\Migration\IOutput;
+use OCP\Migration\SimpleMigrationStep;
 
 class Version2Date20190906100917 extends SimpleMigrationStep {
 

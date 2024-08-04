@@ -23,7 +23,7 @@ class EstimatorService {
 	private $logger;
 
 	public function __construct(ModelStore $modelStore,
-								ILogger $logger) {
+		ILogger $logger) {
 		$this->modelStore = $modelStore;
 		$this->logger = $logger;
 	}
@@ -36,7 +36,7 @@ class EstimatorService {
 	 * @return bool
 	 * @throws ServiceException
 	 */
-	public function predict(string $uid, string $ip, AClassificationStrategy $strategy, int $modelId = null): bool {
+	public function predict(string $uid, string $ip, AClassificationStrategy $strategy, ?int $modelId = null): bool {
 		try {
 			if ($modelId === null) {
 				$this->logger->debug("loading latest model");

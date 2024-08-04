@@ -25,8 +25,8 @@ class TrainingResult {
 	private $report;
 
 	public function __construct(Estimator $classifier,
-								Model $model,
-								Report $report) {
+		Model $model,
+		Report $report) {
 		$this->classifier = $classifier;
 		$this->model = $model;
 		$this->report = $report;
