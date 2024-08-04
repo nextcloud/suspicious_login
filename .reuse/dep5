@@ -15,6 +15,10 @@ Files: composer.json composer.lock
 Copyright: 2018 Nextcloud GmbH and Nextcloud contributors
 License: AGPL-3.0-or-later
 
+Files: vendor-bin/php-cs-fixer/composer.json vendor-bin/php-cs-fixer/composer.lock
+Copyright: 2024 Nextcloud GmbH and Nextcloud contributors
+License: AGPL-3.0-or-later
+
 Files: package.json package-lock.json tests/phpunit.xml
 Copyright: 2019 Nextcloud GmbH and Nextcloud contributors
 License: AGPL-3.0-or-later
