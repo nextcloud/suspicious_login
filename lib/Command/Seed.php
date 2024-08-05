@@ -28,7 +28,7 @@ class Seed extends Command {
 	private $seeder;
 
 	public function __construct(IConfig $config,
-								LoginAddressAggregatedSeeder $seeder) {
+		LoginAddressAggregatedSeeder $seeder) {
 		parent::__construct("suspiciouslogin:seed");
 		$this->seeder = $seeder;
 

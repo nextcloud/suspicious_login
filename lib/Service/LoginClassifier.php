@@ -9,21 +9,21 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use function base64_decode;
-use function explode;
+use OCA\SuspiciousLogin\Db\SuspiciousLogin;
+use OCA\SuspiciousLogin\Db\SuspiciousLoginMapper;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
-use OCP\EventDispatcher\IEventDispatcher;
-use function preg_match;
-use function strlen;
-use function substr;
-use OCA\SuspiciousLogin\Db\SuspiciousLogin;
-use OCA\SuspiciousLogin\Db\SuspiciousLoginMapper;
 use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\ILogger;
 use OCP\IRequest;
 use Throwable;
+use function base64_decode;
+use function explode;
+use function preg_match;
+use function strlen;
+use function substr;
 
 class LoginClassifier {
 
@@ -46,11 +46,11 @@ class LoginClassifier {
 	private $dispatcher;
 
 	public function __construct(EstimatorService $estimator,
-								IRequest $request,
-								ILogger $logger,
-								SuspiciousLoginMapper $mapper,
-								ITimeFactory $timeFactory,
-								IEventDispatcher $dispatcher) {
+		IRequest $request,
+		ILogger $logger,
+		SuspiciousLoginMapper $mapper,
+		ITimeFactory $timeFactory,
+		IEventDispatcher $dispatcher) {
 		$this->estimator = $estimator;
 		$this->request = $request;
 		$this->logger = $logger;
@@ -79,9 +79,9 @@ class LoginClassifier {
 		}
 
 		return preg_match(
-				"/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/",
-				$pwd[1]
-			) === 1;
+			"/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/",
+			$pwd[1]
+		) === 1;
 	}
 
 	public function process(string $uid, string $ip) {

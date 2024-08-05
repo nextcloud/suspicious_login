@@ -48,8 +48,8 @@ class Trainer {
 	 * @throws InsufficientDataException
 	 */
 	public function train(Config $config,
-						  TrainingDataSet $dataSet,
-						  AClassificationStrategy $strategy): TrainingResult {
+		TrainingDataSet $dataSet,
+		AClassificationStrategy $strategy): TrainingResult {
 		$start = $this->timeFactory->getDateTime();
 		$layers = array_map(function () use ($strategy) {
 			return new Dense($strategy->getSize());

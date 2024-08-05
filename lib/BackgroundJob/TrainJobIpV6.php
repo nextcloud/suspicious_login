@@ -27,8 +27,8 @@ class TrainJobIpV6 extends TimedJob {
 	private $logger;
 
 	public function __construct(TrainService $trainService,
-								ILogger $logger,
-								ITimeFactory $time) {
+		ILogger $logger,
+		ITimeFactory $time) {
 		parent::__construct($time);
 
 		$this->setInterval(24 * 60 * 60);

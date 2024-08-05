@@ -26,8 +26,8 @@ class LoginNotificationListener implements IEventListener {
 	private $logger;
 
 	public function __construct(IManager $notificationManager,
-								ITimeFactory $timeFactory,
-								ILogger $logger) {
+		ITimeFactory $timeFactory,
+		ILogger $logger) {
 		$this->notificationManager = $notificationManager;
 		$this->timeFactory = $timeFactory;
 		$this->logger = $logger;

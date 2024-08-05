@@ -9,13 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
-use Rubix\ML\Estimator;
-use Rubix\ML\Persistable;
-use Rubix\ML\Persisters\Filesystem;
-use RuntimeException;
-use Throwable;
-use function file_get_contents;
-use function file_put_contents;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Db\ModelMapper;
@@ -27,6 +20,13 @@ use OCP\Files\NotFoundException;
 use OCP\ICacheFactory;
 use OCP\ILogger;
 use OCP\ITempManager;
+use Rubix\ML\Estimator;
+use Rubix\ML\Persistable;
+use Rubix\ML\Persisters\Filesystem;
+use RuntimeException;
+use Throwable;
+use function file_get_contents;
+use function file_put_contents;
 use function strlen;
 
 class ModelStore {
@@ -51,11 +51,11 @@ class ModelStore {
 	private $logger;
 
 	public function __construct(ModelMapper $modelMapper,
-								IAppData $appData,
-								IAppManager $appManager,
-								ITempManager $tempManager,
-								ICacheFactory $cachFactory,
-								ILogger $logger) {
+		IAppData $appData,
+		IAppManager $appManager,
+		ITempManager $tempManager,
+		ICacheFactory $cachFactory,
+		ILogger $logger) {
 		$this->appData = $appData;
 		$this->appManager = $appManager;
 		$this->modelMapper = $modelMapper;

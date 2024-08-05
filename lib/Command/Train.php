@@ -37,8 +37,8 @@ class Train extends Command {
 	private $store;
 
 	public function __construct(DataLoader $loader,
-								Trainer $optimizer,
-								ModelStore $store) {
+		Trainer $optimizer,
+		ModelStore $store) {
 		parent::__construct("suspiciouslogin:train");
 		$this->trainer = $optimizer;
 		$this->loader = $loader;

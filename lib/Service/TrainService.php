@@ -27,8 +27,8 @@ class TrainService {
 	private $store;
 
 	public function __construct(DataLoader $dataLoader,
-								Trainer $trainer,
-								ModelStore $store) {
+		Trainer $trainer,
+		ModelStore $store) {
 		$this->trainer = $trainer;
 		$this->store = $store;
 		$this->dataLoader = $dataLoader;
@@ -45,8 +45,8 @@ class TrainService {
 	 * @throws ServiceException
 	 */
 	public function train(Config $config,
-						  TrainingDataConfig $dataConfig,
-						  AClassificationStrategy $strategy): Model {
+		TrainingDataConfig $dataConfig,
+		AClassificationStrategy $strategy): Model {
 		// Load
 		$collectedData = $this->dataLoader->loadTrainingAndValidationData(
 			$dataConfig,

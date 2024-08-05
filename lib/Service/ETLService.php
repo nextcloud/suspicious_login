@@ -30,14 +30,14 @@ class ETLService {
 	private $logger;
 
 	public function __construct(IDBConnection $db,
-								LoginAddressAggregatedMapper $aggregatedMapper,
-								ILogger $logger) {
+		LoginAddressAggregatedMapper $aggregatedMapper,
+		ILogger $logger) {
 		$this->db = $db;
 		$this->aggregatedMapper = $aggregatedMapper;
 		$this->logger = $logger;
 	}
 
-	private function getRaw(int $max, OutputInterface $output = null): Generator {
+	private function getRaw(int $max, ?OutputInterface $output = null): Generator {
 		if (!is_null($output)) {
 			$progress = new ProgressBar($output);
 		}
@@ -68,7 +68,7 @@ class ETLService {
 	/**
 	 * Extract raw login data and feed it into the aggregated table
 	 */
-	public function extractAndTransform(int $max = self::MAX_BATCH_SIZE, OutputInterface $output = null) {
+	public function extractAndTransform(int $max = self::MAX_BATCH_SIZE, ?OutputInterface $output = null) {
 		$this->logger->debug('starting login data ETL process');
 		$this->db->beginTransaction();
 

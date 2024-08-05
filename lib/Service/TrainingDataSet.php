@@ -38,10 +38,10 @@ class TrainingDataSet {
 	private $numRandomNegatives;
 
 	public function __construct(Labeled $trainingData,
-								Labeled $validationData,
-								int $numPositives,
-								int $numShuffledNegatives,
-								int $numRandomNegatives) {
+		Labeled $validationData,
+		int $numPositives,
+		int $numShuffledNegatives,
+		int $numRandomNegatives) {
 		$this->trainingData = $trainingData;
 		$this->validationData = $validationData;
 		$this->numPositives = $numPositives;

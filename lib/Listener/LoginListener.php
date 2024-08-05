@@ -32,9 +32,9 @@ class LoginListener implements IEventListener {
 	private $loginDataCollector;
 
 	public function __construct(IRequest $request,
-								ITimeFactory $timeFactory,
-								LoginClassifier $loginClassifier,
-								LoginDataCollector $loginDataCollector) {
+		ITimeFactory $timeFactory,
+		LoginClassifier $loginClassifier,
+		LoginDataCollector $loginDataCollector) {
 		$this->request = $request;
 		$this->timeFactory = $timeFactory;
 		$this->loginDataCollector = $loginDataCollector;

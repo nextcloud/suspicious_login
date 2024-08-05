@@ -1,0 +1,10 @@
+{
+    "config": {
+        "platform": {
+            "php": "8.0"
+        }
+    },
+    "require-dev": {
+        "nextcloud/coding-standard": "^1.2.1"
+    }
+}

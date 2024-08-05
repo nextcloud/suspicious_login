@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use Rubix\ML\Datasets\Dataset;
 use Rubix\ML\Datasets\Labeled;
 use function array_fill;
 use function array_filter;
 use function array_map;
-use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use function array_merge;
 use function array_slice;
 use function random_int;

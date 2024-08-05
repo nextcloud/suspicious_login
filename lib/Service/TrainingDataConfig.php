@@ -24,14 +24,14 @@ class TrainingDataConfig implements JsonSerializable {
 	private $now;
 
 	public function __construct(int $maxAge,
-								int $threshold,
-								int $now) {
+		int $threshold,
+		int $now) {
 		$this->maxAge = $maxAge;
 		$this->threshold = $threshold;
 		$this->now = $now;
 	}
 
-	public static function default(int $time = null) {
+	public static function default(?int $time = null) {
 		return new self(60, 7, $time ?? time());
 	}
 

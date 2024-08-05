@@ -12,14 +12,14 @@ namespace OCA\SuspiciousLogin\Service\MLP;
 use Amp\Promise;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\DataLoader;
+use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCA\SuspiciousLogin\Service\TrainingResult;
 use OCA\SuspiciousLogin\Task\TrainTask;
+use Symfony\Component\Console\Output\OutputInterface;
 use function Amp\Parallel\Worker\enqueue;
 use function array_map;
 use function array_sum;
 use function mt_getrandmax;
-use OCA\SuspiciousLogin\Service\TrainingDataConfig;
-use Symfony\Component\Console\Output\OutputInterface;
 use function range;
 use function sprintf;
 
@@ -45,15 +45,15 @@ class OptimizerService {
 	];
 
 	public function __construct(DataLoader $loader,
-								Trainer $trainer) {
+		Trainer $trainer) {
 		$this->loader = $loader;
 		$this->trainer = $trainer;
 	}
 
 	private function printConfig(int $epoch,
-								 float $stepWidth,
-								 Config $config,
-								 OutputInterface $output) {
+		float $stepWidth,
+		Config $config,
+		OutputInterface $output) {
 		$epochs = sprintf("%4d", $config->getEpochs());
 		$layers = sprintf("%2d", $config->getLayers());
 		$shuffledRate = sprintf("%1.3f", $config->getShuffledNegativeRate());
@@ -69,7 +69,7 @@ class OptimizerService {
 	 * @param TrainingResult ...$results
 	 */
 	private function getAverageCost(OutputInterface $output,
-									TrainingResult ...$results): float {
+		TrainingResult ...$results): float {
 		$costs = array_map(function (TrainingResult $result) use ($output) {
 			$output->writeln(sprintf("  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d",
 				$result->getReport()['overall']['f1_score'],
@@ -84,18 +84,18 @@ class OptimizerService {
 				$result->getModel()->getSamplesRandom()
 			));
 			return (
-					$result->getReport()['classes']['n']['f1_score'] +
-					$result->getReport()['overall']['f1_score']
-				) / 2;
+				$result->getReport()['classes']['n']['f1_score'] +
+				$result->getReport()['overall']['f1_score']
+			) / 2;
 		}, $results);
 
 		return array_sum($costs) / count($costs);
 	}
 
 	private function getRandomIntParam(int $current,
-									   int $min,
-									   int $max,
-									   float $stepWidth): int {
+		int $min,
+		int $max,
+		float $stepWidth): int {
 		$range = $max - $min;
 		$newVal = $current
 			+ $stepWidth * $range * random_int(0, mt_getrandmax()) / mt_getrandmax()
@@ -104,9 +104,9 @@ class OptimizerService {
 	}
 
 	private function getRandomFloatParam(float $current,
-										 float $min,
-										 float $max,
-										 float $stepWidth): float {
+		float $min,
+		float $max,
+		float $stepWidth): float {
 		$range = $max - $min;
 		$newVal = $current
 			+ $stepWidth * $range * random_int(0, mt_getrandmax()) / mt_getrandmax()
@@ -159,10 +159,10 @@ class OptimizerService {
 	}
 
 	public function optimize(int $maxEpochs,
-							 AClassificationStrategy $strategy,
-							 int $now = null,
-							 OutputInterface $output,
-							 int $parallelism = 8): void {
+		AClassificationStrategy $strategy,
+		?int $now = null,
+		OutputInterface $output,
+		int $parallelism = 8): void {
 		$epochs = 0;
 		$stepWidth = self::INITIAL_STEP_WIDTH;
 		// Start with random config if none was passed (breadth-first search)

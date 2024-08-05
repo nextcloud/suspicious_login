@@ -28,8 +28,8 @@ class AdminService {
 	private $modelMapper;
 
 	public function __construct(LoginAddressMapper $loginAddressMapper,
-								LoginAddressAggregatedMapper $loginAddressAggregatedMapper,
-								ModelMapper $modelMapper) {
+		LoginAddressAggregatedMapper $loginAddressAggregatedMapper,
+		ModelMapper $modelMapper) {
 		$this->loginAddressMapper = $loginAddressMapper;
 		$this->loginAddressAggregatedMapper = $loginAddressAggregatedMapper;
 		$this->modelMapper = $modelMapper;

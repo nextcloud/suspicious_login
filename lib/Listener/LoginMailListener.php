@@ -9,10 +9,10 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Listener;
 
 use Exception;
-use OCP\IConfig;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use OCP\IConfig;
 use OCP\IL10N;
 use OCP\ILogger;
 use OCP\IUser;

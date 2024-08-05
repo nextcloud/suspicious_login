@@ -30,10 +30,10 @@ class Config {
 	private $learningRate;
 
 	public function __construct(int $epochs,
-								int $layers,
-								float $shuffledNegativeRate,
-								float $randomNegativeRate,
-								float $learningRate) {
+		int $layers,
+		float $shuffledNegativeRate,
+		float $randomNegativeRate,
+		float $learningRate) {
 		$this->epochs = $epochs;
 		$this->layers = $layers;
 		$this->shuffledNegativeRate = $shuffledNegativeRate;
