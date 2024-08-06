@@ -11,6 +11,7 @@
     "require": {
         "amphp/amp": "^2.6.4",
         "amphp/parallel": "^1.4.3",
+        "bamarni/composer-bin-plugin": "^1.8.2",
         "rubix/ml": "dev-chore/bump-flysystem-v2.1.1"
     },
     "license": "AGPLv3",
@@ -31,7 +32,6 @@
 		"post-update-cmd": ["@composer bin all update --ansi"]
     },
     "require-dev": {
-        "bamarni/composer-bin-plugin": "^1.8.2",
         "christophwurst/nextcloud_testing": "^0.12.4"
     },
 	"config": {
