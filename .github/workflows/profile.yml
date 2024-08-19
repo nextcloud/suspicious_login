@@ -10,7 +10,7 @@ jobs:
       matrix:
         flag: ['', '--v6']
         php-version: [ '8.1', '8.2' ]
-        nextcloud-version: [ 'master' ]
+        nextcloud-version: [ 'stable30' ]
     name: php${{ matrix.php-version }} ${{ matrix.flag }} profiling
     services:
       mysql-service:
