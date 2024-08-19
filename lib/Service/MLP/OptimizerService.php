@@ -160,7 +160,7 @@ class OptimizerService {
 
 	public function optimize(int $maxEpochs,
 		AClassificationStrategy $strategy,
-		?int $now = null,
+		?int $now,
 		OutputInterface $output,
 		int $parallelism = 8): void {
 		$epochs = 0;
