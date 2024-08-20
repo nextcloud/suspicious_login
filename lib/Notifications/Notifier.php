@@ -89,7 +89,7 @@ class Notifier implements INotifier {
 					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp) . $additionalText
 				);
 
-				$notification->setIcon($this->url->getAbsoluteURL($this->url->imagePath('suspicious_login', 'app.svg')));
+				$notification->setIcon($this->url->getAbsoluteURL($this->url->imagePath('suspicious_login', 'app-dark.svg')));
 
 				return $notification;
 			default:
