@@ -24,12 +24,15 @@
 		<directory name="vendor" />
 		<directory name="vendor-bin/psalm/vendor/nextcloud/ocp" />
 	</extraFiles>
+	<stubs>
+		<file name="tests/stubs/doctrine_dbal_types_type.php" />
+	</stubs>
 	<issueHandlers>
 		<UndefinedDocblockClass>
 			<errorLevel type="suppress">
+				<referencedClass name="Doctrine\DBAL\Driver\Statement" />
 				<referencedClass name="Doctrine\DBAL\Schema\Schema" />
 				<referencedClass name="Doctrine\DBAL\Schema\SchemaException" />
-				<referencedClass name="Doctrine\DBAL\Driver\Statement" />
 				<referencedClass name="Doctrine\DBAL\Schema\Table" />
 			</errorLevel>
 		</UndefinedDocblockClass>

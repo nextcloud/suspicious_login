@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Migration;
 
 use Closure;
+use Doctrine\DBAL\Types\Type;
 use OCP\DB\ISchemaWrapper;
 use OCP\DB\Types;
 use OCP\Migration\IOutput;
@@ -30,7 +31,7 @@ class Version0Date20181214103754 extends SimpleMigrationStep {
 
 		$table = $schema->getTable('suspicious_login_model');
 		$table->getColumn('app_version')
-			->setType(Types::STRING);
+			->setType(Type::getType(Types::STRING));
 
 		return $schema;
 	}
