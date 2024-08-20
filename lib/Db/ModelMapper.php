@@ -13,6 +13,9 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
+/**
+ * @extends QBMapper<Model>
+ */
 class ModelMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'suspicious_login_model');

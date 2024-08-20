@@ -148,7 +148,7 @@ class ModelStore {
 	}
 
 	/**
-	 * @param Estimator|Persistable $estimator
+	 * @param Estimator $estimator (Must implement Persistable)
 	 * @todo encapsulate in transaction to prevent inconsistencies
 	 */
 	public function persist(Estimator $estimator, Model $model) {

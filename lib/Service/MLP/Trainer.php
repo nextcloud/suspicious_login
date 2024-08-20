@@ -42,7 +42,7 @@ class Trainer {
 	 * @param TrainingDataConfig $dataConfig
 	 * @param AClassificationStrategy $strategy
 	 *
-	 * @retrun TrainingResult
+	 * @return TrainingResult
 	 *
 	 * @throws ServiceException
 	 * @throws InsufficientDataException
@@ -51,7 +51,7 @@ class Trainer {
 		TrainingDataSet $dataSet,
 		AClassificationStrategy $strategy): TrainingResult {
 		$start = $this->timeFactory->getDateTime();
-		$layers = array_map(function () use ($strategy) {
+		$layers = array_map(function ($index) use ($strategy) {
 			return new Dense($strategy->getSize());
 		}, range(0, $config->getLayers() - 2));
 		$layers[] = new Activation(new Sigmoid());

@@ -11,6 +11,14 @@ namespace OCA\SuspiciousLogin\Db;
 
 use OCP\AppFramework\Db\Entity;
 
+/**
+ * @method string getUid()
+ * @method void setUid(string $uid)
+ * @method string getIp()
+ * @method void setIp(string $ip)
+ * @method int getCreatedAt()
+ * @method void setCreatedAt(int $createdAt)
+ */
 class LoginAddress extends Entity {
 	protected $uid;
 	protected $ip;

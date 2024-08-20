@@ -1,0 +1,6 @@
+{
+    "require-dev": {
+        "nextcloud/ocp": "dev-master",
+        "vimeo/psalm": "^5.25"
+    }
+}

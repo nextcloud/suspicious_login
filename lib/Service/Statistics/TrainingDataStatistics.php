@@ -39,7 +39,7 @@ class TrainingDataStatistics implements JsonSerializable {
 		return $this->loginsAggregated;
 	}
 
-	public function jsonSerialize() {
+	public function jsonSerialize(): array {
 		return [
 			'loginsCaptured' => $this->getLoginsCaptured(),
 			'loginsAggregated' => $this->getLoginsAggregated(),

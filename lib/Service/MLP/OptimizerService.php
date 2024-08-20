@@ -177,7 +177,7 @@ class OptimizerService {
 		$output->writeln("");
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
-		$tasks = array_map(function () use ($config, $collectedData, $strategy) {
+		$tasks = array_map(function ($index) use ($config, $collectedData, $strategy) {
 			return new TrainTask($config, $collectedData, $strategy);
 		}, range(1, $parallelism));
 		$best = $this->getAverageCost(
@@ -198,7 +198,7 @@ class OptimizerService {
 			$cost = $this->getAverageCost(
 				$output,
 				...Promise\wait(
-					Promise\all(array_map(function () use ($newConfig, $collectedData, $strategy) {
+					Promise\all(array_map(function ($index) use ($newConfig, $collectedData, $strategy) {
 						return enqueue(new TrainTask($newConfig, $collectedData, $strategy));
 					}, range(1, $parallelism)))
 				)

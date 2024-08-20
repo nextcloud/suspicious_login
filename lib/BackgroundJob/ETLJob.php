@@ -29,7 +29,7 @@ class ETLJob extends TimedJob {
 	/**
 	 * @param $argument
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	protected function run($argument) {
 		$this->etlService->extractAndTransform();

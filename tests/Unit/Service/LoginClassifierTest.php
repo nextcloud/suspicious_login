@@ -83,7 +83,7 @@ class LoginClassifierTest extends TestCase {
 				new SuspiciousLogin(),
 			]);
 		$this->dispatcher->expects(self::never())
-			->method('dispatch');
+			->method('dispatchTyped');
 
 		$this->classifier->process('user', '1.2.3.4');
 	}
@@ -111,7 +111,7 @@ class LoginClassifierTest extends TestCase {
 			)
 			->willReturn(array_fill(0, 25, new SuspiciousLogin()));
 		$this->dispatcher->expects(self::never())
-			->method('dispatch');
+			->method('dispatchTyped');
 
 		$this->classifier->process('user', '1.2.3.4');
 	}
@@ -137,7 +137,7 @@ class LoginClassifierTest extends TestCase {
 				]
 			]);
 		$this->dispatcher->expects(self::never())
-			->method('dispatch');
+			->method('dispatchTyped');
 
 		$this->classifier->process('user', '1.2.3.4');
 	}
@@ -163,7 +163,7 @@ class LoginClassifierTest extends TestCase {
 				]
 			]);
 		$this->dispatcher->expects(self::once())
-			->method('dispatch');
+			->method('dispatchTyped');
 
 		$this->classifier->process('user', '1.2.3.4');
 	}
