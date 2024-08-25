@@ -2,7 +2,9 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Виявлено нове розташування входу користувача",
+    "More info about the suspicious IP address available on %s" : "Більше інформації про підозрілі адреси IP доступно %s",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Виявлено новий вхід до вашого облікового запису. IP-адресу %s визначено підозрілою. Якщо це були не ви, проігноруйте це повідомлення. В іншому випадку вам потрібно змінити ваш пароль.",
+    "Open %s ↗" : "Відкрити %s ↗",
     "Suspicious Login" : "Підозрілий вхід",
     "New login detected" : "Виявлено новий вхід",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Виявляє та попереджає про підозрілі IP адреси, з яких здійснюється вхід до Nextcloud\n\t",
