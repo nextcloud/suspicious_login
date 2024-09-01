@@ -16,7 +16,7 @@ use OCA\SuspiciousLogin\Service\Statistics\AppStatistics;
 use OCA\SuspiciousLogin\Service\Statistics\TrainingDataStatistics;
 use OCP\AppFramework\Db\DoesNotExistException;
 
-class AdminService {
+class StatisticsService {
 
 	/** @var LoginAddressMapper */
 	private $loginAddressMapper;

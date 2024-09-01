@@ -41,8 +41,4 @@
 		<command>OCA\SuspiciousLogin\Command\Seed</command>
 		<command>OCA\SuspiciousLogin\Command\Train</command>
 	</commands>
-
-	<settings>
-		<admin>OCA\SuspiciousLogin\Settings\AdminSettings</admin>
-	</settings>
 </info>

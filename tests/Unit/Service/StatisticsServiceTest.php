@@ -14,14 +14,14 @@ use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Db\LoginAddressMapper;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Db\ModelMapper;
-use OCA\SuspiciousLogin\Service\AdminService;
 use OCA\SuspiciousLogin\Service\Statistics\AppStatistics;
 use OCA\SuspiciousLogin\Service\Statistics\TrainingDataStatistics;
+use OCA\SuspiciousLogin\Service\StatisticsService;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class AdminServiceTest extends TestCase {
+class StatisticsServiceTest extends TestCase {
 
 	/** @var LoginAddressMapper|MockObject */
 	private $loginAddressMapper;
@@ -32,7 +32,7 @@ class AdminServiceTest extends TestCase {
 	/** @var ModelMapper|MockObject */
 	private $modelMapper;
 
-	/** @var AdminService */
+	/** @var StatisticsService */
 	private $service;
 
 	protected function setUp(): void {
@@ -42,7 +42,7 @@ class AdminServiceTest extends TestCase {
 		$this->loginAddressAggregatedMapper = $this->createMock(LoginAddressAggregatedMapper::class);
 		$this->modelMapper = $this->createMock(ModelMapper::class);
 
-		$this->service = new AdminService(
+		$this->service = new StatisticsService(
 			$this->loginAddressMapper,
 			$this->loginAddressAggregatedMapper,
 			$this->modelMapper
