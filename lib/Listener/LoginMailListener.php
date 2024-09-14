@@ -14,38 +14,24 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\IConfig;
 use OCP\IL10N;
-use OCP\ILogger;
 use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Mail\IMailer;
 use OCP\Mail\IMessage;
+use Psr\Log\LoggerInterface;
 
 /**
  * @implements IEventListener<SuspiciousLoginEvent>
  */
 class LoginMailListener implements IEventListener {
 
-	/** @var ILogger */
-	private $logger;
-	
-	/** @var IMailer */
-	private $mailer;
-	
-	/** @var IUserManager */
-	private $userManager;
-	
-	/** @var IL10N */
-	private $l;
-	
-	/** @var IConfig */
-	protected $config;
-
-	public function __construct(ILogger $logger, IMailer $mailer, IUserManager $userManager, IL10N $l, IConfig $config) {
-		$this->logger = $logger;
-		$this->mailer = $mailer;
-		$this->userManager = $userManager;
-		$this->l = $l;
-		$this->config = $config;
+	public function __construct(
+		private LoggerInterface $logger,
+		private IMailer $mailer,
+		private IUserManager $userManager,
+		private IL10N $l,
+		private IConfig $config,
+	) {
 	}
 
 	public function handle(Event $event): void {
@@ -69,10 +55,7 @@ class LoginMailListener implements IEventListener {
 				$this->getMail($event, $user)
 			);
 		} catch (Exception $e) {
-			$this->logger->logException($e, [
-				'message' => "Could not send suspicious login email to <$uid>",
-				'level' => ILogger::ERROR,
-			]);
+			$this->logger->error("Could not send suspicious login email to <$uid>", ['exception' => $e]);
 		}
 	}
 

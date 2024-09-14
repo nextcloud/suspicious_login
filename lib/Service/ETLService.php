@@ -13,28 +13,18 @@ use Generator;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ETLService {
 	public const MAX_BATCH_SIZE = 10000;
 
-	/** @var IDBConnection */
-	private $db;
-
-	/** @var LoginAddressAggregatedMapper */
-	private $aggregatedMapper;
-
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(IDBConnection $db,
-		LoginAddressAggregatedMapper $aggregatedMapper,
-		ILogger $logger) {
-		$this->db = $db;
-		$this->aggregatedMapper = $aggregatedMapper;
-		$this->logger = $logger;
+	public function __construct(
+		private IDBConnection $db,
+		private LoginAddressAggregatedMapper $aggregatedMapper,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	private function getRaw(int $max, ?OutputInterface $output = null): Generator {
