@@ -11,7 +11,6 @@ namespace OCA\SuspiciousLogin\Task;
 
 use Amp\Parallel\Worker\Environment;
 use Amp\Parallel\Worker\Task;
-use OC;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\CollectedData;
 use OCA\SuspiciousLogin\Service\DataLoader;
@@ -50,10 +49,10 @@ class TrainTask implements Task {
 		}
 
 		/** @var DataLoader $loader */
-		$loader = OC::$server->get(DataLoader::class);
+		$loader = \OCP\Server::get(DataLoader::class);
 		$data = $loader->generateRandomShuffledData($this->dataSet, $this->config, $this->strategy);
 		/** @var Trainer $trainer */
-		$trainer = OC::$server->get(Trainer::class);
+		$trainer = \OCP\Server::get(Trainer::class);
 
 		return $trainer->train(
 			$this->config,

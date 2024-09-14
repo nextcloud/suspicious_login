@@ -16,6 +16,9 @@ use OCP\EventDispatcher\IEventListener;
 use OCP\ILogger;
 use OCP\Notification\IManager;
 
+/**
+ * @implements IEventListener<SuspiciousLoginEvent>
+ */
 class LoginNotificationListener implements IEventListener {
 
 	/** @var IManager */

@@ -12,6 +12,9 @@ namespace OCA\SuspiciousLogin\Db;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 
+/**
+ * @extends QBMapper<SuspiciousLogin>
+ */
 class SuspiciousLoginMapper extends QBMapper {
 	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'suspicious_login');

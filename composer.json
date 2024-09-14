@@ -1,50 +1,54 @@
 {
-    "name": "christophwurst/suspicious_login",
-    "description": "Detect and warn about suspicious IPs logging into Nextcloud",
-    "type": "library",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/nextcloud-deps/RubixML"
-        }
-    ],
-    "require": {
-        "amphp/amp": "^2.6.4",
-        "amphp/parallel": "^1.4.3",
-        "bamarni/composer-bin-plugin": "^1.8.2",
-        "rubix/ml": "dev-chore/bump-flysystem-v2.1.1"
-    },
-    "license": "AGPLv3",
-    "authors": [
-        {
-            "name": "Christoph Wurst",
-            "email": "christoph@winzerhof-wurst.at"
-        }
-    ],
-    "scripts": {
-        "cs:check": "vendor-bin/php-cs-fixer/vendor/php-cs-fixer/shim/php-cs-fixer fix --dry-run --diff",
-        "cs:fix": "vendor-bin/php-cs-fixer/vendor/php-cs-fixer/shim/php-cs-fixer fix",
-        "lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
-        "test": "phpunit -c tests/phpunit.xml",
-        "test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
-        "test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
+	"name": "christophwurst/suspicious_login",
+	"description": "Detect and warn about suspicious IPs logging into Nextcloud",
+	"type": "library",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/nextcloud-deps/RubixML"
+		}
+	],
+	"require": {
+		"amphp/amp": "^2.6.4",
+		"amphp/parallel": "^1.4.3",
+		"bamarni/composer-bin-plugin": "^1.8.2",
+		"rubix/ml": "dev-chore/bump-flysystem-v2.1.1"
+	},
+	"license": "AGPLv3",
+	"authors": [
+		{
+			"name": "Christoph Wurst",
+			"email": "christoph@winzerhof-wurst.at"
+		}
+	],
+	"scripts": {
+		"cs:check": "vendor-bin/php-cs-fixer/vendor/php-cs-fixer/shim/php-cs-fixer fix --dry-run --diff",
+		"cs:fix": "vendor-bin/php-cs-fixer/vendor/php-cs-fixer/shim/php-cs-fixer fix",
+		"lint": "find . -name \\*.php -not -path './vendor/*' -print0 | xargs -0 -n1 php -l",
+		"test": "phpunit -c tests/phpunit.xml",
+		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
+		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
 		"post-install-cmd": ["@composer bin all install --ansi"],
-		"post-update-cmd": ["@composer bin all update --ansi"]
-    },
-    "require-dev": {
-        "christophwurst/nextcloud_testing": "^0.12.4"
-    },
+		"post-update-cmd": ["@composer bin all update --ansi"],
+		"psalm": "psalm --threads=1",
+		"psalm:update-baseline": "psalm --threads=1 --update-baseline",
+		"psalm:update-baseline:force": "psalm --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
+		"psalm:clear": "psalm --clear-cache && psalm --clear-global-cache"
+	},
+	"require-dev": {
+		"christophwurst/nextcloud_testing": "^0.12.4"
+	},
 	"config": {
 		"sort-packages": true,
 		"optimize-autoloader": true,
 		"classmap-authoritative": true,
 		"autoloader-suffix": "SuspiciousLogin",
 		"platform": {
-			"php": "8.0"
+			"php": "8.1"
 		},
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
+		"allow-plugins": {
+			"bamarni/composer-bin-plugin": true
+		}
 	},
 	"autoload" : {
 		"psr-4": {

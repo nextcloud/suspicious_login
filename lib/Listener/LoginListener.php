@@ -17,6 +17,9 @@ use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\IRequest;
 
+/**
+ * @implements IEventListener<PostLoginEvent>
+ */
 class LoginListener implements IEventListener {
 
 	/** @var IRequest */

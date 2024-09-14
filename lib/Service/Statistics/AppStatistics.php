@@ -69,7 +69,7 @@ class AppStatistics implements JsonSerializable {
 		return $this->trainingDataStatistics;
 	}
 
-	public function jsonSerialize() {
+	public function jsonSerialize(): array {
 		return [
 			'active' => $this->isActive(),
 			'recentModels' => $this->getRecentModels(),

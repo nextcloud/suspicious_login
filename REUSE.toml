@@ -6,33 +6,27 @@ SPDX-PackageSupplier = "Nextcloud <info@nextcloud.com>"
 SPDX-PackageDownloadLocation = "https://github.com/nextcloud/suspicious_login"
 
 [[annotations]]
-path = [".tx/config", "l10n/**.js", "l10n/**.json", "screenshots/admin_settings.png", "screenshots/notification_android.png", "screenshots/notification_web.png"]
+path = [".tx/config", "l10n/**.js", "l10n/**.json", "**/composer.json", "**/composer.lock", "package.json", "package-lock.json", "renovate.json", ".github/CODEOWNERS", "tests/psalm-baseline.xml"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2019 Nextcloud GmbH and Nextcloud contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later"
+SPDX-FileCopyrightText = "2021 Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
-path = [".github/CODEOWNERS", "renovate.json"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2023 Nextcloud GmbH and Nextcloud contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later"
-
-[[annotations]]
-path = ["composer.json", "composer.lock"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2018 Nextcloud GmbH and Nextcloud contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later"
-
-[[annotations]]
-path = ["vendor-bin/php-cs-fixer/composer.json", "vendor-bin/php-cs-fixer/composer.lock"]
+path = ["tsconfig.json", "vite.config.ts"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
-path = ["package.json", "package-lock.json", "tests/phpunit.xml"]
+path = ["css/*.css", "css/*.map", "js/*.js.map"]
 precedence = "aggregate"
-SPDX-FileCopyrightText = "2019 Nextcloud GmbH and Nextcloud contributors"
+SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ["screenshots/*.png"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
@@ -40,9 +34,3 @@ path = ["img/app.svg", "img/app-dark.svg"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2018-2024 Google LLC"
 SPDX-License-Identifier = "Apache-2.0"
-
-[[annotations]]
-path = ["js/settings.js", "js/settings.js.LICENSE.txt", "js/settings.js.map"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2019 Nextcloud GmbH and Nextcloud contributors, 2020 Chart.js Contributors, 2014-2022 Evan You, 2011-2023 Tim Wood, Iskren Chernev, Moment.js contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later AND MIT"

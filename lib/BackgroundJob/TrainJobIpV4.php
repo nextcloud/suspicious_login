@@ -45,7 +45,7 @@ class TrainJobIpV4 extends TimedJob {
 	/**
 	 * @param $argument
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	protected function run($argument) {
 		try {

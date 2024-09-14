@@ -89,7 +89,7 @@ class TrainingDataConfig implements JsonSerializable {
 		return $clone;
 	}
 
-	public function jsonSerialize() {
+	public function jsonSerialize(): array {
 		return [
 			'maxAge' => $this->getMaxAge(),
 			'threshold' => $this->getThreshold(),

@@ -64,7 +64,7 @@ class LoginClassifier {
 	 */
 	private function isAuthenticatedWithAppPassword(IRequest $request): bool {
 		$authHeader = $request->getHeader('Authorization');
-		if (is_null($authHeader)) {
+		if (empty($authHeader)) {
 			return false;
 		}
 		if (substr($authHeader, 0, strlen('Basic ')) !== 'Basic ') {
@@ -113,7 +113,7 @@ class LoginClassifier {
 	 * @param string $uid
 	 * @param string $ip
 	 */
-	private function persistSuspiciousLogin(string $uid, string $ip): SuspiciousLogin {
+	private function persistSuspiciousLogin(string $uid, string $ip): ?SuspiciousLogin {
 		try {
 			$entity = new SuspiciousLogin();
 			$entity->setUid($uid);
@@ -128,15 +128,24 @@ class LoginClassifier {
 		} catch (Throwable $ex) {
 			$this->logger->critical("could not save the details of a suspicious login");
 			$this->logger->logException($ex);
+			return null;
 		}
 	}
 
 	/**
 	 * @param string $uid
 	 * @param string $ip
-	 * @param SuspiciousLogin $login
+	 * @param ?SuspiciousLogin $login If null the user will be notified regardless of training thresholds
 	 */
-	private function notifyUser(string $uid, string $ip, SuspiciousLogin $login): void {
+	private function notifyUser(string $uid, string $ip, ?SuspiciousLogin $login): void {
+		if ($login === null) {
+			// There was an error persisting the login attempt, so we can not look for related events in the past.
+			// But we should still warn the user and not silently accept that attempt.
+			$event = new SuspiciousLoginEvent($uid, $ip);
+			$this->dispatcher->dispatchTyped($event);
+			return;
+		}
+
 		$now = $this->timeFactory->getTime();
 
 		// Assuming that a suspicious IP is most likely one that hasn't been seen before
@@ -167,7 +176,7 @@ class LoginClassifier {
 		}
 
 		$event = new SuspiciousLoginEvent($uid, $ip);
-		$this->dispatcher->dispatch(SuspiciousLoginEvent::class, $event);
+		$this->dispatcher->dispatchTyped($event);
 		$login->setNotificationState(NotificationState::SENT);
 
 		$this->mapper->update($login);

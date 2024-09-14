@@ -73,7 +73,7 @@ class DataLoader {
 	}
 
 	/**
-	 * @param LoginAddressAggregated[] $loginAddresses
+	 * @param list<LoginAddressAggregated> $loginAddresses
 	 */
 	private function addressesToDataSet(array $loginAddresses, AClassificationStrategy $strategy): Labeled {
 		$deep = array_map(function (LoginAddressAggregated $addr) use ($strategy) {

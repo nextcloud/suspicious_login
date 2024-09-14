@@ -12,6 +12,7 @@ namespace OCA\SuspiciousLogin\Migration;
 use Closure;
 use Doctrine\DBAL\Types\Type;
 use OCP\DB\ISchemaWrapper;
+use OCP\DB\Types;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
@@ -22,7 +23,7 @@ class Version0Date20181214103754 extends SimpleMigrationStep {
 	 * @param Closure $schemaClosure The `\Closure` returns a `ISchemaWrapper`
 	 * @param array $options
 	 *
-	 * @return ISchemaWrapper
+	 * @return ISchemaWrapper|null
 	 */
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options) {
 		/** @var ISchemaWrapper $schema */
@@ -30,7 +31,7 @@ class Version0Date20181214103754 extends SimpleMigrationStep {
 
 		$table = $schema->getTable('suspicious_login_model');
 		$table->getColumn('app_version')
-			->setType(Type::getType('string'));
+			->setType(Type::getType(Types::STRING));
 
 		return $schema;
 	}
