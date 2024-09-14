@@ -13,27 +13,19 @@ use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
-use OCP\ILogger;
 use OCP\Notification\IManager;
+use Psr\Log\LoggerInterface;
 
 /**
  * @implements IEventListener<SuspiciousLoginEvent>
  */
 class LoginNotificationListener implements IEventListener {
 
-	/** @var IManager */
-	private $notificationManager;
-	/** @var ITimeFactory */
-	private $timeFactory;
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(IManager $notificationManager,
-		ITimeFactory $timeFactory,
-		ILogger $logger) {
-		$this->notificationManager = $notificationManager;
-		$this->timeFactory = $timeFactory;
-		$this->logger = $logger;
+	public function __construct(
+		private IManager $notificationManager,
+		private ITimeFactory $timeFactory,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	public function handle(Event $event): void {
@@ -52,8 +44,7 @@ class LoginNotificationListener implements IEventListener {
 				]);
 			$this->notificationManager->notify($notification);
 		} catch (\Throwable $ex) {
-			$this->logger->critical("could not send notification about a suspicious login");
-			$this->logger->logException($ex);
+			$this->logger->critical('Could not send notification about a suspicious login', ['exception' => $ex]);
 		}
 	}
 }

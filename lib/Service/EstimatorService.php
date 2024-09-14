@@ -10,22 +10,16 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Exception\ServiceException;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use Rubix\ML\Datasets\Unlabeled;
 use RuntimeException;
 
 class EstimatorService {
 
-	/** @var ModelStore */
-	private $modelStore;
-
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(ModelStore $modelStore,
-		ILogger $logger) {
-		$this->modelStore = $modelStore;
-		$this->logger = $logger;
+	public function __construct(
+		private ModelStore $modelStore,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	/**

@@ -16,8 +16,8 @@ use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\IEventDispatcher;
-use OCP\ILogger;
 use OCP\IRequest;
+use Psr\Log\LoggerInterface;
 use Throwable;
 use function base64_decode;
 use function explode;
@@ -27,36 +27,14 @@ use function substr;
 
 class LoginClassifier {
 
-	/** @var EstimatorService */
-	private $estimator;
-
-	/** @var IRequest */
-	private $request;
-
-	/** @var ILogger */
-	private $logger;
-
-	/** @var SuspiciousLoginMapper */
-	private $mapper;
-
-	/** @var ITimeFactory */
-	private $timeFactory;
-
-	/** @var IEventDispatcher */
-	private $dispatcher;
-
-	public function __construct(EstimatorService $estimator,
-		IRequest $request,
-		ILogger $logger,
-		SuspiciousLoginMapper $mapper,
-		ITimeFactory $timeFactory,
-		IEventDispatcher $dispatcher) {
-		$this->estimator = $estimator;
-		$this->request = $request;
-		$this->logger = $logger;
-		$this->mapper = $mapper;
-		$this->timeFactory = $timeFactory;
-		$this->dispatcher = $dispatcher;
+	public function __construct(
+		private EstimatorService $estimator,
+		private IRequest $request,
+		private LoggerInterface $logger,
+		private SuspiciousLoginMapper $mapper,
+		private ITimeFactory $timeFactory,
+		private IEventDispatcher $dispatcher,
+	) {
 	}
 
 	/**
@@ -126,8 +104,7 @@ class LoginClassifier {
 
 			return $entity;
 		} catch (Throwable $ex) {
-			$this->logger->critical("could not save the details of a suspicious login");
-			$this->logger->logException($ex);
+			$this->logger->critical('could not save the details of a suspicious login', ['exception' => $ex]);
 			return null;
 		}
 	}

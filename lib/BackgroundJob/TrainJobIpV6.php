@@ -15,20 +15,16 @@ use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCA\SuspiciousLogin\Service\TrainService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\BackgroundJob\TimedJob;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 class TrainJobIpV6 extends TimedJob {
 
-	/** @var TrainService */
-	private $trainService;
-
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(TrainService $trainService,
-		ILogger $logger,
-		ITimeFactory $time) {
+	public function __construct(
+		private TrainService $trainService,
+		private LoggerInterface $logger,
+		ITimeFactory $time,
+	) {
 		parent::__construct($time);
 
 		$this->setInterval(24 * 60 * 60);
@@ -38,8 +34,6 @@ class TrainJobIpV6 extends TimedJob {
 		if (defined('\OCP\BackgroundJob\IJob::TIME_INSENSITIVE') && method_exists($this, 'setTimeSensitivity')) {
 			$this->setTimeSensitivity(self::TIME_INSENSITIVE);
 		}
-		$this->trainService = $trainService;
-		$this->logger = $logger;
 	}
 
 	/**
@@ -56,15 +50,9 @@ class TrainJobIpV6 extends TimedJob {
 				$strategy
 			);
 		} catch (InsufficientDataException $ex) {
-			$this->logger->logException($ex, [
-				'level' => ILogger::INFO,
-				'message' => 'No suspicious login model for IPv6 trained because of insufficient data',
-			]);
+			$this->logger->info('No suspicious login model for IPv6 trained because of insufficient data', ['exception' => $ex]);
 		} catch (Throwable $ex) {
-			$this->logger->logException($ex, [
-				'level' => ILogger::ERROR,
-				'message' => 'Caught unknown error during IPv6 background training',
-			]);
+			$this->logger->error('Caught unknown error during IPv6 background training', ['exception' => $ex]);
 		}
 	}
 }

@@ -18,8 +18,8 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
 use OCP\ICacheFactory;
-use OCP\ILogger;
 use OCP\ITempManager;
+use Psr\Log\LoggerInterface;
 use Rubix\ML\Estimator;
 use Rubix\ML\Persistable;
 use Rubix\ML\Persisters\Filesystem;
@@ -32,36 +32,14 @@ use function strlen;
 class ModelStore {
 	public const APPDATA_MODELS_FOLDER = 'models';
 
-	/** @var ModelMapper */
-	private $modelMapper;
-
-	/** @var IAppData */
-	private $appData;
-
-	/** @var IAppManager */
-	private $appManager;
-
-	/** @var ITempManager */
-	private $tempManager;
-
-	/** @var ICacheFactory */
-	private $cacheFactory;
-
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(ModelMapper $modelMapper,
-		IAppData $appData,
-		IAppManager $appManager,
-		ITempManager $tempManager,
-		ICacheFactory $cachFactory,
-		ILogger $logger) {
-		$this->appData = $appData;
-		$this->appManager = $appManager;
-		$this->modelMapper = $modelMapper;
-		$this->tempManager = $tempManager;
-		$this->cacheFactory = $cachFactory;
-		$this->logger = $logger;
+	public function __construct(
+		private ModelMapper $modelMapper,
+		private IAppData $appData,
+		private IAppManager $appManager,
+		private ITempManager $tempManager,
+		private ICacheFactory $cacheFactory,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	/**
