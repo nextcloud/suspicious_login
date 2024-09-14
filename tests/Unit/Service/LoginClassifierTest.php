@@ -18,9 +18,9 @@ use OCA\SuspiciousLogin\Service\LoginClassifier;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\IEventDispatcher;
-use OCP\ILogger;
 use OCP\IRequest;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use function array_fill;
 
 class LoginClassifierTest extends TestCase {
@@ -34,8 +34,7 @@ class LoginClassifierTest extends TestCase {
 	/** @var SuspiciousLoginMapper|MockObject */
 	private $mapper;
 
-	/** @var ILogger|MockObject */
-	private $logger;
+	private LoggerInterface&MockObject $logger;
 
 	/** @var ITimeFactory|MockObject */
 	private $timeFactory;
@@ -50,7 +49,7 @@ class LoginClassifierTest extends TestCase {
 
 		$this->estimatorService = $this->createMock(EstimatorService::class);
 		$this->request = $this->createMock(IRequest::class);
-		$this->logger = $this->createMock(ILogger::class);
+		$this->logger = $this->createMock(LoggerInterface::class);
 		$this->mapper = $this->createMock(SuspiciousLoginMapper::class);
 		$this->timeFactory = $this->createMock(ITimeFactory::class);
 		$this->dispatcher = $this->createMock(IEventDispatcher::class);
