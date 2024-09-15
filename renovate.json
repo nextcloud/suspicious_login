@@ -24,10 +24,7 @@
 		"master",
 		"stable30",
 		"stable29",
-		"stable28",
-		"stable27",
-		"stable26",
-		"stable25"
+		"stable28"
 	],
 	"enabledManagers": [
 		"composer",
@@ -63,10 +60,7 @@
 			"matchBaseBranches": [
 				"stable30",
 				"stable29",
-				"stable28",
-				"stable27",
-				"stable26",
-				"stable25"
+				"stable28"
 			],
 			"extends": ["schedule:monthly"]
 		},
