@@ -14,7 +14,7 @@ This file is generated from multiple sources. Included packages:
 	- version: 2.29.4
 	- license: MIT
 - webpack
-	- version: 5.88.2
+	- version: 5.94.0
 	- license: MIT
 - suspicious_login
 	- version: 9.0.0
