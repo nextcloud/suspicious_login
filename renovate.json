@@ -28,12 +28,7 @@
 	],
 	"enabledManagers": [
 		"composer",
-		"github-actions",
-		"npm"
-	],
-	"ignoreDeps": [
-		"node",
-		"npm"
+		"github-actions"
 	],
 	"packageRules": [
 		{

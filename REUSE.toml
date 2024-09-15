@@ -6,22 +6,10 @@ SPDX-PackageSupplier = "Nextcloud <info@nextcloud.com>"
 SPDX-PackageDownloadLocation = "https://github.com/nextcloud/suspicious_login"
 
 [[annotations]]
-path = [".tx/config", "l10n/**.js", "l10n/**.json", "**/composer.json", "**/composer.lock", "package.json", "package-lock.json", "renovate.json", ".github/CODEOWNERS", "tests/psalm-baseline.xml"]
+path = [".tx/config", "l10n/**.js", "l10n/**.json", "**/composer.json", "**/composer.lock", "renovate.json", ".github/CODEOWNERS", "tests/psalm-baseline.xml"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2021 Nextcloud GmbH and Nextcloud contributors"
 SPDX-License-Identifier = "CC0-1.0"
-
-[[annotations]]
-path = ["tsconfig.json", "vite.config.ts"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later"
-
-[[annotations]]
-path = ["css/*.css", "css/*.map", "js/*.js.map"]
-precedence = "aggregate"
-SPDX-FileCopyrightText = "2024 Nextcloud GmbH and Nextcloud contributors"
-SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
 path = ["screenshots/*.png"]
