@@ -6,12 +6,12 @@ OC.L10N.register(
     "Suspicious Login" : "Epäilyttävä kirjautuminen",
     "New login detected" : "Uusi kirjautuminen havaittu",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Havaitsee ja varoittaa epäilyttävistä IP -osoitteista kirjautumassa Nextcloudiin.",
+    "More information ↗" : "Lisää tietoa ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Saat lisätietoa epäilyttävästä IP-osoitteesta avaamalla %s.",
     "Suspicious login detection" : "Epäilyttävän kirjautumisen havaitseminen",
     "Training data statistics" : "Koulutusdatan tilastot",
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
-    "Precision" : "Tarkkuus",
-    "More information ↗" : "Lisää tietoa ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Saat lisätietoa epäilyttävästä IP-osoitteesta avaamalla %s."
+    "Precision" : "Tarkkuus"
 },
 "nplurals=2; plural=(n != 1);");
