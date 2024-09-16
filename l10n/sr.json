@@ -6,6 +6,8 @@
     "Suspicious Login" : "Сумњиве Пријаве",
     "New login detected" : "Примећена нова пријава",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Детектуј и обавештавај о сумњивим IP адресама које се пријављују на Некстклауд\n\t",
+    "More information ↗" : "Више информација ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Притиском на дугме можете да добијете више информација. Отвориће се %s и приказаће се информације у вези са сумњивом IP адресом.",
     "Suspicious login detection" : "Детекција сумњивих пријава",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Апликација сумњивих пријава је укључена на овој инстанци. Пратиће IP адресе са којих се људи пријављују и градиће класификатор који упозорава када пријављивање дође са сумњиве IP адресе.",
     "Training data statistics" : "Статистика тренинг података",
@@ -16,8 +18,6 @@
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Модела класификатора још није истрениран. Ово обично значи да сте недавно укључили апликацију. Пошто тренирање модела захтева добре податке, апликација чека док не ухвате пријаве бар {days} дана.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "За време евалуације, последњи модел (истрениран {time}) је испало да хвата {recall}% сумњивих пријава (осетљивост), док је {precision}% пријава класификовано као сумњиво стварно било сумњиво (прецизност). Испод можете видети историјат перформанси модела.",
     "Precision" : "Прецизност",
-    "Recall" : "Осетљивост",
-    "More information ↗" : "Више информација ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Притиском на дугме можете да добијете више информација. Отвориће се %s и приказаће се информације у вези са сумњивом IP адресом."
+    "Recall" : "Осетљивост"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"
 }

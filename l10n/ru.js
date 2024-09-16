@@ -7,6 +7,8 @@ OC.L10N.register(
     "Suspicious Login" : "Подозрительный вход",
     "New login detected" : "Зарегистрирован новый вход",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Регистрировать и предупреждать о входах в Nextcloud с подозрительных IP-адресов\n\t",
+    "More information ↗" : "Дополнительная информация ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Вы можете получить больше информации, нажав на кнопку, которая откроет %s и покажет информацию о подозрительном IP-адресе.",
     "Suspicious login detection" : "Обнаружение подозрительных входов",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Приложение обнаружения подозрительных входов активировано для этого сервера. Оно будет отслеживать IP-адреса пользователей, которые успешно авторизовались в системе, и создавать классификатор, предупреждающий об авторизации с подозрительных IP-адресов.",
     "Training data statistics" : "Статистика обучающих данных",
@@ -17,8 +19,6 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Ни одна классификационная модель еще не обучена. Это означает, что вы, скорее всего, недавно включили приложение. Так как обучение модели требует наличия надёжных данных, приложение будет ожидать до тех пор, пока не будут отслежены входы в систему по крайней мере за {days} дней.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Во время оценки, последняя модель (обучена {time}) показала, что она отследила {recall}% всех подозрительных входов в систему (полнота), а {precision}% входов, классифицированных моделью как подозрительные, действительно являются таковыми (точность). Ниже вы видите временную диаграмму производительности модели.",
     "Precision" : "Точность",
-    "Recall" : "Полнота",
-    "More information ↗" : "Дополнительная информация ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Вы можете получить больше информации, нажав на кнопку, которая откроет %s и покажет информацию о подозрительном IP-адресе."
+    "Recall" : "Полнота"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");

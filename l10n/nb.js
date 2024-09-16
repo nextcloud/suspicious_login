@@ -8,6 +8,8 @@ OC.L10N.register(
     "Suspicious Login" : "Mistenkelig pålogging",
     "New login detected" : "Ny pålogging oppdaget",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Oppdag og advar om mistenkelige IP-adresser som logger på Nextcloud\n\t",
+    "More information ↗" : "Mer informasjon ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kan få mer info ved å trykke på knappen som vil åpne %s og vise info om den mistenkelige IP-adressen.",
     "Suspicious login detection" : "Oppdagelse av mistenkelig pålogging",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Den mistenkelige påloggingsappen er aktivert på denne forekomsten. Det vil holde oversikt over IP-adresser brukere logger på fra og bygge en klassifiserer som advarer om en ny pålogging kommer fra en mistenkelig IP-adresse.",
     "Training data statistics" : "Treningsdatastatistikk",
@@ -18,8 +20,6 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Ingen klassifiseringsmodell har blitt trent enda. Dette betyr mest sannsynlig at du nettopp har aktivert appen nylig. Fordi opplæring av en modell krever gode data, venter appen til pålogginger på minst {dager} dager er registrert.",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Under evalueringen har den nyeste modellen (trent {time}) vist seg å fange {recall}% av alle mistenkelige pålogginger (tilbakekalling), mens {presisjon}% av påloggingene klassifisert som mistenkelige faktisk er mistenkelige (presisjon). Nedenfor ser du en visualisering av historisk modellytelse.",
     "Precision" : "Presisjon",
-    "Recall" : "Tilbakekalling",
-    "More information ↗" : "Mer informasjon ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kan få mer info ved å trykke på knappen som vil åpne %s og vise info om den mistenkelige IP-adressen."
+    "Recall" : "Tilbakekalling"
 },
 "nplurals=2; plural=(n != 1);");
