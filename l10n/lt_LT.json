@@ -4,11 +4,11 @@
     "Suspicious Login" : "Įtartinas prisijungimas",
     "New login detected" : "Aptiktas naujas prisijungimas",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Aptikti ir įspėti apie įtartinus, prie Nextcloud prisijungiančius, IP adresus\n\t",
+    "More information ↗" : "Daugiau informacijos ↗",
     "Suspicious login detection" : "Įtartinų prisijungimų aptikimas",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Šiame egzemplioriuje yra įjungta įtartinų prisijungimų programėlė. Ji stebės IP adresus, iš kurių naudotojai sėkmingai prisijungia, ir sukurs klasifikatorių, kuris įspės tais atvejai, kai prisijungimas bus vykdomas iš įtartino IP adreso.",
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
-    "Precision" : "Tikslumas",
-    "More information ↗" : "Daugiau informacijos ↗"
+    "Precision" : "Tikslumas"
 },"pluralForm" :"nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);"
 }

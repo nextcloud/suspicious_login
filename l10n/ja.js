@@ -6,6 +6,8 @@ OC.L10N.register(
     "Suspicious Login" : "不審なログイン",
     "New login detected" : "新しいログインが検出されました",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloudにログインする不審なIPを検出して警告します\n\t",
+    "More information ↗" : "詳細情報 ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "ボタンを押すことで、%sが開き、不審なIPアドレスに関する情報が表示され、より詳細な情報を確認できます。",
     "Suspicious login detection" : "不審なログインの検出",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "このインスタンスで不審ログインの検知アプリケーションが有効になっています。ユーザーが正常にログインしたIPアドレスを追跡し、疑わしいIPアドレスから新しいログインがあった場合に警告する分類モデルを構築します。",
     "Training data statistics" : "統計データをトレーニング",
@@ -16,8 +18,6 @@ OC.L10N.register(
     "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "分類モデルはまだトレーニングされていません。これは、最近アプリを有効にしたばかりです。モデルを正しくトレーニングするには良いデータが必要なので、アプリは少なくとも {days} 日はログイン情報がたまるまで必要です。",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "評価中に最新のモデル ({time} 回トレーニングされたもの) で全ての疑わしいログイン (recall)うちの {recall}% を捕捉しました。その中で疑わしいと分類されたログインの {precision}% は実際に疑わしい(正確性)ものです。次の図は、従来のモデルのパフォーマンスを視覚化したものです。",
     "Precision" : "精度",
-    "Recall" : "呼び出し",
-    "More information ↗" : "詳細情報 ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "ボタンを押すことで、%sが開き、不審なIPアドレスに関する情報が表示され、より詳細な情報を確認できます。"
+    "Recall" : "呼び出し"
 },
 "nplurals=1; plural=0;");
