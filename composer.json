@@ -36,7 +36,7 @@
 		"psalm:clear": "psalm --clear-cache && psalm --clear-global-cache"
 	},
 	"require-dev": {
-		"christophwurst/nextcloud_testing": "^0.12.4"
+		"christophwurst/nextcloud_testing": "^1.0.0"
 	},
 	"config": {
 		"sort-packages": true,
