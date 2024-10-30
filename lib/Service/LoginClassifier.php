@@ -114,12 +114,12 @@ class LoginClassifier {
 				return;
 			}
 		} catch (ServiceException $ex) {
-			$this->logger->warning("Could not predict suspiciousness: " . $ex->getMessage());
+			$this->logger->debug("Could not predict suspiciousness: " . $ex->getMessage());
 			// This most likely means there is no trained model yet, so we return early here
 			return;
 		}
 
-		$this->logger->warning("Detected a login from a suspicious login. user=$uid ip=$ip strategy=" . $strategy::getTypeName());
+		$this->logger->info("Detected a login from a suspicious login. user=$uid ip=$ip strategy=" . $strategy::getTypeName());
 
 		$login = $this->persistSuspiciousLogin($uid, $ip);
 		$this->notifyUser($uid, $ip, $login);
@@ -168,7 +168,7 @@ class LoginClassifier {
 
 		$lastTwoDays = count($this->mapper->findRecentByUid($uid, $now - 60 * 60 * 24 * 2));
 		if ($lastTwoDays > 10) {
-			$this->logger->warning("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last two days");
+			$this->logger->info("Suspicious login peak detected: $uid received $lastTwoDays alerts in the last two days");
 			$login->setNotificationState(NotificationState::NOT_SENT_PEAK_TWO_DAYS);
 			$this->mapper->update($login);
 			return;
@@ -176,7 +176,7 @@ class LoginClassifier {
 
 		$lastHour = count($this->mapper->findRecentByUid($uid, $now - 60 * 60));
 		if ($lastHour > 3) {
-			$this->logger->warning("Suspicious login peak detected: $uid received $lastHour alerts in the last hour");
+			$this->logger->info("Suspicious login peak detected: $uid received $lastHour alerts in the last hour");
 			$login->setNotificationState(NotificationState::NOT_SENT_PEAK_ONE_HOUR);
 			$this->mapper->update($login);
 			return;
