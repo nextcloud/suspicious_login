@@ -1,0 +1,23 @@
+{ "translations": {
+    "New login location detected" : "يېڭى كىرىش ئورنى بايقالدى",
+    "More info about the suspicious IP address available on %s" : "% S دىكى گۇمانلىق IP ئادرېس ھەققىدە تېخىمۇ كۆپ ئۇچۇرلار",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "ھېساباتىڭىزغا يېڭى كىرىش بايقالدى. IP ئادرېس% s گۇمانلىق دەپ ئايرىلدى. ئەگەر بۇ سىز بولسىڭىز ، بۇ ئۇچۇرغا سەل قارىسىڭىز بولىدۇ. بولمىسا پارولىڭىزنى ئۆزگەرتىشىڭىز كېرەك.",
+    "Open %s ↗" : "% S Open نى ئېچىڭ",
+    "Suspicious Login" : "گۇمانلىق كىرىش",
+    "New login detected" : "يېڭى كىرىش بايقالدى",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloud غا گۇمانلىق IP لارنىڭ كىرىدىغانلىقىنى بايقاش ۋە ئاگاھلاندۇرۇش\n\t",
+    "More information ↗" : "تېخىمۇ كۆپ ئۇچۇرلار ↗",
+    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "% S نى ئاچىدىغان ۋە گۇمانلىق IP ئادرېس ھەققىدىكى ئۇچۇرلارنى كۆرسىتىدىغان كۇنۇپكىنى بېسىش ئارقىلىق تېخىمۇ كۆپ ئۇچۇرلارغا ئېرىشەلەيسىز.",
+    "Suspicious login detection" : "گۇمانلىق كىرىشنى بايقاش",
+    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "گۇمانلىق كىرىش دېتالى بۇ ئەھۋالدا قوزغىتىلغان. ئۇ ئىشلەتكۈچىلەرنىڭ مۇۋەپپەقىيەتلىك ھالدا كىرگەن IP ئادرېسلىرىنى خاتىرىلەيدۇ ۋە يېڭى كىرىشنىڭ گۇمانلىق IP ئادرېسىدىن كەلگەن-كەلمەيدىغانلىقىنى ئاگاھلاندۇرىدىغان تۈرگە ئايرىيدۇ.",
+    "Training data statistics" : "تەربىيىلەش سانلىق مەلۇمات ستاتىستىكىسى",
+    "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "ھازىرغا قەدەر بۇ ئەپ {ئومۇمىي} كىرىش (خېرىدارلارنىڭ ئۇلىنىشىنىمۇ ئۆز ئىچىگە ئالىدۇ) نى قولغا چۈشۈردى ، بۇنىڭ ئىچىدە {پەرقلىق} پەرقلىق (IP ، UID).",
+    "IPv4" : "IPv4",
+    "IPv6" : "IPv6",
+    "Classifier model statistics" : "تۈرگە ئايرىش مودېلى ستاتىستىكىسى",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "ھېچقانداق تۈرگە ئايرىش ئەندىزىسى تېخى تەربىيەلەنمىگەن. بۇ بەلكىم يېقىندىن بۇيان بۇ ئەپنى قوزغىغانلىقىڭىزدىن دېرەك بېرىدۇ. بىر مودېلنى تەربىيىلەش ياخشى سانلىق مەلۇماتقا ئېھتىياجلىق بولغاچقا ، بۇ دېتال كەم دېگەندە {كۈن} كۈننىڭ خاتىرىلىرى تۇتۇلغۇچە ساقلايدۇ.",
+    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "باھالاش جەريانىدا ، ئەڭ يېڭى مودېل (تەربىيەلەنگەن {ۋاقىت}) بارلىق گۇمانلىق كىرىش (قايتۇرۇۋېلىش) نىڭ% {نى خاتىرىلەش (قايتۇرۇۋېلىش) نى قولغا كەلتۈردى ، ھالبۇكى گۇمانلىق دەپ ئايرىلغان تىزىمنىڭ {ئېنىقلىق}% ھەقىقەتەن گۇمانلىق (ئېنىقلىق). تۆۋەندە سىز تارىخىي مودېلنىڭ ئىپادىسىنى كۆرەلەيسىز.",
+    "Precision" : "ئېنىقلىق",
+    "Recall" : "ئەسلەڭ"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
