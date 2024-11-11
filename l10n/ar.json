@@ -15,7 +15,7 @@
     "IPv4" : "IPv4",
     "IPv6" : "IPv6",
     "Classifier model statistics" : "إحصائيّات نموذج مُصنّف",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "لم يتم تدريب أي نموذجٍ مُصنِّفٍ بعدُ. و هذا يعني غالباً أنك قد مكّنت التطبيق للتّوّ. و بالنظر إلى أن التدريب يتطلب بياناتٍ جيدةٍ، فإن التطبيق سينتظر حتى يتم التقاط عمليات دخولٍ لعدد {days} يوماً على الأقل.  ",
+    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "لم يتم تدريب أي نموذجٍ مُصنِّفٍ حتى الآن. و هذا يعني غالباً أنك قد مكّنت التطبيق للتّوّ. و بالنظر إلى أن التدريب يتطلب بياناتٍ جيدةٍ، فإن التطبيق سينتظر حتى يتم التقاط عمليات دخولٍ لعدد {days} يوماً على الأقل.  ",
     "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "خلال التقييم، أظهر النموذج الأخير ( المُدرَّب {time}) أنّه استطاع التقاط {recall}% من جملة محاولات الدخول المشبوهة (تذكُّر)، بينما تبيّن أن {precision}% من المحاولات المُصنّفة مشبوهةٌ هي مشبوهةُ فعلاً (دقّة).  تجد أدناه شكلاً يوضح أداء النموذج تاريخيّاً.",
     "Precision" : "دقّة",
     "Recall" : "تذكُّر"
