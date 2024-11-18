@@ -11,7 +11,7 @@ OC.L10N.register(
     "More information ↗" : "Máis información ↗",
     "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Pode obter máis información premendo o botón que abrirá %s e amosará información sobre o enderezo IP sospeitoso.",
     "Suspicious login detection" : "Detección de accesos sospeitosos",
-    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A aplicación de detección de accesos sospeitosos está activa nesta instalación. Rexistraranse os enderezos IP dos usuarios que accedan e construirase un clasificador que alertará ao detectar un acceso dende un IP sospeitoso.",
+    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A aplicación de detección de accesos sospeitosos está activa nesta instalación. Rexistraranse os enderezos IP dos usuarios que accedan e construirase un clasificador que alertará ao detectar un acceso desde un IP sospeitoso.",
     "Training data statistics" : "Estatísticas de datos de adestramento",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Polo de agora esta aplicación rexistrou {total} accesos (nos que se inclúen as conexións dos clientes), entre os cales hai {distinct} tuplas (IP, UID) distintas.",
     "IPv4" : "IPv4",
