@@ -33,7 +33,7 @@ class EstimatorService {
 	public function predict(string $uid, string $ip, AClassificationStrategy $strategy, ?int $modelId = null): bool {
 		try {
 			if ($modelId === null) {
-				$this->logger->debug("loading latest model");
+				$this->logger->debug('loading latest model');
 
 				$estimator = $this->modelStore->loadLatest($strategy);
 			} else {

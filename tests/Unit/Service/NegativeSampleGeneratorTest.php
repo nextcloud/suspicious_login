@@ -134,9 +134,9 @@ class NegativeSampleGeneratorTest extends TestCase {
 	private static function decToBitArray(int $dec, int $length): array {
 		return array_map(
 			function (string $d): int {
-				return (int) $d;
+				return (int)$d;
 			},
-			str_split(str_pad(decbin($dec), $length, "0", STR_PAD_LEFT))
+			str_split(str_pad(decbin($dec), $length, '0', STR_PAD_LEFT))
 		);
 	}
 }

@@ -39,7 +39,7 @@ class Train extends Command {
 	public function __construct(DataLoader $loader,
 		Trainer $optimizer,
 		ModelStore $store) {
-		parent::__construct("suspiciouslogin:train");
+		parent::__construct('suspiciouslogin:train');
 		$this->trainer = $optimizer;
 		$this->loader = $loader;
 		$this->store = $store;
@@ -48,56 +48,56 @@ class Train extends Command {
 			'epochs',
 			'e',
 			InputOption::VALUE_OPTIONAL,
-			"number of epochs to train"
+			'number of epochs to train'
 		);
 		$this->addOption(
 			'layers',
 			'l',
 			InputOption::VALUE_OPTIONAL,
-			"number of hidden layers"
+			'number of hidden layers'
 		);
 		$this->addOption(
 			'shuffled',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"ratio of shuffled negative samples"
+			'ratio of shuffled negative samples'
 		);
 		$this->addOption(
 			'random',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"ratio of random negative samples"
+			'ratio of random negative samples'
 		);
 		$this->addOption(
 			'learn-rate',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"learning rate"
+			'learning rate'
 		);
 		$this->addOption(
 			'validation-threshold',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"determines how much of the most recent data is used for validation. the default is one week"
+			'determines how much of the most recent data is used for validation. the default is one week'
 		);
 		$this->addOption(
 			'max-age',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"determines the maximum age of test data"
+			'determines the maximum age of test data'
 		);
 		$this->addOption(
 			'now',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"overwrite the current time",
+			'overwrite the current time',
 			time()
 		);
 		$this->addOption(
 			'v6',
 			null,
 			InputOption::VALUE_NONE,
-			"train with IPv6 data"
+			'train with IPv6 data'
 		);
 		$this->addOption(
 			'dry-run',
@@ -109,7 +109,7 @@ class Train extends Command {
 			'now',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"the current time as timestamp",
+			'the current time as timestamp',
 			time()
 		);
 		$this->registerStatsOption();
@@ -134,7 +134,7 @@ class Train extends Command {
 			$config = $config->setLearningRate((float)$input->getOption('learn-rate'));
 		}
 
-		$trainingDataConfig = TrainingDataConfig::default((int) $input->getOption('now'));
+		$trainingDataConfig = TrainingDataConfig::default((int)$input->getOption('now'));
 		if ($input->getOption('validation-threshold') !== null) {
 			$trainingDataConfig = $trainingDataConfig->setThreshold((int)$input->getOption('validation-threshold'));
 		}
@@ -171,13 +171,13 @@ class Train extends Command {
 					$result->getClassifier(),
 					$result->getModel()
 				);
-				$output->writeln("<info>Model and estimator persisted.</info>");
+				$output->writeln('<info>Model and estimator persisted.</info>');
 			}
 		} catch (InsufficientDataException $ex) {
-			$output->writeln("<info>Not enough data, try again later (<error>" . $ex->getMessage() . "</error>)</info>");
+			$output->writeln('<info>Not enough data, try again later (<error>' . $ex->getMessage() . '</error>)</info>');
 			return 1;
 		} catch (ServiceException $ex) {
-			$output->writeln("<error>Could not train a model: " . $ex->getMessage() . "</error>");
+			$output->writeln('<error>Could not train a model: ' . $ex->getMessage() . '</error>');
 			return 1;
 		}
 		return 0;
