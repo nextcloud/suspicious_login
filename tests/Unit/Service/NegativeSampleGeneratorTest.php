@@ -132,6 +132,7 @@ class NegativeSampleGeneratorTest extends TestCase {
 	 * DataSet can consist of multiple unique entries only. If not handled correctly,
 	 * this will result in an array without any IP. This tests the
 	 * correct handling. See GitHub issue #860 for more.
+	 * @return void
 	 */
 	public function testGenerateMultipleShuffledFromUniquesOnly(): void {
 		$positives = new Unlabeled([
@@ -151,7 +152,7 @@ class NegativeSampleGeneratorTest extends TestCase {
 			$ipVec = array_slice($sample, 16, 32);
 
 			self::assertTrue(
-				$ipVec == self::decToBitArray(1, 32) ||
+				$ipVec === self::decToBitArray(1, 32) ||
 				$ipVec === self::decToBitArray(2, 32),
 				'Sample has an unique IP'
 			);
