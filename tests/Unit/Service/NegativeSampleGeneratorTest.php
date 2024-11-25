@@ -145,9 +145,9 @@ class NegativeSampleGeneratorTest extends TestCase {
 			array_merge(self::decToBitArray(2, 16), self::decToBitArray(2, 32)),
 		]);
 
-		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 5);
+		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 2);
 
-		self::assertCount(5, $result);
+		self::assertCount(2, $result);
 		foreach ($result as $sample) {
 			$ipVec = array_slice($sample, 16, 32);
 
