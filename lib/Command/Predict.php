@@ -24,30 +24,30 @@ class Predict extends Command {
 	private $estimatorService;
 
 	public function __construct(EstimatorService $estimatorService) {
-		parent::__construct("suspiciouslogin:predict");
+		parent::__construct('suspiciouslogin:predict');
 
 		$this->estimatorService = $estimatorService;
 
 		$this->addArgument(
 			'uid',
 			InputArgument::REQUIRED,
-			"the UID of the user to run a prediction for"
+			'the UID of the user to run a prediction for'
 		);
 		$this->addArgument(
 			'ip',
 			InputArgument::REQUIRED,
-			"the IP to predict suspiciousness"
+			'the IP to predict suspiciousness'
 		);
 		$this->addArgument(
 			'model',
 			InputArgument::OPTIONAL,
-			"persisted model id (latest if omited)"
+			'persisted model id (latest if omited)'
 		);
 		$this->addOption(
 			'v6',
 			null,
 			InputOption::VALUE_NONE,
-			"train with IPv6 data"
+			'train with IPv6 data'
 		);
 	}
 

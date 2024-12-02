@@ -21,7 +21,7 @@ class ETL extends Command {
 	private $etlService;
 
 	public function __construct(ETLService $etlService) {
-		parent::__construct("suspiciouslogin:etl");
+		parent::__construct('suspiciouslogin:etl');
 
 		$this->etlService = $etlService;
 
