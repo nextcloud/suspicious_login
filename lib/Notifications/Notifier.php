@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Notifications;
 
-use InvalidArgumentException;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCP\IConfig;
 use OCP\IRequest;
@@ -18,6 +17,7 @@ use OCP\L10N\IFactory;
 use OCP\Notification\IAction;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
+use OCP\Notification\UnknownNotificationException;
 
 class Notifier implements INotifier {
 
@@ -51,7 +51,7 @@ class Notifier implements INotifier {
 	public function prepare(INotification $notification, string $languageCode): INotification {
 		if ($notification->getApp() !== Application::APP_ID) {
 			// Not my app => throw
-			throw new InvalidArgumentException();
+			throw new UnknownNotificationException();
 		}
 
 		// Read the language from the notification
@@ -65,7 +65,7 @@ class Notifier implements INotifier {
 			case 'suspicious_login_detected':
 				if ($suspiciousIp === $this->request->getRemoteAddress()) {
 					// It is the potential attacking user so don't render the notification for them
-					throw new InvalidArgumentException();
+					throw new UnknownNotificationException();
 				}
 
 				$additionalText = '';
@@ -94,7 +94,7 @@ class Notifier implements INotifier {
 				return $notification;
 			default:
 				// Unknown subject => Unknown notification => throw
-				throw new InvalidArgumentException();
+				throw new UnknownNotificationException();
 		}
 	}
 }
