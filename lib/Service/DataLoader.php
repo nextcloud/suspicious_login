@@ -49,7 +49,7 @@ class DataLoader {
 		$maxAge = $dataConfig->getMaxAge() === -1 ? 0 : $dataConfig->getNow() - $dataConfig->getMaxAge() * 60 * 60 * 24;
 
 		if (!$strategy->hasSufficientData($this->loginAddressMapper, $maxAge)) {
-			throw new InsufficientDataException("Not enough data for the specified maximum age");
+			throw new InsufficientDataException('Not enough data for the specified maximum age');
 		}
 		[$historyRaw, $recentRaw] = $strategy->findHistoricAndRecent(
 			$this->loginAddressMapper,
@@ -57,10 +57,10 @@ class DataLoader {
 			$maxAge
 		);
 		if (empty($historyRaw)) {
-			throw new InsufficientDataException("No historic data available");
+			throw new InsufficientDataException('No historic data available');
 		}
 		if (empty($recentRaw)) {
-			throw new InsufficientDataException("No recent data available");
+			throw new InsufficientDataException('No recent data available');
 		}
 
 		$positives = $this->addressesToDataSet($historyRaw, $strategy);

@@ -70,7 +70,7 @@ class Notifier implements INotifier {
 
 				$additionalText = '';
 				// Add button for more information about the IP-address
-				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === "1") {
+				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === '1') {
 					$action = $notification->createAction();
 					$label = $l->t('Open %s ↗', ['iplookup.flagfox.net']);
 					$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
