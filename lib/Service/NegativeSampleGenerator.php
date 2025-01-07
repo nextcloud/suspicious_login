@@ -38,6 +38,10 @@ use function range;
 use function str_split;
 
 class NegativeSampleGenerator {
+	/**
+	 * Get IP vectors exclusively used by one user.
+	 * Includes the user vector in second dimension of the returned array.
+	 */
 	private function getUniqueIPsPerUser(Dataset $positives): array {
 		$map = [];
 
@@ -51,7 +55,7 @@ class NegativeSampleGenerator {
 				$map[$ipVecStr] = [
 					$uidVecStr,
 				];
-			} else {
+			} elseif (!in_array($uidVecStr, $map[$ipVecStr])) {
 				$map[$ipVecStr][] = $uidVecStr;
 			}
 		}
