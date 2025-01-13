@@ -10,12 +10,12 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use OCA\SuspiciousLogin\Db\Model;
-use Rubix\ML\Estimator;
+use Rubix\ML\Learner;
 use Rubix\ML\Report;
 
 class TrainingResult {
 
-	/** @var Estimator */
+	/** @var Learner */
 	private $classifier;
 
 	/** @var Model */
@@ -24,7 +24,7 @@ class TrainingResult {
 	/** @var Report */
 	private $report;
 
-	public function __construct(Estimator $classifier,
+	public function __construct(Learner $classifier,
 		Model $model,
 		Report $report) {
 		$this->classifier = $classifier;
@@ -32,7 +32,7 @@ class TrainingResult {
 		$this->report = $report;
 	}
 
-	public function getClassifier(): Estimator {
+	public function getClassifier(): Learner {
 		return $this->classifier;
 	}
 
