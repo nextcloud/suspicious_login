@@ -21,7 +21,9 @@ use OCP\ICacheFactory;
 use OCP\ITempManager;
 use Psr\Log\LoggerInterface;
 use Rubix\ML\Estimator;
+use Rubix\ML\Learner;
 use Rubix\ML\Persistable;
+use Rubix\ML\PersistentModel;
 use Rubix\ML\Persisters\Filesystem;
 use RuntimeException;
 use Throwable;
@@ -110,26 +112,21 @@ class ModelStore {
 		file_put_contents($tmpFile, $serialized);
 
 		try {
-			$persister = new Filesystem($tmpFile);
-			$estimator = $persister->load();
+			$learner = PersistentModel::load(new Filesystem($tmpFile));
 		} catch (RuntimeException $e) {
 			$this->logger->error("Could not deserialize persisted model $id: " . $e->getMessage());
 
 			throw $e;
 		}
 
-		if (!($estimator instanceof Estimator)) {
-			throw new RuntimeException("Deserialized object is not an estimator");
-		}
-
-		return $estimator;
+		return $learner;
 	}
 
 	/**
-	 * @param Estimator $estimator (Must implement Persistable)
+	 * @param Learner $estimator (Must implement Persistable)
 	 * @todo encapsulate in transaction to prevent inconsistencies
 	 */
-	public function persist(Estimator $estimator, Model $model) {
+	public function persist(Learner $estimator, Model $model) {
 		if (!($estimator instanceof Persistable)) {
 			throw new RuntimeException("Estimator is not persistable");
 		}
@@ -151,8 +148,8 @@ class ModelStore {
 			// Inefficient, but we can't get the real path from app data as it might
 			// not be a local file
 			$tmpFile = $this->tempManager->getTemporaryFile();
-			$persister = new Filesystem($tmpFile);
-			$persister->save($estimator);
+			$persistentModel = new PersistentModel($estimator, new Filesystem($tmpFile));
+			$persistentModel->save();
 
 			$modelFile->putContent(file_get_contents($tmpFile));
 		} catch (Throwable $e) {
