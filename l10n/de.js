@@ -7,7 +7,7 @@ OC.L10N.register(
     "Open %s ↗" : "Öffne %s ↗",
     "Suspicious Login" : "Verdächtige Anmeldung",
     "New login detected" : "Neue Anmeldung erkannt",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Erkenne und melde verdächtige Anmeldungen in Nextcloud\n",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Erkenne und melde verdächtige Anmeldungen in Nextcloud\n\t",
     "More information ↗" : "Weitere Informationen ↗",
     "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kannst weitere Informationen erhalten, indem du die Schaltfläche drückst, um  %s zu öffnen und Informationen über die verdächtige IP-Adresse anzuzeigen.",
     "Suspicious login detection" : "Erkennung verdächtiger Anmeldungen",
