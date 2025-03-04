@@ -2,7 +2,9 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Új bejelentkezési hely észlelve",
+    "More info about the suspicious IP address available on %s" : "További információ érhető el a gyanús IP-címről itt: %s",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "A fiókjába új bejelentkezés lett észlelve. A(z) %s IP-cím gyanús besorolású. Ha ez Ön volt, figyelmen kívül hagyhatja a figyelmeztetést. Egyéb esetben változtasson jelszót.",
+    "Open %s ↗" : "%s megnyitása ↗",
     "Suspicious Login" : "Gyanús bejelentkezés",
     "New login detected" : "Új belépes észlelve",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "A gyanús IP-címekről történő Nextcloud bejelentkezések észlelések és figyelmeztetés küldése ezekről",
