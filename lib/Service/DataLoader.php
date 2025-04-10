@@ -56,6 +56,7 @@ class DataLoader {
 			$validationThreshold,
 			$maxAge
 		);
+		\OCP\Log\logger('suspicious_login')->debug('Loaded ' . count($historyRaw) . ' historic and ' . count($recentRaw) . ' recent rows with strategy ' . $strategy::class);
 		if (empty($historyRaw)) {
 			throw new InsufficientDataException("No historic data available");
 		}
@@ -64,7 +65,9 @@ class DataLoader {
 		}
 
 		$positives = $this->addressesToDataSet($historyRaw, $strategy);
+		\OCP\Log\logger('suspicious_login')->debug('Converted historic data to dataset');
 		$validationPositives = $this->addressesToDataSet($recentRaw, $strategy);
+		\OCP\Log\logger('suspicious_login')->debug('Converted recent data to dataset');
 
 		return new CollectedData(
 			$positives,
