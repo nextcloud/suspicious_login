@@ -52,11 +52,13 @@ class TrainService {
 			$dataConfig,
 			$strategy
 		);
+		\OCP\Log\logger('suspicious_login')->debug('Loaded data');
 		$data = $this->dataLoader->generateRandomShuffledData(
 			$collectedData,
 			$config,
 			$strategy
 		);
+		\OCP\Log\logger('suspicious_login')->debug('Generated shuffled data');
 
 		// Train
 		$result = $this->trainer->train(
@@ -64,6 +66,7 @@ class TrainService {
 			$data,
 			$strategy
 		);
+		\OCP\Log\logger('suspicious_login')->debug('Trained model');
 
 		// Persist
 		$this->store->persist(
