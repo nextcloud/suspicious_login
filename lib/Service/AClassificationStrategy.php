@@ -33,10 +33,10 @@ abstract class AClassificationStrategy {
 	 * @return int[]
 	 */
 	public function newVector(string $uid, string $ip): array {
-		return array_merge(
-			$this->uidAsFeatureVector($uid),
-			$this->ipToVec($ip)
-		);
+		return [
+			...$this->uidAsFeatureVector($uid),
+			...$this->ipToVec($ip),
+		];
 	}
 
 	/**
