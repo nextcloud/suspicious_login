@@ -162,6 +162,7 @@ class ModelStore {
 				'exception' => $e,
 			]);
 			$this->modelMapper->delete($model);
+			throw $e;
 		}
 	}
 }
