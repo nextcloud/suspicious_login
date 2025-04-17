@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc3d339b8906a0fadb07f4ae53388cb7",
+    "content-hash": "f8313a54038eb3b1ede5eeabdc6eb022",
     "packages": [
         {
             "name": "amphp/amp",
@@ -665,16 +665,16 @@
         },
         {
             "name": "rubix/ml",
-            "version": "2.3.2",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RubixML/ML.git",
-                "reference": "79100cb37aa0513e4c313d6568b29143a6766d7f"
+                "reference": "59782a24bd09f0faa00e7df335fd58ca288d1eab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RubixML/ML/zipball/79100cb37aa0513e4c313d6568b29143a6766d7f",
-                "reference": "79100cb37aa0513e4c313d6568b29143a6766d7f",
+                "url": "https://api.github.com/repos/RubixML/ML/zipball/59782a24bd09f0faa00e7df335fd58ca288d1eab",
+                "reference": "59782a24bd09f0faa00e7df335fd58ca288d1eab",
                 "shasum": ""
             },
             "require": {
@@ -702,8 +702,7 @@
                 "ext-gd": "For image support",
                 "ext-mbstring": "For fast multibyte string manipulation",
                 "ext-svm": "For Support Vector Machine engine (libsvm)",
-                "ext-tensor": "For fast Matrix/Vector computing",
-                "rubix/extras": "For experimental features"
+                "ext-tensor": "For fast Matrix/Vector computing"
             },
             "type": "library",
             "autoload": {
@@ -823,7 +822,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-13T19:12:38+00:00"
+            "time": "2024-11-09T23:02:27+00:00"
         },
         {
             "name": "rubix/tensor",
