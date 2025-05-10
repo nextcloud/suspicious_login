@@ -9,7 +9,7 @@
     "More information ↗" : "Weitere Informationen ↗",
     "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kannst weitere Informationen erhalten, indem du die Schaltfläche drückst, um  %s zu öffnen und Informationen über die verdächtige IP-Adresse anzuzeigen.",
     "Suspicious login detection" : "Erkennung verdächtiger Anmeldungen",
-    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Die Verdächtige-Anmeldung-Anwendung ist für diese Instanz aktiviert. Sie protokolliert die IP-Adressen, von denen sich Anwender erfolgreich angemeldet haben, und ermittelt darauf basierend Kriterien, um vor Anmeldungen von verdächtigen IP-Adressen zu warnen.",
+    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Die Verdächtige-Anmeldung-Anwendung ist für diese Instanz aktiviert. Sie protokolliert die IP-Adressen, von denen sich Anwender angemeldet haben, und ermittelt darauf basierend Kriterien, um vor Anmeldungen von verdächtigen IP-Adressen zu warnen.",
     "Training data statistics" : "Statistiken der Trainingsdaten",
     "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Bisher hat die Anwendung {total} Anmeldungen (inklusive Client-Verbindungen) erfasst, von denen {distinct} eindeutige (IP, UID)-Tupel sind.",
     "IPv4" : "IPv4",
