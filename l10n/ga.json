@@ -6,8 +6,6 @@
     "Suspicious Login" : "Logáil Isteach Amhrasacha",
     "New login detected" : "Braitheadh ​​logáil isteach nua",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Braith agus rabhadh a thabhairt faoi IPanna amhrasacha a logáil isteach ar Nextcloud\n\t",
-    "More information ↗" : "Tuilleadh eolais ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Is féidir leat tuilleadh eolais a fháil ach an cnaipe a bhrú a osclóidh %s agus a thaispeánfaidh eolas faoin seoladh IP amhrasach.",
     "Suspicious login detection" : "Brath logáil isteach amhrasach",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Tá an aip logáil isteach amhrasach cumasaithe ar an gcás seo. Coinneoidh sé súil ar sheoltaí IP úsáideoirí logáil isteach go rathúil ó agus tóg aicmitheoir a thugann rabhadh má thagann logáil isteach nua ó sheoladh IP amhrasach.",
     "Training data statistics" : "Staitisticí sonraí oiliúna",

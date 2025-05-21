@@ -6,7 +6,6 @@ OC.L10N.register(
     "Open %s ↗" : "Ava %s ↗",
     "Suspicious Login" : "Kahtlane sisselogimine",
     "New login detected" : "Tuvastasin uue sisselogimise",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Tuvasta ja hoiata kahtlaste Nextcloudi sisselogimiste ip-aadressidest\n\t",
-    "More information ↗" : "Lisateave ↗"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Tuvasta ja hoiata kahtlaste Nextcloudi sisselogimiste ip-aadressidest\n\t"
 },
 "nplurals=2; plural=(n != 1);");

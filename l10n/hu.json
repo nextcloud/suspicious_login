@@ -6,8 +6,6 @@
     "Suspicious Login" : "Gyanús bejelentkezés",
     "New login detected" : "Új belépes észlelve",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "A gyanús IP-címekről történő Nextcloud bejelentkezések észlelések és figyelmeztetés küldése ezekről",
-    "More information ↗" : "További információk ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "További információkhoz juthat a gomb megnyomásával, ami megnyitja a %s oldalt, és információkat jelenít meg a gyanús IP-címekről.",
     "Suspicious login detection" : "Gyanús bejelentkezés észlelve",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "A gyanús belépés alkalmazás engedélyezett ezen a példányon. Nyomon fogja követni a felhasználók sikeres bejelentkezéseinek IP-címeit, és összeállít egy osztályozási rendszert, hogy figyelmeztetni tudja, ha egy belépés gyanús IP-címről érkezik.",
     "Training data statistics" : "Tanulási adatok statisztikája",
