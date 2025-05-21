@@ -6,8 +6,6 @@ OC.L10N.register(
     "Suspicious Login" : "可疑登录行为",
     "New login detected" : "检测到新的登录行为",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "检测并警告登录到 Nextcloud 的可疑 IP 地址\n\t",
-    "More information ↗" : "更多信息",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "要获取更多信息，你可以按这个按钮打开 %s，显示有关可疑 IP 地址的信息",
     "Suspicious login detection" : "可疑登录行为检测",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "可疑登录行为应用在此实例上被启用。它将跟踪成功登录用户的源IP地址并创建一个分类器，用于对来自可疑IP地址的新登录行为发出警告。",
     "Training data statistics" : "训练数据统计",

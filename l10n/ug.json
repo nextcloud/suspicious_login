@@ -6,8 +6,6 @@
     "Suspicious Login" : "گۇمانلىق كىرىش",
     "New login detected" : "يېڭى كىرىش بايقالدى",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloud غا گۇمانلىق IP لارنىڭ كىرىدىغانلىقىنى بايقاش ۋە ئاگاھلاندۇرۇش\n\t",
-    "More information ↗" : "تېخىمۇ كۆپ ئۇچۇرلار ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "% S نى ئاچىدىغان ۋە گۇمانلىق IP ئادرېس ھەققىدىكى ئۇچۇرلارنى كۆرسىتىدىغان كۇنۇپكىنى بېسىش ئارقىلىق تېخىمۇ كۆپ ئۇچۇرلارغا ئېرىشەلەيسىز.",
     "Suspicious login detection" : "گۇمانلىق كىرىشنى بايقاش",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "گۇمانلىق كىرىش دېتالى بۇ ئەھۋالدا قوزغىتىلغان. ئۇ ئىشلەتكۈچىلەرنىڭ مۇۋەپپەقىيەتلىك ھالدا كىرگەن IP ئادرېسلىرىنى خاتىرىلەيدۇ ۋە يېڭى كىرىشنىڭ گۇمانلىق IP ئادرېسىدىن كەلگەن-كەلمەيدىغانلىقىنى ئاگاھلاندۇرىدىغان تۈرگە ئايرىيدۇ.",
     "Training data statistics" : "تەربىيىلەش سانلىق مەلۇمات ستاتىستىكىسى",

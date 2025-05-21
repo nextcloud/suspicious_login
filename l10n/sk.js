@@ -8,8 +8,6 @@ OC.L10N.register(
     "Suspicious Login" : "Podozrivé prihlasovanie",
     "New login detected" : "Zistené nové prihlásenie",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upozornovať na podozrivé adresy IP prihlasujúce sa do systému Nextcloud\n\t",
-    "More information ↗" : "Viac informácií ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Viac informácií získate stlačením tlačidla, ktoré otvorí %s a zobrazí informácie o podozrivej adrese IP.",
     "Suspicious login detection" : "Zisťovanie podozrivého prihlasovania",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "V tejto inštancii systému Nextcloud je povolená apka Podozrivé prihlasovanie. Bude sledovať adresy IP používateľov, ktorí sa úspešne prihlásia a zostavovať klasifikátor, ktorý bude varovať v prípade, ak dané prihlásenie bude prichádzať z podozrivej adresy IP.",
     "Training data statistics" : "Trénovanie štatistických dát",

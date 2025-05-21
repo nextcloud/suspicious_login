@@ -6,8 +6,6 @@
     "Suspicious Login" : "Podezřelé přihlášení",
     "New login detected" : "Zjištěno nové přihlášení",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Zjišťovat a varovat o podezřelých IP adresách přihlašujících se k Nextcloud\n\t",
-    "More information ↗" : "Další informace",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Další informace získáte kliknutím na tlačítko, které otevře %s a zobrazí další informace o podezřelé IP adrese.",
     "Suspicious login detection" : "Zjišťování podezřelých přihlášení",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Na této instanci je zapnutá služba sledování podezřelých přihlášení. Uchovává záznam o IP adresách ze kterých se uživatelé úspěšně přihlásili a vytváří hodnocení, které varuje, pokud nové přihlášení přichází z podezřelé iP adresy.",
     "Training data statistics" : "Statistiky trénovacích údajů",

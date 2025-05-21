@@ -6,8 +6,6 @@
     "Suspicious Login" : "Сумњиве Пријаве",
     "New login detected" : "Примећена нова пријава",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Детектуј и обавештавај о сумњивим IP адресама које се пријављују на Некстклауд\n\t",
-    "More information ↗" : "Више информација ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Притиском на дугме можете да добијете више информација. Отвориће се %s и приказаће се информације у вези са сумњивом IP адресом.",
     "Suspicious login detection" : "Детекција сумњивих пријава",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Апликација сумњивих пријава је укључена на овој инстанци. Пратиће IP адресе са којих се људи пријављују и градиће класификатор који упозорава када пријављивање дође са сумњиве IP адресе.",
     "Training data statistics" : "Статистика тренинг података",

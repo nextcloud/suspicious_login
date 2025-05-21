@@ -8,8 +8,6 @@ OC.L10N.register(
     "Suspicious Login" : "Şüpheli oturum açma",
     "New login detected" : "Oturum açıldı",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Şüpheli IP adreslerinden açılan Nextcloud oturumlarını izler ve uyarır\n\t",
-    "More information ↗" : "Diğer bilgiler ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Düğmeye basarak açılacak %s ile şüpheli IP adresi hakkında ayrıntılı bilgi alabilirsiniz.",
     "Suspicious login detection" : "Şüpheli oturum açma izleme",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Bu Nextcloud kopyasında şüpheli oturum açma uygulaması kullanıma alınmış. Bu uygulama kullanıcıların oturum açtığı IP adreslerini izler ve bir sınıflayıcı ile değerlendirerek şüpheli bir IP adresinden açılan oturumlarla ilgili uyarıda bulunur.",
     "Training data statistics" : "Model geliştirme verilerinin istastistikleri",

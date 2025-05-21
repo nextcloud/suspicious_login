@@ -6,8 +6,6 @@ OC.L10N.register(
     "Suspicious Login" : "Suspicious Login",
     "New login detected" : "New login detected",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detect and warn about suspicious IPs logging into Nextcloud\n\t",
-    "More information ↗" : "More information ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address.",
     "Suspicious login detection" : "Suspicious login detection",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address.",
     "Training data statistics" : "Training data statistics",
