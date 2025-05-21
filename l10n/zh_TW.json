@@ -6,8 +6,6 @@
     "Suspicious Login" : "可疑的帳號登入活動",
     "New login detected" : "偵測到新的帳號登入活動",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "偵測並警告登入 Nextcloud 的可疑 IP\n\t",
-    "More information ↗" : "更多資訊 ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "您可以透過按下按鈕開啟 %s 並顯示關於可疑 IP 地址的資訊來取得更多資訊。",
     "Suspicious login detection" : "偵測到可疑的帳號登入活動",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "此站台啟用了可疑的帳號登入活動應用程式。其將追蹤成功登入帳號的 IP 位置，並建置分類器，若新帳號登入來自可疑的 IP 位置，則該分類器將會發出警告。",
     "Training data statistics" : "訓練資料統計分析",

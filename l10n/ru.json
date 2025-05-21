@@ -5,8 +5,6 @@
     "Suspicious Login" : "Подозрительный вход",
     "New login detected" : "Зарегистрирован новый вход",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Регистрировать и предупреждать о входах в Nextcloud с подозрительных IP-адресов\n\t",
-    "More information ↗" : "Дополнительная информация ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Вы можете получить больше информации, нажав на кнопку, которая откроет %s и покажет информацию о подозрительном IP-адресе.",
     "Suspicious login detection" : "Обнаружение подозрительных входов",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Приложение обнаружения подозрительных входов активировано для этого сервера. Оно будет отслеживать IP-адреса пользователей, которые успешно авторизовались в системе, и создавать классификатор, предупреждающий об авторизации с подозрительных IP-адресов.",
     "Training data statistics" : "Статистика обучающих данных",

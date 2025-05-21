@@ -6,8 +6,6 @@
     "Suspicious Login" : "Shubhali Kirish",
     "New login detected" : "Yangi login aniqlandi",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Shubhali IP-larning Nextcloud-ga kirishini aniqlang va ogohlantiring",
-    "More information ↗" : "Qo'shimcha ma'lumot ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : " Siz %s  ochiladigan tugmani bosib qo'shimcha ma'lumot olishingiz va shubhali IP-manzil haqida ma'lumot ko'rsatish.mumkin",
     "Suspicious login detection" : "Shubhali kirishni aniqlash",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Ushbu misolda shubhali kirish ilovasi yoqilgan. U IP-manzillarni kuzatib boradi foydalanuvchilar muvaffaqiyatli tizimga kirishadi va shubhali IP-manzildan yangi login kelsa, ogohlantiruvchi Klassifikatorni yaratadilar.",
     "Training data statistics" : "Trening ma'lumotlari statistikasi",

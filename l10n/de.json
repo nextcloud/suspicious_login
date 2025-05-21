@@ -6,8 +6,6 @@
     "Suspicious Login" : "Verdächtige Anmeldung",
     "New login detected" : "Neue Anmeldung erkannt",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Erkenne und melde verdächtige Anmeldungen in Nextcloud\n\t",
-    "More information ↗" : "Weitere Informationen ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kannst weitere Informationen erhalten, indem du die Schaltfläche drückst, um  %s zu öffnen und Informationen über die verdächtige IP-Adresse anzuzeigen.",
     "Suspicious login detection" : "Erkennung verdächtiger Anmeldungen",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Die Verdächtige-Anmeldung-Anwendung ist für diese Instanz aktiviert. Sie protokolliert die IP-Adressen, von denen sich Anwender angemeldet haben, und ermittelt darauf basierend Kriterien, um vor Anmeldungen von verdächtigen IP-Adressen zu warnen.",
     "Training data statistics" : "Statistiken der Trainingsdaten",

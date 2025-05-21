@@ -6,8 +6,6 @@
     "Suspicious Login" : "Misstänkt inloggning",
     "New login detected" : "Ny inloggning upptäckt",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upptäck och varna om misstänkta IP-adresser loggar in i Nextcloud\n\t",
-    "More information ↗" : "Mer information ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Du kan få mer information genom att klicka på knappen som kommer att öppna %s och visa information om den misstänkta IP-adressen.",
     "Suspicious login detection" : "Misstänkt inloggningsdetektering",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Appen för misstänkta inloggningar är aktiverad för denna instans. Den kommer att hålla reda på IP-adresser som användare loggar från och varna om en ny inloggning kommer från en misstänkt IP-adress.",
     "Training data statistics" : "Träna datastatistik",

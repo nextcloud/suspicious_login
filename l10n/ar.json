@@ -6,8 +6,6 @@
     "Suspicious Login" : "دخولٌ مشبوهٌ",
     "New login detected" : " لم يتم كشف أي دخول جديد",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "أكتشف و بلّغ عن أي عناوين مشبوهة تتم منها محاولة الدخول إلى نكست كلاود\n\t",
-    "More information ↗" : "لمعلوماتٍ أكثر ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "يٌمكنك الحصول على معلومات أكثر بالضغط على الزر الذي سيفتح %s و يعرض عليك معلوماتٍ عن عنوان IP المشبوه.",
     "Suspicious login detection" : "كشف محاولة دخولٍ مشبوهٍ",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "تطبيق كشف الدخول المشبوه suspicious login تمّ تفعيله على هذا الخادوم؛ وهو سوف يقوم يمتابعة عنوان IP التي يدخل منها المستخدمون بنجاحٍ إى نكست كلاود و يقوم بتصنيفها بحيث يستطيع التحذير من أي محاولة دخولٍ تأتي من عنوان IP مشبوهٍ.",
     "Training data statistics" : "تدريب البيانات الإحصائية",

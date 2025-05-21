@@ -6,8 +6,6 @@ OC.L10N.register(
     "Suspicious Login" : "Verdachte login",
     "New login detected" : "Nieuwe inlogpoging opgemerkt",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detecteer en waarschuw voor inlogpogingen bij Nextcloud vanaf verdachte IP-adressen.",
-    "More information ↗" : "Meer informatie ↗",
-    "You can get more info by pressing the button which will open %s and show info about the suspicious IP-address." : "Je kunt meer informatie krijgen door op de knop te drukken die %s opent en informatie weergeeft over het verdachte IP-adres.",
     "Suspicious login detection" : "Detectie verdachte inlogpogingen",
     "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "De 'verdachte inlogpogingen'-app is ingeschakeld voor deze Nextcloud server. Het houdt de IP-adressen vanwaar gebruikers succesvol hebben ingelogd, en waarschuwt wanneer er wordt ingelogd vanaf een verdacht IP-adres.",
     "Training data statistics" : "Trainingsgegevens statistieken",
