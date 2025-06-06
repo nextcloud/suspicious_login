@@ -23,14 +23,10 @@
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
 		"post-install-cmd": ["@composer bin all install --ansi"],
-		"post-update-cmd": ["@composer bin all update --ansi"],
 		"psalm": "psalm --threads=1",
 		"psalm:update-baseline": "psalm --threads=1 --update-baseline",
 		"psalm:update-baseline:force": "psalm --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
 		"psalm:clear": "psalm --clear-cache && psalm --clear-global-cache"
-	},
-	"require-dev": {
-		"christophwurst/nextcloud_testing": "^1.0.0"
 	},
 	"config": {
 		"sort-packages": true,
