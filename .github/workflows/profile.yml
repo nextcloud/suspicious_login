@@ -28,19 +28,19 @@ jobs:
     name: php${{ matrix.php-version }} ${{ matrix.flag }} profiling
     services:
       mysql-service:
-        image: mariadb:10.11
+        image: ghcr.io/nextcloud/continuous-integration-mariadb-11.4:latest
         env:
-          MYSQL_ROOT_PASSWORD: my-secret-pw
-          MYSQL_DATABASE: nextcloud
-          MYSQL_USER: nextcloud
-          MYSQL_PASSWORD: nextcloud
+          MARIADB_ROOT_PASSWORD: my-secret-pw
+          MARIADB_DATABASE: nextcloud
+          MARIADB_USER: nextcloud
+          MARIADB_PASSWORD: nextcloud
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
+          --health-cmd="mariadb-admin ping"
+          --health-interval=5s
+          --health-timeout=2s
+          --health-retries=5
     steps:
       - name: Set up php${{ matrix.php-version }}
         uses: shivammathur/setup-php@master
