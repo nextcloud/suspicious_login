@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d96eca15cf8511c892c726dd45540cb",
+    "content-hash": "75d7bb2364235bcec7e0f0e1987a2b3c",
     "packages": [
         {
             "name": "christophwurst/nextcloud_testing",
