@@ -11,6 +11,7 @@ namespace OCA\SuspiciousLogin\Db;
 
 use JsonSerializable;
 use OCP\AppFramework\Db\Entity;
+use ReturnTypeWillChange;
 
 /**
  * @method string getType()
@@ -64,6 +65,7 @@ class Model extends Entity implements JsonSerializable {
 	protected $createdAt;
 	protected $addressType;
 
+	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {
 		return [
 			'type' => $this->type,
