@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service\Statistics;
 
 use JsonSerializable;
+use ReturnTypeWillChange;
 
 class TrainingDataStatistics implements JsonSerializable {
 
@@ -39,7 +40,8 @@ class TrainingDataStatistics implements JsonSerializable {
 		return $this->loginsAggregated;
 	}
 
-	public function jsonSerialize() {
+	#[ReturnTypeWillChange]
+	public function jsonSerialize(): array {
 		return [
 			'loginsCaptured' => $this->getLoginsCaptured(),
 			'loginsAggregated' => $this->getLoginsAggregated(),
