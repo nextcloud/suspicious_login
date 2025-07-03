@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Service;
 
 use JsonSerializable;
+use ReturnTypeWillChange;
 use function time;
 
 class TrainingDataConfig implements JsonSerializable {
@@ -89,7 +90,8 @@ class TrainingDataConfig implements JsonSerializable {
 		return $clone;
 	}
 
-	public function jsonSerialize() {
+	#[ReturnTypeWillChange]
+	public function jsonSerialize(): array {
 		return [
 			'maxAge' => $this->getMaxAge(),
 			'threshold' => $this->getThreshold(),

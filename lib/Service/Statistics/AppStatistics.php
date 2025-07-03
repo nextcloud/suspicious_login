@@ -16,6 +16,7 @@ namespace OCA\SuspiciousLogin\Service\Statistics;
 use JsonSerializable;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
+use ReturnTypeWillChange;
 
 class AppStatistics implements JsonSerializable {
 
@@ -69,7 +70,8 @@ class AppStatistics implements JsonSerializable {
 		return $this->trainingDataStatistics;
 	}
 
-	public function jsonSerialize() {
+	#[ReturnTypeWillChange]
+	public function jsonSerialize(): array {
 		return [
 			'active' => $this->isActive(),
 			'recentModels' => $this->getRecentModels(),
