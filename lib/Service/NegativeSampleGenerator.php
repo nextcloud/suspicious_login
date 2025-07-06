@@ -57,17 +57,17 @@ class NegativeSampleGenerator {
 	}
 
 	private function generateFromRealData(array $uidVec, array $uniqueIps): array {
-		return array_merge(
-			$uidVec,
-			empty($uniqueIps) ? [] : $uniqueIps[random_int(0, count($uniqueIps) - 1)]
-		);
+		return [
+			...$uidVec,
+			...empty($uniqueIps) ? [] : $uniqueIps[random_int(0, count($uniqueIps) - 1)]
+		];
 	}
 
 	private function generateRandom(array $uidVec, AClassificationStrategy $strategy): array {
-		return array_merge(
-			$uidVec,
-			$strategy->generateRandomIpVector()
-		);
+		return [
+			...$uidVec,
+			...$strategy->generateRandomIpVector()
+		];
 	}
 
 	/**
@@ -78,10 +78,12 @@ class NegativeSampleGenerator {
 	 */
 	public function generateRandomFromPositiveSamples(Dataset $positives, int $num, AClassificationStrategy $strategy): DataSet {
 		$max = count($positives);
+		$samples = [];
+		for ($i = 0; $i < $num; $i++) {
+			$samples[] = $this->generateRandom(array_slice($positives[$i % $max], 0, 16), $strategy);
+		}
 		return new Labeled(
-			array_map(function (int $id) use ($strategy, $positives, $max) {
-				return $this->generateRandom(array_slice($positives[$id % $max], 0, 16), $strategy);
-			}, range(0, $num - 1)),
+			$samples,
 			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
 	}
@@ -95,12 +97,13 @@ class NegativeSampleGenerator {
 	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num): DataSet {
 		$max = count($positives);
 		$uniqueIps = $this->getUniqueIPsPerUser($positives);
-
+		$samples = [];
+		for ($i = 0; $i < $num; $i++) {
+			$sample = $positives->sample($i % $max);
+			$samples[] = $this->generateFromRealData(array_slice($sample, 0, 16), $uniqueIps);
+		}
 		return new Labeled(
-			array_map(function (int $id) use ($uniqueIps, $positives, $max) {
-				$sample = $positives->sample($id % $max);
-				return $this->generateFromRealData(array_slice($sample, 0, 16), $uniqueIps);
-			}, range(0, $num - 1)),
+			$samples,
 			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
 	}
