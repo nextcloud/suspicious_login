@@ -12,7 +12,7 @@ namespace OCA\SuspiciousLogin\Service;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Db\ModelMapper;
-use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Files\IAppData;
@@ -47,14 +47,14 @@ class ModelStore {
 	/**
 	 * @return Estimator
 	 * @throws RuntimeException
-	 * @throws ServiceException
+	 * @throws ModelNotFoundException
 	 */
 	public function loadLatest(AClassificationStrategy $strategy): Estimator {
 		try {
 			$latestModel = $this->modelMapper->findLatest($strategy::getTypeName());
 		} catch (DoesNotExistException $e) {
 			$this->logger->debug("No models found. Can't load latest");
-			throw new ServiceException("No models found", 0, $e);
+			throw new ModelNotFoundException("No models found", 0, $e);
 		}
 		return $this->load($latestModel->getId());
 	}
@@ -82,6 +82,11 @@ class ModelStore {
 		$cache->set($this->getCacheKey($id), $serialized);
 	}
 
+	/**
+	 * @return Estimator
+	 * @throws RuntimeException
+	 * @throws ModelNotFoundException
+	 */
 	public function load(int $id): Estimator {
 		$cached = $this->getCached($id);
 		if ($cached !== null) {
@@ -96,7 +101,7 @@ class ModelStore {
 				$modelFile = $modelsFolder->getFile((string)$id);
 			} catch (NotFoundException $e) {
 				$this->logger->error("Could not load classifier model $id: " . $e->getMessage());
-				throw new ServiceException("Could not load model $id", 0, $e);
+				throw new ModelNotFoundException("Could not load model $id", 0, $e);
 			}
 
 			$serialized = $modelFile->getContent();
