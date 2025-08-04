@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Command;
 
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
+use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Service\EstimatorService;
 use OCA\SuspiciousLogin\Service\Ipv4Strategy;
 use OCA\SuspiciousLogin\Service\IpV6Strategy;
@@ -55,14 +57,24 @@ class Predict extends Command {
 		$uid = $input->getArgument('uid');
 		$ip = $input->getArgument('ip');
 		$modelId = $input->getArgument('model');
-		if (!$this->estimatorService->predict(
-			$uid,
-			$ip,
-			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
-			$modelId ? (int)$modelId : null)) {
-			$output->writeln("WARN: IP $ip is suspicious");
-			return 1;
+
+		try {
+			if (!$this->estimatorService->predict(
+				$uid,
+				$ip,
+				$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
+				$modelId ? (int)$modelId : null)) {
+				$output->writeln("WARN: IP $ip is suspicious");
+				return 1;
+			}
+		} catch (ModelNotFoundException $ex) {
+			$output->writeln('<error>Could not predict suspiciousness: ' . $ex->getMessage() . '</error>');
+			return 2;
+		} catch (ServiceException $ex) {
+			$output->writeln('<error>Could not predict suspiciousness: ' . $ex->getMessage() . '</error>');
+			return 3;
 		}
+
 		$output->writeln("OK:   IP $ip is not suspicious");
 		return 0;
 	}
