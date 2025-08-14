@@ -4,7 +4,7 @@
 	"type": "library",
 	"require": {
 		"amphp/amp": "^2.6.4",
-		"amphp/parallel": "^1.4.3",
+		"amphp/parallel": "^1.4.4",
 		"bamarni/composer-bin-plugin": "^1.8.2",
 		"rubix/ml": "^2.5.2"
 	},
