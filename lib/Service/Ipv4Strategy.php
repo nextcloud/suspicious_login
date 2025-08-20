@@ -54,7 +54,7 @@ class Ipv4Strategy extends AClassificationStrategy {
 			$prefix += 16;
 		}
 
-		return $prefix . implode('.', array_map(function (int $index) {
+		return $prefix . '.' . implode('.', array_map(function (int $index) {
 			return random_int(0, 255);
 		}, range(1, 3)));
 	}
