@@ -112,20 +112,9 @@ class NegativeSampleGeneratorTest extends TestCase {
 			self::assertTrue(
 				$ipVec == self::decToBitArray(3, 32) ||
 				$ipVec === self::decToBitArray(4, 32),
-				'sample has a unique IP'
+				'Sample must have an unique IP'
 			);
 		}
-
-		$positives = new Unlabeled([
-			array_merge(self::decToBitArray(1, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(2, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(3, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(4, 16), self::decToBitArray(1, 32)),
-		]);
-
-		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 5);
-
-		self::assertCount(5, $result);
 	}
 
 	/**
@@ -154,9 +143,28 @@ class NegativeSampleGeneratorTest extends TestCase {
 			self::assertTrue(
 				$ipVec === self::decToBitArray(1, 32) ||
 				$ipVec === self::decToBitArray(2, 32),
-				'Sample has an unique IP'
+				'Sample must have an unique IP'
 			);
 		}
+	}
+
+	/**
+	 * Generating shuffled samples isn't possible when no user has an unique IP.
+	 * In that case, we have to return an empty Labeled() object as merging will
+	 * fail otherwise. See GitHub issue #860 for more.
+	 * @return void
+	 */
+	public function testGenerateShuffledFromDuplicatesOnly(): void {
+		$positives = new Unlabeled([
+			array_merge(self::decToBitArray(1, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(2, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(3, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(4, 16), self::decToBitArray(1, 32)),
+		]);
+
+		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 4);
+
+		self::assertCount(0, $result, 'Returned sample must be empty');
 	}
 
 	/**
