@@ -54,6 +54,7 @@
 			"matchManagers": ["github-actions"],
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchBaseBranches": [
+				"stable32",
 				"stable31",
 				"stable30",
 				"stable29",
