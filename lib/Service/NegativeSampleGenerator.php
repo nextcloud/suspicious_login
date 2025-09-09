@@ -59,7 +59,7 @@ class NegativeSampleGenerator {
 	private function generateFromRealData(array $uidVec, array $uniqueIps): array {
 		return array_merge(
 			$uidVec,
-			empty($uniqueIps) ? [] : $uniqueIps[random_int(0, count($uniqueIps) - 1)]
+			$uniqueIps[random_int(0, count($uniqueIps) - 1)]
 		);
 	}
 
@@ -95,6 +95,10 @@ class NegativeSampleGenerator {
 	public function generateShuffledFromPositiveSamples(DataSet $positives, int $num): DataSet {
 		$max = count($positives);
 		$uniqueIps = $this->getUniqueIPsPerUser($positives);
+
+		if ($uniqueIps === []) {
+			return new Labeled();
+		}
 
 		return new Labeled(
 			array_map(function (int $id) use ($uniqueIps, $positives, $max) {
