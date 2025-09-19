@@ -55,9 +55,24 @@ class IpV6Strategy extends AClassificationStrategy {
 	}
 
 	public function generateRandomIp(): string {
-		return implode(':', array_map(function (int $index) {
+		//  The whole IPv6 address space is too large. Randomly generated addresses
+		// add too much noise to the training data, so we have to constrain it on
+		// the addresses that could theoretically be used for logins.
+		//  fe80::/64 (Link Local Addresses) might never be "suspicious" logins, as it
+		// will always be just a "local" login.
+		//  fc00::/7 (Unicast Local Addresses) could be used for company deployments.
+		// However, the users logging in are always coming from the "inside". These
+		// logins *could* be suspicious but it depends a lot on the setup.
+		//  2000::/3 (Global Unicast Addresses) is the range we are most interested in,
+		// as this is *the* internet. However, only 2000::/4 is allocated so far and it
+		// might take ages until the first 3000::/4 block could be considered to be
+		// allocated somewhere — maybe for Mars? So we focus only on 2000::/4 addresses.
+		$ip = '2' . str_pad(base_convert((string)random_int(0, 2 ** 12 - 1), 10, 16), 3, '0', STR_PAD_LEFT) . ':';
+		$ip .= implode(':', array_map(function (int $index) {
 			return base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16);
-		}, range(0, 7)));
+		}, range(1, 7)));
+
+		return $ip;
 	}
 
 	public function getSize(): int {
