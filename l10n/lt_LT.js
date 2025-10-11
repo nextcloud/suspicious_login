@@ -5,11 +5,6 @@ OC.L10N.register(
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Buvo aptiktas naujas prisijungimas prie jūsų paskyros. IP adresas %s buvo klasifikuotas kaip įtartinas. Jeigu tai buvote jūs, galite nepaisyti šio pranešimo. Priešingu atveju, turėtumėte pasikeisti slaptažodį.",
     "Suspicious Login" : "Įtartinas prisijungimas",
     "New login detected" : "Aptiktas naujas prisijungimas",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Aptikti ir įspėti apie įtartinus, prie Nextcloud prisijungiančius, IP adresus\n\t",
-    "Suspicious login detection" : "Įtartinų prisijungimų aptikimas",
-    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Šiame egzemplioriuje yra įjungta įtartinų prisijungimų programėlė. Ji stebės IP adresus, iš kurių naudotojai sėkmingai prisijungia, ir sukurs klasifikatorių, kuris įspės tais atvejai, kai prisijungimas bus vykdomas iš įtartino IP adreso.",
-    "IPv4" : "IPv4",
-    "IPv6" : "IPv6",
-    "Precision" : "Tikslumas"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Aptikti ir įspėti apie įtartinus, prie Nextcloud prisijungiančius, IP adresus\n\t"
 },
 "nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);");
