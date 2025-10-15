@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "Tuvastasin uue sisselogimise asukoha",
     "More info about the suspicious IP address available on %s" : "Lisateave kahtlaste ip-aadresside kohta on saadaval: %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Server tuvastas uue sisselogimise sinu kasutajakontoga. IP-aadress %s on tuvastatud kahtlasena. Kui see olid sina, siis võid seda teadet eirata. Muudel juhtudel palun muuda oma salasõna.",
     "Open %s ↗" : "Ava %s ↗",
     "Suspicious Login" : "Kahtlane sisselogimine",
     "New login detected" : "Tuvastasin uue sisselogimise",
