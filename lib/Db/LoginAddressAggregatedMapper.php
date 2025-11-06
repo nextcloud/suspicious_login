@@ -53,7 +53,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 				$qb->expr()->lte('first_seen', $qb->createNamedParameter($start))
 			));
 
-		$result = $query->execute();
+		$result = $query->executeQuery();
 		$count = (int)$result->fetchColumn();
 		$result->closeCursor();
 
@@ -111,7 +111,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 				$qb->expr()->lte('first_seen', $qb->createNamedParameter($start))
 			));
 
-		$result = $query->execute();
+		$result = $query->executeQuery();
 		$count = (int)$result->fetchColumn();
 		$result->closeCursor();
 
@@ -123,7 +123,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 
 		$qb->select($qb->createFunction('COUNT(*)'))
 			->from($this->getTableName());
-		$result = $qb->execute();
+		$result = $qb->executeQuery();
 		$cnt = $result->fetchColumn();
 		$result->closeCursor();
 
@@ -135,7 +135,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 
 		$qb->select($qb->createFunction('SUM(seen)'))
 			->from($this->getTableName());
-		$result = $qb->execute();
+		$result = $qb->executeQuery();
 		$cnt = $result->fetchColumn();
 		$result->closeCursor();
 

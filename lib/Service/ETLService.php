@@ -38,7 +38,7 @@ class ETLService {
 			->setMaxResults(100);
 
 		do {
-			$data = $selectQuery->execute();
+			$data = $selectQuery->executeQuery();
 			$rows = $data->fetchAll();
 			foreach ($rows as $row) {
 				yield $row;
@@ -95,7 +95,7 @@ class ETLService {
 			$select
 				->setParameter('uid', $row['uid'])
 				->setParameter('ip', $row['ip']);
-			$result = $select->execute();
+			$result = $select->executeQuery();
 			$existing = $result->fetch();
 			$result->closeCursor();
 			if (empty($existing)) {
@@ -103,7 +103,7 @@ class ETLService {
 				$insert->setParameter('ip', $row['ip']);
 				$insert->setParameter('seen', 1, IQueryBuilder::PARAM_INT);
 				$insert->setParameter('ts', $row['created_at'], IQueryBuilder::PARAM_INT);
-				$insert->execute();
+				$insert->executeStatement();
 			} else {
 				$update
 					->setParameter('uid', $row['uid'])
@@ -111,11 +111,11 @@ class ETLService {
 					->setParameter('seen', $existing['seen'] + 1)
 					->setParameter('first_seen', min($existing['first_seen'], $row['created_at']))
 					->setParameter('last_seen', max($existing['last_seen'], $row['created_at']));
-				$update->execute();
+				$update->executeStatement();
 
 				$cleanUp
 					->setParameter('id', $row['id']);
-				$cleanUp->execute();
+				$cleanUp->executeStatement();
 			}
 		}
 		$this->logger->debug('finished login data ETL process, sending transaction commit');
