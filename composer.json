@@ -3,7 +3,7 @@
 	"description": "Detect and warn about suspicious IPs logging into Nextcloud",
 	"type": "library",
 	"require": {
-		"amphp/amp": "^2.6.4",
+		"amphp/amp": "^2.6.5",
 		"amphp/parallel": "^1.4.4",
 		"bamarni/composer-bin-plugin": "^1.8.2",
 		"rubix/ml": "^2.5.2",
