@@ -31,6 +31,20 @@
 		"composer",
 		"github-actions"
 	],
+	"ignorePaths": [
+		".github/workflows/block-merge-freeze.yml",
+		".github/workflows/fixup.yml",
+		".github/workflows/lint-info-xml.yml",
+		".github/workflows/lint-php.yml",
+		".github/workflows/lint-php-cs.yml",
+		".github/workflows/npm-audit-fix.yml",
+		".github/workflows/phpunit-mariadb.yml",
+		".github/workflows/phpunit-pgsql.yml",
+		".github/workflows/phpunit-sqlite.yml",
+		".github/workflows/pr-feedback.yml",
+		".github/workflows/psalm.yml",
+		".github/workflows/reuse.yml"
+	],
 	"packageRules": [
 		{
 			"matchUpdateTypes": ["minor", "patch"],
