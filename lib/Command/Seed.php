@@ -29,22 +29,22 @@ class Seed extends Command {
 
 	public function __construct(IConfig $config,
 		LoginAddressAggregatedSeeder $seeder) {
-		parent::__construct("suspiciouslogin:seed");
+		parent::__construct('suspiciouslogin:seed');
 		$this->seeder = $seeder;
 
 		$this->addOption(
 			'v6',
 			null,
 			InputOption::VALUE_NONE,
-			"train with IPv6 data"
+			'train with IPv6 data'
 		);
-		$this->setDescription("Fills the database with random IPs for development and testing purposes");
+		$this->setDescription('Fills the database with random IPs for development and testing purposes');
 		$this->config = $config;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		if ($this->config->getSystemValueBool('debug', false) === false) {
-			$output->writeln("<error>This command is meant for development purposes.</error> Enable debug mode and try again if you know what you are doing.");
+			$output->writeln('<error>This command is meant for development purposes.</error> Enable debug mode and try again if you know what you are doing.');
 			return 1;
 		}
 

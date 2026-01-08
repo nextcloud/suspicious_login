@@ -58,7 +58,7 @@ class LoginClassifier {
 		}
 
 		return preg_match(
-			"/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/",
+			'/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/',
 			$pwd[1]
 		) === 1;
 	}
@@ -66,7 +66,7 @@ class LoginClassifier {
 	public function process(string $uid, string $ip) {
 		if ($this->isAuthenticatedWithAppPassword($this->request)) {
 			// We don't care about those logins
-			$this->logger->debug("App password detected. No address classification is performed");
+			$this->logger->debug('App password detected. No address classification is performed');
 			return;
 		}
 		try {
@@ -81,7 +81,7 @@ class LoginClassifier {
 			// This most likely means there is no trained model yet, so we return early here
 			return;
 		} catch (ServiceException $ex) {
-			$this->logger->warning("Could not predict suspiciousness: " . $ex->getMessage());
+			$this->logger->warning('Could not predict suspiciousness: ' . $ex->getMessage());
 			// There was an error loading the model, so we return early here
 			return;
 		}

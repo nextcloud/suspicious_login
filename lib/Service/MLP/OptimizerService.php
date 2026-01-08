@@ -54,11 +54,11 @@ class OptimizerService {
 		float $stepWidth,
 		Config $config,
 		OutputInterface $output) {
-		$epochs = sprintf("%4d", $config->getEpochs());
-		$layers = sprintf("%2d", $config->getLayers());
-		$shuffledRate = sprintf("%1.3f", $config->getShuffledNegativeRate());
-		$randomRate = sprintf("%1.3f", $config->getRandomNegativeRate());
-		$learningRate = sprintf("%1.4f", $config->getLearningRate());
+		$epochs = sprintf('%4d', $config->getEpochs());
+		$layers = sprintf('%2d', $config->getLayers());
+		$shuffledRate = sprintf('%1.3f', $config->getShuffledNegativeRate());
+		$randomRate = sprintf('%1.3f', $config->getRandomNegativeRate());
+		$learningRate = sprintf('%1.4f', $config->getLearningRate());
 
 		$output->writeln("Epoch $epoch: epochs=$epochs layers=$layers shuffledRate=$shuffledRate randomRate=$randomRate, learningRate=$learningRate");
 		$output->writeln("  Step width for next config neighbor: $stepWidth");
@@ -71,7 +71,7 @@ class OptimizerService {
 	private function getAverageCost(OutputInterface $output,
 		TrainingResult ...$results): float {
 		$costs = array_map(function (TrainingResult $result) use ($output) {
-			$output->writeln(sprintf("  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d",
+			$output->writeln(sprintf('  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d',
 				$result->getReport()['overall']['f1 score'],
 				$result->getReport()['classes']['n']['precision'],
 				$result->getReport()['classes']['n']['recall'],
@@ -84,8 +84,8 @@ class OptimizerService {
 				$result->getModel()->getSamplesRandom()
 			));
 			return (
-				$result->getReport()['classes']['n']['f1 score'] +
-				$result->getReport()['overall']['f1 score']
+				$result->getReport()['classes']['n']['f1 score']
+				+ $result->getReport()['overall']['f1 score']
 			) / 2;
 		}, $results);
 
@@ -174,7 +174,7 @@ class OptimizerService {
 		);
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps</>");
-		$output->writeln("");
+		$output->writeln('');
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
 		$tasks = array_map(function ($index) use ($config, $collectedData, $strategy) {

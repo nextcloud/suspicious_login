@@ -54,7 +54,7 @@ class ModelStore {
 			$latestModel = $this->modelMapper->findLatest($strategy::getTypeName());
 		} catch (DoesNotExistException $e) {
 			$this->logger->debug("No models found. Can't load latest");
-			throw new ModelNotFoundException("No models found", 0, $e);
+			throw new ModelNotFoundException('No models found', 0, $e);
 		}
 		return $this->load($latestModel->getId());
 	}
@@ -109,7 +109,7 @@ class ModelStore {
 			$this->cache($id, $serialized);
 		}
 
-		$this->logger->debug("seralized model size: " . strlen($serialized));
+		$this->logger->debug('seralized model size: ' . strlen($serialized));
 
 		// Inefficient, but we can't get the real path from app data as it might
 		// not be a local file
@@ -133,7 +133,7 @@ class ModelStore {
 	 */
 	public function persist(Learner $estimator, Model $model) {
 		if (!($estimator instanceof Persistable)) {
-			throw new RuntimeException("Estimator is not persistable");
+			throw new RuntimeException('Estimator is not persistable');
 		}
 
 		$model->setType(get_class($estimator));
@@ -143,7 +143,7 @@ class ModelStore {
 		try {
 			$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
 		} catch (NotFoundException $e) {
-			$this->logger->info("App data models folder does not exist. Creating it");
+			$this->logger->info('App data models folder does not exist. Creating it');
 			$modelsFolder = $this->appData->newFolder(self::APPDATA_MODELS_FOLDER);
 		}
 
@@ -158,7 +158,7 @@ class ModelStore {
 
 			$modelFile->putContent(file_get_contents($tmpFile));
 		} catch (Throwable $e) {
-			$this->logger->error("Could not save persisted estimator to storage, reverting", [
+			$this->logger->error('Could not save persisted estimator to storage, reverting', [
 				'exception' => $e,
 			]);
 			$this->modelMapper->delete($model);
