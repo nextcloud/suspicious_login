@@ -34,7 +34,7 @@ class LoginAddressAggregatedSeeder {
 		$maxRowsPerUser = 10;
 		$total = 0;
 		for ($i = 0; $i <= $numberOfUsers; $i++) {
-			$numberOfRows = random_int((int) ($maxRowsPerUser * 0.3), (int) ($maxRowsPerUser * 1.3));
+			$numberOfRows = random_int((int)($maxRowsPerUser * 0.3), (int)($maxRowsPerUser * 1.3));
 			for ($j = 0; $j <= $numberOfRows; $j++) {
 				$this->insertRow($now, $i, $strategy);
 				$total++;

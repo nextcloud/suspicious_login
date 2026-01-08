@@ -110,8 +110,8 @@ class NegativeSampleGeneratorTest extends TestCase {
 			$ipVec = array_slice($sample, 16, 32);
 
 			self::assertTrue(
-				$ipVec == self::decToBitArray(3, 32) ||
-				$ipVec === self::decToBitArray(4, 32),
+				$ipVec == self::decToBitArray(3, 32)
+				|| $ipVec === self::decToBitArray(4, 32),
 				'Sample must have an unique IP'
 			);
 		}
@@ -141,8 +141,8 @@ class NegativeSampleGeneratorTest extends TestCase {
 			$ipVec = array_slice($sample, 16, 32);
 
 			self::assertTrue(
-				$ipVec === self::decToBitArray(1, 32) ||
-				$ipVec === self::decToBitArray(2, 32),
+				$ipVec === self::decToBitArray(1, 32)
+				|| $ipVec === self::decToBitArray(2, 32),
 				'Sample must have an unique IP'
 			);
 		}
@@ -173,9 +173,9 @@ class NegativeSampleGeneratorTest extends TestCase {
 	private static function decToBitArray(int $dec, int $length): array {
 		return array_map(
 			function (string $d): int {
-				return (int) $d;
+				return (int)$d;
 			},
-			str_split(str_pad(decbin($dec), $length, "0", STR_PAD_LEFT))
+			str_split(str_pad(decbin($dec), $length, '0', STR_PAD_LEFT))
 		);
 	}
 }

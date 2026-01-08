@@ -61,7 +61,7 @@ class LoginMailListener implements IEventListener {
 
 	private function getMail(SuspiciousLoginEvent $event, IUser $user): IMessage {
 		$suspiciousIp = $event->getIp();
-		$addButton = $this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === "1";
+		$addButton = $this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === '1';
 
 		$message = $this->mailer->createMessage();
 		$emailTemplate = $this->mailer->createEMailTemplate('suspiciousLogin.suspiciousLoginDetected');
@@ -71,7 +71,7 @@ class LoginMailListener implements IEventListener {
 		$emailTemplate->addHeading(
 			$this->l->t('New login location detected')
 		);
-		
+
 		$additionalText = '';
 		// Add explanation for more information about the IP-address (if enabled)
 		if ($addButton) {
