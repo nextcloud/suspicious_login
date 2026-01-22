@@ -38,9 +38,25 @@ class Ipv4Strategy extends AClassificationStrategy {
 	}
 
 	public function generateRandomIp(): string {
-		return implode('.', array_map(function (int $index) {
+		// 000/8 is reserved for local identification
+		$prefix = random_int(1, 255 - 18);
+
+		// 010/8 is reserved for private use
+		if ($prefix >= 10) {
+			$prefix += 1;
+		}
+		// 127/8 is reserved for loopback
+		if ($prefix >= 127) {
+			$prefix += 1;
+		}
+		// 224/8 - 239/8 (224/4) is used for multicast.
+		if ($prefix >= 224) {
+			$prefix += 16;
+		}
+
+		return $prefix . '.' . implode('.', array_map(function (int $index) {
 			return random_int(0, 255);
-		}, range(0, 3)));
+		}, range(1, 3)));
 	}
 
 	public function getSize(): int {
