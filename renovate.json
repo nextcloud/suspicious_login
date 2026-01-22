@@ -22,10 +22,9 @@
 	"ignoreUnstable": false,
 	"baseBranches": [
 		"master",
-		"stable31",
-		"stable30",
-		"stable29",
-		"stable28"
+		"stable33",
+		"stable32",
+		"stable31"
 	],
 	"enabledManagers": [
 		"composer",
@@ -68,11 +67,9 @@
 			"matchManagers": ["github-actions"],
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchBaseBranches": [
+				"stable33",
 				"stable32",
-				"stable31",
-				"stable30",
-				"stable29",
-				"stable28"
+				"stable31"
 			],
 			"extends": ["schedule:monthly"]
 		},
