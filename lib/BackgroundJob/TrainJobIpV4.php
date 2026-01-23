@@ -41,6 +41,7 @@ class TrainJobIpV4 extends TimedJob {
 	 *
 	 * @return void
 	 */
+	#[\Override]
 	protected function run($argument) {
 		try {
 			$strategy = new Ipv4Strategy();
