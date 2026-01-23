@@ -24,10 +24,11 @@
 		"test:unit": "phpunit -c tests/phpunit.xml tests/Unit",
 		"test:unit:dev": "phpunit -c tests/phpunit.xml tests/Unit --no-coverage",
 		"post-install-cmd": ["@composer bin all install --ansi"],
-		"psalm": "psalm --threads=1",
-		"psalm:update-baseline": "psalm --threads=1 --update-baseline",
-		"psalm:update-baseline:force": "psalm --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
-		"psalm:clear": "psalm --clear-cache && psalm --clear-global-cache"
+		"psalm": "psalm.phar --threads=1",
+		"psalm:fix": "psalm.phar --no-cache --alter --issues=InvalidReturnType,InvalidNullableReturnType,MissingParamType,InvalidFalsableReturnType,MissingOverrideAttribute",
+		"psalm:update-baseline": "psalm.phar --threads=1 --update-baseline",
+		"psalm:update-baseline:force": "psalm.phar --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
+		"psalm:clear": "psalm.phar --clear-cache && psalm --clear-global-cache"
 	},
 	"config": {
 		"sort-packages": true,
@@ -35,7 +36,7 @@
 		"classmap-authoritative": true,
 		"autoloader-suffix": "SuspiciousLogin",
 		"platform": {
-			"php": "8.1"
+			"php": "8.2"
 		},
 		"allow-plugins": {
 			"bamarni/composer-bin-plugin": true
