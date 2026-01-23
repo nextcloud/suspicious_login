@@ -23,6 +23,7 @@ class Version9000Date20250114095826 extends SimpleMigrationStep {
 	) {
 	}
 
+	#[\Override]
 	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
 		$this->jobList->add(TrainIpV4OnceJob::class);
 		$this->jobList->add(TrainIpV6OnceJob::class);
