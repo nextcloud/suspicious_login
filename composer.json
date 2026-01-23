@@ -35,7 +35,7 @@
 		"classmap-authoritative": true,
 		"autoloader-suffix": "SuspiciousLogin",
 		"platform": {
-			"php": "8.1"
+			"php": "8.2"
 		},
 		"allow-plugins": {
 			"bamarni/composer-bin-plugin": true
