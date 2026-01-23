@@ -31,6 +31,7 @@ class ETLJob extends TimedJob {
 	 *
 	 * @return void
 	 */
+	#[\Override]
 	protected function run($argument) {
 		$this->etlService->extractAndTransform();
 	}
