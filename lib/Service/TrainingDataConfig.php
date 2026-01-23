@@ -90,6 +90,7 @@ class TrainingDataConfig implements JsonSerializable {
 		return $clone;
 	}
 
+	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {
 		return [
