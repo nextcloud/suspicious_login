@@ -40,6 +40,7 @@ class TrainingDataStatistics implements JsonSerializable {
 		return $this->loginsAggregated;
 	}
 
+	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {
 		return [
