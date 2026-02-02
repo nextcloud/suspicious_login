@@ -2,9 +2,9 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "يېڭى كىرىش ئورنى بايقالدى",
-    "More info about the suspicious IP address available on %s" : "% S دىكى گۇمانلىق IP ئادرېس ھەققىدە تېخىمۇ كۆپ ئۇچۇرلار",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "ھېساباتىڭىزغا يېڭى كىرىش بايقالدى. IP ئادرېس% s گۇمانلىق دەپ ئايرىلدى. ئەگەر بۇ سىز بولسىڭىز ، بۇ ئۇچۇرغا سەل قارىسىڭىز بولىدۇ. بولمىسا پارولىڭىزنى ئۆزگەرتىشىڭىز كېرەك.",
-    "Open %s ↗" : "% S Open نى ئېچىڭ",
+    "More info about the suspicious IP address available on %s" : "%s دىكى گۇمانلىق IP ئادرېس ھەققىدە تېخىمۇ كۆپ ئۇچۇرلار",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "ھېساباتىڭىزغا يېڭى كىرىش بايقالدى. IP ئادرېس %s گۇمانلىق دەپ ئايرىلدى. ئەگەر بۇ سىز بولسىڭىز ، بۇ ئۇچۇرغا سەل قارىسىڭىز بولىدۇ. بولمىسا پارولىڭىزنى ئۆزگەرتىشىڭىز كېرەك.",
+    "Open %s ↗" : "%s نى ئېچىڭ",
     "Suspicious Login" : "گۇمانلىق كىرىش",
     "New login detected" : "يېڭى كىرىش بايقالدى",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloud غا گۇمانلىق IP لارنىڭ كىرىدىغانلىقىنى بايقاش ۋە ئاگاھلاندۇرۇش\n\t"
