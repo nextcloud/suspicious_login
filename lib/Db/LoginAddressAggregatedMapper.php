@@ -46,7 +46,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 		$qb = $this->db->getQueryBuilder();
 
 		$query = $qb
-			->select($qb->createFunction('COUNT(*)'))
+			->select($qb->func()->count('*'))
 			->from($this->getTableName())
 			->where($qb->expr()->andX(
 				$qb->expr()->like('ip', $qb->createNamedParameter('_%._%._%._%')),
@@ -103,8 +103,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 	public function hasSufficientIpV6Data(int $start) {
 		$qb = $this->db->getQueryBuilder();
 
-		$query = $qb
-			->select($qb->createFunction('COUNT(*)'))
+		$query = $qb->select($qb->func()->count('*'))
 			->from($this->getTableName())
 			->where($qb->expr()->andX(
 				$qb->expr()->notLike('ip', $qb->createNamedParameter('_%._%._%._%')),
@@ -121,7 +120,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 	public function getCount(): int {
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->select($qb->createFunction('COUNT(*)'))
+		$qb->select($qb->func()->count('*'))
 			->from($this->getTableName());
 		$result = $qb->execute();
 		$cnt = $result->fetchColumn();
@@ -133,7 +132,7 @@ class LoginAddressAggregatedMapper extends QBMapper {
 	public function getTotalCount(): int {
 		$qb = $this->db->getQueryBuilder();
 
-		$qb->select($qb->createFunction('SUM(seen)'))
+		$qb->select($qb->func()->sum('seen'))
 			->from($this->getTableName());
 		$result = $qb->execute();
 		$cnt = $result->fetchColumn();
