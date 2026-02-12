@@ -7,6 +7,6 @@ OC.L10N.register(
     "Open %s ↗" : "Abrir %s ↗",
     "Suspicious Login" : "Suspicious Login",
     "New login detected" : "Nuevo inicio de sesión detectado",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detectar y advierta sobre las IP sospechosas que inician sesión en la nube\n\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detectar y advertir sobre las IP sospechosas que inician sesión en Nextcloud\n\t"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
