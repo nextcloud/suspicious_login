@@ -6,6 +6,7 @@
 	},
 	"require-dev": {
 		"nextcloud/ocp": "dev-master",
-		"vimeo/psalm": "^5.26.1"
+		"psalm/phar": "6.14.3",
+		"psr/clock": "^1.0"
 	}
 }
