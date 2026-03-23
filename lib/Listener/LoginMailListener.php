@@ -80,7 +80,7 @@ class LoginMailListener implements IEventListener {
 			$additionalText = ' ' . $this->l->t('More info about the suspicious IP address available on %s', 'https://iplookup.flagfox.net');
 		}
 		$emailTemplate->addBodyText(
-			$this->l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp) . $additionalText
+			$this->l->t('A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password.', $suspiciousIp) . $additionalText
 		);
 		// Add button for more information about the IP-address (if enabled)
 		if ($addButton) {
