@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "New login location detected" : "新しいログイン場所が検出されました",
     "More info about the suspicious IP address available on %s" : "不審なIPアドレスについての詳細情報は %s で入手できます",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "アカウントへの新しいログインが検出されました。 IP アドレス%sは不審なログインに分類されます。このログインがあなたであればこのメッセージは無視して構いません。そうでない場合は、パスワードを変更してください。",
     "Open %s ↗" : "%s を開く ↗",
     "Suspicious Login" : "不審なログイン",
     "New login detected" : "新しいログインが検出されました",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloudにログインする不審なIPを検出して警告します\n\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Nextcloudにログインする不審なIPを検出して警告します\n\t",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "アカウントへの新しいログインが検出されました。 IP アドレス%sは不審なログインに分類されます。このログインがあなたであればこのメッセージは無視して構いません。そうでない場合は、パスワードを変更してください。"
 },
 "nplurals=1; plural=0;");
