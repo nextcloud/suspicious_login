@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "Noteikta pieteikšanās no jaunas atrašanās vietas",
     "More info about the suspicious IP address available on %s" : "Vairāk informācijas par aizdomīgo IP adresi ir pieejama %s",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Tika noteikta jauna pieteikšanās Tavā kontā. IP adrese %s tika novērtēta kā aizdomīga. Ja to darīji Tu, šo ziņojumu var neņemt vērā. Pretējā gadījumā vajadzētu nomainīt savu paroli.",
-    "Open %s ↗" : "Atvērt %s ↗"
+    "Open %s ↗" : "Atvērt %s ↗",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Tika noteikta jauna pieteikšanās Tavā kontā. IP adrese %s tika novērtēta kā aizdomīga. Ja to darīji Tu, šo ziņojumu var neņemt vērā. Pretējā gadījumā vajadzētu nomainīt savu paroli."
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);");
