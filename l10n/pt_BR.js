@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "Novo local de login detectado",
     "More info about the suspicious IP address available on %s" : "Mais informações sobre o endereço IP suspeito disponíveis em %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Foi detectado um novo acesso à sua conta. O endereço IP %s foi classificado como suspeito por um modelo de IA. Se foi você quem acessou, pode ignorar esta mensagem, pois o modelo de IA não tomou nenhuma medida automática. Caso contrário, você deve alterar sua senha.",
     "Open %s ↗" : "Abrir %s ↗",
     "Suspicious Login" : "Logins Suspeitos",
     "New login detected" : "Novo login detectado",
