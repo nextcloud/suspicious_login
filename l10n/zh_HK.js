@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "偵測到新的賬號登入位置",
     "More info about the suspicious IP address available on %s" : "關於可疑 IP 地址的更多資訊，請見 %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "偵測到您帳號有新的帳戶登入活動。IP 位址 %s 被人工智能模型歸類為可疑。如果是您本人的登入活動，您可以不用理會此訊息，因為人工智能模型並未採取任何自動操作。否則您應更改密碼。",
     "Open %s ↗" : "開啟 %s ↗",
     "Suspicious Login" : "可疑的賬號登入活動",
     "New login detected" : "偵測到新的賬號登入活動",
