@@ -4,6 +4,7 @@
 		errorLevel="4"
 		findUnusedBaselineEntry="true"
 		findUnusedCode="false"
+        strictBinaryOperands="false"
 		phpVersion="8.2"
 		resolveFromConfigFile="true"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -24,11 +25,19 @@
 	<extraFiles>
 		<directory name="vendor" />
 		<directory name="vendor-bin/psalm/vendor/nextcloud/ocp" />
+		<directory name="vendor-bin/psalm/vendor/psr" />
 	</extraFiles>
 	<stubs>
 		<file name="tests/stubs/doctrine_dbal_types_type.php" />
 	</stubs>
 	<issueHandlers>
+		<UndefinedClass>
+			<errorLevel type="suppress">
+				<referencedClass name="Symfony\Component\Console\Command\Command" />
+				<referencedClass name="Symfony\Component\Console\Output\OutputInterface" />
+				<referencedClass name="Symfony\Component\Console\Helper\ProgressBar" />
+			</errorLevel>
+		</UndefinedClass>
 		<UndefinedDocblockClass>
 			<errorLevel type="suppress">
 				<referencedClass name="Doctrine\DBAL\Driver\Statement" />
