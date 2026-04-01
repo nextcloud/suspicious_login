@@ -15,21 +15,11 @@ use function time;
 
 class TrainingDataConfig implements JsonSerializable {
 
-	/** @var int */
-	private $maxAge;
-
-	/** @var int */
-	private $threshold;
-
-	/** @var int */
-	private $now;
-
-	public function __construct(int $maxAge,
-		int $threshold,
-		int $now) {
-		$this->maxAge = $maxAge;
-		$this->threshold = $threshold;
-		$this->now = $now;
+	public function __construct(
+		private int $maxAge,
+		private int $threshold,
+		private int $now,
+	) {
 	}
 
 	public static function default(?int $time = null) {

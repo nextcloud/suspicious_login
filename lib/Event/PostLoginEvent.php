@@ -13,16 +13,11 @@ use OCP\EventDispatcher\Event;
 
 class PostLoginEvent extends Event {
 
-	/** @var string */
-	private $uid;
-
-	/** @var bool */
-	private $isTokenLogin;
-
-	public function __construct(string $uid, bool $isTokenLogin) {
+	public function __construct(
+		private readonly string $uid,
+		private readonly bool $isTokenLogin,
+	) {
 		parent::__construct();
-		$this->uid = $uid;
-		$this->isTokenLogin = $isTokenLogin;
 	}
 
 	public function getUid(): string {

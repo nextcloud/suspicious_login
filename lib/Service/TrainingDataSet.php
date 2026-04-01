@@ -16,37 +16,13 @@ use Rubix\ML\Datasets\Labeled;
  */
 class TrainingDataSet {
 
-	/**
-	 * @var Labeled
-	 */
-	private $trainingData;
-	/**
-	 * @var Labeled
-	 */
-	private $validationData;
-	/**
-	 * @var int
-	 */
-	private $numPositives;
-	/**
-	 * @var int
-	 */
-	private $numShuffledNegatives;
-	/**
-	 * @var int
-	 */
-	private $numRandomNegatives;
-
-	public function __construct(Labeled $trainingData,
-		Labeled $validationData,
-		int $numPositives,
-		int $numShuffledNegatives,
-		int $numRandomNegatives) {
-		$this->trainingData = $trainingData;
-		$this->validationData = $validationData;
-		$this->numPositives = $numPositives;
-		$this->numShuffledNegatives = $numShuffledNegatives;
-		$this->numRandomNegatives = $numRandomNegatives;
+	public function __construct(
+		private readonly Labeled $trainingData,
+		private readonly Labeled $validationData,
+		private readonly int $numPositives,
+		private readonly int $numShuffledNegatives,
+		private readonly int $numRandomNegatives,
+	) {
 	}
 
 	/**

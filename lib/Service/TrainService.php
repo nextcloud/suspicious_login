@@ -17,21 +17,11 @@ use OCA\SuspiciousLogin\Service\MLP\Trainer;
 
 class TrainService {
 
-	/** @var DataLoader */
-	private $dataLoader;
-
-	/** @var Trainer */
-	private $trainer;
-
-	/** @var ModelStore */
-	private $store;
-
-	public function __construct(DataLoader $dataLoader,
-		Trainer $trainer,
-		ModelStore $store) {
-		$this->trainer = $trainer;
-		$this->store = $store;
-		$this->dataLoader = $dataLoader;
+	public function __construct(
+		private readonly DataLoader $dataLoader,
+		private readonly Trainer $trainer,
+		private readonly ModelStore $store,
+	) {
 	}
 
 	/**

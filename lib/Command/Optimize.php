@@ -22,12 +22,10 @@ use function time;
 class Optimize extends Command {
 	use ModelStatistics;
 
-	/** @var OptimizerService */
-	private $optimizerService;
-
-	public function __construct(OptimizerService $optimizer) {
+	public function __construct(
+		private OptimizerService $optimizerService,
+	) {
 		parent::__construct('suspiciouslogin:optimize');
-		$this->optimizerService = $optimizer;
 
 		$this->addOption(
 			'max-epochs',
@@ -58,7 +56,7 @@ class Optimize extends Command {
 		}
 
 		// Prevent getting killed by a timeout
-		if (strpos(ini_get('disable_functions'), 'set_time_limit') === false) {
+		if (!str_contains(ini_get('disable_functions'), 'set_time_limit')) {
 			set_time_limit(0);
 		}
 

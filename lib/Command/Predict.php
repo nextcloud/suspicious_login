@@ -22,13 +22,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class Predict extends Command {
 
-	/** @var EstimatorService */
-	private $estimatorService;
-
-	public function __construct(EstimatorService $estimatorService) {
+	public function __construct(
+		private readonly EstimatorService $estimatorService,
+	) {
 		parent::__construct('suspiciouslogin:predict');
-
-		$this->estimatorService = $estimatorService;
 
 		$this->addArgument(
 			'uid',

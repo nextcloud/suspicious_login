@@ -28,16 +28,10 @@ class DataLoader {
 	private const MAX_SAMPLES_POSITIVES = 15_000;
 	private const MAX_SAMPLES_VALIDATE_POSITIVES = 3_000;
 
-	/** @var LoginAddressAggregatedMapper */
-	private $loginAddressMapper;
-
-	/** @var NegativeSampleGenerator */
-	private $negativeSampleGenerator;
-
-	public function __construct(LoginAddressAggregatedMapper $loginAddressMapper,
-		NegativeSampleGenerator $negativeSampleGenerator) {
-		$this->loginAddressMapper = $loginAddressMapper;
-		$this->negativeSampleGenerator = $negativeSampleGenerator;
+	public function __construct(
+		private readonly LoginAddressAggregatedMapper $loginAddressMapper,
+		private readonly NegativeSampleGenerator $negativeSampleGenerator,
+	) {
 	}
 
 	/**

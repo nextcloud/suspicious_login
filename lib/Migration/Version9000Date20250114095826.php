@@ -19,7 +19,7 @@ use OCP\Migration\SimpleMigrationStep;
 class Version9000Date20250114095826 extends SimpleMigrationStep {
 
 	public function __construct(
-		private IJobList $jobList,
+		private readonly IJobList $jobList,
 	) {
 	}
 

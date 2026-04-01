@@ -30,12 +30,6 @@ class OptimizerService {
 	public const INITIAL_STEP_WIDTH = 0.8;
 	public const STEP_WIDTH_FACTOR = 0.985;
 
-	/** @var DataLoader */
-	private $loader;
-
-	/** @var Trainer */
-	private $trainer;
-
 	private $parameterRanges = [
 		'epochs' => [50, 600],
 		'layers' => [2, 20],
@@ -44,10 +38,10 @@ class OptimizerService {
 		'learningRate' => [0.0001, 0.01],
 	];
 
-	public function __construct(DataLoader $loader,
-		Trainer $trainer) {
-		$this->loader = $loader;
-		$this->trainer = $trainer;
+	public function __construct(
+		private readonly DataLoader $loader,
+		private readonly Trainer $trainer,
+	) {
 	}
 
 	private function printConfig(int $epoch,
@@ -177,15 +171,11 @@ class OptimizerService {
 		$output->writeln('');
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
-		$tasks = array_map(function ($index) use ($config, $collectedData, $strategy) {
-			return new TrainTask($config, $collectedData, $strategy);
-		}, range(1, $parallelism));
+		$tasks = array_map(fn ($index) => new TrainTask($config, $collectedData, $strategy), range(1, $parallelism));
 		$best = $this->getAverageCost(
 			$output,
 			...Promise\wait(
-				Promise\all(array_map(function (TrainTask $task) {
-					return enqueue($task);
-				}, $tasks))
+				Promise\all(array_map(enqueue(...), $tasks))
 			)
 		);
 		$output->writeln("  Base cost is $best. Trying to optimize this now …");
@@ -198,9 +188,7 @@ class OptimizerService {
 			$cost = $this->getAverageCost(
 				$output,
 				...Promise\wait(
-					Promise\all(array_map(function ($index) use ($newConfig, $collectedData, $strategy) {
-						return enqueue(new TrainTask($newConfig, $collectedData, $strategy));
-					}, range(1, $parallelism)))
+					Promise\all(array_map(fn ($index) => enqueue(new TrainTask($newConfig, $collectedData, $strategy)), range(1, $parallelism)))
 				)
 			);
 

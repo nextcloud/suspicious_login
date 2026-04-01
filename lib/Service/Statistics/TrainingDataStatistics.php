@@ -14,16 +14,10 @@ use ReturnTypeWillChange;
 
 class TrainingDataStatistics implements JsonSerializable {
 
-	/** @var int */
-	private $loginsCaptured;
-
-	/** @var int */
-	private $loginsAggregated;
-
-	public function __construct(int $loginsCaptured,
-		int $loginsAggregated) {
-		$this->loginsCaptured = $loginsCaptured;
-		$this->loginsAggregated = $loginsAggregated;
+	public function __construct(
+		private readonly int $loginsCaptured,
+		private readonly int $loginsAggregated,
+	) {
 	}
 
 	/**

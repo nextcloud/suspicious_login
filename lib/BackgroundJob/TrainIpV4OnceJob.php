@@ -21,8 +21,8 @@ use Throwable;
 class TrainIpV4OnceJob extends QueuedJob {
 
 	public function __construct(
-		private TrainService $trainService,
-		private LoggerInterface $logger,
+		private readonly TrainService $trainService,
+		private readonly LoggerInterface $logger,
 		ITimeFactory $time,
 	) {
 		parent::__construct($time);

@@ -51,9 +51,7 @@ class Trainer {
 		TrainingDataSet $dataSet,
 		AClassificationStrategy $strategy): TrainingResult {
 		$start = $this->timeFactory->getDateTime();
-		$layers = array_map(function ($index) use ($strategy) {
-			return new Dense($strategy->getSize());
-		}, range(0, $config->getLayers() - 2));
+		$layers = array_map(fn ($index) => new Dense($strategy->getSize()), range(0, $config->getLayers() - 2));
 		$layers[] = new Activation(new Sigmoid());
 		$classifier = new MultilayerPerceptron(
 			$layers,

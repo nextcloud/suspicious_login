@@ -21,9 +21,9 @@ class ETLService {
 	public const MAX_BATCH_SIZE = 10000;
 
 	public function __construct(
-		private IDBConnection $db,
-		private LoginAddressAggregatedMapper $aggregatedMapper,
-		private LoggerInterface $logger,
+		private readonly IDBConnection $db,
+		private readonly LoginAddressAggregatedMapper $aggregatedMapper,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 
