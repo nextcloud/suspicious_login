@@ -28,7 +28,8 @@
 		"psalm:fix": "psalm.phar --no-cache --alter --issues=InvalidReturnType,InvalidNullableReturnType,MissingParamType,InvalidFalsableReturnType,MissingOverrideAttribute",
 		"psalm:update-baseline": "psalm.phar --threads=1 --update-baseline",
 		"psalm:update-baseline:force": "psalm.phar --threads=1 --update-baseline --set-baseline=tests/psalm-baseline.xml",
-		"psalm:clear": "psalm.phar --clear-cache && psalm --clear-global-cache"
+		"psalm:clear": "psalm.phar --clear-cache && psalm --clear-global-cache",
+		"rector": "rector"
 	},
 	"config": {
 		"sort-packages": true,
