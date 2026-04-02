@@ -17,6 +17,9 @@ class AddressClassifier {
 	}
 
 	public static function isIpV6(string $address): bool {
-		return filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
+		$strippedAddress = IPv6AddressParser::stripScopeIdentifier($address);
+
+		return filter_var($strippedAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false;
 	}
+
 }
