@@ -23,6 +23,7 @@
 /package.json
 /package-lock.json
 /.php-cs-fixer.dist.php
+/rector.php
 /renovate.json
 /screenshots
 .scrutinizer.yml

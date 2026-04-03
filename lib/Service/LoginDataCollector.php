@@ -14,11 +14,9 @@ use OCA\SuspiciousLogin\Db\LoginAddressMapper;
 
 class LoginDataCollector {
 
-	/** @var LoginAddressMapper */
-	private $addressMapper;
-
-	public function __construct(LoginAddressMapper $addressMapper) {
-		$this->addressMapper = $addressMapper;
+	public function __construct(
+		private readonly LoginAddressMapper $addressMapper,
+	) {
 	}
 
 	public function collectSuccessfulLogin(string $uid, string $ip, int $timestamp): void {

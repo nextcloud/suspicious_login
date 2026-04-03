@@ -29,12 +29,12 @@ use function substr;
 class LoginClassifier {
 
 	public function __construct(
-		private EstimatorService $estimator,
-		private IRequest $request,
-		private LoggerInterface $logger,
-		private SuspiciousLoginMapper $mapper,
-		private ITimeFactory $timeFactory,
-		private IEventDispatcher $dispatcher,
+		private readonly EstimatorService $estimator,
+		private readonly IRequest $request,
+		private readonly LoggerInterface $logger,
+		private readonly SuspiciousLoginMapper $mapper,
+		private readonly ITimeFactory $timeFactory,
+		private readonly IEventDispatcher $dispatcher,
 	) {
 	}
 
@@ -46,7 +46,7 @@ class LoginClassifier {
 		if (empty($authHeader)) {
 			return false;
 		}
-		if (substr($authHeader, 0, strlen('Basic ')) !== 'Basic ') {
+		if (!str_starts_with($authHeader, 'Basic ')) {
 			return false;
 		}
 		$pwd = explode(

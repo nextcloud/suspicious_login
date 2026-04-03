@@ -26,11 +26,11 @@ use Psr\Log\LoggerInterface;
 class LoginMailListener implements IEventListener {
 
 	public function __construct(
-		private LoggerInterface $logger,
-		private IMailer $mailer,
-		private IUserManager $userManager,
-		private IL10N $l,
-		private IConfig $config,
+		private readonly LoggerInterface $logger,
+		private readonly IMailer $mailer,
+		private readonly IUserManager $userManager,
+		private readonly IL10N $l,
+		private readonly IConfig $config,
 	) {
 	}
 

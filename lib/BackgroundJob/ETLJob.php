@@ -15,15 +15,13 @@ use OCP\BackgroundJob\TimedJob;
 
 class ETLJob extends TimedJob {
 
-	/** @var ETLService */
-	private $etlService;
-
-	public function __construct(ETLService $etlService,
-		ITimeFactory $time) {
+	public function __construct(
+		private readonly ETLService $etlService,
+		ITimeFactory $time,
+	) {
 		parent::__construct($time);
 
 		$this->setInterval(60 * 60);
-		$this->etlService = $etlService;
 	}
 
 	/**

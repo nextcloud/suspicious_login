@@ -44,9 +44,7 @@ class Ipv4Strategy extends AClassificationStrategy {
 
 	#[\Override]
 	public function generateRandomIp(): string {
-		return implode('.', array_map(function (int $index) {
-			return random_int(0, 255);
-		}, range(0, 3)));
+		return implode('.', array_map(fn (int $index) => random_int(0, 255), range(0, 3)));
 	}
 
 	#[\Override]

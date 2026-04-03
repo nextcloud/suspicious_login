@@ -44,16 +44,11 @@ class NegativeSampleGenerator {
 			}
 		}
 
-		$uniqueMap = array_filter($map, function (array $uidVecs) {
-			return count($uidVecs) === 1;
-		});
+		$uniqueMap = array_filter($map, fn (array $uidVecs) => count($uidVecs) === 1);
 
-		return array_map(function (string $ipVecStr): array {
+		return array_map(
 			// Split the IP vec again, but also past the digits
-			return array_map(function (string $c): int {
-				return (int)$c;
-			}, str_split($ipVecStr));
-		}, array_keys($uniqueMap));
+			fn (string $ipVecStr): array => array_map(fn (string $c): int => (int)$c, str_split($ipVecStr)), array_keys($uniqueMap));
 	}
 
 	private function generateFromRealData(array $uidVec, array $uniqueIps): array {
@@ -79,9 +74,7 @@ class NegativeSampleGenerator {
 	public function generateRandomFromPositiveSamples(Dataset $positives, int $num, AClassificationStrategy $strategy): DataSet {
 		$max = count($positives);
 		return new Labeled(
-			array_map(function (int $id) use ($strategy, $positives, $max) {
-				return $this->generateRandom(array_slice($positives[$id % $max], 0, 16), $strategy);
-			}, range(0, $num - 1)),
+			array_map(fn (int $id) => $this->generateRandom(array_slice($positives[$id % $max], 0, 16), $strategy), range(0, $num - 1)),
 			array_fill(0, $num, Trainer::LABEL_NEGATIVE)
 		);
 	}

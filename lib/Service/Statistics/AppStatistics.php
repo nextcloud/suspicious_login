@@ -21,26 +21,13 @@ use ReturnTypeWillChange;
 
 class AppStatistics implements JsonSerializable {
 
-	/** @var bool */
-	private $active;
-
-	/** @var Model[] */
-	private $recentModels;
-
-	/** @var TrainingDataConfig */
-	private $trainingDataConfig;
-
-	/** @var TrainingDataStatistics */
-	private $trainingDataStatistics;
-
-	public function __construct(bool $active,
-		array $recentModels,
-		TrainingDataConfig $trainingDataConfig,
-		TrainingDataStatistics $trainingDataStatistics) {
-		$this->active = $active;
-		$this->recentModels = $recentModels;
-		$this->trainingDataConfig = $trainingDataConfig;
-		$this->trainingDataStatistics = $trainingDataStatistics;
+	public function __construct(
+		private readonly bool $active,
+		/** @var Model[] */
+		private readonly array $recentModels,
+		private readonly TrainingDataConfig $trainingDataConfig,
+		private readonly TrainingDataStatistics $trainingDataStatistics,
+	) {
 	}
 
 	/**

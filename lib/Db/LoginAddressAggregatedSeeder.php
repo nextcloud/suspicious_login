@@ -17,13 +17,11 @@ class LoginAddressAggregatedSeeder {
 	/** @var IDBConnection */
 	private $db;
 
-	/** @var LoginAddressAggregatedMapper */
-	private $mapper;
-
-	public function __construct(IDBConnection $db,
-		LoginAddressAggregatedMapper $mapper) {
+	public function __construct(
+		IDBConnection $db,
+		private readonly LoginAddressAggregatedMapper $mapper,
+	) {
 		$this->db = $db;
-		$this->mapper = $mapper;
 	}
 
 	public function seed(AClassificationStrategy $strategy): int {

@@ -45,24 +45,18 @@ class IpV6Strategy extends AClassificationStrategy {
 
 		$hex = bin2hex($addr);
 		$padded = str_pad($hex, 32, '0', STR_PAD_LEFT);
-		$binString = implode('', array_map(function (string $h) {
-			return str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT);
-		}, str_split($padded)));
+		$binString = implode('', array_map(fn (string $h) => str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT), str_split($padded)));
 		$mostSign = substr($binString, 0, 64);
 
 		return array_map(
-			function (string $bit) {
-				return (int)$bit;
-			},
+			fn (string $bit) => (int)$bit,
 			str_split($mostSign)
 		);
 	}
 
 	#[\Override]
 	public function generateRandomIp(): string {
-		return implode(':', array_map(function (int $index) {
-			return base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16);
-		}, range(0, 7)));
+		return implode(':', array_map(fn (int $index) => base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16), range(0, 7)));
 	}
 
 	#[\Override]
