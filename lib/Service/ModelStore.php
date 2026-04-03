@@ -165,4 +165,59 @@ class ModelStore {
 			throw $e;
 		}
 	}
+
+	/**
+	 * Remove old models, keeping only the `$numberOfModelsToKeep` ones
+	 * for each used address type (IPv4 / IPv6).
+	 *
+	 * @throws \OCP\DB\Exception
+	 * @throws \OCP\Files\NotPermittedException
+	 */
+	public function cleanup(int $numberOfModelsToKeep): void {
+		$oldModels = array_merge(
+			$this->modelMapper->findOld($numberOfModelsToKeep, Ipv4Strategy::getTypeName()),
+			$this->modelMapper->findOld($numberOfModelsToKeep, IpV6Strategy::getTypeName())
+		);
+
+		if (empty($oldModels)) {
+			$this->logger->debug('No old models to clean up');
+			return;
+		}
+
+		try {
+			$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
+		} catch (NotFoundException) {
+			$this->logger->debug('Models folder does not exist, skipping file deletion');
+		}
+
+		if ($this->cacheFactory->isLocalCacheAvailable()) {
+			$cache = $this->cacheFactory->createLocal();
+		}
+
+		foreach ($oldModels as $oldModel) {
+			$id = $oldModel->getId();
+			$this->logger->debug("Cleaning up old model $id");
+
+			// Remove the model file from app data
+			if (isset($modelsFolder)) {
+				try {
+					$modelFile = $modelsFolder->getFile((string)$id);
+					$modelFile->delete();
+				} catch (NotFoundException) {
+					$this->logger->debug("Model file $id not found in app data, skipping file deletion");
+				}
+			}
+
+			// Evict from cache
+			if (isset($cache)) {
+				$cache->remove($this->getCacheKey($id));
+			}
+
+			// Remove the DB record
+			$this->modelMapper->delete($oldModel);
+		}
+
+		$numberOfOldModels = count($oldModels);
+		$this->logger->info("Cleaned up {$numberOfOldModels} old model(s)");
+	}
 }
