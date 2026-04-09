@@ -27,22 +27,12 @@ use function time;
 class Train extends Command {
 	use ModelStatistics;
 
-	/** @var DataLoader */
-	private $loader;
-
-	/** @var Trainer */
-	private $trainer;
-
-	/** @var ModelStore */
-	private $store;
-
-	public function __construct(DataLoader $loader,
-		Trainer $optimizer,
-		ModelStore $store) {
+	public function __construct(
+		private DataLoader $loader,
+		private Trainer $trainer,
+		private ModelStore $store,
+	) {
 		parent::__construct('suspiciouslogin:train');
-		$this->trainer = $optimizer;
-		$this->loader = $loader;
-		$this->store = $store;
 
 		$this->addOption(
 			'epochs',

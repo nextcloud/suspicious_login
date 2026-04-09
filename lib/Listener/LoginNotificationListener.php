@@ -22,9 +22,9 @@ use Psr\Log\LoggerInterface;
 class LoginNotificationListener implements IEventListener {
 
 	public function __construct(
-		private IManager $notificationManager,
-		private ITimeFactory $timeFactory,
-		private LoggerInterface $logger,
+		private readonly IManager $notificationManager,
+		private readonly ITimeFactory $timeFactory,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 

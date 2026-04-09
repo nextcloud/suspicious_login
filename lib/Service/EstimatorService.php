@@ -18,8 +18,8 @@ use RuntimeException;
 class EstimatorService {
 
 	public function __construct(
-		private ModelStore $modelStore,
-		private LoggerInterface $logger,
+		private readonly ModelStore $modelStore,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 

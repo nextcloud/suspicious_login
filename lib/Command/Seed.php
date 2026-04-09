@@ -24,13 +24,11 @@ class Seed extends Command {
 	/** @var IConfig */
 	private $config;
 
-	/** @var LoginAddressAggregatedSeeder */
-	private $seeder;
-
-	public function __construct(IConfig $config,
-		LoginAddressAggregatedSeeder $seeder) {
+	public function __construct(
+		IConfig $config,
+		private LoginAddressAggregatedSeeder $seeder,
+	) {
 		parent::__construct('suspiciouslogin:seed');
-		$this->seeder = $seeder;
 
 		$this->addOption(
 			'v6',

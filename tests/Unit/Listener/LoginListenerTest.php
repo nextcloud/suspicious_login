@@ -53,7 +53,7 @@ class LoginListenerTest extends TestCase {
 	}
 
 	public function testHandleUnrelated(): void {
-		$event = $this->createMock(Event::class);
+		$event = $this->createStub(Event::class);
 		$this->loginClassifier->expects($this->never())
 			->method('process');
 

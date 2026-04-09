@@ -17,13 +17,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ETL extends Command {
 
-	/** @var ETLService */
-	private $etlService;
-
-	public function __construct(ETLService $etlService) {
+	public function __construct(
+		private readonly ETLService $etlService,
+	) {
 		parent::__construct('suspiciouslogin:etl');
-
-		$this->etlService = $etlService;
 
 		$this->addOption(
 			'max',

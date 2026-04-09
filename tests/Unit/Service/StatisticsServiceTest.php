@@ -79,7 +79,7 @@ class StatisticsServiceTest extends TestCase {
 	}
 
 	public function testGetStatistics() {
-		$model = $this->createMock(Model::class);
+		$model = $this->createStub(Model::class);
 		$this->modelMapper->expects($this->once())
 			->method('findLatest')
 			->willReturn($model);

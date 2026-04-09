@@ -35,12 +35,12 @@ class ModelStore {
 	public const APPDATA_MODELS_FOLDER = 'models';
 
 	public function __construct(
-		private ModelMapper $modelMapper,
-		private IAppData $appData,
-		private IAppManager $appManager,
-		private ITempManager $tempManager,
-		private ICacheFactory $cacheFactory,
-		private LoggerInterface $logger,
+		private readonly ModelMapper $modelMapper,
+		private readonly IAppData $appData,
+		private readonly IAppManager $appManager,
+		private readonly ITempManager $tempManager,
+		private readonly ICacheFactory $cacheFactory,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 
@@ -136,7 +136,7 @@ class ModelStore {
 			throw new RuntimeException('Estimator is not persistable');
 		}
 
-		$model->setType(get_class($estimator));
+		$model->setType($estimator::class);
 		$model->setAppVersion($this->appManager->getAppVersion(Application::APP_ID));
 
 		$this->modelMapper->insert($model);
