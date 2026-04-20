@@ -10,32 +10,26 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Tests\Listener;
 
 use ChristophWurst\Nextcloud\Testing\TestCase;
-use OCA\SuspiciousLogin\Event\PostLoginEvent;
 use OCA\SuspiciousLogin\Listener\LoginListener;
 use OCA\SuspiciousLogin\Service\LoginClassifier;
 use OCA\SuspiciousLogin\Service\LoginDataCollector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\IRequest;
+use OCP\IUser;
+use OCP\User\Events\UserLoggedInEvent;
+use Override;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class LoginListenerTest extends TestCase {
+	private IRequest&MockObject $request;
+	private ITimeFactory&MockObject $timeFactory;
+	private LoginClassifier&MockObject $loginClassifier;
 
-	/** @var IRequest|MockObject */
-	private $request;
+	private LoginDataCollector&MockObject $loginDataCollector;
+	private LoginListener $listener;
 
-	/** @var ITimeFactory|MockObject */
-	private $timeFactory;
-
-	/** @var LoginClassifier|MockObject */
-	private $loginClassifier;
-
-	/** @var LoginDataCollector|MockObject */
-	private $loginDataCollector;
-
-	/** @var LoginListener */
-	private $listener;
-
+	#[Override]
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -57,6 +51,7 @@ class LoginListenerTest extends TestCase {
 		$this->loginClassifier->expects($this->never())
 			->method('process');
 
+		/** @psalm-suppress InvalidArgument */
 		$this->listener->handle($event);
 	}
 
@@ -70,7 +65,9 @@ class LoginListenerTest extends TestCase {
 				$this->anything(),
 				$this->anything()
 			);
-		$event = new PostLoginEvent('user', true);
+		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user');
+		$event = new UserLoggedInEvent($user, 'user', null, true);
 
 		$this->listener->handle($event);
 	}
@@ -85,7 +82,9 @@ class LoginListenerTest extends TestCase {
 				$this->anything(),
 				$this->anything()
 			);
-		$event = new PostLoginEvent('user', false);
+		$user = $this->createMock(IUser::class);
+		$user->method('getUID')->willReturn('user');
+		$event = new UserLoggedInEvent($user, 'user', null, false);
 
 		$this->listener->handle($event);
 	}
