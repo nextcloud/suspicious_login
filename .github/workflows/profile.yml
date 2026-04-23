@@ -62,7 +62,7 @@ jobs:
           persist-credentials: false
           submodules: true
           repository: nextcloud/server
-          ref: ${{ matrix.nextcloud-versions }}
+          ref: ${{ matrix.nextcloud-version }}
           path: nextcloud
 
       - name: Install Nextcloud
