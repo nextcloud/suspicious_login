@@ -9,39 +9,29 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Listener;
 
-use OCA\SuspiciousLogin\Event\PostLoginEvent;
 use OCA\SuspiciousLogin\Service\LoginClassifier;
 use OCA\SuspiciousLogin\Service\LoginDataCollector;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 use OCP\IRequest;
+use OCP\User\Events\UserLoggedInEvent;
 
 /**
- * @implements IEventListener<PostLoginEvent>
+ * @implements IEventListener<UserLoggedInEvent>
  */
 class LoginListener implements IEventListener {
-
-	/** @var IRequest */
-	private $request;
-
-	/** @var ITimeFactory */
-	private $timeFactory;
-
 	public function __construct(
-		IRequest $request,
-		ITimeFactory $timeFactory,
+		private readonly IRequest $request,
+		private readonly ITimeFactory $timeFactory,
 		private readonly LoginClassifier $loginClassifier,
 		private readonly LoginDataCollector $loginDataCollector,
 	) {
-		$this->request = $request;
-		$this->timeFactory = $timeFactory;
 	}
 
 	#[\Override]
 	public function handle(Event $event): void {
-		if (!($event instanceof PostLoginEvent)) {
-			// Unrelated
+		if (!$event instanceof UserLoggedInEvent) {
 			return;
 		}
 
@@ -49,21 +39,21 @@ class LoginListener implements IEventListener {
 		$this->handleDataCollection($event);
 	}
 
-	private function handleClassification(PostLoginEvent $event): void {
+	private function handleClassification(UserLoggedInEvent $event): void {
 		if ($event->isTokenLogin()) {
 			// We don't care about those
 			return;
 		}
 
 		$this->loginClassifier->process(
-			$event->getUid(),
+			$event->getUser()->getUID(),
 			$this->request->getRemoteAddress()
 		);
 	}
 
-	private function handleDataCollection(PostLoginEvent $event): void {
+	private function handleDataCollection(UserLoggedInEvent $event): void {
 		$this->loginDataCollector->collectSuccessfulLogin(
-			$event->getUid(),
+			$event->getUser()->getUID(),
 			$this->request->getRemoteAddress(),
 			$this->timeFactory->getTime()
 		);

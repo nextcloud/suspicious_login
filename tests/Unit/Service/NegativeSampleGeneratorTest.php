@@ -14,6 +14,7 @@ use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
+use Override;
 use Rubix\ML\Datasets\Unlabeled;
 use function array_fill;
 use function array_merge;
@@ -23,13 +24,10 @@ use function str_pad;
 use function str_split;
 
 class NegativeSampleGeneratorTest extends TestCase {
+	private ServiceMockObject $serviceMock;
+	private NegativeSampleGenerator $generator;
 
-	/** @var ServiceMockObject */
-	private $serviceMock;
-
-	/** @var NegativeSampleGenerator */
-	private $generator;
-
+	#[Override]
 	protected function setUp(): void {
 		parent::setUp();
 

@@ -19,6 +19,7 @@ use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
+use Override;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use function array_fill;
@@ -44,6 +45,7 @@ class LoginClassifierTest extends TestCase {
 	/** @var LoginClassifier */
 	private $classifier;
 
+	#[Override]
 	protected function setUp(): void {
 		parent::setUp();
 

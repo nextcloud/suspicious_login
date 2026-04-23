@@ -19,6 +19,7 @@ use OCA\SuspiciousLogin\Service\Statistics\TrainingDataStatistics;
 use OCA\SuspiciousLogin\Service\StatisticsService;
 use OCA\SuspiciousLogin\Service\TrainingDataConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
+use Override;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class StatisticsServiceTest extends TestCase {
@@ -35,6 +36,7 @@ class StatisticsServiceTest extends TestCase {
 	/** @var StatisticsService */
 	private $service;
 
+	#[Override]
 	protected function setUp(): void {
 		parent::setUp();
 
