@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "New login location detected" : "Εντοπίστηκε νέα τοποθεσία σύνδεσης",
     "More info about the suspicious IP address available on %s" : "Περισσότερες πληροφορίες για την ύποπτη διεύθυνση IP διαθέσιμες στο %s",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Εντοπίστηκε νέα σύνδεση στο λογαριασμό σας. Η διεύθυνση IP %s κρίθηκε ύποπτη. Εάν ήσασταν εσείς, μπορείτε να αγνοήσετε αυτό το μήνυμα. Σε αντίθετη περίπτωση πρέπει να αλλάξετε τον κωδικό σας.",
     "Open %s ↗" : "Άνοιγμα %s ↗",
     "Suspicious Login" : "Ύποπτη σύνδεση",
     "New login detected" : "Έντοπίστηκε νέα σύνδεση",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Εντοπισμός και προειδοποίηση για ύποπτες IP που συνδέονται στο Nextcloud\n\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Εντοπισμός και προειδοποίηση για ύποπτες IP που συνδέονται στο Nextcloud\n\t",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Εντοπίστηκε νέα σύνδεση στο λογαριασμό σας. Η διεύθυνση IP %s κρίθηκε ύποπτη. Εάν ήσασταν εσείς, μπορείτε να αγνοήσετε αυτό το μήνυμα. Σε αντίθετη περίπτωση πρέπει να αλλάξετε τον κωδικό σας."
 },
 "nplurals=2; plural=(n != 1);");

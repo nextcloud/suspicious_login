@@ -1,10 +1,11 @@
 { "translations": {
     "New login location detected" : "Tuvastasin uue sisselogimise asukoha",
     "More info about the suspicious IP address available on %s" : "Lisateave kahtlaste ip-aadresside kohta on saadaval: %s",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Server tuvastas uue sisselogimise sinu kasutajakontoga. IP-aadress %s on tuvastatud kahtlasena. Kui see olid sina, siis võid seda teadet eirata. Muudel juhtudel palun muuda oma salasõna.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Server tuvastas uue sisselogimise sinu kasutajakontoga. Tehisaru mudel tuvastas %s IP-aadressi kahtlasena. Kui see olid sina, siis võid seda teadet eirata. Tehisaru mudel niikuinii ei teinud ühtegi automaatset tegevust. Muudel juhtudel palun muuda oma salasõna.",
     "Open %s ↗" : "Ava %s ↗",
     "Suspicious Login" : "Kahtlane sisselogimine",
     "New login detected" : "Tuvastasin uue sisselogimise",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Tuvasta Nextcloudi kahtlaste sisselogimiste ip-aadressid ja anna neist teada\n\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Tuvasta Nextcloudi kahtlaste sisselogimiste ip-aadressid ja anna neist teada\n\t",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Server tuvastas uue sisselogimise sinu kasutajakontoga. IP-aadress %s on tuvastatud kahtlasena. Kui see olid sina, siis võid seda teadet eirata. Muudel juhtudel palun muuda oma salasõna."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -2,9 +2,9 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Открито е ново място за влизане",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Открито е ново влизане във вашия профил. IP адресът %s беше класифициран като подозрителен. Ако това сте били вие, можете да игнорирате това съобщение. В противен случай трябва да промените паролата си.",
     "Suspicious Login" : "Подозрително влизане",
     "New login detected" : "Открито е ново влизане",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Откриване и предупреждаване за подозрителни IP адреси, влизащи в Nextcloud\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Откриване и предупреждаване за подозрителни IP адреси, влизащи в Nextcloud\t",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Открито е ново влизане във вашия профил. IP адресът %s беше класифициран като подозрителен. Ако това сте били вие, можете да игнорирате това съобщение. В противен случай трябва да промените паролата си."
 },
 "nplurals=2; plural=(n != 1);");

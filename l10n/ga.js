@@ -3,10 +3,11 @@ OC.L10N.register(
     {
     "New login location detected" : "Braitheadh ​​suíomh logáil isteach nua",
     "More info about the suspicious IP address available on %s" : "Tuilleadh eolais faoin seoladh IP amhrasach ar fáil ar %s",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Braitheadh ​​logáil isteach nua ar do chuntas. Rangaíodh an seoladh IP %s mar amhrasach. Más tusa a bhí ann, is féidir leat neamhaird a dhéanamh den teachtaireacht seo. Seachas sin ba cheart duit do phasfhocal a athrú.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Braitheadh ​​logáil isteach nua i do chuntas. Rangaíodh an seoladh IP %s mar amhrasach ag samhail AI. Más tusa a bhí ann, is féidir leat neamhaird a dhéanamh den teachtaireacht seo, mar nach ndearna an tsamhail AI aon ghníomhartha uathoibrithe. Seachas sin, ba chóir duit do phasfhocal a athrú.",
     "Open %s ↗" : "Oscail %s ↗",
     "Suspicious Login" : "Logáil Isteach Amhrasacha",
     "New login detected" : "Braitheadh ​​logáil isteach nua",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Braith agus rabhadh a thabhairt faoi IPanna amhrasacha a logáil isteach ar Nextcloud\n\t"
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Braith agus rabhadh a thabhairt faoi IPanna amhrasacha a logáil isteach ar Nextcloud\n\t",
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Braitheadh ​​logáil isteach nua ar do chuntas. Rangaíodh an seoladh IP %s mar amhrasach. Más tusa a bhí ann, is féidir leat neamhaird a dhéanamh den teachtaireacht seo. Seachas sin ba cheart duit do phasfhocal a athrú."
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");
