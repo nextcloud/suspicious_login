@@ -24,6 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function extension_loaded;
 use function time;
 
+/** @psalm-immutable */
 class Train extends Command {
 	use ModelStatistics;
 
