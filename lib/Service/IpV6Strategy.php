@@ -12,6 +12,7 @@ namespace OCA\SuspiciousLogin\Service;
 use InvalidArgumentException;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Service\MLP\Config;
+use OCA\SuspiciousLogin\Util\IPv6AddressParser;
 use function array_map;
 use function base_convert;
 use function bin2hex;
@@ -38,7 +39,8 @@ class IpV6Strategy extends AClassificationStrategy {
 
 	#[\Override]
 	protected function ipToVec(string $ip): array {
-		$addr = inet_pton($ip);
+		$strippedIp = IPv6AddressParser::stripScopeIdentifier($ip);
+		$addr = inet_pton($strippedIp);
 		if ($addr === false) {
 			throw new InvalidArgumentException('Invalid IPv6 address');
 		}
