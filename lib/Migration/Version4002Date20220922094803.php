@@ -22,6 +22,7 @@ class Version4002Date20220922094803 extends SimpleMigrationStep {
 	 */
 	protected $connection;
 
+	/** @psalm-mutation-free */
 	public function __construct(IDBConnection $connection) {
 		$this->connection = $connection;
 	}

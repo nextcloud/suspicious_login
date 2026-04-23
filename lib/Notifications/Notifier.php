@@ -33,6 +33,7 @@ class Notifier implements INotifier {
 	/** @var IURLGenerator */
 	protected $url;
 
+	/** @psalm-mutation-free */
 	public function __construct(IFactory $factory, IRequest $request, IConfig $config, IURLGenerator $urlGenerator) {
 		$this->config = $config;
 		$this->factory = $factory;
@@ -40,6 +41,7 @@ class Notifier implements INotifier {
 		$this->url = $urlGenerator;
 	}
 
+	/** @psalm-pure */
 	#[\Override]
 	public function getID(): string {
 		return Application::APP_ID;

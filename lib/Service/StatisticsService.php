@@ -18,6 +18,7 @@ use OCP\AppFramework\Db\DoesNotExistException;
 
 class StatisticsService {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly LoginAddressMapper $loginAddressMapper,
 		private readonly LoginAddressAggregatedMapper $loginAddressAggregatedMapper,

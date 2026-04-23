@@ -25,6 +25,7 @@ use Psr\Log\LoggerInterface;
  */
 class LoginMailListener implements IEventListener {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly LoggerInterface $logger,
 		private readonly IMailer $mailer,
