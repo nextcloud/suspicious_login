@@ -11,7 +11,9 @@ namespace OCA\SuspiciousLogin\Service;
 
 use Rubix\ML\Datasets\Labeled;
 
+/** @psalm-immutable */
 class CollectedData {
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly Labeled $trainingPositives,
 		private readonly Labeled $validationPositives,
