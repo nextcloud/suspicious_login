@@ -1,7 +1,7 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
-		"config:base",
+		"config:recommended",
 		"helpers:pinGitHubActionDigests",
 		":semanticCommits",
 		":dependencyDashboard"
@@ -20,7 +20,7 @@
 	"rangeStrategy": "bump",
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
-	"baseBranches": [
+	"baseBranchPatterns": [
 		"master",
 		"stable33",
 		"stable32",
@@ -80,11 +80,11 @@
 		},
 		{
 			"groupName": "AMPHP",
-			"matchPackagePrefixes": [
-				"amphp"
-			],
 			"matchManagers": [
 				"composer"
+			],
+			"matchPackageNames": [
+				"amphp{/,}**"
 			]
 		}
 	],
