@@ -21,18 +21,22 @@ use function str_split;
 use function substr;
 
 class IpV6Strategy extends AClassificationStrategy {
+	#[\Override]
 	public static function getTypeName(): string {
 		return 'ipv6';
 	}
 
+	#[\Override]
 	public function hasSufficientData(LoginAddressAggregatedMapper $loginAddressMapper, int $validationDays): bool {
 		return $loginAddressMapper->hasSufficientIpV6Data($validationDays);
 	}
 
+	#[\Override]
 	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array {
 		return $loginAddressMapper->findHistoricAndRecentIpv6($validationThreshold, $maxAge);
 	}
 
+	#[\Override]
 	protected function ipToVec(string $ip): array {
 		$addr = inet_pton($ip);
 		if ($addr === false) {
@@ -54,16 +58,19 @@ class IpV6Strategy extends AClassificationStrategy {
 		);
 	}
 
+	#[\Override]
 	public function generateRandomIp(): string {
 		return implode(':', array_map(function (int $index) {
 			return base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16);
 		}, range(0, 7)));
 	}
 
+	#[\Override]
 	public function getSize(): int {
 		return 16 + 64;
 	}
 
+	#[\Override]
 	public function getDefaultMlpConfig(): Config {
 		return Config::default()->setEpochs(20);
 	}

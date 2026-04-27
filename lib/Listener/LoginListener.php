@@ -44,6 +44,7 @@ class LoginListener implements IEventListener {
 		$this->loginClassifier = $loginClassifier;
 	}
 
+	#[\Override]
 	public function handle(Event $event): void {
 		if (!($event instanceof PostLoginEvent)) {
 			// Unrelated
