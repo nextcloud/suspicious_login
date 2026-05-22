@@ -32,6 +32,7 @@
 		<job>OCA\SuspiciousLogin\BackgroundJob\ETLJob</job>
 		<job>OCA\SuspiciousLogin\BackgroundJob\TrainJobIpV4</job>
 		<job>OCA\SuspiciousLogin\BackgroundJob\TrainJobIpV6</job>
+		<job>OCA\SuspiciousLogin\BackgroundJob\CleanupModelsJob</job>
 	</background-jobs>
 
 	<commands>
