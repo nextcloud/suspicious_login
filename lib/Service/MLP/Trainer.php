@@ -33,6 +33,7 @@ class Trainer {
 	/** @var ITimeFactory */
 	private $timeFactory;
 
+	/** @psalm-mutation-free */
 	public function __construct(ITimeFactory $timeFactory) {
 		$this->timeFactory = $timeFactory;
 	}

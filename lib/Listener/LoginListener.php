@@ -21,6 +21,7 @@ use OCP\User\Events\UserLoggedInEvent;
  * @implements IEventListener<UserLoggedInEvent>
  */
 class LoginListener implements IEventListener {
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly IRequest $request,
 		private readonly ITimeFactory $timeFactory,
