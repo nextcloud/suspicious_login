@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "Új bejelentkezési hely észlelve",
     "More info about the suspicious IP address available on %s" : "További információ érhető el a gyanús IP-címről itt: %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "A fiókjába új bejelentkezés lett észlelve. A(z) %s IP-cím egy MI-modell szerint gyanús besorolású. Ha ez Ön volt, figyelmen kívül hagyhatja a figyelmeztetést, mivel az MI-modell nem próbált automatizált műveleteket végezni. Egyéb esetben változtasson jelszót.",
     "Open %s ↗" : "%s megnyitása ↗",
     "Suspicious Login" : "Gyanús bejelentkezés",
     "New login detected" : "Új belépes észlelve",
