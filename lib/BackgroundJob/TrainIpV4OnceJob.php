@@ -33,6 +33,7 @@ class TrainIpV4OnceJob extends QueuedJob {
 	 *
 	 * @return void
 	 */
+	#[\Override]
 	protected function run($argument) {
 		try {
 			$strategy = new Ipv4Strategy();

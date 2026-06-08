@@ -71,6 +71,7 @@ class AppStatistics implements JsonSerializable {
 		return $this->trainingDataStatistics;
 	}
 
+	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {
 		return [
