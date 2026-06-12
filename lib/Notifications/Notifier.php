@@ -74,7 +74,7 @@ class Notifier implements INotifier {
 					$action = $notification->createAction();
 					$label = $l->t('Open %s ↗', ['iplookup.flagfox.net']);
 					$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
-					$action->setLabel($label)
+					$action->setLabel('open_iplookup')
 						->setParsedLabel($label)
 						->setLink($link, IAction::TYPE_WEB)
 						->setPrimary(true);
