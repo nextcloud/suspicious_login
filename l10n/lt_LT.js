@@ -2,6 +2,9 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Aptiktas prisijungimas iš naujos vietos",
+    "More info about the suspicious IP address available on %s" : "Daugiau informacijos apie įtartiną IP adresą rasite %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Aptiktas naujas prisijungimas prie jūsų paskyros. Dirbtinio intelekto modelis IP adresą %s klasifikavo kaip įtartiną. Jei tai buvote jūs, galite ignoruoti šį pranešimą, nes dirbtinio intelekto modelis neatliko jokių automatinių veiksmų. Priešingu atveju turėtumėte pakeisti slaptažodį.",
+    "Open %s ↗" : "Atverti %s ↗",
     "Suspicious Login" : "Įtartinas prisijungimas",
     "New login detected" : "Aptiktas naujas prisijungimas",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Aptikti ir įspėti apie įtartinus, prie Nextcloud prisijungiančius, IP adresus\n\t",
