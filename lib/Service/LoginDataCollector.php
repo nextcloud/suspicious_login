@@ -14,6 +14,7 @@ use OCA\SuspiciousLogin\Db\LoginAddressMapper;
 
 class LoginDataCollector {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly LoginAddressMapper $addressMapper,
 	) {
