@@ -2,6 +2,7 @@ OC.L10N.register(
     "suspicious_login",
     {
     "New login location detected" : "Foi detetada uma nova localização do inicio de sessão",
+    "More info about the suspicious IP address available on %s" : "Mais informações sobre o endereço IP suspeito disponíveis em %s",
     "Suspicious Login" : "Acesso suspeito",
     "New login detected" : "Detetado novo acesso",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Detetar e avisar sobre acessos ao Nextcloud a partir de endereços IP suspeitos ",
