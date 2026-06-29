@@ -42,8 +42,10 @@ if (function_exists('Rubix\ML\sigmoid')) {
 	exit(2);
 }
 
-// Exercise the exact path from the crash report. Without the fix this throws
-// the TypeError from #1113 because 'Rubix\ML\sigmoid' no longer resolves.
+// The fix: explicitly load our own copies regardless of the dedupe flag.
+require_once $appRoot . '/lib/RubixBootstrap.php';
+
+// Exercise the exact path from the crash report.
 $result = (new Rubix\ML\NeuralNet\ActivationFunctions\Sigmoid())
 	->activate(Tensor\Matrix::quick([[0.5, -1.0], [2.0, 0.0]]));
 
