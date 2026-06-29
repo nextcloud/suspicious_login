@@ -38,25 +38,23 @@ class Ipv4Strategy extends AClassificationStrategy {
 	}
 
 	public function generateRandomIp(): string {
-		// 000/8 is reserved for local identification
-		$prefix = random_int(1, 255 - 18);
-
-		// 010/8 is reserved for private use
+		// Exclude: 0/8 (reserved), 10/8 (RFC 1918), 127/8 (loopback), 224-255 (multicast/reserved).
+		// 221 = 256 - 35 excluded first octets. Max after two +1 shifts: 221+2=223, so 224-255 never appear.
+		$prefix = random_int(1, 221);
 		if ($prefix >= 10) {
 			$prefix += 1;
 		}
-		// 127/8 is reserved for loopback
 		if ($prefix >= 127) {
 			$prefix += 1;
 		}
-		// 224/8 - 239/8 (224/4) is used for multicast.
-		if ($prefix >= 224) {
-			$prefix += 16;
-		}
 
-		return $prefix . '.' . implode('.', array_map(function (int $index) {
-			return random_int(0, 255);
-		}, range(1, 3)));
+		// Exclude 172.16.0.0/12 and 192.168.0.0/16 (RFC 1918) via rejection sampling on the second octet.
+		do {
+			$second = random_int(0, 255);
+		} while (($prefix === 172 && $second >= 16 && $second <= 31)
+			|| ($prefix === 192 && $second === 168));
+
+		return $prefix . '.' . $second . '.' . random_int(0, 255) . '.' . random_int(0, 255);
 	}
 
 	public function getSize(): int {
