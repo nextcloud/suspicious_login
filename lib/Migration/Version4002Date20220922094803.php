@@ -33,6 +33,7 @@ class Version4002Date20220922094803 extends SimpleMigrationStep {
 	 *
 	 * @return ISchemaWrapper
 	 */
+	#[\Override]
 	public function changeSchema(IOutput $output, Closure $schemaClosure, array $options): ?ISchemaWrapper {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
@@ -69,6 +70,7 @@ class Version4002Date20220922094803 extends SimpleMigrationStep {
 		return $schema;
 	}
 
+	#[\Override]
 	public function postSchemaChange(IOutput $output, \Closure $schemaClosure, array $options): void {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
@@ -109,13 +111,13 @@ class Version4002Date20220922094803 extends SimpleMigrationStep {
 			$insert
 				->setParameter('uid', $row['uid'])
 				->setParameter('ip', $row['ip'])
-				->setParameter('seen', (int) $row['seen'], IQueryBuilder::PARAM_INT)
-				->setParameter('first_seen', (int) $row['first_seen'], IQueryBuilder::PARAM_INT)
-				->setParameter('last_seen', (int) $row['last_seen'], IQueryBuilder::PARAM_INT)
+				->setParameter('seen', (int)$row['seen'], IQueryBuilder::PARAM_INT)
+				->setParameter('first_seen', (int)$row['first_seen'], IQueryBuilder::PARAM_INT)
+				->setParameter('last_seen', (int)$row['last_seen'], IQueryBuilder::PARAM_INT)
 			;
 			$insert->executeStatement();
 
-			$newOffset = (int) $row['id'];
+			$newOffset = (int)$row['id'];
 		}
 		$result->closeCursor();
 		$this->connection->commit();

@@ -14,31 +14,13 @@ namespace OCA\SuspiciousLogin\Service\MLP;
  */
 class Config {
 
-	/** @var int */
-	private $epochs;
-
-	/** @var int */
-	private $layers;
-
-	/** @var float */
-	private $shuffledNegativeRate;
-
-	/** @var float */
-	private $randomNegativeRate;
-
-	/** @var float */
-	private $learningRate;
-
-	public function __construct(int $epochs,
-		int $layers,
-		float $shuffledNegativeRate,
-		float $randomNegativeRate,
-		float $learningRate) {
-		$this->epochs = $epochs;
-		$this->layers = $layers;
-		$this->shuffledNegativeRate = $shuffledNegativeRate;
-		$this->randomNegativeRate = $randomNegativeRate;
-		$this->learningRate = $learningRate;
+	public function __construct(
+		private int $epochs,
+		private int $layers,
+		private float $shuffledNegativeRate,
+		private float $randomNegativeRate,
+		private float $learningRate,
+	) {
 	}
 
 	public static function default() {

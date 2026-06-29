@@ -14,6 +14,7 @@ use ChristophWurst\Nextcloud\Testing\TestCase;
 use OCA\SuspiciousLogin\Service\AClassificationStrategy;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use OCA\SuspiciousLogin\Service\NegativeSampleGenerator;
+use Override;
 use Rubix\ML\Datasets\Unlabeled;
 use function array_fill;
 use function array_merge;
@@ -23,13 +24,10 @@ use function str_pad;
 use function str_split;
 
 class NegativeSampleGeneratorTest extends TestCase {
+	private ServiceMockObject $serviceMock;
+	private NegativeSampleGenerator $generator;
 
-	/** @var ServiceMockObject */
-	private $serviceMock;
-
-	/** @var NegativeSampleGenerator */
-	private $generator;
-
+	#[Override]
 	protected function setUp(): void {
 		parent::setUp();
 
@@ -110,22 +108,11 @@ class NegativeSampleGeneratorTest extends TestCase {
 			$ipVec = array_slice($sample, 16, 32);
 
 			self::assertTrue(
-				$ipVec == self::decToBitArray(3, 32) ||
-				$ipVec === self::decToBitArray(4, 32),
-				'sample has a unique IP'
+				$ipVec == self::decToBitArray(3, 32)
+				|| $ipVec === self::decToBitArray(4, 32),
+				'Sample must have an unique IP'
 			);
 		}
-
-		$positives = new Unlabeled([
-			array_merge(self::decToBitArray(1, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(2, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(3, 16), self::decToBitArray(1, 32)),
-			array_merge(self::decToBitArray(4, 16), self::decToBitArray(1, 32)),
-		]);
-
-		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 5);
-
-		self::assertCount(5, $result);
 	}
 
 	/**
@@ -152,11 +139,30 @@ class NegativeSampleGeneratorTest extends TestCase {
 			$ipVec = array_slice($sample, 16, 32);
 
 			self::assertTrue(
-				$ipVec === self::decToBitArray(1, 32) ||
-				$ipVec === self::decToBitArray(2, 32),
-				'Sample has an unique IP'
+				$ipVec === self::decToBitArray(1, 32)
+				|| $ipVec === self::decToBitArray(2, 32),
+				'Sample must have an unique IP'
 			);
 		}
+	}
+
+	/**
+	 * Generating shuffled samples isn't possible when no user has an unique IP.
+	 * In that case, we have to return an empty Labeled() object as merging will
+	 * fail otherwise. See GitHub issue #860 for more.
+	 * @return void
+	 */
+	public function testGenerateShuffledFromDuplicatesOnly(): void {
+		$positives = new Unlabeled([
+			array_merge(self::decToBitArray(1, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(2, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(3, 16), self::decToBitArray(1, 32)),
+			array_merge(self::decToBitArray(4, 16), self::decToBitArray(1, 32)),
+		]);
+
+		$result = $this->generator->generateShuffledFromPositiveSamples($positives, 4);
+
+		self::assertCount(0, $result, 'Returned sample must be empty');
 	}
 
 	/**
@@ -164,10 +170,8 @@ class NegativeSampleGeneratorTest extends TestCase {
 	 */
 	private static function decToBitArray(int $dec, int $length): array {
 		return array_map(
-			function (string $d): int {
-				return (int) $d;
-			},
-			str_split(str_pad(decbin($dec), $length, "0", STR_PAD_LEFT))
+			fn (string $d): int => (int)$d,
+			str_split(str_pad(decbin($dec), $length, '0', STR_PAD_LEFT))
 		);
 	}
 }

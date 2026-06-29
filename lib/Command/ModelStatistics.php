@@ -28,9 +28,9 @@ trait ModelStatistics {
 		if (!$input->hasOption('stats') && !$input->getOption('stats')) {
 			return;
 		}
-		$output->writeln("Prescision(y): " . $model->getPrecisionY());
-		$output->writeln("Prescision(n): " . $model->getPrecisionN());
-		$output->writeln("Recall(y): " . $model->getRecallY());
-		$output->writeln("Recall(n): " . $model->getRecallN());
+		$output->writeln('Prescision(y): ' . $model->getPrecisionY());
+		$output->writeln('Prescision(n): ' . $model->getPrecisionN());
+		$output->writeln('Recall(y): ' . $model->getRecallY());
+		$output->writeln('Recall(n): ' . $model->getRecallN());
 	}
 }

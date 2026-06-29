@@ -21,8 +21,8 @@ use Throwable;
 class TrainIpV6OnceJob extends QueuedJob {
 
 	public function __construct(
-		private TrainService $trainService,
-		private LoggerInterface $logger,
+		private readonly TrainService $trainService,
+		private readonly LoggerInterface $logger,
 		ITimeFactory $time,
 	) {
 		parent::__construct($time);
@@ -33,6 +33,7 @@ class TrainIpV6OnceJob extends QueuedJob {
 	 *
 	 * @return void
 	 */
+	#[\Override]
 	protected function run($argument) {
 		try {
 			$strategy = new IpV6Strategy();

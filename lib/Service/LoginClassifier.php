@@ -12,6 +12,7 @@ namespace OCA\SuspiciousLogin\Service;
 use OCA\SuspiciousLogin\Db\SuspiciousLogin;
 use OCA\SuspiciousLogin\Db\SuspiciousLoginMapper;
 use OCA\SuspiciousLogin\Event\SuspiciousLoginEvent;
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use OCA\SuspiciousLogin\Util\AddressClassifier;
 use OCP\AppFramework\Utility\ITimeFactory;
@@ -28,12 +29,12 @@ use function substr;
 class LoginClassifier {
 
 	public function __construct(
-		private EstimatorService $estimator,
-		private IRequest $request,
-		private LoggerInterface $logger,
-		private SuspiciousLoginMapper $mapper,
-		private ITimeFactory $timeFactory,
-		private IEventDispatcher $dispatcher,
+		private readonly EstimatorService $estimator,
+		private readonly IRequest $request,
+		private readonly LoggerInterface $logger,
+		private readonly SuspiciousLoginMapper $mapper,
+		private readonly ITimeFactory $timeFactory,
+		private readonly IEventDispatcher $dispatcher,
 	) {
 	}
 
@@ -45,7 +46,7 @@ class LoginClassifier {
 		if (empty($authHeader)) {
 			return false;
 		}
-		if (substr($authHeader, 0, strlen('Basic ')) !== 'Basic ') {
+		if (!str_starts_with($authHeader, 'Basic ')) {
 			return false;
 		}
 		$pwd = explode(
@@ -57,7 +58,7 @@ class LoginClassifier {
 		}
 
 		return preg_match(
-			"/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/",
+			'/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/',
 			$pwd[1]
 		) === 1;
 	}
@@ -65,7 +66,7 @@ class LoginClassifier {
 	public function process(string $uid, string $ip) {
 		if ($this->isAuthenticatedWithAppPassword($this->request)) {
 			// We don't care about those logins
-			$this->logger->debug("App password detected. No address classification is performed");
+			$this->logger->debug('App password detected. No address classification is performed');
 			return;
 		}
 		try {
@@ -75,9 +76,13 @@ class LoginClassifier {
 				// All good, carry on!
 				return;
 			}
-		} catch (ServiceException $ex) {
-			$this->logger->debug("Could not predict suspiciousness: " . $ex->getMessage());
+		} catch (ModelNotFoundException $ex) {
+			$this->logger->debug('Could not predict suspiciousness: ' . $ex->getMessage());
 			// This most likely means there is no trained model yet, so we return early here
+			return;
+		} catch (ServiceException $ex) {
+			$this->logger->warning('Could not predict suspiciousness: ' . $ex->getMessage());
+			// There was an error loading the model, so we return early here
 			return;
 		}
 

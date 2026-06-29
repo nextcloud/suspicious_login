@@ -18,33 +18,23 @@ use OCA\SuspiciousLogin\Service\MLP\Config;
 use OCA\SuspiciousLogin\Service\MLP\Trainer;
 use function ini_get;
 use function set_time_limit;
-use function strpos;
 
 class TrainTask implements Task {
 
-	/** @var Config */
-	private $config;
-
-	/** @var CollectedData */
-	private $dataSet;
-
-	/** @var AClassificationStrategy */
-	private $strategy;
-
-	public function __construct(Config $config,
-		CollectedData $dataSet,
-		AClassificationStrategy $strategy) {
-		$this->config = $config;
-		$this->dataSet = $dataSet;
-		$this->strategy = $strategy;
+	public function __construct(
+		private readonly Config $config,
+		private readonly CollectedData $dataSet,
+		private readonly AClassificationStrategy $strategy,
+	) {
 	}
 
+	#[\Override]
 	public function run(Environment $environment) {
 		// TODO: only works if the app is placed into a sub-sub directory of Nextcloud
 		require_once __DIR__ . '/../../../../lib/base.php';
 
 		// Prevent getting killed by a timeout
-		if (strpos(ini_get('disable_functions'), 'set_time_limit') === false) {
+		if (!str_contains(ini_get('disable_functions'), 'set_time_limit')) {
 			set_time_limit(0);
 		}
 

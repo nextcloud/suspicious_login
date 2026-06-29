@@ -12,16 +12,11 @@ namespace OCA\SuspiciousLogin\Event;
 use OCP\EventDispatcher\Event;
 
 class SuspiciousLoginEvent extends Event {
-	/** @var string */
-	private $uid;
-	/** @var string */
-	private $ip;
-
-	public function __construct(string $uid, string $ip) {
+	public function __construct(
+		private readonly string $uid,
+		private readonly string $ip,
+	) {
 		parent::__construct();
-
-		$this->uid = $uid;
-		$this->ip = $ip;
 	}
 
 	public function getUid(): string {

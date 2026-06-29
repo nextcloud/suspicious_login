@@ -70,13 +70,13 @@ abstract class AClassificationStrategy {
 		return $this->numStringsToBitArray($splitHash, 16, 4);
 	}
 
-	protected function numStringsToBitArray(array $strings, $base, $padding): array {
-		$converted = array_reduce(array_map(function (string $s) use ($base, $padding) {
-			return $this->numStringToBitArray($s, $base, $padding);
-		}, $strings), 'array_merge', []);
-		return array_map(function ($x) {
-			return (int)$x;
-		}, $converted);
+	/**
+	 * @psalm-param 10|16 $base
+	 * @psalm-param 4|8 $padding
+	 */
+	protected function numStringsToBitArray(array $strings, int $base, int $padding): array {
+		$converted = array_reduce(array_map(fn (string $s) => $this->numStringToBitArray($s, $base, $padding), $strings), array_merge(...), []);
+		return array_map(fn ($x) => (int)$x, $converted);
 	}
 
 	protected function numStringToBitArray(string $s, int $base, int $padding): array {

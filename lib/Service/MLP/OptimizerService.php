@@ -30,12 +30,6 @@ class OptimizerService {
 	public const INITIAL_STEP_WIDTH = 0.8;
 	public const STEP_WIDTH_FACTOR = 0.985;
 
-	/** @var DataLoader */
-	private $loader;
-
-	/** @var Trainer */
-	private $trainer;
-
 	private $parameterRanges = [
 		'epochs' => [50, 600],
 		'layers' => [2, 20],
@@ -44,21 +38,21 @@ class OptimizerService {
 		'learningRate' => [0.0001, 0.01],
 	];
 
-	public function __construct(DataLoader $loader,
-		Trainer $trainer) {
-		$this->loader = $loader;
-		$this->trainer = $trainer;
+	public function __construct(
+		private readonly DataLoader $loader,
+		private readonly Trainer $trainer,
+	) {
 	}
 
 	private function printConfig(int $epoch,
 		float $stepWidth,
 		Config $config,
 		OutputInterface $output) {
-		$epochs = sprintf("%4d", $config->getEpochs());
-		$layers = sprintf("%2d", $config->getLayers());
-		$shuffledRate = sprintf("%1.3f", $config->getShuffledNegativeRate());
-		$randomRate = sprintf("%1.3f", $config->getRandomNegativeRate());
-		$learningRate = sprintf("%1.4f", $config->getLearningRate());
+		$epochs = sprintf('%4d', $config->getEpochs());
+		$layers = sprintf('%2d', $config->getLayers());
+		$shuffledRate = sprintf('%1.3f', $config->getShuffledNegativeRate());
+		$randomRate = sprintf('%1.3f', $config->getRandomNegativeRate());
+		$learningRate = sprintf('%1.4f', $config->getLearningRate());
 
 		$output->writeln("Epoch $epoch: epochs=$epochs layers=$layers shuffledRate=$shuffledRate randomRate=$randomRate, learningRate=$learningRate");
 		$output->writeln("  Step width for next config neighbor: $stepWidth");
@@ -71,21 +65,21 @@ class OptimizerService {
 	private function getAverageCost(OutputInterface $output,
 		TrainingResult ...$results): float {
 		$costs = array_map(function (TrainingResult $result) use ($output) {
-			$output->writeln(sprintf("  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d",
-				$result->getReport()['overall']['f1_score'],
+			$output->writeln(sprintf('  Training result: f1=%f, p(n)=%f, r(n)=%f, f1(n)=%f, p(y)=%f, r(y)=%f, f1(y)=%f, PSR=%d/%d/%d',
+				$result->getReport()['overall']['f1 score'],
 				$result->getReport()['classes']['n']['precision'],
 				$result->getReport()['classes']['n']['recall'],
-				$result->getReport()['classes']['n']['f1_score'],
+				$result->getReport()['classes']['n']['f1 score'],
 				$result->getReport()['classes']['y']['precision'],
 				$result->getReport()['classes']['y']['recall'],
-				$result->getReport()['classes']['y']['f1_score'],
+				$result->getReport()['classes']['y']['f1 score'],
 				$result->getModel()->getSamplesPositive(),
 				$result->getModel()->getSamplesShuffled(),
 				$result->getModel()->getSamplesRandom()
 			));
 			return (
-				$result->getReport()['classes']['n']['f1_score'] +
-				$result->getReport()['overall']['f1_score']
+				$result->getReport()['classes']['n']['f1 score']
+				+ $result->getReport()['overall']['f1 score']
 			) / 2;
 		}, $results);
 
@@ -174,18 +168,14 @@ class OptimizerService {
 		);
 
 		$output->writeln("<fg=green>Optimizing a MLP trainer in $maxEpochs steps</>");
-		$output->writeln("");
+		$output->writeln('');
 
 		$this->printConfig($epochs, $stepWidth, $config, $output);
-		$tasks = array_map(function ($index) use ($config, $collectedData, $strategy) {
-			return new TrainTask($config, $collectedData, $strategy);
-		}, range(1, $parallelism));
+		$tasks = array_map(fn ($index) => new TrainTask($config, $collectedData, $strategy), range(1, $parallelism));
 		$best = $this->getAverageCost(
 			$output,
 			...Promise\wait(
-				Promise\all(array_map(function (TrainTask $task) {
-					return enqueue($task);
-				}, $tasks))
+				Promise\all(array_map(enqueue(...), $tasks))
 			)
 		);
 		$output->writeln("  Base cost is $best. Trying to optimize this now …");
@@ -198,9 +188,7 @@ class OptimizerService {
 			$cost = $this->getAverageCost(
 				$output,
 				...Promise\wait(
-					Promise\all(array_map(function ($index) use ($newConfig, $collectedData, $strategy) {
-						return enqueue(new TrainTask($newConfig, $collectedData, $strategy));
-					}, range(1, $parallelism)))
+					Promise\all(array_map(fn ($index) => enqueue(new TrainTask($newConfig, $collectedData, $strategy)), range(1, $parallelism)))
 				)
 			);
 

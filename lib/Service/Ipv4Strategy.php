@@ -15,28 +15,34 @@ use function array_map;
 use function explode;
 
 class Ipv4Strategy extends AClassificationStrategy {
+	#[\Override]
 	public static function getTypeName(): string {
 		return 'ipv4';
 	}
 
+	#[\Override]
 	public function hasSufficientData(LoginAddressAggregatedMapper $loginAddressMapper, int $validationDays): bool {
 		return $loginAddressMapper->hasSufficientIpV4Data($validationDays);
 	}
 
+	#[\Override]
 	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array {
 		return $loginAddressMapper->findHistoricAndRecentIpv4($validationThreshold, $maxAge);
 	}
 
+	#[\Override]
 	public function generateRandomIpVector(): array {
 		$ip = $this->generateRandomIp();
 		$splitIp = explode('.', $ip);
 		return $this->numStringsToBitArray($splitIp, 10, 8);
 	}
 
+	#[\Override]
 	protected function ipToVec(string $ip): array {
 		return $this->numStringsToBitArray(explode('.', $ip), 10, 8);
 	}
 
+	#[\Override]
 	public function generateRandomIp(): string {
 		// Exclude: 0/8 (reserved), 10/8 (RFC 1918), 127/8 (loopback), 224-255 (multicast/reserved).
 		// 221 = 256 - 35 excluded first octets. Max after two +1 shifts: 221+2=223, so 224-255 never appear.
@@ -57,10 +63,12 @@ class Ipv4Strategy extends AClassificationStrategy {
 		return $prefix . '.' . $second . '.' . random_int(0, 255) . '.' . random_int(0, 255);
 	}
 
+	#[\Override]
 	public function getSize(): int {
 		return 16 + 32;
 	}
 
+	#[\Override]
 	public function getDefaultMlpConfig(): Config {
 		return Config::default();
 	}

@@ -12,6 +12,7 @@ namespace OCA\SuspiciousLogin\Service;
 use InvalidArgumentException;
 use OCA\SuspiciousLogin\Db\LoginAddressAggregatedMapper;
 use OCA\SuspiciousLogin\Service\MLP\Config;
+use OCA\SuspiciousLogin\Util\IPv6AddressParser;
 use function array_map;
 use function base_convert;
 use function bin2hex;
@@ -21,39 +22,41 @@ use function str_split;
 use function substr;
 
 class IpV6Strategy extends AClassificationStrategy {
+	#[\Override]
 	public static function getTypeName(): string {
 		return 'ipv6';
 	}
 
+	#[\Override]
 	public function hasSufficientData(LoginAddressAggregatedMapper $loginAddressMapper, int $validationDays): bool {
 		return $loginAddressMapper->hasSufficientIpV6Data($validationDays);
 	}
 
+	#[\Override]
 	public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array {
 		return $loginAddressMapper->findHistoricAndRecentIpv6($validationThreshold, $maxAge);
 	}
 
+	#[\Override]
 	protected function ipToVec(string $ip): array {
-		$addr = inet_pton($ip);
+		$strippedIp = IPv6AddressParser::stripScopeIdentifier($ip);
+		$addr = inet_pton($strippedIp);
 		if ($addr === false) {
 			throw new InvalidArgumentException('Invalid IPv6 address');
 		}
 
 		$hex = bin2hex($addr);
 		$padded = str_pad($hex, 32, '0', STR_PAD_LEFT);
-		$binString = implode('', array_map(function (string $h) {
-			return str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT);
-		}, str_split($padded)));
+		$binString = implode('', array_map(fn (string $h) => str_pad(base_convert($h, 16, 2), 4, '0', STR_PAD_LEFT), str_split($padded)));
 		$mostSign = substr($binString, 0, 64);
 
 		return array_map(
-			function (string $bit) {
-				return (int)$bit;
-			},
+			fn (string $bit) => (int)$bit,
 			str_split($mostSign)
 		);
 	}
 
+	#[\Override]
 	public function generateRandomIp(): string {
 		// Constrain to 2000::/4 (allocated global unicast) to avoid address space noise in training data.
 		$ip = '2' . str_pad(base_convert((string)random_int(0, 2 ** 12 - 1), 10, 16), 3, '0', STR_PAD_LEFT) . ':';
@@ -64,10 +67,12 @@ class IpV6Strategy extends AClassificationStrategy {
 		return $ip;
 	}
 
+	#[\Override]
 	public function getSize(): int {
 		return 16 + 64;
 	}
 
+	#[\Override]
 	public function getDefaultMlpConfig(): Config {
 		return Config::default()->setEpochs(20);
 	}

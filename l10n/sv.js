@@ -3,21 +3,11 @@ OC.L10N.register(
     {
     "New login location detected" : "Ny inloggningsplats upptäckt",
     "More info about the suspicious IP address available on %s" : "Mer information om den misstänkta IP-adressen finns på %s",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "En ny inloggning upptäcktes på ditt konto. IP-adressen %s klassificerades som misstänkt. Om det var du kan du ignorera meddelandet. Annars bör du byta ditt lösenord.",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "En ny inloggning på ditt konto har upptäckts. IP-adressen %s klassificerades som misstänkt av en AI-modell. Om det var du kan du ignorera detta meddelande, eftersom AI-modellen inte vidtog några automatiska åtgärder. Annars bör du ändra ditt lösenord.",
     "Open %s ↗" : "Öppna %s ↗",
     "Suspicious Login" : "Misstänkt inloggning",
     "New login detected" : "Ny inloggning upptäckt",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upptäck och varna om misstänkta IP-adresser loggar in i Nextcloud\n\t",
-    "Suspicious login detection" : "Misstänkt inloggningsdetektering",
-    "The suspicious login app is enabled on this instance. It will keep track of IP addresses users successfully log in from and build a classifier that warns if a new login comes from a suspicious IP address." : "Appen för misstänkta inloggningar är aktiverad för denna instans. Den kommer att hålla reda på IP-adresser som användare loggar från och varna om en ny inloggning kommer från en misstänkt IP-adress.",
-    "Training data statistics" : "Träna datastatistik",
-    "So far the app has captured {total} logins (including client connections), of which {distinct} are distinct (IP, UID) tuples." : "Hittills har appen fångat {total} inloggningar (inklusive klientanslutningar), varav {distinct} är tydliga (IP, UID) tupler.",
-    "IPv4" : "IPv4",
-    "IPv6" : "IPv6",
-    "Classifier model statistics" : "Klassificeringsmodell statistik",
-    "No classifier model has been trained yet. This most likely means that you just enabled the app recently. Because the training of a model requires good data, the app waits until logins of at least {days} days have been captured." : "Ingen klassificeringsmodell har tränats än. Detta innebär sannolikt att du aktiverat appen nyligen. Eftersom träning av en modell kräver bra data väntar appen tills inloggningar av minst {days} dagar har loggats.",
-    "During evaluation, the latest model (trained {time}) has shown to capture {recall}% of all suspicious logins (recall), whereas {precision}% of the logins classified as suspicious are indeed suspicious (precision). Below you see a visualization of historic model performance." : "Under utvärdering, den senaste modellen (tränad {time}) har visat sig fånga {recall}% av alla misstänkta inloggningar (återkalla), medan {precision}% av inloggningar klassificerade som misstänkta, verkligen är misstänkta (precision). Nedan ser du en visualisering av historisk modellprestanda.",
-    "Precision" : "Precision",
-    "Recall" : "Återkalla"
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "En ny inloggning upptäcktes på ditt konto. IP-adressen %s klassificerades som misstänkt. Om det var du kan du ignorera meddelandet. Annars bör du byta ditt lösenord."
 },
 "nplurals=2; plural=(n != 1);");

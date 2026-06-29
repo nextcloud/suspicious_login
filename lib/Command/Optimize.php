@@ -22,31 +22,29 @@ use function time;
 class Optimize extends Command {
 	use ModelStatistics;
 
-	/** @var OptimizerService */
-	private $optimizerService;
-
-	public function __construct(OptimizerService $optimizer) {
-		parent::__construct("suspiciouslogin:optimize");
-		$this->optimizerService = $optimizer;
+	public function __construct(
+		private OptimizerService $optimizerService,
+	) {
+		parent::__construct('suspiciouslogin:optimize');
 
 		$this->addOption(
 			'max-epochs',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"maximum number of epochs of optimization",
+			'maximum number of epochs of optimization',
 			100
 		);
 		$this->addOption(
 			'v6',
 			null,
 			InputOption::VALUE_NONE,
-			"train with IPv6 data"
+			'train with IPv6 data'
 		);
 		$this->addOption(
 			'now',
 			null,
 			InputOption::VALUE_OPTIONAL,
-			"the current time as timestamp",
+			'the current time as timestamp',
 			time()
 		);
 		$this->registerStatsOption();
@@ -58,14 +56,14 @@ class Optimize extends Command {
 		}
 
 		// Prevent getting killed by a timeout
-		if (strpos(ini_get('disable_functions'), 'set_time_limit') === false) {
+		if (!str_contains(ini_get('disable_functions'), 'set_time_limit')) {
 			set_time_limit(0);
 		}
 
 		$this->optimizerService->optimize(
 			(int)$input->getOption('max-epochs'),
 			$input->getOption('v6') ? new IpV6Strategy() : new Ipv4Strategy(),
-			(int) $input->getOption('now'),
+			(int)$input->getOption('now'),
 			$output
 		);
 

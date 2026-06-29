@@ -25,7 +25,7 @@ class LoginAddressMapper extends QBMapper {
 
 		$qb->select($qb->createFunction('COUNT(*)'))
 			->from($this->getTableName());
-		$result = $qb->execute();
+		$result = $qb->executeQuery();
 		$cnt = $result->fetchColumn();
 		$result->closeCursor();
 

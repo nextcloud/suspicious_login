@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OCA\SuspiciousLogin\Service;
 
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
 use OCA\SuspiciousLogin\Exception\ServiceException;
 use Psr\Log\LoggerInterface;
 use Rubix\ML\Datasets\Unlabeled;
@@ -17,8 +18,8 @@ use RuntimeException;
 class EstimatorService {
 
 	public function __construct(
-		private ModelStore $modelStore,
-		private LoggerInterface $logger,
+		private readonly ModelStore $modelStore,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 
@@ -28,12 +29,13 @@ class EstimatorService {
 	 * @param int|null $modelId
 	 *
 	 * @return bool
+	 * @throws ModelNotFoundException
 	 * @throws ServiceException
 	 */
 	public function predict(string $uid, string $ip, AClassificationStrategy $strategy, ?int $modelId = null): bool {
 		try {
 			if ($modelId === null) {
-				$this->logger->debug("loading latest model");
+				$this->logger->debug('loading latest model');
 
 				$estimator = $this->modelStore->loadLatest($strategy);
 			} else {

@@ -1,7 +1,7 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
-		"config:base",
+		"config:recommended",
 		"helpers:pinGitHubActionDigests",
 		":semanticCommits",
 		":dependencyDashboard"
@@ -20,16 +20,29 @@
 	"rangeStrategy": "bump",
 	"rebaseWhen": "conflicted",
 	"ignoreUnstable": false,
-	"baseBranches": [
+	"baseBranchPatterns": [
 		"master",
-		"stable31",
-		"stable30",
-		"stable29",
-		"stable28"
+		"stable34",
+		"stable33",
+		"stable32"
 	],
 	"enabledManagers": [
 		"composer",
 		"github-actions"
+	],
+	"ignorePaths": [
+		".github/workflows/block-merge-freeze.yml",
+		".github/workflows/fixup.yml",
+		".github/workflows/lint-info-xml.yml",
+		".github/workflows/lint-php.yml",
+		".github/workflows/lint-php-cs.yml",
+		".github/workflows/npm-audit-fix.yml",
+		".github/workflows/phpunit-mariadb.yml",
+		".github/workflows/phpunit-pgsql.yml",
+		".github/workflows/phpunit-sqlite.yml",
+		".github/workflows/pr-feedback.yml",
+		".github/workflows/psalm.yml",
+		".github/workflows/reuse.yml"
 	],
 	"packageRules": [
 		{
@@ -54,10 +67,9 @@
 			"matchManagers": ["github-actions"],
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchBaseBranches": [
-				"stable31",
-				"stable30",
-				"stable29",
-				"stable28"
+				"stable34",
+				"stable33",
+				"stable32"
 			],
 			"extends": ["schedule:monthly"]
 		},
@@ -68,11 +80,11 @@
 		},
 		{
 			"groupName": "AMPHP",
-			"matchPackagePrefixes": [
-				"amphp"
-			],
 			"matchManagers": [
 				"composer"
+			],
+			"matchPackageNames": [
+				"amphp{/,}**"
 			]
 		}
 	],

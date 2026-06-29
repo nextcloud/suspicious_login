@@ -40,14 +40,17 @@ class Notifier implements INotifier {
 		$this->url = $urlGenerator;
 	}
 
+	#[\Override]
 	public function getID(): string {
 		return Application::APP_ID;
 	}
 
+	#[\Override]
 	public function getName(): string {
 		return $this->factory->get(Application::APP_ID)->t('Suspicious Login');
 	}
 
+	#[\Override]
 	public function prepare(INotification $notification, string $languageCode): INotification {
 		if ($notification->getApp() !== Application::APP_ID) {
 			// Not my app => throw
@@ -70,11 +73,11 @@ class Notifier implements INotifier {
 
 				$additionalText = '';
 				// Add button for more information about the IP-address
-				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === "1") {
+				if ($this->config->getAppValue('suspicious_login', 'show_more_info_button', '1') === '1') {
 					$action = $notification->createAction();
 					$label = $l->t('Open %s ↗', ['iplookup.flagfox.net']);
 					$link = 'https://iplookup.flagfox.net/?ip=' . $suspiciousIp;
-					$action->setLabel($label)
+					$action->setLabel('open_iplookup')
 						->setParsedLabel($label)
 						->setLink($link, IAction::TYPE_WEB)
 						->setPrimary(true);
@@ -86,7 +89,7 @@ class Notifier implements INotifier {
 				$notification->setParsedSubject(
 					$l->t('New login detected')
 				)->setParsedMessage(
-					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password.', $suspiciousIp) . $additionalText
+					$l->t('A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password.', $suspiciousIp) . $additionalText
 				);
 
 				$notification->setIcon($this->url->getAbsoluteURL($this->url->imagePath('suspicious_login', 'app-dark.svg')));

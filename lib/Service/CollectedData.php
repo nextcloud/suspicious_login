@@ -12,16 +12,10 @@ namespace OCA\SuspiciousLogin\Service;
 use Rubix\ML\Datasets\Labeled;
 
 class CollectedData {
-	/** @var Labeled */
-	private $trainingPositives;
-
-	/** @var Labeled */
-	private $validationPositives;
-
-	public function __construct(Labeled $trainingPositives,
-		Labeled $validationPositives) {
-		$this->trainingPositives = $trainingPositives;
-		$this->validationPositives = $validationPositives;
+	public function __construct(
+		private readonly Labeled $trainingPositives,
+		private readonly Labeled $validationPositives,
+	) {
 	}
 
 	public function getTrainingPositives(): Labeled {

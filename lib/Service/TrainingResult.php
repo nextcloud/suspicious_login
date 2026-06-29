@@ -15,21 +15,11 @@ use Rubix\ML\Report;
 
 class TrainingResult {
 
-	/** @var Learner */
-	private $classifier;
-
-	/** @var Model */
-	private $model;
-
-	/** @var Report */
-	private $report;
-
-	public function __construct(Learner $classifier,
-		Model $model,
-		Report $report) {
-		$this->classifier = $classifier;
-		$this->model = $model;
-		$this->report = $report;
+	public function __construct(
+		private readonly Learner $classifier,
+		private readonly Model $model,
+		private readonly Report $report,
+	) {
 	}
 
 	public function getClassifier(): Learner {

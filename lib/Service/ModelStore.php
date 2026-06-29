@@ -12,7 +12,7 @@ namespace OCA\SuspiciousLogin\Service;
 use OCA\SuspiciousLogin\AppInfo\Application;
 use OCA\SuspiciousLogin\Db\Model;
 use OCA\SuspiciousLogin\Db\ModelMapper;
-use OCA\SuspiciousLogin\Exception\ServiceException;
+use OCA\SuspiciousLogin\Exception\ModelNotFoundException;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Files\IAppData;
@@ -35,26 +35,26 @@ class ModelStore {
 	public const APPDATA_MODELS_FOLDER = 'models';
 
 	public function __construct(
-		private ModelMapper $modelMapper,
-		private IAppData $appData,
-		private IAppManager $appManager,
-		private ITempManager $tempManager,
-		private ICacheFactory $cacheFactory,
-		private LoggerInterface $logger,
+		private readonly ModelMapper $modelMapper,
+		private readonly IAppData $appData,
+		private readonly IAppManager $appManager,
+		private readonly ITempManager $tempManager,
+		private readonly ICacheFactory $cacheFactory,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 
 	/**
 	 * @return Estimator
 	 * @throws RuntimeException
-	 * @throws ServiceException
+	 * @throws ModelNotFoundException
 	 */
 	public function loadLatest(AClassificationStrategy $strategy): Estimator {
 		try {
 			$latestModel = $this->modelMapper->findLatest($strategy::getTypeName());
 		} catch (DoesNotExistException $e) {
 			$this->logger->debug("No models found. Can't load latest");
-			throw new ServiceException("No models found", 0, $e);
+			throw new ModelNotFoundException('No models found', 0, $e);
 		}
 		return $this->load($latestModel->getId());
 	}
@@ -82,6 +82,11 @@ class ModelStore {
 		$cache->set($this->getCacheKey($id), $serialized);
 	}
 
+	/**
+	 * @return Estimator
+	 * @throws RuntimeException
+	 * @throws ModelNotFoundException
+	 */
 	public function load(int $id): Estimator {
 		$cached = $this->getCached($id);
 		if ($cached !== null) {
@@ -96,7 +101,7 @@ class ModelStore {
 				$modelFile = $modelsFolder->getFile((string)$id);
 			} catch (NotFoundException $e) {
 				$this->logger->error("Could not load classifier model $id: " . $e->getMessage());
-				throw new ServiceException("Could not load model $id", 0, $e);
+				throw new ModelNotFoundException("Could not load model $id", 0, $e);
 			}
 
 			$serialized = $modelFile->getContent();
@@ -104,7 +109,7 @@ class ModelStore {
 			$this->cache($id, $serialized);
 		}
 
-		$this->logger->debug("seralized model size: " . strlen($serialized));
+		$this->logger->debug('seralized model size: ' . strlen($serialized));
 
 		// Inefficient, but we can't get the real path from app data as it might
 		// not be a local file
@@ -128,17 +133,17 @@ class ModelStore {
 	 */
 	public function persist(Learner $estimator, Model $model) {
 		if (!($estimator instanceof Persistable)) {
-			throw new RuntimeException("Estimator is not persistable");
+			throw new RuntimeException('Estimator is not persistable');
 		}
 
-		$model->setType(get_class($estimator));
+		$model->setType($estimator::class);
 		$model->setAppVersion($this->appManager->getAppVersion(Application::APP_ID));
 
 		$this->modelMapper->insert($model);
 		try {
 			$modelsFolder = $this->appData->getFolder(self::APPDATA_MODELS_FOLDER);
 		} catch (NotFoundException $e) {
-			$this->logger->info("App data models folder does not exist. Creating it");
+			$this->logger->info('App data models folder does not exist. Creating it');
 			$modelsFolder = $this->appData->newFolder(self::APPDATA_MODELS_FOLDER);
 		}
 
@@ -153,10 +158,11 @@ class ModelStore {
 
 			$modelFile->putContent(file_get_contents($tmpFile));
 		} catch (Throwable $e) {
-			$this->logger->error("Could not save persisted estimator to storage, reverting", [
+			$this->logger->error('Could not save persisted estimator to storage, reverting', [
 				'exception' => $e,
 			]);
 			$this->modelMapper->delete($model);
+			throw $e;
 		}
 	}
 }

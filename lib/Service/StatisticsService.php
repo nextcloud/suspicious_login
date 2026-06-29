@@ -18,21 +18,11 @@ use OCP\AppFramework\Db\DoesNotExistException;
 
 class StatisticsService {
 
-	/** @var LoginAddressMapper */
-	private $loginAddressMapper;
-
-	/** @var LoginAddressAggregatedMapper */
-	private $loginAddressAggregatedMapper;
-
-	/** @var ModelMapper */
-	private $modelMapper;
-
-	public function __construct(LoginAddressMapper $loginAddressMapper,
-		LoginAddressAggregatedMapper $loginAddressAggregatedMapper,
-		ModelMapper $modelMapper) {
-		$this->loginAddressMapper = $loginAddressMapper;
-		$this->loginAddressAggregatedMapper = $loginAddressAggregatedMapper;
-		$this->modelMapper = $modelMapper;
+	public function __construct(
+		private readonly LoginAddressMapper $loginAddressMapper,
+		private readonly LoginAddressAggregatedMapper $loginAddressAggregatedMapper,
+		private readonly ModelMapper $modelMapper,
+	) {
 	}
 
 	public function getStatistics(): AppStatistics {
@@ -51,7 +41,7 @@ class StatisticsService {
 		try {
 			$this->modelMapper->findLatest(Ipv4Strategy::getTypeName());
 			return true;
-		} catch (DoesNotExistException $ex) {
+		} catch (DoesNotExistException) {
 			return false;
 		}
 	}
