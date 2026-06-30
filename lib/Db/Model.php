@@ -65,6 +65,7 @@ class Model extends Entity implements JsonSerializable {
 	protected $createdAt;
 	protected $addressType;
 
+	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {
 		return [

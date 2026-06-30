@@ -39,6 +39,7 @@ class TrainTask implements Task {
 		$this->strategy = $strategy;
 	}
 
+	#[\Override]
 	public function run(Environment $environment) {
 		// TODO: only works if the app is placed into a sub-sub directory of Nextcloud
 		require_once __DIR__ . '/../../../../lib/base.php';
