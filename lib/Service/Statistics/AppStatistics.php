@@ -21,6 +21,7 @@ use ReturnTypeWillChange;
 
 class AppStatistics implements JsonSerializable {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly bool $active,
 		/** @var Model[] */
@@ -58,6 +59,7 @@ class AppStatistics implements JsonSerializable {
 		return $this->trainingDataStatistics;
 	}
 
+	/** @psalm-mutation-free */
 	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {

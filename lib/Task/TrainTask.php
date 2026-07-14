@@ -21,6 +21,7 @@ use function set_time_limit;
 
 class TrainTask implements Task {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly Config $config,
 		private readonly CollectedData $dataSet,
