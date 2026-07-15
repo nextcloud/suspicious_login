@@ -20,6 +20,10 @@
 		<ignoreFiles>
 			<directory name="vendor" />
 			<directory name="vendor-bin" />
+			<!-- Procedural subprocess fixtures that deliberately poke rubix
+			     internals and Composer's autoload globals to reproduce #1113. -->
+			<file name="tests/Unit/AppInfo/rubix-collision-repro.php" />
+			<file name="tests/Unit/AppInfo/rubix-redeclare-repro.php" />
 		</ignoreFiles>
 	</projectFiles>
 	<extraFiles>
