@@ -7,7 +7,7 @@ OC.L10N.register(
     "Open %s ↗" : "Öppna %s ↗",
     "Suspicious Login" : "Misstänkt inloggning",
     "New login detected" : "Ny inloggning upptäckt",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upptäck och varna om misstänkta IP-adresser loggar in i Nextcloud\n\t",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upptäck och varna för misstänkta IP-adresser som loggar in på Nextcloud\n\t",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "En ny inloggning upptäcktes på ditt konto. IP-adressen %s klassificerades som misstänkt. Om det var du kan du ignorera meddelandet. Annars bör du byta ditt lösenord."
 },
 "nplurals=2; plural=(n != 1);");
