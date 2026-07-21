@@ -6,6 +6,6 @@
 	},
 	"require": {
 		"christophwurst/nextcloud_testing": "^2.0.0",
-		"phpunit/phpunit": "^10.5.64"
+		"phpunit/phpunit": "^13.2.4"
 	}
 }
