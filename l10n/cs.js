@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "New login location detected" : "Zjištěno nové místo přihlášení",
     "More info about the suspicious IP address available on %s" : "Další informace o podezřelé IP adrese jsou k dispozici na %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Bylo zaznamenáno nové přihlášení k vašemu účtu. IP adresa %s byla vyhodnocena AI modelem jako podezřelá. Pokud jste to byli vy, tuto zprávu ignorujte, AI model neprovedl žádné automatické změny. Pokud ne, měli byste si změnit heslo.",
     "Open %s ↗" : "Otevřít %s ↗",
     "Suspicious Login" : "Podezřelé přihlášení",
     "New login detected" : "Zjištěno nové přihlášení",
