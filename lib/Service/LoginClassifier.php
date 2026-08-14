@@ -20,11 +20,6 @@ use OCP\EventDispatcher\IEventDispatcher;
 use OCP\IRequest;
 use Psr\Log\LoggerInterface;
 use Throwable;
-use function base64_decode;
-use function explode;
-use function preg_match;
-use function strlen;
-use function substr;
 
 class LoginClassifier {
 
@@ -38,37 +33,7 @@ class LoginClassifier {
 	) {
 	}
 
-	/**
-	 * @todo find a more reliable way of checking this
-	 */
-	private function isAuthenticatedWithAppPassword(IRequest $request): bool {
-		$authHeader = $request->getHeader('Authorization');
-		if (empty($authHeader)) {
-			return false;
-		}
-		if (substr($authHeader, 0, strlen('Basic ')) !== 'Basic ') {
-			return false;
-		}
-		$pwd = explode(
-			':',
-			base64_decode(substr($authHeader, strlen('Basic ')))
-		);
-		if (!isset($pwd[1])) {
-			return false;
-		}
-
-		return preg_match(
-			'/^([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})-([0-9A-Za-z]{5})$/',
-			$pwd[1]
-		) === 1;
-	}
-
 	public function process(string $uid, string $ip) {
-		if ($this->isAuthenticatedWithAppPassword($this->request)) {
-			// We don't care about those logins
-			$this->logger->debug('App password detected. No address classification is performed');
-			return;
-		}
 		try {
 			$strategy = AddressClassifier::isIpV4($ip) ? new Ipv4Strategy() : new IpV6Strategy();
 			if ($this->estimator->predict($uid, $ip, $strategy)) {
