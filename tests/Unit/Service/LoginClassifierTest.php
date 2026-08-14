@@ -168,4 +168,23 @@ class LoginClassifierTest extends TestCase {
 
 		$this->classifier->process('user', '1.2.3.4');
 	}
+
+	public function testProcessClassifiesRealPasswordShapedLikeAppPassword(): void {
+		// A genuine account password that happens to match the app-password display format.
+		$realPassword = 'abcde-fghij-klmno-pqrst-uvwxy';
+		$this->request->method('getHeader')
+			->with('Authorization')
+			->willReturn('Basic ' . base64_encode('user:' . $realPassword));
+		$this->timeFactory->method('getTime')->willReturn(1000000);
+		$this->estimatorService->expects(self::once())
+			->method('predict')
+			->with('user', '1.2.3.4', self::equalTo(new Ipv4Strategy()))
+			->willReturn(false);
+		$this->mapper->method('findRelated')->willReturn([]);
+		$this->mapper->method('findRecentByUid')->willReturn([]);
+		$this->dispatcher->expects(self::once())
+			->method('dispatchTyped');
+
+		$this->classifier->process('user', '1.2.3.4');
+	}
 }
