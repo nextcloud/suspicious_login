@@ -38,12 +38,14 @@ class OptimizerService {
 		'learningRate' => [0.0001, 0.01],
 	];
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly DataLoader $loader,
 		private readonly Trainer $trainer,
 	) {
 	}
 
+	/** @psalm-mutation-free */
 	private function printConfig(int $epoch,
 		float $stepWidth,
 		Config $config,

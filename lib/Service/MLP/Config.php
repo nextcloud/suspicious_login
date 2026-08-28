@@ -23,6 +23,7 @@ class Config {
 	) {
 	}
 
+	/** @psalm-pure */
 	public static function default() {
 		return new static(
 			330,

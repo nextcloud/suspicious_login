@@ -22,6 +22,7 @@ use function str_split;
 use function substr;
 
 class IpV6Strategy extends AClassificationStrategy {
+	/** @psalm-pure */
 	#[\Override]
 	public static function getTypeName(): string {
 		return 'ipv6';
@@ -37,6 +38,7 @@ class IpV6Strategy extends AClassificationStrategy {
 		return $loginAddressMapper->findHistoricAndRecentIpv6($validationThreshold, $maxAge);
 	}
 
+	/** @psalm-pure */
 	#[\Override]
 	protected function ipToVec(string $ip): array {
 		$strippedIp = IPv6AddressParser::stripScopeIdentifier($ip);
@@ -61,11 +63,13 @@ class IpV6Strategy extends AClassificationStrategy {
 		return implode(':', array_map(fn (int $index) => base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16), range(0, 7)));
 	}
 
+	/** @psalm-pure */
 	#[\Override]
 	public function getSize(): int {
 		return 16 + 64;
 	}
 
+	/** @psalm-mutation-free */
 	#[\Override]
 	public function getDefaultMlpConfig(): Config {
 		return Config::default()->setEpochs(20);

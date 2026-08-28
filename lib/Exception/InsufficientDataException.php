@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace OCA\SuspiciousLogin\Exception;
 
 class InsufficientDataException extends ServiceException {
+	/** @psalm-mutation-free */
 	public function __construct(string $message = '') {
 		parent::__construct(
 			$message === '' ? 'Insufficient data' : "Insufficient data: $message"

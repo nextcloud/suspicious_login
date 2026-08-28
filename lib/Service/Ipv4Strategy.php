@@ -15,6 +15,7 @@ use function array_map;
 use function explode;
 
 class Ipv4Strategy extends AClassificationStrategy {
+	/** @psalm-pure */
 	#[\Override]
 	public static function getTypeName(): string {
 		return 'ipv4';
@@ -47,11 +48,13 @@ class Ipv4Strategy extends AClassificationStrategy {
 		return implode('.', array_map(fn (int $index) => random_int(0, 255), range(0, 3)));
 	}
 
+	/** @psalm-pure */
 	#[\Override]
 	public function getSize(): int {
 		return 16 + 32;
 	}
 
+	/** @psalm-mutation-free */
 	#[\Override]
 	public function getDefaultMlpConfig(): Config {
 		return Config::default();

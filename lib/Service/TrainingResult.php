@@ -13,8 +13,10 @@ use OCA\SuspiciousLogin\Db\Model;
 use Rubix\ML\Learner;
 use Rubix\ML\Report;
 
+/** @psalm-immutable */
 class TrainingResult {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly Learner $classifier,
 		private readonly Model $model,
