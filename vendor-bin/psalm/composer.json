@@ -6,7 +6,7 @@
 	},
 	"require-dev": {
 		"nextcloud/ocp": "dev-master",
-		"psalm/phar": "6.16.1",
+		"psalm/phar": "7.0.0-beta19",
 		"psr/clock": "^1.0"
 	}
 }

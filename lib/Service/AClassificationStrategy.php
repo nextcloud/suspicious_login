@@ -20,11 +20,14 @@ use function str_pad;
 use function str_split;
 
 abstract class AClassificationStrategy {
+	/** @psalm-pure */
 	abstract public static function getTypeName(): string;
 
+	/** @psalm-impure */
 	abstract public function hasSufficientData(LoginAddressAggregatedMapper $loginAddressMapper, int $validationDays): bool;
 
 	/**
+	 * @psalm-impure
 	 * @return LoginAddressAggregated[][]
 	 */
 	abstract public function findHistoricAndRecent(LoginAddressAggregatedMapper $loginAddressMapper, int $validationThreshold, int $maxAge): array;
@@ -47,6 +50,7 @@ abstract class AClassificationStrategy {
 	}
 
 	/**
+	 * @psalm-pure
 	 * @param string $ip
 	 *
 	 * @return int[]
@@ -79,6 +83,7 @@ abstract class AClassificationStrategy {
 		return array_map(fn ($x) => (int)$x, $converted);
 	}
 
+	/** @psalm-pure */
 	protected function numStringToBitArray(string $s, int $base, int $padding): array {
 		$bin = base_convert($s, $base, 2);
 		// make sure we get 00000000 to 11111111
@@ -86,9 +91,12 @@ abstract class AClassificationStrategy {
 		return str_split($padded);
 	}
 
+	/** @psalm-impure */
 	abstract public function generateRandomIp(): string;
 
+	/** @psalm-pure */
 	abstract public function getSize(): int;
 
+	/** @psalm-mutation-free */
 	abstract public function getDefaultMlpConfig(): Config;
 }

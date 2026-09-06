@@ -21,6 +21,7 @@ use Psr\Log\LoggerInterface;
  */
 class LoginNotificationListener implements IEventListener {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly IManager $notificationManager,
 		private readonly ITimeFactory $timeFactory,

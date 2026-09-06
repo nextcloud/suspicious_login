@@ -28,6 +28,7 @@ class DataLoader {
 	private const MAX_SAMPLES_POSITIVES = 15_000;
 	private const MAX_SAMPLES_VALIDATE_POSITIVES = 3_000;
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly LoginAddressAggregatedMapper $loginAddressMapper,
 		private readonly NegativeSampleGenerator $negativeSampleGenerator,

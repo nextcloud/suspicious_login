@@ -19,6 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use function extension_loaded;
 use function time;
 
+/** @psalm-immutable */
 class Optimize extends Command {
 	use ModelStatistics;
 

@@ -14,6 +14,7 @@ use ReturnTypeWillChange;
 
 class TrainingDataStatistics implements JsonSerializable {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly int $loginsCaptured,
 		private readonly int $loginsAggregated,
@@ -34,6 +35,7 @@ class TrainingDataStatistics implements JsonSerializable {
 		return $this->loginsAggregated;
 	}
 
+	/** @psalm-mutation-free */
 	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {

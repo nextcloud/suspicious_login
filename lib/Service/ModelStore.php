@@ -34,6 +34,7 @@ use function strlen;
 class ModelStore {
 	public const APPDATA_MODELS_FOLDER = 'models';
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly ModelMapper $modelMapper,
 		private readonly IAppData $appData,
@@ -59,6 +60,7 @@ class ModelStore {
 		return $this->load($latestModel->getId());
 	}
 
+	/** @psalm-pure */
 	private function getCacheKey(int $id): string {
 		return "suspicious_login_model_$id";
 	}

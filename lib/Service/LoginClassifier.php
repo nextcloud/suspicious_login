@@ -23,6 +23,7 @@ use Throwable;
 
 class LoginClassifier {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly EstimatorService $estimator,
 		private readonly IRequest $request,
