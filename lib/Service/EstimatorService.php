@@ -17,6 +17,7 @@ use RuntimeException;
 
 class EstimatorService {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly ModelStore $modelStore,
 		private readonly LoggerInterface $logger,

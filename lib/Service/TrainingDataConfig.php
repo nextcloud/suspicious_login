@@ -15,6 +15,7 @@ use function time;
 
 class TrainingDataConfig implements JsonSerializable {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private int $maxAge,
 		private int $threshold,
@@ -80,6 +81,7 @@ class TrainingDataConfig implements JsonSerializable {
 		return $clone;
 	}
 
+	/** @psalm-mutation-free */
 	#[\Override]
 	#[ReturnTypeWillChange]
 	public function jsonSerialize(): array {

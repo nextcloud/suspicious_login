@@ -17,6 +17,7 @@ use OCA\SuspiciousLogin\Service\MLP\Trainer;
 
 class TrainService {
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly DataLoader $dataLoader,
 		private readonly Trainer $trainer,

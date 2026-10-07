@@ -7,6 +7,7 @@ declare(strict_types=1);
  */
 namespace OCA\SuspiciousLogin\Service;
 
+/** @psalm-immutable */
 class NotificationState {
 	public const SENT = 1;
 	public const NOT_SENT_DUPLICATE = 2;
