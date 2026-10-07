@@ -7,7 +7,7 @@ OC.L10N.register(
     "Open %s ↗" : "Otvoriť %s ↗",
     "Suspicious Login" : "Podozrivé prihlasovanie",
     "New login detected" : "Zistené nové prihlásenie",
-    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Upozornovať na podozrivé adresy IP prihlasujúce sa do systému Nextcloud\n\t",
+    "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Zisťovať podozrivé IP adresy prihlasujúce sa do Nextcloudu a upozorňovať na ne\n\t",
     "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Zistilo sa podozrivé prihlásenie do vášho účtu. Adresa IP %s bola klasifikovaná ako podozrivá. Ak ste to boli vy, môžete toto hlásenie ignorovať. V opačnom prípade odporúčame, aby ste si zmenili svoje heslo."
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
