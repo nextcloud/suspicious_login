@@ -66,4 +66,20 @@ class ModelMapper extends QBMapper {
 
 		return $this->findEntities($query);
 	}
+
+	/**
+	 * Find all models older than `$numberOfModelsToKeep` per `$addressType`
+	 *
+	 * @return Model[]
+	 */
+	public function findOld(int $numberOfModelsToKeep, string $addressType): array {
+		$qb = $this->db->getQueryBuilder();
+		$query = $qb->select('*')
+			->from($this->getTableName())
+			->where($qb->expr()->eq('address_type', $qb->createNamedParameter($addressType)))
+			->setFirstResult($numberOfModelsToKeep)
+			->orderBy('created_at', 'desc');
+
+		return $this->findEntities($query);
+	}
 }
