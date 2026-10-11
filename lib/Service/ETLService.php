@@ -20,6 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ETLService {
 	public const MAX_BATCH_SIZE = 10000;
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		private readonly IDBConnection $db,
 		private readonly LoginAddressAggregatedMapper $aggregatedMapper,

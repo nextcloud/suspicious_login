@@ -11,11 +11,14 @@ namespace OCA\SuspiciousLogin\Util;
 
 use function filter_var;
 
+/** @psalm-immutable */
 class AddressClassifier {
+	/** @psalm-pure */
 	public static function isIpV4(string $address): bool {
 		return filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) !== false;
 	}
 
+	/** @psalm-pure */
 	public static function isIpV6(string $address): bool {
 		$strippedAddress = IPv6AddressParser::stripScopeIdentifier($address);
 

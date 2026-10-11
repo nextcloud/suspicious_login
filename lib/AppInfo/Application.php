@@ -23,6 +23,7 @@ use OCP\User\Events\UserLoggedInEvent;
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'suspicious_login';
 
+	/** @psalm-mutation-free */
 	public function __construct(array $urlParams = []) {
 		parent::__construct(self::APP_ID, $urlParams);
 	}

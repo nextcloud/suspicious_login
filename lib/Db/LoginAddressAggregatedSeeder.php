@@ -17,6 +17,7 @@ class LoginAddressAggregatedSeeder {
 	/** @var IDBConnection */
 	private $db;
 
+	/** @psalm-mutation-free */
 	public function __construct(
 		IDBConnection $db,
 		private readonly LoginAddressAggregatedMapper $mapper,
