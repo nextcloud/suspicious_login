@@ -58,7 +58,13 @@ class IpV6Strategy extends AClassificationStrategy {
 
 	#[\Override]
 	public function generateRandomIp(): string {
-		return implode(':', array_map(fn (int $index) => base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16), range(0, 7)));
+		// Constrain to 2000::/4 (allocated global unicast) to avoid address space noise in training data.
+		$ip = '2' . str_pad(base_convert((string)random_int(0, 2 ** 12 - 1), 10, 16), 3, '0', STR_PAD_LEFT) . ':';
+		$ip .= implode(':', array_map(function (int $index) {
+			return base_convert((string)random_int(0, 2 ** 16 - 1), 10, 16);
+		}, range(1, 7)));
+
+		return $ip;
 	}
 
 	#[\Override]
