@@ -3,9 +3,11 @@ OC.L10N.register(
     {
     "New login location detected" : "Зарегистрировано новое местоположение при входе в учётную запись",
     "More info about the suspicious IP address available on %s" : "Более подробная информация о подозрительном IP-адресе доступна на сайте %s",
+    "A new login into your account was detected. The IP address %s was classified as suspicious by an AI model. If this was you, you can ignore this message, as the AI model did not take any automated actions. Otherwise, you should change your password." : "Обнаружен новый вход в вашу учётную запись. Модель ИИ сочла IP-адрес %s подозрительным. Если это были вы, сообщение можно проигнорировать: модель ИИ не предпринимала никаких автоматических действий. Иначе смените пароль.",
+    "Open %s ↗" : "Открыть %s ↗",
     "Suspicious Login" : "Подозрительный вход",
     "New login detected" : "Зарегистрирован новый вход",
     "Detect and warn about suspicious IPs logging into Nextcloud\n\t" : "Регистрировать и предупреждать о входах в Nextcloud с подозрительных IP-адресов\n\t",
-    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Зарегистрирован новый вход в ваш аккаунт. IP-адрес %s считается подозрительным. Если это были вы, то можете проигнорировать это сообщение. Иначе, вам лучше сменить пароль."
+    "A new login into your account was detected. The IP address %s was classified as suspicious. If this was you, you can ignore this message. Otherwise you should change your password." : "Обнаружен новый вход в вашу учётную запись. IP-адрес %s признан подозрительным. Если это были вы, сообщение можно проигнорировать. Иначе смените пароль."
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");
